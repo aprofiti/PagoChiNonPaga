@@ -21,12 +21,12 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.singular /([\w]*)nti$/i, '\1nte'
 
   # Titolare
-  inflect.plural /([\w]*)nte$/i, '\1ari'
-  inflect.singular /([\w]*)nti$/i, '\1are'
+  inflect.plural /([\w]*)are$/i, '\1ari'
+  inflect.singular /([\w]*)ari$/i, '\1are'
 
   # Categoria, Sottocategoria
-  inflect.plural /([\w]*)zione$/i, '\1goria'
-  inflect.singular /([\w]*)zioni$/i, '\1gorie'
+  inflect.plural /([\w]*)gorie$/i, '\1goria'
+  inflect.singular /([\w]*)goria$/i, '\1gorie'
 
   # azione, condizione, deviazione, proiezione
   inflect.plural /([\w]*)zione$/i, '\1zioni'
