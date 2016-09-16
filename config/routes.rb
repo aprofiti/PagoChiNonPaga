@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :utenti
+  devise_for :admins
   resources :categoria
   resources :sottocategoria
   resources :indirizzi
