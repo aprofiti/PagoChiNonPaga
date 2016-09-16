@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Titolari</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Piva</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @titolari.each do |titolare| %>
+      <tr>
+        <td><%= titolare.piva %></td>
+        <td><%= link_to 'Show', titolare %></td>
+        <td><%= link_to 'Edit', edit_titolare_path(titolare) %></td>
+        <td><%= link_to 'Destroy', titolare, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Titolare', new_titolare_path %>

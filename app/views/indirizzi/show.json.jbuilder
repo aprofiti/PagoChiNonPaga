@@ -1,0 +1,1 @@
+json.partial! "indirizzi/indirizzo", indirizzo: @indirizzo

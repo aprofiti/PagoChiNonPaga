@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @impresa.nome %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @impresa.telefono %>
+</p>
+
+<p>
+  <strong>Fax:</strong>
+  <%= @impresa.fax %>
+</p>
+
+<p>
+  <strong>Giorni orari:</strong>
+  <%= @impresa.giorni_orari %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @impresa.email %>
+</p>
+
+<p>
+  <strong>Sitoweb:</strong>
+  <%= @impresa.sitoweb %>
+</p>
+
+<p>
+  <strong>Facebook:</strong>
+  <%= @impresa.facebook %>
+</p>
+
+<p>
+  <strong>Descrizione:</strong>
+  <%= @impresa.descrizione %>
+</p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @impresa.lat %>
+</p>
+
+<p>
+  <strong>Lng:</strong>
+  <%= @impresa.lng %>
+</p>
+
+<p>
+  <strong>Verificato:</strong>
+  <%= @impresa.verificato %>
+</p>
+
+<p>
+  <strong>Congelato:</strong>
+  <%= @impresa.congelato %>
+</p>
+
+<%= link_to 'Edit', edit_impresa_path(@impresa) %> |
+<%= link_to 'Back', imprese_path %>

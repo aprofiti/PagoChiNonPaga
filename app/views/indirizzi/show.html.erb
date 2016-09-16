@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Via:</strong>
+  <%= @indirizzo.via %>
+</p>
+
+<p>
+  <strong>Ncivico:</strong>
+  <%= @indirizzo.ncivico %>
+</p>
+
+<p>
+  <strong>Cap:</strong>
+  <%= @indirizzo.cap %>
+</p>
+
+<p>
+  <strong>Quartiere:</strong>
+  <%= @indirizzo.quartiere %>
+</p>
+
+<%= link_to 'Edit', edit_indirizzo_path(@indirizzo) %> |
+<%= link_to 'Back', indirizzi_path %>

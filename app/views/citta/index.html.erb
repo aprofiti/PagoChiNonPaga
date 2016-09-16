@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Citta</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Provincia</th>
+      <th>Regione</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @citta.each do |citta| %>
+      <tr>
+        <td><%= citta.nome %></td>
+        <td><%= citta.provincia %></td>
+        <td><%= citta.regione %></td>
+        <td><%= link_to 'Show', citta %></td>
+        <td><%= link_to 'Edit', edit_citta_path(citta) %></td>
+        <td><%= link_to 'Destroy', citta, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Citta', new_citta_path %>

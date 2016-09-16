@@ -1,0 +1,1 @@
+json.array! @ordini, partial: 'ordini/ordine', as: :ordine

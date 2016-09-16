@@ -1,0 +1,21 @@
+<%= form_for(@titolare) do |f| %>
+  <% if @titolare.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@titolare.errors.count, "error") %> prohibited this titolare from being saved:</h2>
+
+      <ul>
+      <% @titolare.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :piva %><br>
+    <%= f.text_field :piva %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

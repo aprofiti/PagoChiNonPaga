@@ -1,0 +1,65 @@
+<%= form_for(@impresa) do |f| %>
+  <% if @impresa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@impresa.errors.count, "error") %> prohibited this impresa from being saved:</h2>
+
+      <ul>
+      <% @impresa.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome %><br>
+    <%= f.text_field :nome %>
+  </div>
+  <div class="field">
+    <%= f.label :telefono %><br>
+    <%= f.text_field :telefono %>
+  </div>
+  <div class="field">
+    <%= f.label :fax %><br>
+    <%= f.text_field :fax %>
+  </div>
+  <div class="field">
+    <%= f.label :giorni_orari %><br>
+    <%= f.text_field :giorni_orari %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :sitoweb %><br>
+    <%= f.text_field :sitoweb %>
+  </div>
+  <div class="field">
+    <%= f.label :facebook %><br>
+    <%= f.text_field :facebook %>
+  </div>
+  <div class="field">
+    <%= f.label :descrizione %><br>
+    <%= f.text_field :descrizione %>
+  </div>
+  <div class="field">
+    <%= f.label :lat %><br>
+    <%= f.text_field :lat %>
+  </div>
+  <div class="field">
+    <%= f.label :lng %><br>
+    <%= f.text_field :lng %>
+  </div>
+  <div class="field">
+    <%= f.label :verificato %><br>
+    <%= f.check_box :verificato %>
+  </div>
+  <div class="field">
+    <%= f.label :congelato %><br>
+    <%= f.check_box :congelato %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
