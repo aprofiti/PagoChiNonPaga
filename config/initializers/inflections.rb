@@ -14,3 +14,31 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+ActiveSupport::Inflector.inflections do |inflect|
+  # Utente, Cliente
+  inflect.plural /([\w]*)nte$/i, '\1nti'
+  inflect.singular /([\w]*)nti$/i, '\1nte'
+
+  # Titolare
+  inflect.plural /([\w]*)nte$/i, '\1ari'
+  inflect.singular /([\w]*)nti$/i, '\1are'
+
+  # Categoria, Sottocategoria
+  inflect.plural /([\w]*)zione$/i, '\1goria'
+  inflect.singular /([\w]*)zioni$/i, '\1gorie'
+
+  # azione, condizione, deviazione, proiezione
+  inflect.plural /([\w]*)zione$/i, '\1zioni'
+  inflect.singular /([\w]*)zioni$/i, '\1zione'
+
+  # Irregolarità
+  inflect.irregular 'ordine', 'ordini'
+  inflect.irregular 'negozio', 'negozzi'
+  inflect.irregular 'impresa', 'imprese'
+  inflect.irregular 'prodotto', 'prodotti'
+
+  # Uncountable
+  inflect.uncountable %w( citta )
+
+end
