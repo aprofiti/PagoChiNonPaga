@@ -37,6 +37,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'negozio', 'negozzi'
   inflect.irregular 'impresa', 'imprese'
   inflect.irregular 'prodotto', 'prodotti'
+  inflect.irregular 'indirizzo', 'indirizzi'
 
   # Uncountable
   inflect.uncountable %w( citta )
