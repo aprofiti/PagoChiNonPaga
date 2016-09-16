@@ -69,6 +69,6 @@ class TitolariController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def titolare_params
-      params.require(:titolare).permit(:piva)
+      params.require(:titolare).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:piva,:actable_id,:actable_type)
     end
 end
