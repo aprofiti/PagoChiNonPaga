@@ -1,5 +1,23 @@
 source 'https://rubygems.org'
 
+# Pannello Amministratore
+gem 'rails_admin'
+gem 'rails_admin_rollincode', '~> 1.0'
+gem 'rails_admin_history_rollback'
+# Athenticazione e Authorizzazione
+gem 'devise'
+gem 'cancancan'
+# User action history
+gem 'paper_trail'
+# Implementazione IS-A
+gem 'activerecord', '~> 4.2.6'
+gem 'active_record-acts_as'
+# View
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'twitter-typeahead-rails', :git => "git://github.com/yourabi/twitter-typeahead-rails.git"
+gem 'formtastic', '~> 3.0'
+gem 'devise-bootstrap-views'
+gem 'twitter-bootstrap-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -44,4 +62,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
