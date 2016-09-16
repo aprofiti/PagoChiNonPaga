@@ -13,8 +13,8 @@ gem 'paper_trail'
 gem 'activerecord', '~> 4.2.6'
 gem 'active_record-acts_as'
 # View
-gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
-gem 'twitter-typeahead-rails', :git => "git://github.com/yourabi/twitter-typeahead-rails.git"
+gem 'twitter-typeahead-rails'
+gem "paperclip", "~> 5.0.0"
 gem 'formtastic', '~> 3.0'
 gem 'devise-bootstrap-views'
 gem 'twitter-bootstrap-rails'
