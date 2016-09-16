@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916120151) do
+ActiveRecord::Schema.define(version: 20160916122708) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -152,6 +152,8 @@ ActiveRecord::Schema.define(version: 20160916120151) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "actable_id"
+    t.string   "actable_type"
   end
 
   add_index "utenti", ["email"], name: "index_utenti_on_email", unique: true
