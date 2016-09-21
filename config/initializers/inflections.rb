@@ -24,9 +24,13 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.plural /([\w]*)are$/i, '\1ari'
   inflect.singular /([\w]*)ari$/i, '\1are'
 
+  # Polo
+  inflect.plural /([\w]*)olo$/i, '\1oli'
+  inflect.singular /([\w]*)oli$/i, '\1olo'
+
   # Categoria, Sottocategoria
-  inflect.plural /([\w]*)gorie$/i, '\1goria'
-  inflect.singular /([\w]*)goria$/i, '\1gorie'
+  inflect.plural /([\w]*)goria$/i, '\1gorie'
+  inflect.singular /([\w]*)gorie$/i, '\1goria'
 
   # azione, condizione, deviazione, proiezione
   inflect.plural /([\w]*)zione$/i, '\1zioni'
@@ -34,7 +38,6 @@ ActiveSupport::Inflector.inflections do |inflect|
 
   # Irregolarità
   inflect.irregular 'ordine', 'ordini'
-  inflect.irregular 'negozio', 'negozzi'
   inflect.irregular 'impresa', 'imprese'
   inflect.irregular 'prodotto', 'prodotti'
   inflect.irregular 'indirizzo', 'indirizzi'
