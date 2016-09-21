@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  resources :sottocategorie
+  resources :categorie
+  resources :poli
   mount RailsAdmin::Engine => '/cp', as: 'rails_admin'
   devise_for :utenti
   devise_for :admins
-  resources :categoria
-  resources :sottocategoria
   resources :indirizzi
   resources :citta
   resources :ordini

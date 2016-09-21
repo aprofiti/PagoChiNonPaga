@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Poli</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @poli.each do |polo| %>
+      <tr>
+        <td><%= polo.nome %></td>
+        <td><%= link_to 'Show', polo %></td>
+        <td><%= link_to 'Edit', edit_polo_path(polo) %></td>
+        <td><%= link_to 'Destroy', polo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Polo', new_polo_path %>

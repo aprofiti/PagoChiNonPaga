@@ -1,0 +1,1 @@
+json.array! @poli, partial: 'poli/polo', as: :polo
