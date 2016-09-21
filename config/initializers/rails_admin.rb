@@ -22,7 +22,12 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
-    new
+
+    # Rimuove la possibilita di creare un nuovo Cliente o Titoare via pannello
+    new do
+      except [Cliente, Titolare]
+    end
+    
     export
     bulk_delete
     show
