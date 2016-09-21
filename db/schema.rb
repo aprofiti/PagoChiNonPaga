@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916122826) do
+ActiveRecord::Schema.define(version: 20160921084214) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -47,8 +47,13 @@ ActiveRecord::Schema.define(version: 20160916122826) do
   end
 
   create_table "clienti", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "nome"
+    t.string   "cognome"
+    t.string   "cf"
+    t.date     "data_nascita"
+    t.string   "telefono"
   end
 
   create_table "imprese", force: :cascade do |t|
@@ -101,16 +106,16 @@ ActiveRecord::Schema.define(version: 20160916122826) do
 
   create_table "titolari", force: :cascade do |t|
     t.string   "piva"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "utenti", force: :cascade do |t|
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "nome"
     t.string   "cognome"
     t.string   "cf"
     t.date     "data_nascita"
     t.string   "telefono"
+  end
+
+  create_table "utenti", force: :cascade do |t|
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "email",                  default: "", null: false
