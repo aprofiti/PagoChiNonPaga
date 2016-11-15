@@ -1,6 +1,7 @@
 class Ordine < ActiveRecord::Base
 
-  has_many :prodotti
   belongs_to :cliente
   belongs_to :impresa
+  has_many :prodotti
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921130123) do
+ActiveRecord::Schema.define(version: 20161115145936) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -33,12 +33,6 @@ ActiveRecord::Schema.define(version: 20160921130123) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["polo_id"], name: "index_admins_on_polo_id"
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
-
-  create_table "categoria", force: :cascade do |t|
-    t.string   "nome"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "categorie", force: :cascade do |t|
     t.string   "nome"
@@ -65,10 +59,10 @@ ActiveRecord::Schema.define(version: 20160921130123) do
     t.string   "cf"
     t.date     "data_nascita"
     t.string   "telefono"
-    t.integer  "citta_id"
+    t.integer  "indirizzo_id"
   end
 
-  add_index "clienti", ["citta_id"], name: "index_clienti_on_citta_id"
+  add_index "clienti", ["indirizzo_id"], name: "index_clienti_on_indirizzo_id"
 
   create_table "imprese", force: :cascade do |t|
     t.string   "nome"
@@ -85,12 +79,20 @@ ActiveRecord::Schema.define(version: 20160921130123) do
     t.boolean  "congelato"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "titolare_id"
     t.integer  "citta_id"
+    t.integer  "titolare_id"
   end
 
   add_index "imprese", ["citta_id"], name: "index_imprese_on_citta_id"
   add_index "imprese", ["titolare_id"], name: "index_imprese_on_titolare_id"
+
+  create_table "imprese_sottocategorie", id: false, force: :cascade do |t|
+    t.integer "impresa_id"
+    t.integer "sottocategoria_id"
+  end
+
+  add_index "imprese_sottocategorie", ["impresa_id"], name: "index_imprese_sottocategorie_on_impresa_id"
+  add_index "imprese_sottocategorie", ["sottocategoria_id"], name: "index_imprese_sottocategorie_on_sottocategoria_id"
 
   create_table "indirizzi", force: :cascade do |t|
     t.string   "via"
@@ -120,10 +122,7 @@ ActiveRecord::Schema.define(version: 20160921130123) do
     t.string   "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "admin_id"
   end
-
-  add_index "poli", ["admin_id"], name: "index_poli_on_admin_id"
 
   create_table "prodotti", force: :cascade do |t|
     t.string   "nome"
@@ -132,13 +131,10 @@ ActiveRecord::Schema.define(version: 20160921130123) do
     t.string   "descrizione"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "impresa_id"
   end
 
-  create_table "sottocategoria", force: :cascade do |t|
-    t.string   "nome"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "prodotti", ["impresa_id"], name: "index_prodotti_on_impresa_id"
 
   create_table "sottocategorie", force: :cascade do |t|
     t.string   "nome"
@@ -158,10 +154,10 @@ ActiveRecord::Schema.define(version: 20160921130123) do
     t.string   "cf"
     t.date     "data_nascita"
     t.string   "telefono"
-    t.integer  "citta_id"
+    t.integer  "indirizzo_id"
   end
 
-  add_index "titolari", ["citta_id"], name: "index_titolari_on_citta_id"
+  add_index "titolari", ["indirizzo_id"], name: "index_titolari_on_indirizzo_id"
 
   create_table "utenti", force: :cascade do |t|
     t.datetime "created_at",                          null: false
