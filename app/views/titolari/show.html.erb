@@ -1,9 +1,33 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Titolare -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Piva:</strong>
-  <%= @titolare.piva %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+  <dd><%= @titolare.nome %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:cognome) %>:</strong></dt>
+  <dd><%= @titolare.cognome %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @titolare.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:cf) %>:</strong></dt>
+  <dd><%= @titolare.cf %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:piva) %>:</strong></dt>
+  <dd><%= @titolare.piva %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:data_nascita) %>:</strong></dt>
+  <dd><%= @titolare.data_nascita %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
+  <dd><%= @titolare.telefono %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:indirizzo_id) %>:</strong></dt>
+  <dd><%= @titolare.indirizzo_id %></dd>
+</dl>
 
-<%= link_to 'Edit', edit_titolare_path(@titolare) %> |
-<%= link_to 'Back', titolari_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              titolari_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_titolare_path(@titolare), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              titolare_path(@titolare),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

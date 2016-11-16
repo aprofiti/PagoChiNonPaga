@@ -1,50 +1,26 @@
-<%= form_for(@cliente) do |f| %>
-  <% if @cliente.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
+<%= simple_form_for @cliente, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :nome %>
+  <%= error_span(@cliente[:nome]) %>
+  <%= f.input :cognome %>
+  <%= error_span(@cliente[:cognome]) %>
+  <%= f.input :data_nascita %>
+  <%= error_span(@cliente[:data_nascita]) %>
+  <%= f.input :cf %>
+  <%= error_span(@cliente[:cf]) %>
+  <%= f.input :telefono %>
+  <%= error_span(@cliente[:telefono]) %>
+  <%= f.input :email %>
+  <%= error_span(@cliente[:email]) %>
+  <%= f.input :password %>
+  <%= error_span(@cliente[:password]) %>
+  <%= f.input :password_confirmation %>
+  <%= error_span(@cliente[:password_confirmation]) %>
 
-      <ul>
-      <% @cliente.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :nome %><br>
-    <%= f.text_field :nome %>
-  </div>
+  <%= f.input :indirizzo_id %> <!-- visualizzare?? tipo relazione -->
+  <%= error_span(@cliente[:indirizzo_id]) %>
 
-  <div class="field">
-    <%= f.label :cognome %><br>
-    <%= f.text_field :cognome %>
-  </div>
-
-  <div class="field">
-    <%= f.label :telefono %><br>
-    <%= f.text_field :telefono %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :data_nascita %><br>
-    <%= f.date_field :data_nascita %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.text_field :password_confirmation %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                clienti_path, :class => 'btn btn-default' %>
 <% end %>

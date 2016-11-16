@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
 # Pannello Amministratore
-gem 'rails_admin'
+gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
 gem 'rails_admin_rollincode', '~> 1.0'
-gem 'rails_admin_history_rollback'
+gem 'rails_admin_history_rollback', git: 'https://github.com/rikkipitt/rails_admin_history_rollback.git'
 # Athenticazione e Authorizzazione
 gem 'devise'
 gem 'cancancan'
@@ -13,11 +13,15 @@ gem 'paper_trail'
 gem 'activerecord', '~> 4.2.6'
 gem 'active_record-acts_as'
 # View
-gem 'twitter-typeahead-rails'
-gem "paperclip", "~> 5.0.0"
-gem 'formtastic', '~> 3.0'
-gem 'devise-bootstrap-views'
-gem 'twitter-bootstrap-rails'
+gem 'twitter-typeahead-rails', git: 'https://github.com/yourabi/twitter-typeahead-rails.git'
+gem 'paperclip', "~> 5.0.0"
+gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
+gem 'railsstrap', git: 'https://github.com/toadkicker/railsstrap.git' # Sostituisce Twitter-Bootstrap-Rails
+gem 'devise-bootstrap-views' , git: 'https://github.com/hisea/devise-bootstrap-views.git'
+
+# Preprocessore Less per bootstrap
+gem "therubyracer"
+gem "less-rails"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
