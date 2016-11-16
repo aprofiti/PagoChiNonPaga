@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115145936) do
+ActiveRecord::Schema.define(version: 20161116125353) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -117,6 +117,14 @@ ActiveRecord::Schema.define(version: 20161115145936) do
 
   add_index "ordini", ["cliente_id"], name: "index_ordini_on_cliente_id"
   add_index "ordini", ["impresa_id"], name: "index_ordini_on_impresa_id"
+
+  create_table "ordini_prodotti", id: false, force: :cascade do |t|
+    t.integer "ordine_id"
+    t.integer "prodotto_id"
+  end
+
+  add_index "ordini_prodotti", ["ordine_id"], name: "index_ordini_prodotti_on_ordine_id"
+  add_index "ordini_prodotti", ["prodotto_id"], name: "index_ordini_prodotti_on_prodotto_id"
 
   create_table "poli", force: :cascade do |t|
     t.string   "nome"
