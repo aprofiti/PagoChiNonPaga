@@ -1,21 +1,10 @@
-<%= form_for(@sottocategoria) do |f| %>
-  <% if @sottocategoria.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sottocategoria.errors.count, "error") %> prohibited this sottocategoria from being saved:</h2>
+<%= simple_form_for @sottocategoria, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :nome %>
+  <%= error_span(@sottocategoria[:nome]) %>
+  <%= f.input :categoria_id %>
+  <%= error_span(@sottocategoria[:categoria_id]) %>
 
-      <ul>
-      <% @sottocategoria.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :nome %><br>
-    <%= f.text_field :nome %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                sottocategorie_path, :class => 'btn btn-default' %>
 <% end %>

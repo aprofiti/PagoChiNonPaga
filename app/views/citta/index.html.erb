@@ -1,31 +1,42 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Citta</h1>
-
-<table>
+<%- model_class = Citta -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Nome</th>
-      <th>Provincia</th>
-      <th>Regione</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:provincia) %></th>
+      <th><%= model_class.human_attribute_name(:regione) %></th>
+      <th><%= model_class.human_attribute_name(:polo_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @citta.each do |citta| %>
       <tr>
+        <td><%= link_to citta.id, citta_path(citta) %></td>
         <td><%= citta.nome %></td>
         <td><%= citta.provincia %></td>
         <td><%= citta.regione %></td>
-        <td><%= link_to 'Show', citta %></td>
-        <td><%= link_to 'Edit', edit_citta_path(citta) %></td>
-        <td><%= link_to 'Destroy', citta, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= citta.polo_id %></td>
+        <td><%=l citta.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_citta_path(citta), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      citta_path(citta),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Citta', new_citta_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_citta_path,
+            :class => 'btn btn-primary' %>

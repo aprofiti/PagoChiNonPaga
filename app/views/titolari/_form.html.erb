@@ -1,53 +1,22 @@
-<%= form_for(@titolare) do |f| %>
-  <% if @titolare.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@titolare.errors.count, "error") %> prohibited this titolare from being saved:</h2>
+<%= simple_form_for @titolare, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :nome %>
+  <%= error_span(@titolare[:nome]) %>
+  <%= f.input :cognome %>
+  <%= error_span(@titolare[:cognome]) %>
+  <%= f.input :email %>
+  <%= error_span(@titolare[:email]) %>
+  <%= f.input :cf %>
+  <%= error_span(@titolare[:cf]) %>
+  <%= f.input :piva %>
+  <%= error_span(@titolare[:piva]) %>
+  <%= f.input :data_nascita %>
+  <%= error_span(@titolare[:data_nascita]) %>
+  <%= f.input :telefono %>
+  <%= error_span(@titolare[:telefono]) %>
+  <%= f.input :indirizzo_id %>
+  <%= error_span(@titolare[:indirizzo_id]) %>
 
-      <ul>
-      <% @titolare.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :nome %><br>
-    <%= f.text_field :nome %>
-  </div>
-
-  <div class="field">
-    <%= f.label :cognome %><br>
-    <%= f.text_field :cognome %>
-  </div>
-
-  <div class="field">
-    <%= f.label :telefono %><br>
-    <%= f.text_field :telefono %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :data_nascita %><br>
-    <%= f.date_field :data_nascita %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.text_field :password_confirmation %>
-  </div>
-  <div class="field">
-    <%= f.label :piva %><br>
-    <%= f.text_field :piva %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                titolari_path, :class => 'btn btn-default' %>
 <% end %>

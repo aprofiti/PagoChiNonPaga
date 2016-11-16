@@ -1,25 +1,14 @@
-<%= form_for(@ordine) do |f| %>
-  <% if @ordine.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@ordine.errors.count, "error") %> prohibited this ordine from being saved:</h2>
+<%= simple_form_for @ordine, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :data %>
+  <%= error_span(@ordine[:data]) %>
+  <%= f.input :stato %>
+  <%= error_span(@ordine[:stato]) %>
+  <%= f.input :cliente_id %>
+  <%= error_span(@ordine[:cliente_id]) %>
+  <%= f.input :impresa_id %>
+  <%= error_span(@ordine[:impresa_id]) %>
 
-      <ul>
-      <% @ordine.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :data %><br>
-    <%= f.datetime_select :data %>
-  </div>
-  <div class="field">
-    <%= f.label :stato %><br>
-    <%= f.text_field :stato %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                ordini_path, :class => 'btn btn-default' %>
 <% end %>
