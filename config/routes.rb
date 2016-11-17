@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'static_pages/home_page'
+
   mount RailsAdmin::Engine => '/cp', as: 'rails_admin'
 
   resources :sottocategorie, except: [:new,:edit]
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
   resources :titolari, except: [:index]
   resources :clienti, except: [:index]
   #resources :utenti
-
+  root 'static_pages#home_page'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

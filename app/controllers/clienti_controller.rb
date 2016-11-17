@@ -1,7 +1,7 @@
 class ClientiController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
-
-  # GET /clienti
+  before_action :authenticate_utente! , except: [:new,:create]
+  before_filter :controllo_id_cliente, except: [:new, :create]
   # GET /clienti.json
   def index
     @clienti = Cliente.all
@@ -23,6 +23,7 @@ class ClientiController < ApplicationController
 
   # POST /clienti
   # POST /clienti.json
+  #Dopo la creazione PER ORA l'utente viene reindirizzato alla schermata di login 
   def create
     @cliente = Cliente.new(cliente_params)
 
@@ -62,6 +63,12 @@ class ClientiController < ApplicationController
   end
 
   private
+    #controlla che current_utente è di tipo Cliente e con l'id che cerca di visualizzare
+    def controllo_id_cliente
+      if !(current_utente.actable_id==params[:id].to_i && current_utente.actable_type == "Cliente")
+        redirect_to imprese_path
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_cliente
       @cliente = Cliente.find(params[:id])
