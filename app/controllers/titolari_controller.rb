@@ -67,7 +67,7 @@ class TitolariController < ApplicationController
 
     def controllo_id_titolare
       if !(current_utente.actable_id==params[:id].to_i && current_utente.actable_type == "Titolare")
-        redirect_to root_path
+        redirect_back
       end
     end
     # Use callbacks to share common setup or constraints between actions.

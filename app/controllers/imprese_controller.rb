@@ -1,10 +1,13 @@
 class ImpreseController < ApplicationController
   before_action :set_impresa, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_utente! , except: [:index, :show]
+  before_filter :controllo_titolare_impresa, only: [:edit,:destroy]
+  before_filter :is_titolare, only: :new
 
   # GET /imprese
   # GET /imprese.json
   def index
-    @imprese = Impresa.all
+    @imprese = Impresa.where(congelato: false, verificato: true)#Impresa.all  #SOLO IMPRESE NON CONGELATE O VERIFICATE
   end
 
   # GET /imprese/1
@@ -25,7 +28,7 @@ class ImpreseController < ApplicationController
   # POST /imprese.json
   def create
     @impresa = Impresa.new(impresa_params)
-
+    @impresa.titolare_id = current_utente.actable_id
     respond_to do |format|
       if @impresa.save
         format.html { redirect_to @impresa, notice: 'Impresa was successfully created.' }
@@ -62,6 +65,18 @@ class ImpreseController < ApplicationController
   end
 
   private
+
+    def is_titolare
+       if !(current_utente.actable_type == "Titolare")
+         redirect_back
+       end
+    end
+
+    def controllo_titolare_impresa
+      if !(current_utente.actable_id==@impresa.titolare_id)
+        redirect_back
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_impresa
       @impresa = Impresa.find(params[:id])

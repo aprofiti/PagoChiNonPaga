@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   resources :citta, except: [:new,:edit]
   resources :ordini
   resources :prodotti
-  resources :imprese
+  resources :imprese #CONTROLLER FATTO
   #resources :admins perchè si accede da rails_admin
-  resources :titolari, except: [:index]
+  resources :titolari, except: [:index] #CONTROLLER FATTO
   resources :clienti, except: [:index]  #CONTROLLER FATTO
   #resources :utenti
   root 'static_pages#home_page'

@@ -66,7 +66,7 @@ class ClientiController < ApplicationController
     #controlla che current_utente è di tipo Cliente e con l'id che cerca di visualizzare
     def controllo_id_cliente
       if !(current_utente.actable_id==params[:id].to_i && current_utente.actable_type == "Cliente")
-        redirect_to root_path
+        redirect_back
       end
     end
     # Use callbacks to share common setup or constraints between actions.
