@@ -15,6 +15,11 @@
   <%= error_span(@titolare[:telefono]) %>
   <%= f.input :indirizzo_id %>
   <%= error_span(@titolare[:indirizzo_id]) %>
+  <%= f.input :password %>
+  <%= error_span(@titolare[:password]) %>
+  <%= f.input :password_confirmation %>
+  <%= error_span(@titolare[:password_confirmation]) %>
+
 
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

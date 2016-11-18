@@ -1,5 +1,7 @@
 class TitolariController < ApplicationController
   before_action :set_titolare, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_utente!, except: [:new,:create]
+  before_filter :controllo_id_titolare, except:  [:new,:create]
 
   # GET /titolari
   # GET /titolari.json
@@ -62,6 +64,12 @@ class TitolariController < ApplicationController
   end
 
   private
+
+    def controllo_id_titolare
+      if !(current_utente.actable_id==params[:id].to_i && current_utente.actable_type == "Titolare")
+        redirect_to root_path
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_titolare
       @titolare = Titolare.find(params[:id])

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :imprese
   #resources :admins perchè si accede da rails_admin
   resources :titolari, except: [:index]
-  resources :clienti, except: [:index]
+  resources :clienti, except: [:index]  #CONTROLLER FATTO
   #resources :utenti
   root 'static_pages#home_page'
   # The priority is based upon order of creation: first created -> highest priority.
