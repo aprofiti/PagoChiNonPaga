@@ -1,9 +1,11 @@
 class ProdottiController < ApplicationController
   before_action :set_prodotto, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_utente!, only: [:new, :edit]
+  before_filter :is_titolare, only: [:new,:edit]
 
   # GET /prodotti
   # GET /prodotti.json
-  def index
+  def index       #rotta rimossa
     @prodotti = Prodotto.all
   end
 
@@ -62,6 +64,11 @@ class ProdottiController < ApplicationController
   end
 
   private
+  def is_titolare
+     if !(current_utente.actable_type == "Titolare")
+       redirect_back
+     end
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_prodotto
       @prodotto = Prodotto.find(params[:id])

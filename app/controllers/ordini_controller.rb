@@ -1,10 +1,16 @@
 class OrdiniController < ApplicationController
   before_action :set_ordine, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_utente!
+  
   # GET /ordini
   # GET /ordini.json
   def index
-    @ordini = Ordine.all
+    if current_utente.actable_type == "Cliente"
+      @ordini = Cliente.find(current_utente.id).ordini
+    elsif current_utente.actable_type == "Titolare"
+      imp_list = Impresa.where(titolare_id: current_utente.actable_id).select("id") #Ritorna array di imprese del titolare loggato, con i soli id
+      @ordini= Ordine.where(imp_list.ids.include? :impresa_id) #Ritorna tutti gli ordini che appartengono a una impresa con id presente nell'array precedente
+    end
   end
 
   # GET /ordini/1
@@ -13,7 +19,7 @@ class OrdiniController < ApplicationController
   end
 
   # GET /ordini/new
-  def new
+  def new #path disabilitato perchè l'ordine si crea cliccando submit su lista e non da url compilando a mano
     @ordine = Ordine.new
   end
 
