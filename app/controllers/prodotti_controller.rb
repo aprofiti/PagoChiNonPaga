@@ -71,7 +71,7 @@ class ProdottiController < ApplicationController
   end
     # Use callbacks to share common setup or constraints between actions.
     def set_prodotto
-      @prodotto = Prodotto.find(params[:id])
+      @prodotto = Prodotto.find(params[:id_p])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

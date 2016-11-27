@@ -10,12 +10,12 @@ Rails.application.routes.draw do
   resources :citta, except: [:new,:edit]
   resources :ordini, except: :new
 
-  #PATH del tipo /imprese/:id/prodotti/:id
-  resources :imprese do
-    resources :prodotti, except: [:index]
+  #PATH del tipo /imprese/:nome/prodotti/:nome
+  resources :imprese, param: :nome do
+    resources :prodotti, param: :nome
   end
 
-  #PATH del tipo /categorie/:id/sottocategorie/:id
+  #PATH del tipo /categorie/:nome/sottocategorie/:nome
   resources :categorie, except: [:show,:new,:edit], param: :nome do  #Il parametro ora è il nome e non l'id
     resources :sottocategorie, except: [:new,:edit], param: :nome    #Il parametro ora è il nome e non l'id
   end
