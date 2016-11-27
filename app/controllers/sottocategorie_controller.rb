@@ -4,7 +4,10 @@ class SottocategorieController < ApplicationController
   # GET /sottocategorie
   # GET /sottocategorie.json
   def index
-    @sottocategorie = Sottocategoria.all
+
+    categoria = Categoria.where(nome: params[:categoria_nome]).first #Ritorna categoria con il nome nell'URL (first perchè è una sola)
+    @sottocategorie = Sottocategoria.where(categoria_id: categoria.id)#Ritorna tutte le sottocategorie della categoria trovata sopra
+
   end
 
   # GET /sottocategorie/1
@@ -64,7 +67,7 @@ class SottocategorieController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sottocategoria
-      @sottocategoria = Sottocategoria.find(params[:id])
+      @sottocategoria = Sottocategoria.find_by(nome: params[:nome])   #modificato perchè ora cerco per nome e non per id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
