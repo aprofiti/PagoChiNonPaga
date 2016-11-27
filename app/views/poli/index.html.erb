@@ -14,8 +14,8 @@
   <tbody>
     <% @poli.each do |polo| %>
       <tr>
-        <td><%= link_to polo.id, polo_path(polo) %></td>
-        <td><%= polo.nome %></td>
+        <td><%= polo.id %></td>
+        <td><%= link_to polo.nome , polo_path(nome: polo.nome)%></td>
         <td><%=l polo.created_at %></td>
       </tr>
     <% end %>

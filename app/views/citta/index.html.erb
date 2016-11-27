@@ -17,8 +17,8 @@
   <tbody>
     <% @citta.each do |citta| %>
       <tr>
-        <td><%= link_to citta.id, citta_path(citta) %></td>
-        <td><%= citta.nome %></td>
+        <td><%=  citta.id %></td>
+        <td><%=link_to citta.nome, citta_path(nome: citta.nome, id: citta.id) %></td>
         <td><%= citta.provincia %></td>
         <td><%= citta.regione %></td>
         <td><%= citta.polo_id %></td>
