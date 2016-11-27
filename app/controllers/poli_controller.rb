@@ -64,7 +64,7 @@ class PoliController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_polo
-      @polo = Polo.find(params[:id])
+      @polo = Polo.find_by(nome: params[:nome])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

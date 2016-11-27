@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/cp', as: 'rails_admin'
 
 
-  resources :poli, except: [:new,:edit]
+  resources :poli, except: [:new,:edit], param: :nome
   devise_for :utenti
   devise_for :admins
-  resources :citta, except: [:new,:edit]
+  resources :citta, except: [:new,:edit] , param: :nome
   resources :ordini, except: :new
 
   #PATH del tipo /imprese/:nome/prodotti/:nome
