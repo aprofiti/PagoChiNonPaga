@@ -17,28 +17,18 @@
   </thead>
   <tbody>
     <% @prodotti.each do |prodotto| %>
+    <% if prodotto.impresa_id.to_i == params[:id].to_i %>
       <tr>
-        <td><%= link_to prodotto.id, prodotto_path(prodotto) %></td>
-        <td><%= prodotto.nome %></td>
+        <td><%= prodotto.id %></td>
+        <td><%= link_to prodotto.nome, impresa_prodotto_path(impresa_nome: params[:impresa_nome],nome: prodotto.nome, id_p: prodotto.id) %></td>
         <td><%= prodotto.prezzo %></td>
         <td><%= prodotto.qta %></td>
         <td><%= prodotto.descrizione %></td>
         <td><%= prodotto.impresa_id %></td>
         <td><%=l prodotto.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_prodotto_path(prodotto), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      prodotto_path(prodotto),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
+
       </tr>
+      <%end%>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_prodotto_path,
-            :class => 'btn btn-primary' %>

@@ -27,8 +27,8 @@
   <tbody>
     <% @imprese.each do |impresa| %>
       <tr>
-        <td><%= link_to impresa.id, impresa_path(impresa) %></td>
-        <td><%= impresa.nome %></td>
+        <td><%=  impresa.id %></td>
+        <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id) %></td>
         <td><%= impresa.telefono %></td>
         <td><%= impresa.fax %></td>
         <td><%= impresa.giorni_orari %></td>
