@@ -15,8 +15,8 @@
   <tbody>
     <% @sottocategorie.each do |sottocategoria| %>
       <tr>
-        <td><%= link_to sottocategoria.id, sottocategoria_path(sottocategoria) %></td>
-        <td><%= sottocategoria.nome %></td>
+        <td><%=  sottocategoria.id %></td>
+        <td><%= link_to sottocategoria.nome , categoria_sottocategoria_path(categoria_nome: params[:categoria_nome], nome: sottocategoria.nome) %></td>
         <td><%= sottocategoria.categoria_id %></td>
         <td><%=l sottocategoria.created_at %></td>
       </tr>

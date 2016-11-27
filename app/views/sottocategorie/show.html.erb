@@ -3,12 +3,24 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
-  <dd><%= @sottocategoria.nome %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:categoria_id) %>:</strong></dt>
-  <dd><%= @sottocategoria.categoria_id %></dd>
-</dl>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sottocategoria.imprese.each do |impresa| %>
+    <% if impresa.verificato && !impresa.congelato %>
+      <tr>
+        <td><%= link_to impresa.nome , impresa_path(id: impresa.id) %></td>
+      </tr>
+    <% end %>
+    <%end%>
+  </tbody>
+</table>
+
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
-              sottocategorie_path, :class => 'btn btn-default'  %>
+              categoria_sottocategorie_path, :class => 'btn btn-default'  %>

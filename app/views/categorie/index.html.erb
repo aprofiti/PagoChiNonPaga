@@ -14,10 +14,10 @@
   <tbody>
     <% @categorie.each do |categoria| %>
       <tr>
-        <td><%= link_to categoria.id, categoria_path(categoria) %></td>
-        <td><%= categoria.nome %></td>
+        <td><%=  categoria.id %></td>
+        <td><%= link_to categoria.nome, categoria_sottocategorie_path(categoria_nome: categoria.nome) %></td>
         <td><%=l categoria.created_at %></td>
-        
+
       </tr>
     <% end %>
   </tbody>
