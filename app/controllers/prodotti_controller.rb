@@ -1,7 +1,6 @@
 class ProdottiController < ApplicationController
   before_action :set_prodotto, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente!, only: [:new, :edit]
-  before_filter :is_titolare_impresa, only: [:new,:edit]
 
   # GET /prodotti
   # GET /prodotti.json
@@ -16,11 +15,19 @@ class ProdottiController < ApplicationController
 
   # GET /prodotti/new
   def new
+   imp_list = Impresa.where(titolare_id: current_utente.actable_id).select("id")
+   if !(current_utente.actable_type == "Titolare" && (imp_list.ids.include? params[:id].to_i ))
+     redirect_back
+   end
     @prodotto = Prodotto.new
   end
 
   # GET /prodotti/1/edit
   def edit
+   imp_list = Impresa.where(titolare_id: current_utente.actable_id).select("id")
+   if !(current_utente.actable_type == "Titolare" && (imp_list.ids.include? @prodotto.impresa_id.to_i ))
+     redirect_back
+   end
   end
 
   # POST /prodotti
@@ -30,7 +37,7 @@ class ProdottiController < ApplicationController
     @prodotto.impresa_id= params[:id]
     respond_to do |format|
       if @prodotto.save
-        format.html { redirect_to root_path, notice: 'Prodotto was successfully created.' }
+        format.html { redirect_to impresa_prodotti_path(id: @prodotto.impresa_id ), notice: 'Prodotto was successfully created.' }
         format.json { render :show, status: :created, location: @prodotto }
       else
         format.html { render :new }
@@ -66,12 +73,7 @@ class ProdottiController < ApplicationController
   private
 
 
-  def is_titolare_impresa
-      imp_list = Impresa.where(titolare_id: current_utente.actable_id).select("id")
-     if !(current_utente.actable_type == "Titolare" && (imp_list.ids.include? params[:id] ))
-       redirect_back
-     end
-  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_prodotto
       @prodotto = Prodotto.find(params[:id_p])
