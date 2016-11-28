@@ -6,7 +6,7 @@ class OrdiniController < ApplicationController
   # GET /ordini.json
   def index
     if current_utente.actable_type == "Cliente"
-      @ordini = Cliente.find(current_utente.id).ordini
+      @ordini = Cliente.find(current_utente.actable_id).ordini
     elsif current_utente.actable_type == "Titolare"
       imp_list = Impresa.where(titolare_id: current_utente.actable_id).select("id") #Ritorna array di imprese del titolare loggato, con i soli id
       @ordini= Ordine.where(imp_list.ids.include? :impresa_id) #Ritorna tutti gli ordini che appartengono a una impresa con id presente nell'array precedente
