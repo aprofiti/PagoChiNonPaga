@@ -12,6 +12,18 @@
   <dd><%= @ordine.cliente_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:impresa_id) %>:</strong></dt>
   <dd><%= @ordine.impresa_id %></dd>
+  <!-- Stampa la lista dei prodotti -->
+  <div class="page-header">
+    <h3>Lista dei prodotti</h3>
+  </div>
+  <% @ordine.prodotti.each do |prodotto| %>
+    <dt><strong><%= model_class.human_attribute_name(:prodotto_id) %>:</strong></dt>
+    <dd><%= prodotto.id %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+    <dd><%= prodotto.nome %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:impresa) %>:</strong></dt>
+    <dd><%= prodotto.impresa.nome %></dd>
+  <% end %>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
