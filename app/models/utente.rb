@@ -17,9 +17,17 @@ class Utente < ActiveRecord::Base
       utente = Cliente.find(id)
     elsif tipo == "Titolare"
       utente = Titolare.find(id)
+    else
+      # Fix New Utente su RailsAdmin
+      return ""
     end
     # Ritorna il nome
     utente.nome
+  end
+
+  # Necessario per mostrare il nome dell'Entita in RailsAdmin
+  def name
+    getNome()
   end
 
 end
