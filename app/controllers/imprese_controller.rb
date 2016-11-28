@@ -31,7 +31,7 @@ class ImpreseController < ApplicationController
     @impresa.titolare_id = current_utente.actable_id
     respond_to do |format|
       if @impresa.save
-        format.html { redirect_to @impresa, notice: 'Impresa was successfully created.' }
+        format.html { redirect_to impresa_path(nome: @impresa.nome,id: @impresa.id), notice: 'Impresa was successfully created.' }
         format.json { render :show, status: :created, location: @impresa }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class ImpreseController < ApplicationController
   def update
     respond_to do |format|
       if @impresa.update(impresa_params)
-        format.html { redirect_to @impresa, notice: 'Impresa was successfully updated.' }
+        format.html { redirect_to impresa_path(nome: @impresa.nome,id: @impresa.id), notice: 'Impresa was successfully updated.' }
         format.json { render :show, status: :ok, location: @impresa }
       else
         format.html { render :edit }

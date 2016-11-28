@@ -27,7 +27,7 @@
   <%= error_span(@impresa[:citta_id]) %>
   <%= f.input :titolare_id %>
   <%= error_span(@impresa[:titolare_id]) %>
-
+  <%= hidden_field_tag(:id,@impresa.id) %>
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 imprese_path, :class => 'btn btn-default' %>
