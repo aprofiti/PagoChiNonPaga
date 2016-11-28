@@ -5,4 +5,9 @@ class Admin < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :polo
+
+  # Necessario per mostrare il nome dell'Entita in RailsAdmin
+  def name
+    self.username.to_s
+  end
 end

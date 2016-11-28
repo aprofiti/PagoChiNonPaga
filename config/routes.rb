@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  # Pagine Statiche
   get 'static_pages/home_page'
+  get 'static_pages/registrati'
 
+  # Rotte per RailsAdmin
   mount RailsAdmin::Engine => '/cp', as: 'rails_admin'
-
 
   resources :poli, except: [:new,:edit], param: :nome
   devise_for :utenti
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
 
   resources :titolari, except: [:index]
   resources :clienti, except: [:index]
+
   root 'static_pages#home_page'
 
 
