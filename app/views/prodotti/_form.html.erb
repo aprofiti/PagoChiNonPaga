@@ -1,4 +1,4 @@
-<%= simple_form_for @prodotto, :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for @prodotto, url: impresa_prodotto_path(nome: @prodotto.nome) ,:html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :nome %>
   <%= error_span(@prodotto[:nome]) %>
   <%= f.input :prezzo %>
@@ -9,8 +9,8 @@
   <%= error_span(@prodotto[:descrizione]) %>
   <%= f.input :impresa_id %>
   <%= error_span(@prodotto[:impresa_id]) %>
-
+  <%= hidden_field_tag(:id_p, @prodotto.id) %>
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                prodotti_path, :class => 'btn btn-default' %>
+                impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default' %>
 <% end %>

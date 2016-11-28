@@ -32,3 +32,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= hidden_field_tag(:id,params[:id]) %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_impresa_prodotto_path+'?id='+params[:id],
+            :class => 'btn btn-primary' %>
