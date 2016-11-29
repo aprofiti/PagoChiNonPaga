@@ -1,0 +1,14 @@
+<%= simple_form_for @citta, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :nome %>
+  <%= error_span(@citta[:nome]) %>
+  <%= f.input :provincia %>
+  <%= error_span(@citta[:provincia]) %>
+  <%= f.input :regione %>
+  <%= error_span(@citta[:regione]) %>
+  <%= f.input :polo_id, as: :radio_buttons%>
+  <%= error_span(@citta[:polo_id]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                citta_index_path, :class => 'btn btn-default' %>
+<% end %>

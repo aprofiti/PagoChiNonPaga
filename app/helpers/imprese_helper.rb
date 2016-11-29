@@ -1,0 +1,2 @@
+module ImpreseHelper
+end

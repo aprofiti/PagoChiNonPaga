@@ -1,0 +1,1 @@
+json.partial! "categorie/categoria", categoria: @categoria

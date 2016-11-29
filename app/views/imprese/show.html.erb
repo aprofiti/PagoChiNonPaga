@@ -1,0 +1,46 @@
+<%- model_class = Impresa -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+  <dd><%= @impresa.nome %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
+  <dd><%= @impresa.telefono %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:fax) %>:</strong></dt>
+  <dd><%= @impresa.fax %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:giorni_orari) %>:</strong></dt>
+  <dd><%= @impresa.giorni_orari %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @impresa.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sitoweb) %>:</strong></dt>
+  <dd><%= @impresa.sitoweb %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:facebook) %>:</strong></dt>
+  <dd><%= @impresa.facebook %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:descrizione) %>:</strong></dt>
+  <dd><%= @impresa.descrizione %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:lat) %>:</strong></dt>
+  <dd><%= @impresa.lat %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:lng) %>:</strong></dt>
+  <dd><%= @impresa.lng %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:verificato) %>:</strong></dt>
+  <dd><%= @impresa.verificato %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:congelato) %>:</strong></dt>
+  <dd><%= @impresa.congelato %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:citta_id) %>:</strong></dt>
+  <dd><%= @impresa.citta_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:titolare_id) %>:</strong></dt>
+  <dd><%= @impresa.titolare_id %></dd>
+</dl>
+<%= link_to "I Nostri Prodotti", impresa_prodotti_path(impresa_nome: @impresa.nome,id: params[:id]), :class => 'btn btn-default'  %>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              imprese_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_impresa_path(@impresa, id: params[:id]), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              impresa_path(@impresa, id: params[:id]),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

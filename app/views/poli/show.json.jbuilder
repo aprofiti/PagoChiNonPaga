@@ -1,0 +1,1 @@
+json.partial! "poli/polo", polo: @polo

@@ -1,0 +1,23 @@
+<%- model_class = Polo -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @poli.each do |polo| %>
+      <tr>
+        <td><%= polo.id %></td>
+        <td><%= link_to polo.nome , polo_path(nome: polo.nome)%></td>
+        <td><%=l polo.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,77 @@
+<!-- Barra Navigazione -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <!-- Logo -->
+      <%= link_to "PagoChiNonPaga", root_path , :class => "navbar-brand" %>
+        <!-- < image_tag "template/logo/Logo_AddioPizzo.png", :id => "logo", :class => "img-responsive">
+        -->
+      <!-- Mostra menu su schermi piccoli-->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Contenuto Barra -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Carrello", static_pages_home_page_path %></li>
+
+        <% if utente_signed_in? %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <%= current_utente.getNome() %>
+              <span class="glyphicon glyphicon-user"></span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <% if current_utente.isCliente? %>
+              <li><%= link_to "Profilo", cliente_path(id: current_utente.actable_id) %></li>
+            <% elsif current_utente.isTitolare? %>
+              <li><%= link_to "Profilo", titolare_path(id: current_utente.actable_id) %></li>
+            <% end %>
+            <li><%= link_to "Ordini", ordini_path(id: current_utente.actable_id) %></li>
+            <li><%= link_to "Logout", destroy_utente_session_path, :method => :delete %></li>
+          </ul>
+        </li>
+        <% else %>
+          <button type="button" class="btn btn-default navbar-btn"><%= link_to "Accedi", new_utente_session_path %></button>
+          <button type="button" class="btn btn-default navbar-btn"><%= link_to "Registra", static_pages_registrati_path %></button>
+        <% end %>
+<!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Carrello</a></li>
+          </ul>
+        </li>
+-->
+      </ul>
+
+      <!-- Campo ricerca -->
+      <form class="navbar-form navbar-center" style="
+        text-align:center;
+        padding-top:10px;">
+        <div class="form-group" style="width: 30%;">
+          <input type="text" class="form-control" placeholder="Search" style="
+             width: 100%;
+             background-color: transparent;
+             border: none;
+             border-radius: 0;
+             border-bottom-width: 1px;
+             border-bottom-color: white;
+             border-bottom-style: solid;">
+        </div>
+        <button type="submit" class="btn btn-default" style="background-color:#F5A623;"><span class="glyphicon glyphicon-search"></button>
+      </form>
+
+    </div>
+  </div>
+</nav>

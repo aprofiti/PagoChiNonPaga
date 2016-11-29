@@ -1,0 +1,36 @@
+<%- model_class = Ordine -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:data) %></th>
+      <th><%= model_class.human_attribute_name(:stato) %></th>
+      <th><%= model_class.human_attribute_name(:cliente_id) %></th>
+      <th><%= model_class.human_attribute_name(:impresa_id) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ordini.each do |ordine| %>
+      <tr>
+        <td><%= link_to ordine.id, ordine_path(ordine) %></td>
+        <td><%= ordine.created_at %></td>
+        <td><%= ordine.stato %></td>
+        <td><%= ordine.cliente_id %></td>
+        <td><%= ordine.impresa_id %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_ordine_path(ordine), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      ordine_path(ordine),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

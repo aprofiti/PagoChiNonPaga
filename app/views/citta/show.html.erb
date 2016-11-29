@@ -1,0 +1,18 @@
+<%- model_class = Citta -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+  <dd><%= @citta.nome %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:provincia) %>:</strong></dt>
+  <dd><%= @citta.provincia %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:regione) %>:</strong></dt>
+  <dd><%= @citta.regione %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:polo_id) %>:</strong></dt>
+  <dd><%= @citta.polo_id %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              citta_index_path, :class => 'btn btn-default'  %>

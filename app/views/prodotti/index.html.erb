@@ -1,0 +1,39 @@
+<%- model_class = Prodotto -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:prezzo) %></th>
+      <th><%= model_class.human_attribute_name(:qta) %></th>
+      <th><%= model_class.human_attribute_name(:descrizione) %></th>
+      <th><%= model_class.human_attribute_name(:impresa_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @prodotti.each do |prodotto| %>
+    <% if prodotto.impresa_id.to_i == params[:id].to_i %>
+      <tr>
+        <td><%= prodotto.id %></td>
+        <td><%= link_to prodotto.nome, impresa_prodotto_path(impresa_nome: params[:impresa_nome],nome: prodotto.nome, id_p: prodotto.id) %></td>
+        <td><%= prodotto.prezzo %></td>
+        <td><%= prodotto.qta %></td>
+        <td><%= prodotto.descrizione %></td>
+        <td><%= prodotto.impresa_id %></td>
+        <td><%=l prodotto.created_at %></td>
+
+      </tr>
+      <%end%>
+    <% end %>
+  </tbody>
+</table>
+
+<%= hidden_field_tag(:id,params[:id]) %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_impresa_prodotto_path+'?id='+params[:id],
+            :class => 'btn btn-primary' %>

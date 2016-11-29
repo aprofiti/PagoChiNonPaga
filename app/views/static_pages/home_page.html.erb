@@ -1,0 +1,20 @@
+<h1>Home Page</h1>
+<ul>
+
+<li><%= link_to "Log in", new_utente_session_path %> </li>
+<li><%= link_to "Imprese", imprese_path %> </li>
+<% if utente_signed_in? %>
+<li><%= link_to "Log out", destroy_utente_session_path, :method => :delete %> </li>
+
+  <% if current_utente.actable_type == "Cliente" %>
+    <li><%= link_to "Edit", edit_cliente_path(current_utente.actable_id) %> </li>
+    <li><%= link_to "Profilo", cliente_path(current_utente.actable_id) %> </li>
+  <% else %>
+    <li><%= link_to "Edit", edit_titolare_path(current_utente.actable_id) %> </li>
+    <li><%= link_to "Profilo", titolare_path(current_utente.actable_id) %> </li>
+  <% end %>
+<% end %>
+<li><%= link_to "Crea cliente", new_cliente_path	 %> </li>
+<li><%= link_to "Crea titolare", new_titolare_path	 %> </li>
+<li><%= link_to "Categorie", categorie_path	 %> </li>
+</ul>

@@ -1,0 +1,1 @@
+json.partial! "citta/citta", citta: @citta

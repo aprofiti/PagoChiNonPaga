@@ -1,0 +1,1 @@
+json.array! @citta, partial: 'citta/citta', as: :citta

@@ -1,0 +1,20 @@
+<%- model_class = Prodotto -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+  <dd><%= @prodotto.nome %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:prezzo) %>:</strong></dt>
+  <dd><%= @prodotto.prezzo %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:qta) %>:</strong></dt>
+  <dd><%= @prodotto.qta %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:descrizione) %>:</strong></dt>
+  <dd><%= @prodotto.descrizione %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:impresa_id) %>:</strong></dt>
+  <dd><%= @prodotto.impresa_id %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default'  %>

@@ -1,0 +1,1 @@
+json.array! @sottocategorie, partial: 'sottocategorie/sottocategoria', as: :sottocategoria
