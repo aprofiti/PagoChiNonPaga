@@ -1,7 +1,7 @@
 class OrdiniController < ApplicationController
   before_action :set_ordine, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente!
-  before_filter :is_cliente_titolare, only: [:show,:edit]
+  before_filter :is_mio_ordine?, only: [:show,:edit]
   # GET /ordini
   # GET /ordini.json
   def index
@@ -69,11 +69,12 @@ class OrdiniController < ApplicationController
   end
 
   private
-    def is_cliente_titolare
-      if !(current_utente.actable_type == "Cliente" && current_utente.actable_id == @ordine.cliente_id)
-        redirect_back
-      end
+  def is_mio_ordine?
+    if(current_utente.isCliente? && @ordine.cliente_id == current_utente.actable_id)
+    elsif (current_utente.isTitolare? && current_utente.isMyImpresa?(Impresa.find(@ordine.impresa_id)))
+    else redirect_back
     end
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_ordine
       @ordine = Ordine.find(params[:id])
