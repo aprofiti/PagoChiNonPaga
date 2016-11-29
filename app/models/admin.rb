@@ -8,6 +8,6 @@ class Admin < ActiveRecord::Base
 
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
-    self.username.to_s
+    self.email.to_s
   end
 end
