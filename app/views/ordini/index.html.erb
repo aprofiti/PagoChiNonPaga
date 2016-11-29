@@ -10,7 +10,6 @@
       <th><%= model_class.human_attribute_name(:stato) %></th>
       <th><%= model_class.human_attribute_name(:cliente_id) %></th>
       <th><%= model_class.human_attribute_name(:impresa_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -18,11 +17,10 @@
     <% @ordini.each do |ordine| %>
       <tr>
         <td><%= link_to ordine.id, ordine_path(ordine) %></td>
-        <td><%= ordine.data %></td>
+        <td><%= ordine.created_at %></td>
         <td><%= ordine.stato %></td>
         <td><%= ordine.cliente_id %></td>
         <td><%= ordine.impresa_id %></td>
-        <td><%=l ordine.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_ordine_path(ordine), :class => 'btn btn-default btn-xs' %>

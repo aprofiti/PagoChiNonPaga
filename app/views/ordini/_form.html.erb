@@ -1,6 +1,4 @@
 <%= simple_form_for @ordine, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :data %>
-  <%= error_span(@ordine[:data]) %>
   <%= f.input :stato %>
   <%= error_span(@ordine[:stato]) %>
   <%= f.input :cliente_id %>
