@@ -30,4 +30,23 @@ class Utente < ActiveRecord::Base
     getNome()
   end
 
+  #
+  # METODI PER LATO VIEW
+  #
+  def isTitolare?
+   self.actable_type == "Titolare"
+  end
+
+  def isCliente?
+   self.actable_type == "Cliente"
+  end
+
+  def isMyImpresa?(impresa)
+    if isTitolare? && self.actable_id == impresa.titolare_id
+      true
+    else
+      false
+    end
+  end
+  
 end
