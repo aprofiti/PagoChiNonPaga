@@ -1,7 +1,7 @@
 class OrdiniController < ApplicationController
   before_action :set_ordine, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente!
-  before_filter :is_mio_ordine?, only: [:show,:edit]
+  before_filter :is_mio_ordine?, only: [:show,:edit,:destroy]
   # GET /ordini
   # GET /ordini.json
   def index
