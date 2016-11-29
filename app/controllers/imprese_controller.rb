@@ -67,13 +67,13 @@ class ImpreseController < ApplicationController
   private
 
     def is_titolare
-       if !(current_utente.actable_type == "Titolare")
+       if !(current_utente.isTitolare?)
          redirect_back
        end
     end
 
     def controllo_titolare_impresa
-      if !(current_utente.actable_id==@impresa.titolare_id)
+      if !(current_utente.isMyImpresa?(@impresa))
         redirect_back
       end
     end
