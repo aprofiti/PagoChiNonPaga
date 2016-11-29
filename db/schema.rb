@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116125353) do
+ActiveRecord::Schema.define(version: 20161129144642) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 20161116125353) do
   add_index "indirizzi", ["citta_id"], name: "index_indirizzi_on_citta_id"
 
   create_table "ordini", force: :cascade do |t|
-    t.datetime "data"
     t.string   "stato"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
