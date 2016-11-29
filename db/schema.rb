@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129144642) do
+ActiveRecord::Schema.define(version: 20161129154122) do
 
   create_table "admins", force: :cascade do |t|
-    t.string   "username"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "email",                  default: "", null: false
@@ -120,6 +119,7 @@ ActiveRecord::Schema.define(version: 20161129144642) do
   create_table "ordini_prodotti", id: false, force: :cascade do |t|
     t.integer "ordine_id"
     t.integer "prodotto_id"
+    t.integer "qta"
   end
 
   add_index "ordini_prodotti", ["ordine_id"], name: "index_ordini_prodotti_on_ordine_id"
