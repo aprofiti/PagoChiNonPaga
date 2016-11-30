@@ -42,7 +42,7 @@
         <td><%= impresa.congelato %></td>
         <td><%= impresa.citta_id %></td>
         <td><%= impresa.titolare_id %></td>
-        <td><%=l impresa.created_at %></td>
+        <td><%= impresa.created_at %></td>
         <td>
           <% # Controllo se l'utente e' il titolare dell'impresa %>
           <% if  utente_signed_in? && current_utente.isTitolare? %>
