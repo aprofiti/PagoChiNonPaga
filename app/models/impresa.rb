@@ -10,4 +10,24 @@ class Impresa < ActiveRecord::Base
     self.nome
   end
 
+  def getTitolare
+    self.titolare.getNome
+  end
+
+  def getCitta
+    self.citta.getNome
+  end
+
+  def getIndirizzo
+    # TODO
+  end
+
+  def getCategorie
+    # TODO
+  end
+
+  def getSottocategorie
+    #self.sottocategoria
+  end
+
 end
