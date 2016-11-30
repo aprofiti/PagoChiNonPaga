@@ -5,4 +5,8 @@ class Titolare < ActiveRecord::Base
   has_many :imprese
   belongs_to :indirizzo
 
+  def getImprese
+    self.imprese
+  end
+
 end
