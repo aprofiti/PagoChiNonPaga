@@ -8,5 +8,35 @@
   <dd><%= @polo.nome %></dd>
 </dl>
 
+<div class="page-header">
+  <h3><%= model_class.human_attribute_name(:citta) %></h3>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:provincia) %></th>
+      <th><%= model_class.human_attribute_name(:regione) %></th>
+      <th><%= model_class.human_attribute_name(:polo_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @polo.getCitta.each do |citta| %>
+      <tr>
+        <td><%=  citta.id %></td>
+        <td><%=link_to citta.nome, citta_path(nome: citta.nome, id: citta.id) %></td>
+        <td><%= citta.provincia %></td>
+        <td><%= citta.regione %></td>
+        <td><%= citta.polo_id %></td>
+        <td><%=l citta.created_at %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to t('.back', :default => t("helpers.links.back")),
               poli_path, :class => 'btn btn-default'  %>
