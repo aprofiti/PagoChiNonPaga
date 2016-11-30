@@ -14,5 +14,32 @@
   <dd><%= @citta.polo_id %></dd>
 </dl>
 
+<div class="page-header">
+  <h3><%= model_class.human_attribute_name(:imprese) %></h3>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:indirizzo) %></th>
+      <th><%= model_class.human_attribute_name(:categoria) %></th>
+      <th><%= model_class.human_attribute_name(:sottocategoria) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @citta.getImprese.each do |impresa| %>
+      <tr>
+        <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id) %></td>
+        <td><%= impresa.id %></td>
+        <td><%= impresa.getIndirizzo %></td>
+        <td><%= impresa.getCategoria %></td>
+        <td><%= impresa.getSottocategoria %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to t('.back', :default => t("helpers.links.back")),
               citta_index_path, :class => 'btn btn-default'  %>
