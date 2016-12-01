@@ -66,7 +66,7 @@ class TitolariController < ApplicationController
   private
 
     def controllo_id_titolare
-      if !(current_utente.actable_id==params[:id].to_i && current_utente.actable_type == "Titolare")
+      if !(current_utente.actable_id==params[:id].to_i && current_utente.isTitolare?)
         redirect_back
       end
     end

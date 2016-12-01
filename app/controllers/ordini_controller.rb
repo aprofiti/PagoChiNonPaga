@@ -5,11 +5,15 @@ class OrdiniController < ApplicationController
   # GET /ordini
   # GET /ordini.json
   def index
-    if current_utente.actable_type == "Cliente"
+    if current_utente.isCliente?
       @ordini = Cliente.find(current_utente.actable_id).ordini
-    elsif current_utente.actable_type == "Titolare"
-      imp_list = Impresa.where(titolare_id: current_utente.actable_id).select("id") #Ritorna array di imprese del titolare loggato, con i soli id
-      @ordini= Ordine.where(imp_list.ids.include? :impresa_id) #Ritorna tutti gli ordini che appartengono a una impresa con id presente nell'array precedente
+    elsif current_utente.isTitolare?
+      @ordini=[]
+      titolare= Titolare.find(current_utente.actable_id)
+      titolare.imprese.each do |impresa|
+        @ordini+= impresa.ordini
+      end
+      @ordini
     end
   end
 
