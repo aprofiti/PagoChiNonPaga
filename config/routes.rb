@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
   # Pagine Statiche
-  get 'static_pages/home_page'
-  get 'static_pages/registrati'
-
+  #get 'static_pages/home_page'
+  get '/registrati', to:'static_pages#registrati'
+  #get '/login', to: 'devise/sessions#new', as: :login
   # Rotte per RailsAdmin
   mount RailsAdmin::Engine => '/cp', as: 'rails_admin'
 
   resources :poli, except: [:new,:edit], param: :nome
-  devise_for :utenti
+  devise_for :utenti, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout"}
   devise_for :admins
   resources :citta, except: [:new,:edit] , param: :nome
-  resources :ordini, except: :new
+  resources :ordini, except: :new, path: '/mieiOrdini'
 
   #PATH del tipo /imprese/:nome/prodotti/:nome
   resources :imprese, param: :nome do

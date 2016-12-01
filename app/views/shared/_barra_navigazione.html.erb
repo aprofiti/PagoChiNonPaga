@@ -21,7 +21,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Carrello", static_pages_home_page_path %></li>
+        <li><%= link_to "Carrello", root_path %></li>
 
         <% if utente_signed_in? %>
         <li class="dropdown">
@@ -36,13 +36,13 @@
             <% elsif current_utente.isTitolare? %>
               <li><%= link_to "Profilo", titolare_path(id: current_utente.actable_id) %></li>
             <% end %>
-            <li><%= link_to "Ordini", ordini_path(id: current_utente.actable_id) %></li>
+            <li><%= link_to "Ordini", ordini_path %></li>
             <li><%= link_to "Logout", destroy_utente_session_path, :method => :delete %></li>
           </ul>
         </li>
         <% else %>
           <button type="button" class="btn btn-default navbar-btn"><%= link_to "Accedi", new_utente_session_path %></button>
-          <button type="button" class="btn btn-default navbar-btn"><%= link_to "Registra", static_pages_registrati_path %></button>
+          <button type="button" class="btn btn-default navbar-btn"><%= link_to "Registra",registrati_path %></button>
         <% end %>
 <!--
         <li class="dropdown">
