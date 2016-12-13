@@ -12,6 +12,8 @@ gem 'paper_trail'
 # Implementazione IS-A
 gem 'activerecord', '~> 4.2.6'
 gem 'active_record-acts_as'
+# Carrello
+gem 'acts_as_shopping_cart', '~> 0.2.1'
 # View
 gem 'twitter-typeahead-rails', git: 'https://github.com/yourabi/twitter-typeahead-rails.git'
 gem 'paperclip', "~> 5.0.0"
