@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+#TODO: riadattare il file di seeds alle validations introdotte
+
 Polo.create(nome: 'AP Messina')
 Polo.create(nome: 'AP Palermo')
 Polo.create(nome: 'AP Catania Buuu')

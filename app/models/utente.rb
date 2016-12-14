@@ -6,6 +6,9 @@ class Utente < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  #TODO: servono delle validations anche qui?
+
+
   # Ritorna il nome dell'Utente
   # Viene utilizzato nelle view
   def getNome
@@ -48,5 +51,5 @@ class Utente < ActiveRecord::Base
       false
     end
   end
-  
+
 end
