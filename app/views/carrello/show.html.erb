@@ -1,4 +1,15 @@
+<%- model_class = Carrello -%>
 <p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
+<dl class="dl-horizontal">
+  <% @carrello.cart_items.each do |item| %>
+    <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+    <dd><%= item.name %></dd>
+  <% end %>
+
+</dl>
 <%= link_to 'Edit', edit_carrello_path(@carrello) %> |
 <%= link_to 'Back', carrello_index_path %>
