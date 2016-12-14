@@ -23,11 +23,19 @@ class Impresa < ActiveRecord::Base
   end
 
   def getCategorie
-    # TODO
+    categorie =[]
+    self.sottocategorie.each do |sottocategoria|
+      categorie << [sottocategoria.categoria.nome]
+    end
+    categorie
   end
 
   def getSottocategorie
-    #self.sottocategoria
+    nomi=[]
+    self.sottocategorie.each do |sottocategoria|
+      nomi << [sottocategoria.nome, sottocategoria.categoria.nome]
+    end
+    nomi
   end
 
 end

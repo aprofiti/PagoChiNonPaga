@@ -34,8 +34,16 @@
         <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id) %></td>
         <td><%= impresa.id %></td>
         <td><%= impresa.getIndirizzo %></td>
-        <td><%= impresa.getCategoria %></td>
-        <td><%= impresa.getSottocategoria %></td>
+        <td><% impresa.getCategorie %>
+          <% impresa.getCategorie.each do |categoria|%>
+            <%= link_to categoria.at(0) ,   categoria_sottocategorie_path(categoria_nome: categoria)%>
+          <% end %>
+        </td>
+        <td>
+          <% impresa.getSottocategorie.each do |sottocategoria|%>
+            <%= link_to sottocategoria.at(0) , categoria_sottocategoria_path(categoria_nome: sottocategoria.at(1),nome: sottocategoria.at(0))%>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
