@@ -1,0 +1,1 @@
+json.array! @carrello, partial: 'carrello/carrello', as: :carrello

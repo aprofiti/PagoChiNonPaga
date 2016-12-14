@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :carrello
   # Pagine Statiche
   #get 'static_pages/home_page'
   get '/registrati', to:'static_pages#registrati'
