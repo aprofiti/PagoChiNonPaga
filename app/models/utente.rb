@@ -48,5 +48,12 @@ class Utente < ActiveRecord::Base
       false
     end
   end
-  
+
+  def hasCarrello?
+      isCliente? && Carrello.exists?(:cliente_id => self.actable_id)
+  end
+
+  def getCarrello
+    Carrello.find_by! cliente_id: self.actable_id
+  end
 end

@@ -21,6 +21,16 @@ class ClientiController < ApplicationController
   def edit
   end
 
+  def add_cart
+    if current_utente.hasCarrello?
+      carrello= current_utente.getCarrello
+    else
+      carrello= Carrello.create(cliente_id: current_utente.actable_id)
+    end
+    prodotto= Prodotto.find(params[:prodotto_id])
+    carrello.add(prodotto,prodotto.prezzo)
+    redirect_back
+  end
   # POST /clienti
   # POST /clienti.json
   #Dopo la creazione PER ORA l'utente viene reindirizzato alla schermata di login

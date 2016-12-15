@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :carrello
   # Pagine Statiche
   #get 'static_pages/home_page'
   get '/registrati', to:'static_pages#registrati'
@@ -24,7 +23,13 @@ Rails.application.routes.draw do
   end
 
   resources :titolari, except: [:index]
-  resources :clienti, except: [:index]
+  resources :clienti, except: [:index] do
+    member do
+      post :add_cart
+    end
+  end
+
+  resources :carrello, except: [:index]
 
   root 'static_pages#home_page'
 

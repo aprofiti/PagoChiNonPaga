@@ -18,3 +18,8 @@
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default'  %>
+<% if utente_signed_in? %>
+  <%= button_to "Aggiungi al carrello", add_cart_cliente_path(current_utente.actable_id, prodotto_id: params[:id_p]), method: :post %>
+  <% else %>
+  <%= button_to "Aggiungi al carrello",  new_utente_session_path%>
+<% end %>
