@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # Pagine Statiche
   #get 'static_pages/home_page'
   get '/registrati', to:'static_pages#registrati'
+  get '/infoCarrello', to:'static_pages#carrello_mancante'
   #get '/login', to: 'devise/sessions#new', as: :login
   # Rotte per RailsAdmin
   mount RailsAdmin::Engine => '/cp', as: 'rails_admin'
