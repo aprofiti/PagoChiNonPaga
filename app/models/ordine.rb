@@ -2,9 +2,10 @@ class Ordine < ActiveRecord::Base
   belongs_to :cliente
   belongs_to :impresa
   has_and_belongs_to_many :prodotti
+  belongs_to :stato_ordine
 
   # Validations necessarie per la registrazione
-  validates :stato, :cliente_id, :impresa_id, presence: true
+  validates :cliente_id, :impresa_id, :stato_ordine_id, presence: true
   validate :has_prodotti #custom validation
 
   # Una relazione habtm ha bisogno di una custom validation
