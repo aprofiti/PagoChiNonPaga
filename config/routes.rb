@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :carrello, except: [:index]
+  resources :carrello, except: [:index, :new]
 
   root 'static_pages#home_page'
 
