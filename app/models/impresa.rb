@@ -16,9 +16,13 @@ class Impresa < ActiveRecord::Base
     errors.add(:base, 'Impresa già presente.') if matched_entry && (matched_entry.id != self.id) #se non sono io stesso allora c'e' un errore
   end
 
+  def getNome
+    self.nome
+  end
+  
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
-    self.nome
+    getNome
   end
 
   def getTitolare
