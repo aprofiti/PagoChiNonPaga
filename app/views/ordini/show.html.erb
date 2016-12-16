@@ -11,18 +11,34 @@
   <dd><%= @ordine.cliente_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:impresa_id) %>:</strong></dt>
   <dd><%= @ordine.impresa_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:stato_ordine) %>:</strong></dt>
+  <dd><%= @ordine.getStato %></dd>
   <!-- Stampa la lista dei prodotti -->
   <div class="page-header">
     <h3>Lista dei prodotti</h3>
   </div>
-  <% @ordine.prodotti.each do |prodotto| %>
-    <dt><strong><%= model_class.human_attribute_name(:prodotto_id) %>:</strong></dt>
-    <dd><%= prodotto.id %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
-    <dd><%= prodotto.nome %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:impresa) %>:</strong></dt>
-    <dd><%= prodotto.impresa.nome %></dd>
-  <% end %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:prodotto_id) %></th>
+        <th><%= model_class.human_attribute_name(:nome) %></th>
+        <th><%= model_class.human_attribute_name(:impresa) %></th>
+        <th><%= model_class.human_attribute_name(:qta) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ordine.prodotti.each do |prodotto| %>
+      <tr>
+        <td><%= prodotto.id %></td>
+        <td><%= prodotto.nome %></td>
+        <td><%= prodotto.impresa.nome %></td>
+        <td><%= prodotto.qta %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
