@@ -7,6 +7,9 @@ class Impresa < ActiveRecord::Base
 
   # Validations necessarie per la registrazione
   validates :nome, :telefono, :email, :descrizione, :citta_id, :titolare_id, presence: true
+  validates_numericality_of :telefono, on: :create
+  validates_numericality_of :fax, on: :create
+  validates :sitoweb, :format => URI::regexp(%w(http https))
   validate :unique_entry #custom validation
 
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
@@ -19,7 +22,7 @@ class Impresa < ActiveRecord::Base
   def getNome
     self.nome
   end
-  
+
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
     getNome

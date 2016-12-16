@@ -5,6 +5,7 @@ class Indirizzo < ActiveRecord::Base
 
   # Validations necessarie per la registrazione
   validates :via, :ncivico, :cap, :citta_id, presence: true
+  validates_numericality_of :cap, on: :create
   validate :unique_entry #custom validation
 
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
