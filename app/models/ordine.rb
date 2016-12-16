@@ -13,4 +13,6 @@ class Ordine < ActiveRecord::Base
     "#" + self.id.to_s + "Cliente: " + self.cliente_id.to_s
   end
 
+
+
 end

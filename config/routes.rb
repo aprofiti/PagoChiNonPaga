@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   devise_for :utenti, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout"}
   devise_for :admins
   resources :citta, except: [:new,:edit] , param: :nome
-  resources :ordini, except: :new, path: '/mieiOrdini'
+  resources :ordini, except: :new, path: '/mieiOrdini' do
+    member do
+      post :prepara_ordini
+    end
+  end
 
   #PATH del tipo /imprese/:nome/prodotti/:nome
   resources :imprese, param: :nome do

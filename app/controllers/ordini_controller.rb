@@ -32,6 +32,17 @@ class OrdiniController < ApplicationController
   def edit
   end
 
+  def prepara_ordini
+    carrello= current_utente.getCarrello
+    imprese = carrello.impreseCarrello
+    impresa_prodotti= carrello.impresaElemento
+    imprese.each do |impresa|
+      prodotti= setOrdine(impresa_prodotti,impresa,carrello)
+      Ordine.create(cliente_id: current_utente.actable_id, stato: "In attesa",impresa_id: impresa ,prodotti: prodotti)
+    end
+    carrello.destroy
+    redirect_to root_path
+  end
   # POST /ordini
   # POST /ordini.json
   def create
@@ -73,6 +84,24 @@ class OrdiniController < ApplicationController
   end
 
   private
+
+#prende in ingresso il carrello e l'id di una impresa, cerca tutti i prodotti del carrello che appartengono a quella impresa
+#e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'aggiunta di ogni oggetto
+  def setOrdine(impresa_prodotti,impresa,carrello)
+    prodotti= []
+    impresa_prodotti.each do |elemento|
+      if elemento.at(0) == impresa
+        prodotto= Prodotto.find(elemento.at(1).item_id)
+        qta= elemento.at(1).quantity.to_i
+        for i in 1..qta
+          prodotti.push(prodotto)
+        end
+        carrello.remove(elemento,qta)
+      end
+    end
+    prodotti
+  end
+
   def is_mio_ordine?
     if(current_utente.isCliente? && @ordine.cliente_id == current_utente.actable_id)
     elsif (current_utente.isTitolare? && current_utente.isMyImpresa?(Impresa.find(@ordine.impresa_id)))

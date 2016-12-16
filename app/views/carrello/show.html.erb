@@ -13,3 +13,7 @@
 </dl>
 <%= link_to 'Edit', edit_carrello_path(@carrello) %> |
 <%= link_to 'Back', carrello_index_path %>
+
+<% if !@carrello.empty? %>
+  <%= link_to "Procedi all' acquisto",  prepara_ordini_ordine_path(id: current_utente.actable_id) ,method: :post%>
+<% end %>

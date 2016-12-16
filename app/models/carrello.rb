@@ -13,4 +13,22 @@ class Carrello < ActiveRecord::Base
     end
   end
 
+  def impreseCarrello  #lista imprese interessate nel carrello
+    imprese = []
+    self.impresaElemento.each do |tupla|
+      if !(imprese.include? tupla.at(0))
+        imprese << tupla.at(0)
+      end
+    end
+    imprese
+  end
+
+  def impresaElemento #ritorna lista prodotti carrello con [id_impresa, elemento]
+    ids=[]
+    self.cart_items.each do |elemento|
+      prodotto = Prodotto.find(elemento.item_id)
+      ids << [prodotto.impresa_id,elemento]
+    end
+    ids
+  end
 end
