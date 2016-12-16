@@ -38,7 +38,7 @@ class OrdiniController < ApplicationController
     impresa_prodotti= carrello.impresaElemento
     imprese.each do |impresa|
       prodotti= setOrdine(impresa_prodotti,impresa,carrello)
-      Ordine.create(cliente_id: current_utente.actable_id, stato: "In attesa",impresa_id: impresa ,prodotti: prodotti)
+      Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti)
     end
     carrello.destroy
     redirect_to root_path

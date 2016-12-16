@@ -6,6 +6,9 @@ class Utente < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  #TODO: servono delle validations anche qui?
+
+
   # Ritorna il nome dell'Utente
   # Viene utilizzato nelle view
   def getNome
@@ -56,4 +59,5 @@ class Utente < ActiveRecord::Base
   def getCarrello
     Carrello.find_by! cliente_id: self.actable_id
   end
+  
 end
