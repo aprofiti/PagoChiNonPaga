@@ -24,6 +24,7 @@
       <td><%= prodotto.impresa.getNome %></td>
       <td><%= item.quantity %></td>
       <td><%= item.price %></td>
+      <td><%= link_to "Cancella elemento",  remove_item_carrello_path(id: params[:id],item: item), method: :post %> </td>
     </tr>
   <% end %>
 

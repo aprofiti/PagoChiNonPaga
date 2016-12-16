@@ -34,7 +34,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :carrello, except: [:index, :new]
+  resources :carrello, except: [:index, :new] do
+    member do
+      post :remove_item
+    end
+  end
 
   root 'static_pages#home_page'
 
