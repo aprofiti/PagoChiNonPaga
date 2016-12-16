@@ -115,6 +115,6 @@ class OrdiniController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordine_params
-      params.require(:ordine).permit(:data, :stato)
+      params.require(:ordine).permit(:data, :cliente_id, :impresa_id, :stato_ordine_id)
     end
 end
