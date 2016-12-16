@@ -14,9 +14,9 @@ class Ordine < ActiveRecord::Base
     #se non ci sono prodotti viene generato un errore
   end
 
-  def getOrdini
-  #  @ordini.where("cliente_id = " + utente.actable_id.to_s + "")
-  #  @ordini.where("cliente_id = 1")
+  # Ritorna lo stato dell'ordine in forma di stringa
+  def getStato
+    stato_ordine.stato
   end
 
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
