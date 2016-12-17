@@ -23,7 +23,5 @@ class Ordine < ActiveRecord::Base
   def name
     "#" + self.id.to_s + "Cliente: " + self.cliente_id.to_s
   end
-
-
-
+  
 end

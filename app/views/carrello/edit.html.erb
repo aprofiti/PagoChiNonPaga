@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @carrello %> |
-<%= link_to 'Back', carrello_index_path %>
+<%= link_to t('.torna_al_carrello', :default => t("helpers.links.torna_al_carrello")),
+            carrello_path, :class => 'btn btn-default' %>

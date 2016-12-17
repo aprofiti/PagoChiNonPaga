@@ -46,8 +46,15 @@
 </table>
 
 </dl>
-<%= link_to 'Edit', edit_carrello_path(@carrello) %> |
-<%= link_to 'Back', carrello_index_path %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+            edit_carrello_path, :class => 'btn btn-default' %>
+<% if current_utente.actable_type == "Cliente" %>
+  <%= link_to t('.profilo', :default => t("helpers.links.profilo")),
+              cliente_path(id: current_utente.actable_id), :class => 'btn btn-default' %>
+<% else %>
+  <%= link_to t('.profilo', :default => t("helpers.links.profilo")),
+              titolare_path(id: current_utente.actable_id), :class => 'btn btn-default'%>
+<% end %>
 
 <% if !@carrello.empty? %>
   <%= link_to "Procedi all' acquisto",  prepara_ordini_ordine_path(id: current_utente.actable_id) ,method: :post%>

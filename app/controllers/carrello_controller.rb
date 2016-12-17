@@ -25,7 +25,7 @@ class CarrelloController < ApplicationController
   def remove_item #rimuove item da carrello
     carrello = Carrello.find(current_utente.getCarrello)  #workaround per cancellazione
     carrello.cart_items.delete(params[:item].to_i)        #item è un parametro che arriva dalla post
-    redirect_to root_path
+    redirect_to carrello_path(id: carrello.id)
   end
 
   # POST /carrello

@@ -12,7 +12,8 @@ class Carrello < ActiveRecord::Base
       cliente.getNome
     end
   end
-#ritorna lista imprese interessate nel carrello, richiamato in controller ordini
+
+  # Ritorna lista imprese interessate nel carrello, richiamato in controller ordini
   def impreseCarrello
     imprese = []
     self.impresaElemento.each do |tupla|
@@ -22,7 +23,8 @@ class Carrello < ActiveRecord::Base
     end
     imprese
   end
-#ritorna lista prodotti carrello con [id_impresa, elemento], richiamato in impreseCarrello e in controller ordini
+
+  # Ritorna lista prodotti carrello con [id_impresa, elemento], richiamato in impreseCarrello e in controller ordini
   def impresaElemento
     ids=[]
     self.cart_items.each do |elemento|
@@ -31,4 +33,5 @@ class Carrello < ActiveRecord::Base
     end
     ids
   end
+
 end

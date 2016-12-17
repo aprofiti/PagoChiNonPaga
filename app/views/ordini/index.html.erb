@@ -32,3 +32,6 @@
     <% end %>
   </tbody>
 </table>
+
+<%= link_to t('.profilo', :default => t("helpers.links.profilo")),
+            cliente_path(id: current_utente.actable_id), :class => 'btn btn-default btn-xs' %>
