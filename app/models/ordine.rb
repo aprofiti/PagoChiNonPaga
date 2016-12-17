@@ -1,7 +1,7 @@
 class Ordine < ActiveRecord::Base
-  has_and_belongs_to_many :prodotti
   belongs_to :cliente
   belongs_to :impresa
+  has_and_belongs_to_many :prodotti
   belongs_to :stato_ordine
 
   # Validations necessarie per la registrazione

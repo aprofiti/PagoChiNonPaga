@@ -31,16 +31,4 @@ class Carrello < ActiveRecord::Base
     end
     ids
   end
-
-  # Ritorna un array con i prodotti dell'impresa passata come parametro
-  def impresaProdotti(impresaId)
-    # Controllo il parametro
-    if impresaId != nil
-      # Ritorna array dei prodotti appartenenti all'impresa richiesta
-      lista = self.impresaElemento()
-      lista[impresaId]
-      #lista = impresaElemento.find(impresaID)
-    end
-  end
-
 end
