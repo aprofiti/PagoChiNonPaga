@@ -93,10 +93,11 @@ class OrdiniController < ApplicationController
       if elemento.at(0) == impresa
         prodotto= Prodotto.find(elemento.at(1).item_id)
         qta= elemento.at(1).quantity.to_i
-        for i in 1..qta
-          prodotti.push(prodotto)
-        end
-        carrello.remove(elemento,qta)
+          for i in 1..qta
+            prodotti.push(prodotto)
+          end
+          #prodotto.setQuantita(qta)    COMMENTATO PER TEST NOSTRI. FUNZIONA E VA ABILITATO ALLA FINE. SCALA QUANTITÀ DA DB
+          carrello.remove(elemento,qta)
       end
     end
     prodotti

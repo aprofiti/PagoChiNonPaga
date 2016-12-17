@@ -14,6 +14,7 @@
       <th><%= model_class.human_attribute_name(:impresa) %></th>
       <th><%= model_class.human_attribute_name(:prezzo) %></th>
       <th><%= model_class.human_attribute_name(:quantita) %></th>
+      <th><%= model_class.human_attribute_name(:azioni) %></th>
     </tr>
   </thead>
   <tbody>
@@ -26,6 +27,8 @@
       <td><%= prodotto.impresa.getNome %></td>
       <td><%= item.price %></td>
       <td><%= item.quantity %></td>
+      <td><%= link_to "", remove_item_carrello_path(id: params[:id],item: item),
+              :class => 'glyphicon glyphicon glyphicon-remove', method: :post %> </td>
     </tr>
   <% end %>
 

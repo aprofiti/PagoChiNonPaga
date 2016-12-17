@@ -16,4 +16,23 @@ class Prodotto < ActiveRecord::Base
     getNome
   end
 
+  def checkDisponibilita(qta,prod,carrello)
+
+    prodotto_carrello = carrello.cart_items.where(item_id: 1).first
+    if prodotto_carrello == nil
+      qta_carrello = 0
+    else
+      qta_carrello = prodotto_carrello.quantity
+    end
+    self.qta > (qta + qta_carrello) && qta > 0
+  end
+
+  def getQuantita
+    self.qta
+  end
+
+  def setQuantita(qta)
+    nuova_qta = self.qta - qta
+    self.update_attribute('qta', nuova_qta)
+  end
 end
