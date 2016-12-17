@@ -6,9 +6,14 @@ class Prodotto < ActiveRecord::Base
   validates :nome, :prezzo, :qta, :descrizione, :impresa_id, presence: true
   #TODO: servono controlli sui duplicati?
 
+  # Ritorna il nome del prodotto
+  def getNome
+    self.nome
+  end
+
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
-    self.nome
+    getNome
   end
 
 end

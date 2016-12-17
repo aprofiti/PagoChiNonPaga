@@ -10,9 +10,10 @@
     <tr>
       <th><%= model_class.human_attribute_name(:prodotto_id) %></th>
       <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:id_impresa) %></th>
       <th><%= model_class.human_attribute_name(:impresa) %></th>
-      <th><%= model_class.human_attribute_name(:quantita) %></th>
       <th><%= model_class.human_attribute_name(:prezzo) %></th>
+      <th><%= model_class.human_attribute_name(:quantita) %></th>
     </tr>
   </thead>
   <tbody>
@@ -21,9 +22,10 @@
     <tr>
       <td><%= item.item_id %></td>
       <td><%= prodotto.nome %></td>
+      <td><%= prodotto.impresa.id %></td>
       <td><%= prodotto.impresa.getNome %></td>
-      <td><%= item.quantity %></td>
       <td><%= item.price %></td>
+      <td><%= item.quantity %></td>
     </tr>
   <% end %>
 
