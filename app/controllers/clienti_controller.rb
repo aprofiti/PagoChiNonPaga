@@ -14,6 +14,9 @@ class ClientiController < ApplicationController
 
   # GET /clienti/new
   def new
+    if utente_signed_in?
+      redirect_to :back
+    end
     @cliente = Cliente.new
   end
 
