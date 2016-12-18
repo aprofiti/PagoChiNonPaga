@@ -1,7 +1,7 @@
 class CarrelloController < ApplicationController
   before_action :set_carrello, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_utente!
-  before_filter :is_my_carrello?, except: :remove_item
+  before_filter :is_my_carrello?
   # GET /carrello
   # GET /carrello.json
   def index
@@ -70,7 +70,7 @@ class CarrelloController < ApplicationController
 
   private
     def is_my_carrello?
-        if !(current_utente.isCliente? && @carrello.cliente_id == current_utente.actable_id)
+        if !(current_utente.isCliente? && current_utente.getCarrello.cliente_id == current_utente.actable_id)
           redirect_back
         end
     end
