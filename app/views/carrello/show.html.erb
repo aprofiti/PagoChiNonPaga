@@ -1,0 +1,61 @@
+<%- model_class = Carrello -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+<p id="notice"><%= notice %></p>
+
+<dl class="dl-horizontal">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:prodotto_id) %></th>
+      <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:id_impresa) %></th>
+      <th><%= model_class.human_attribute_name(:impresa) %></th>
+      <th><%= model_class.human_attribute_name(:prezzo) %></th>
+      <th><%= model_class.human_attribute_name(:quantita) %></th>
+      <th><%= model_class.human_attribute_name(:azioni) %></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @carrello.cart_items.each do |item| %>
+  <% prodotto = Prodotto.find(item.item_id) %>
+    <tr>
+      <td><%= item.item_id %></td>
+      <td><%= prodotto.nome %></td>
+      <td><%= prodotto.impresa.id %></td>
+      <td><%= prodotto.impresa.getNome %></td>
+      <td><%= item.price %></td>
+      <td><%= item.quantity %></td>
+      <td><%= link_to "", remove_item_carrello_path(id: params[:id],item: item),
+              :class => 'glyphicon glyphicon glyphicon-remove', method: :post %> </td>
+    </tr>
+  <% end %>
+
+
+<!-- Fare la lista dei prodotto per impresa
+
+  <% @carrello.impresaElemento.each do |lista| %>
+  <tr>
+    <td><%= %></td>
+  </tr>
+  <% end %>
+-->
+
+  </tbody>
+</table>
+
+</dl>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+            edit_carrello_path, :class => 'btn btn-default' %>
+<% if current_utente.actable_type == "Cliente" %>
+  <%= link_to t('.profilo', :default => t("helpers.links.profilo")),
+              cliente_path(id: current_utente.actable_id), :class => 'btn btn-default' %>
+<% else %>
+  <%= link_to t('.profilo', :default => t("helpers.links.profilo")),
+              titolare_path(id: current_utente.actable_id), :class => 'btn btn-default'%>
+<% end %>
+
+<% if !@carrello.empty? %>
+  <%= link_to "Procedi all' acquisto",  prepara_ordini_ordine_path(id: current_utente.actable_id) ,method: :post%>
+<% end %>

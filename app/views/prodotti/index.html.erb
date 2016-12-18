@@ -44,6 +44,9 @@
 </table>
 
 <%= hidden_field_tag(:id,params[:id]) %>
+<%= link_to t('.profilo_impresa', :default => t("helpers.links.profilo_impresa")),
+          impresa_path(nome: params[:impresa_nome],id: params[:id]),
+          :class => 'btn btn-default' %>
 <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
   <%= link_to t('.new', :default => t("helpers.links.new")),
             new_impresa_prodotto_path(id: params[:id]),

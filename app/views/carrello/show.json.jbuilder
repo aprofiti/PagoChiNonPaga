@@ -1,0 +1,1 @@
+json.partial! "carrello/carrello", carrello: @carrello

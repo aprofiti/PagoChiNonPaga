@@ -14,6 +14,9 @@ class ClientiController < ApplicationController
 
   # GET /clienti/new
   def new
+    if utente_signed_in?
+      redirect_to :back
+    end
     @cliente = Cliente.new
   end
 
@@ -21,6 +24,23 @@ class ClientiController < ApplicationController
   def edit
   end
 
+  #POST -> Aggiunge al carrello il prodotto presente nella pagina in cui viene richamato
+  def add_cart
+    if current_utente.hasCarrello?
+      carrello= current_utente.getCarrello
+    else
+      carrello= Carrello.create(cliente_id: current_utente.actable_id)
+    end
+    prod= Prodotto.find(params[:prodotto_id])
+    qta = params[:prodotto][:qta].to_i
+    if prod.checkDisponibilita(qta,prod,carrello)
+      carrello.add(prod,prod.prezzo,qta)
+      redirect_back
+    else
+      flash[:notice] = "Quantita selezionata non disponibile"
+      redirect_to(:back)
+    end
+  end
   # POST /clienti
   # POST /clienti.json
   #Dopo la creazione PER ORA l'utente viene reindirizzato alla schermata di login

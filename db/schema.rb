@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129154122) do
+ActiveRecord::Schema.define(version: 20161215162226) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -32,6 +32,23 @@ ActiveRecord::Schema.define(version: 20161129154122) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["polo_id"], name: "index_admins_on_polo_id"
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+
+  create_table "carrello", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "cliente_id"
+  end
+
+  create_table "carrello_prodotti", force: :cascade do |t|
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.integer  "quantity"
+    t.integer  "item_id"
+    t.string   "item_type"
+    t.float    "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "categorie", force: :cascade do |t|
     t.string   "nome"
@@ -106,15 +123,16 @@ ActiveRecord::Schema.define(version: 20161129154122) do
   add_index "indirizzi", ["citta_id"], name: "index_indirizzi_on_citta_id"
 
   create_table "ordini", force: :cascade do |t|
-    t.string   "stato"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "cliente_id"
     t.integer  "impresa_id"
+    t.integer  "stato_ordine_id"
   end
 
   add_index "ordini", ["cliente_id"], name: "index_ordini_on_cliente_id"
   add_index "ordini", ["impresa_id"], name: "index_ordini_on_impresa_id"
+  add_index "ordini", ["stato_ordine_id"], name: "index_ordini_on_stato_ordine_id"
 
   create_table "ordini_prodotti", id: false, force: :cascade do |t|
     t.integer "ordine_id"
@@ -151,6 +169,12 @@ ActiveRecord::Schema.define(version: 20161129154122) do
   end
 
   add_index "sottocategorie", ["categoria_id"], name: "index_sottocategorie_on_categoria_id"
+
+  create_table "stato_ordini", force: :cascade do |t|
+    t.string   "stato"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "titolari", force: :cascade do |t|
     t.string   "piva"

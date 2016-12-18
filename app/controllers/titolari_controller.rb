@@ -16,6 +16,9 @@ class TitolariController < ApplicationController
 
   # GET /titolari/new
   def new
+    if utente_signed_in?
+      redirect_to :back
+    end
     @titolare = Titolare.new
   end
 

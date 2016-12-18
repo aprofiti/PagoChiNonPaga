@@ -44,5 +44,6 @@ ActiveSupport::Inflector.inflections do |inflect|
 
   # Uncountable
   inflect.uncountable %w( citta )
+  inflect.uncountable %w( carrello )
 
 end

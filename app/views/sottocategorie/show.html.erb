@@ -1,6 +1,6 @@
 <%- model_class = Sottocategoria -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%=t '.title', :default => t("helpers.links.lista_imprese") %></h1>
 </div>
 
 <table class="table table-striped">
@@ -22,5 +22,5 @@
 </table>
 
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
+<%= link_to t('.lista_sottocategorie', :default => t("helpers.links.lista_sottocategorie")),
               categoria_sottocategorie_path, :class => 'btn btn-default'  %>

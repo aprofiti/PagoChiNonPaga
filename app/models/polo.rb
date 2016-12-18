@@ -2,6 +2,10 @@ class Polo < ActiveRecord::Base
   has_many :citta
   has_many :admins
 
+  # Validations necessarie per la registrazione
+  validates :nome, :citta, presence: true
+  # TODO: admin obbligatorio alla registrazione crea problemi
+
   def getCitta
     self.citta
   end

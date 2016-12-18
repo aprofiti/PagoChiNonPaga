@@ -17,13 +17,13 @@
   <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
   <dd><%= @cliente.telefono %></dd>
 
-  
+
   <dt><strong><%= model_class.human_attribute_name(:indirizzo_id) %>:</strong></dt>
   <dd><%= @cliente.indirizzo_id %></dd>
 </dl>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              clienti_path, :class => 'btn btn-default'  %>
+<%= link_to t('.ordini', :default => t("helpers.links.ordini")),
+              ordini_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_cliente_path(@cliente), :class => 'btn btn-default' %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
