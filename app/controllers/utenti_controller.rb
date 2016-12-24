@@ -1,26 +1,6 @@
 class UtentiController < ApplicationController
   before_action :set_utente, only: [:show, :edit, :update, :destroy]
 
-  # GET /utenti
-  # GET /utenti.json
-  def index
-    @utenti = Utente.all
-  end
-
-  # GET /utenti/1
-  # GET /utenti/1.json
-  def show
-  end
-
-  # GET /utenti/new
-  def new
-    @utente = Utente.new
-  end
-
-  # GET /utenti/1/edit
-  def edit
-  end
-
   # POST /utenti
   # POST /utenti.json
   def create

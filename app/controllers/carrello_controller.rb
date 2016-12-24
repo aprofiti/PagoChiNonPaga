@@ -2,20 +2,11 @@ class CarrelloController < ApplicationController
   before_action :set_carrello, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_utente!
   before_filter :is_my_carrello?
-  # GET /carrello
-  # GET /carrello.json
-  def index
-    @carrello = Carrello.all
-  end
+
 
   # GET /carrello/1
   # GET /carrello/1.json
   def show
-  end
-
-  # GET /carrello/new
-  def new
-    @carrello = Carrello.new
   end
 
   # GET /carrello/1/edit
@@ -23,8 +14,8 @@ class CarrelloController < ApplicationController
   end
 
   def remove_item #rimuove item da carrello
-    carrello = Carrello.find(current_utente.getCarrello)  #workaround per cancellazione
-    carrello.cart_items.delete(params[:item].to_i)        #item è un parametro che arriva dalla post
+    carrello = current_utente.getCarrello
+    carrello.cart_items.delete(params[:item].to_i)  #item è un parametro che arriva dalla post
     redirect_to carrello_path(id: carrello.id)
   end
 

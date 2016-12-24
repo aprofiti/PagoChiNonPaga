@@ -12,15 +12,6 @@ class PoliController < ApplicationController
   def show
   end
 
-  # GET /poli/new
-  def new
-    @polo = Polo.new
-  end
-
-  # GET /poli/1/edit
-  def edit
-  end
-
   # POST /poli
   # POST /poli.json
   def create

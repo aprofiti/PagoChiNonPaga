@@ -15,14 +15,6 @@ class SottocategorieController < ApplicationController
   def show
   end
 
-  # GET /sottocategorie/new
-  def new
-    @sottocategoria = Sottocategoria.new
-  end
-
-  # GET /sottocategorie/1/edit
-  def edit
-  end
 
   # POST /sottocategorie
   # POST /sottocategorie.json

@@ -2,10 +2,7 @@ class ClientiController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente! , except: [:new,:create]
   before_filter :controllo_id_cliente, except: [:new, :create]
-  # GET /clienti.json
-  def index
-    @clienti = Cliente.all
-  end
+
 
   # GET /clienti/1
   # GET /clienti/1.json

@@ -23,10 +23,7 @@ class OrdiniController < ApplicationController
 
   end
 
-  # GET /ordini/new
-  def new #path disabilitato perchè l'ordine si crea cliccando submit su lista e non da url compilando a mano
-    @ordine = Ordine.new
-  end
+
 
   # GET /ordini/1/edit
   def edit

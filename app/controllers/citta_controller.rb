@@ -12,14 +12,7 @@ class CittaController < ApplicationController
   def show
   end
 
-  # GET /citta/new
-  def new
-    @citta = Citta.new
-  end
 
-  # GET /citta/1/edit
-  def edit
-  end
 
   # POST /citta
   # POST /citta.json

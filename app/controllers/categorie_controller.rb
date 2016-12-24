@@ -7,19 +7,6 @@ class CategorieController < ApplicationController
     @categorie = Categoria.all
   end
 
-  # GET /categorie/1
-  # GET /categorie/1.json
-  def show
-  end
-
-  # GET /categorie/new
-  def new
-    @categoria = Categoria.new
-  end
-
-  # GET /categorie/1/edit
-  def edit
-  end
 
   # POST /categorie
   # POST /categorie.json

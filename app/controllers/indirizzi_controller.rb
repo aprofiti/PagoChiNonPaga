@@ -1,26 +1,6 @@
 class IndirizziController < ApplicationController
   before_action :set_indirizzo, only: [:show, :edit, :update, :destroy]
 
-  # GET /indirizzi
-  # GET /indirizzi.json
-  def index
-    @indirizzi = Indirizzo.all
-  end
-
-  # GET /indirizzi/1
-  # GET /indirizzi/1.json
-  def show
-  end
-
-  # GET /indirizzi/new
-  def new
-    @indirizzo = Indirizzo.new
-  end
-
-  # GET /indirizzi/1/edit
-  def edit
-  end
-
   # POST /indirizzi
   # POST /indirizzi.json
   def create

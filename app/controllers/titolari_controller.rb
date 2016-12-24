@@ -3,11 +3,6 @@ class TitolariController < ApplicationController
   before_action :authenticate_utente!, except: [:new,:create]
   before_filter :controllo_id_titolare, except:  [:new,:create]
 
-  # GET /titolari
-  # GET /titolari.json
-  def index
-    @titolari = Titolare.all
-  end
 
   # GET /titolari/1
   # GET /titolari/1.json
