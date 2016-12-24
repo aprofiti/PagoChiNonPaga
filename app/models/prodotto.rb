@@ -11,15 +11,17 @@ class Prodotto < ActiveRecord::Base
     self.nome
   end
 
-  def checkDisponibilita(qta,prod,carrello)
-
-    prodotto_carrello = carrello.cart_items.where(item_id: prod.id).first
-    if prodotto_carrello == nil
-      qta_carrello = 0
-    else
+  def checkDisponibilita(qta,carrello)
+    prodotto_carrello = carrello.cart_items.where(item_id: self.id).first
+    qta_carrello=0
+    if prodotto_carrello != nil
       qta_carrello = prodotto_carrello.quantity
     end
     self.qta >= (qta + qta_carrello) && qta > 0
+  end
+
+  def  checkDisponibilitaOrdine(qta_carrello)
+     self.qta >= qta_carrello
   end
 
   def getQuantita

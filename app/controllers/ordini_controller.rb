@@ -30,18 +30,28 @@ class OrdiniController < ApplicationController
   end
 
   def prepara_ordini
+    successo= true
     carrello= current_utente.getCarrello
     imprese = carrello.impreseCarrello
     impresa_prodotti= carrello.impresaElemento
     imprese.each do |impresa|
-      prodotti= setOrdine(impresa_prodotti,impresa,carrello)
+      prodotti= setOrdine(impresa_prodotti,impresa)
+      if prodotti == nil
+        successo= false
+      else
       Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti)
     end
-    carrello.destroy
-    redirect_to root_path
+    end
+    if successo
+      carrello.destroy
+      redirect_to root_path
+    else
+      flash[:notice] = "Errore con la disponibilità dei prodotti"
+      redirect_to carrello_path(id: carrello.id)
+    end
   end
-  # POST /ordini
-  # POST /ordini.json
+
+
   def create
     @ordine = Ordine.new(ordine_params)
 
@@ -84,17 +94,20 @@ class OrdiniController < ApplicationController
 
 #prende in ingresso il carrello e l'id di una impresa, cerca tutti i prodotti del carrello che appartengono a quella impresa
 #e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'aggiunta di ogni oggetto
-  def setOrdine(impresa_prodotti,impresa,carrello)
+  def setOrdine(impresa_prodotti,impresa)
     prodotti= []
     impresa_prodotti.each do |elemento|
       if elemento.at(0) == impresa
         prodotto= Prodotto.find(elemento.at(1).item_id)
         qta= elemento.at(1).quantity.to_i
+        if prodotto.checkDisponibilitaOrdine(qta)
           for i in 1..qta
             prodotti.push(prodotto)
           end
-          #prodotto.setQuantita(qta)    COMMENTATO PER TEST NOSTRI. FUNZIONA E VA ABILITATO ALLA FINE. SCALA QUANTITÀ DA DB
-          carrello.remove(elemento,qta)
+          prodotto.setQuantita(qta)    #COMMENTATO PER TEST NOSTRI. FUNZIONA E VA ABILITATO ALLA FINE. SCALA QUANTITÀ DA DB
+        else
+          return nil
+        end
       end
     end
     prodotti
