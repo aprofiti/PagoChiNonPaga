@@ -3,7 +3,7 @@ class ImpreseController < ApplicationController
   before_action :authenticate_utente! , except: [:index, :show]
   before_filter :controllo_titolare_impresa, only: [:edit,:destroy]
   before_filter :is_titolare, only: :new
-
+  before_filter :id_nome_match, only: [:show,:edit]
   # GET /imprese
   # GET /imprese.json
   def index
@@ -70,6 +70,13 @@ class ImpreseController < ApplicationController
        if !(current_utente.isTitolare?)
          redirect_back
        end
+    end
+
+    def id_nome_match
+      impresa= Impresa.find(params[:id].to_i)
+      if impresa.nome != params[:nome]
+        redirect_to(impresa_path(id: impresa.id,nome: impresa.nome))
+      end
     end
 
     def controllo_titolare_impresa

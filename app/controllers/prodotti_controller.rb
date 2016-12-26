@@ -1,7 +1,8 @@
 class ProdottiController < ApplicationController
   before_action :set_prodotto, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente!, only: [:new, :edit]
-
+  before_filter :id_index_match, only: :index
+  before_filter :prodotto_impresa_match , only: [:show, :edit]
   # GET /prodotti
   # GET /prodotti.json
   def index       #rotta rimossa
@@ -72,6 +73,18 @@ class ProdottiController < ApplicationController
 
   private
 
+    def id_index_match
+      impresa = Impresa.find(params[:id].to_i)
+      if impresa.nome != params[:impresa_nome]
+        redirect_to(impresa_prodotti_path(impresa_nome: impresa.nome, id: impresa.id))
+      end
+    end
+    def prodotto_impresa_match
+      prodotto = Prodotto.find(params[:id_p])
+      if prodotto.nome != params[:nome] || prodotto.impresa.nome != params[:impresa_nome]
+        redirect_to( impresa_prodotto_path(impresa_nome: prodotto.impresa.nome, id_p: prodotto.id, nome: prodotto.nome))
+      end
+    end
 
 
     # Use callbacks to share common setup or constraints between actions.
