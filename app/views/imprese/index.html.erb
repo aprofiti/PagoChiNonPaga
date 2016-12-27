@@ -2,6 +2,9 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
+
+<%= text_field_tag :impresa, nil, class: "js-impresa-autocomplete" %>
+
 <table class="table table-striped">
   <thead>
     <tr>

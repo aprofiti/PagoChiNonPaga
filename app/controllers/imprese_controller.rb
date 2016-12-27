@@ -23,7 +23,15 @@ class ImpreseController < ApplicationController
   # GET /imprese/1/edit
   def edit
   end
+  def autocomplete
+    imprese = Impresa.all.map do |impresa|
+      {
+        nome: impresa.name,
+      }
+    end
 
+    render json: imprese
+  end
   # POST /imprese
   # POST /imprese.json
   def create

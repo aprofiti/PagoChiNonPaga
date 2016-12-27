@@ -112,6 +112,8 @@ GEM
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-typeahead-rails (0.10.5.1)
+      railties (>= 3.0)
     builder (3.2.2)
     byebug (9.0.5)
     cancancan (1.15.0)
@@ -312,6 +314,7 @@ DEPENDENCIES
   active_record-acts_as
   activerecord (~> 4.2.6)
   acts_as_shopping_cart (~> 0.2.1)
+  bootstrap-typeahead-rails
   byebug
   cancancan
   capybara

@@ -24,6 +24,8 @@ gem 'devise-bootstrap-views' , git: 'https://github.com/hisea/devise-bootstrap-v
 # Preprocessore Less per bootstrap
 gem "therubyracer"
 gem "less-rails"
+gem 'bootstrap-typeahead-rails'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

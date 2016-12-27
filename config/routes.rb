@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post :prepara_ordini
     end
   end
+  get "imprese/autocomplete" => "imprese#autocomplete"
 
   #PATH del tipo /imprese/:nome/prodotti/:nome
   resources :imprese, param: :nome do

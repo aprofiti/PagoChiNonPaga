@@ -15,3 +15,5 @@
 //= require bootstrap/dist/js/bootstrap
 //= require turbolinks
 //= require_tree .
+//= require bootstrap-typeahead-rails
+//= require imprese
