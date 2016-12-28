@@ -1,6 +1,6 @@
 class ImpreseController < ApplicationController
   before_action :set_impresa, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_utente! , except: [:index, :show]
+  before_action :authenticate_utente! , except: [:index, :show,:autocomplete]
   before_filter :controllo_titolare_impresa, only: [:edit,:destroy]
   before_filter :is_titolare, only: :new
   before_filter :id_nome_match, only: [:show,:edit]
@@ -26,7 +26,8 @@ class ImpreseController < ApplicationController
   def autocomplete
     imprese = Impresa.all.map do |impresa|
       {
-        nome: impresa.name,
+        nome: impresa.nome,
+        id: impresa.id.to_s
       }
     end
 
