@@ -68,8 +68,8 @@
       <%= form_tag(impresa_path(:impresa , :id), method: "get", class: "navbar-form navbar-center",style:"
         text-align:center;
         padding-top:10px;") do %>
-
-        <%= text_field_tag :impresa ,"", class: 'form-control typeahead',style: style="
+        <div class="form-group" style="width: 30%;">
+        <%= text_field_tag :impresa ,"", class: "form-control typeahead", style: "
            width: 100%;
            background-color: transparent;
            border: none;
@@ -78,7 +78,13 @@
            border-bottom-color: white;
            border-bottom-style: solid;"%>
            <%= hidden_field_tag "id", "", :id => "id_imp" %>
-        <%= submit_tag %>
+        </div>
+        <%= button_tag(type: 'submit', class: "btn btn-default", style: "background-color:#F5A623;") do %>
+          <span class="glyphicon glyphicon-search">
+        <% end %>
+        <!--
+        <%= submit_tag "", class: "btn btn-default", style: "background-color:#F5A623;" %>
+        -->
       <% end %>
 
 <!-- Campo ricerca
