@@ -10,7 +10,7 @@ $(function() {
 
     imprese_typeahead.initialize();
 
-    $(".form-control").typeahead(null, {
+    $(".typeahead").typeahead(null, {
       displayKey: "nome",
       source: imprese_typeahead.ttAdapter(),
       // Modifica l'aspetto del finestra dei risultati
