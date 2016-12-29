@@ -43,7 +43,9 @@ class Impresa < ActiveRecord::Base
   def getCategorie
     categorie =[]
     self.sottocategorie.each do |sottocategoria|
-      categorie << [sottocategoria.categoria.nome]
+      if !categorie.include?(sottocategoria.categoria.nome)
+        categorie << sottocategoria.categoria.nome
+      end
     end
     categorie
   end
