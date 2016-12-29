@@ -42,9 +42,9 @@
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
-              ordini_path, :class => 'btn btn-default'  %>
+              ordini_path, :class => 'btn btn-default' ,method: :get %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_ordine_path(@ordine), :class => 'btn btn-default' %>
+              edit_ordine_path(@ordine), :class => 'btn btn-default',method: :get %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               ordine_path(@ordine),
               :method => 'delete',

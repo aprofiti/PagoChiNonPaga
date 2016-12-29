@@ -14,7 +14,7 @@
     <% @sottocategoria.imprese.each do |impresa| %>
     <% if impresa.verificato && !impresa.congelato %>
       <tr>
-        <td><%= link_to impresa.nome , impresa_path(id: impresa.id) %></td>
+        <td><%= link_to impresa.nome , impresa_path(id: impresa.id),method: :get %></td>
       </tr>
     <% end %>
     <%end%>
@@ -23,4 +23,4 @@
 
 
 <%= link_to t('.lista_sottocategorie', :default => t("helpers.links.lista_sottocategorie")),
-              categoria_sottocategorie_path, :class => 'btn btn-default'  %>
+              categoria_sottocategorie_path, :class => 'btn btn-default',method: :get  %>

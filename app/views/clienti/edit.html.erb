@@ -29,5 +29,5 @@
 
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                cliente_path(id: current_utente.actable_id), :class => 'btn btn-default' %>
+                cliente_path(id: current_utente.actable_id), :class => 'btn btn-default',method: :get %>
 <% end %>

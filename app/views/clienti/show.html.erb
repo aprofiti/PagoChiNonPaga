@@ -23,9 +23,9 @@
 </dl>
 
 <%= link_to t('.ordini', :default => t("helpers.links.ordini")),
-              ordini_path, :class => 'btn btn-default'  %>
+              ordini_path, :class => 'btn btn-default' ,method: :get %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_cliente_path(@cliente), :class => 'btn btn-default' %>
+              edit_cliente_path(@cliente), :class => 'btn btn-default' ,method: :get%>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               cliente_path(@cliente),
               :method => 'delete',

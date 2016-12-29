@@ -21,7 +21,7 @@
   <tbody>
     <% @titolari.each do |titolare| %>
       <tr>
-        <td><%= link_to titolare.id, titolare_path(titolare) %></td>
+        <td><%= link_to titolare.id, titolare_path(titolare) ,method: :get%></td>
         <td><%= titolare.nome %></td>
         <td><%= titolare.cognome %></td>
         <td><%= titolare.email %></td>
@@ -33,7 +33,7 @@
         <td><%=l titolare.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_titolare_path(titolare), :class => 'btn btn-default btn-xs' %>
+                      edit_titolare_path(titolare), :class => 'btn btn-default btn-xs' ,method: :get%>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       titolare_path(titolare),
                       :method => :delete,
@@ -47,4 +47,4 @@
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_titolare_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-primary' ,method: :get%>

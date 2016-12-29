@@ -29,7 +29,7 @@
     <% @imprese.each do |impresa| %>
       <tr>
         <td><%=  impresa.id %></td>
-        <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id) %></td>
+        <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id),method: :get %></td>
         <td><%= impresa.telefono %></td>
         <td><%= impresa.fax %></td>
         <td><%= impresa.giorni_orari %></td>
@@ -49,7 +49,7 @@
           <% if  utente_signed_in? && current_utente.isTitolare? %>
             <% if  current_utente.isMyImpresa?(impresa) %>
               <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_impresa_path(nome: impresa.nome, id: impresa.id), :class => 'btn btn-default btn-xs' %>
+                      edit_impresa_path(nome: impresa.nome, id: impresa.id), :class => 'btn btn-default btn-xs',method: :get %>
               <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       impresa_path(impresa),
                       :method => :delete,
@@ -66,5 +66,5 @@
 <% if utente_signed_in? && current_utente.isTitolare?%>
   <%= link_to t('.new', :default => t("helpers.links.new")),
             new_impresa_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-primary',method: :get %>
 <% end %>

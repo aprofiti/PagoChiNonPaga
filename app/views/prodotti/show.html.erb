@@ -18,7 +18,7 @@
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
-              impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default'  %>
+              impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default' ,method: :get %>
 <% if utente_signed_in? %>
   <% if !current_utente.isTitolare? %>
   <%= simple_form_for @prodotto,url:  add_cart_cliente_path(current_utente.actable_id, prodotto_id: params[:id_p]),method: :post , :html => { :class => 'form-horizontal' } do |f| %>

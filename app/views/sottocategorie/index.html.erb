@@ -16,7 +16,7 @@
     <% @sottocategorie.each do |sottocategoria| %>
       <tr>
         <td><%=  sottocategoria.id %></td>
-        <td><%= link_to sottocategoria.nome , categoria_sottocategoria_path(categoria_nome: params[:categoria_nome], nome: sottocategoria.nome) %></td>
+        <td><%= link_to sottocategoria.nome , categoria_sottocategoria_path(categoria_nome: params[:categoria_nome], nome: sottocategoria.nome),method: :get %></td>
         <td><%= sottocategoria.categoria_id %></td>
         <td><%=l sottocategoria.created_at %></td>
       </tr>
@@ -25,4 +25,4 @@
 </table>
 
 <%= link_to t('.lista_categorie', :default => t("helpers.links.lista_categorie")),
-              categorie_path, :class => 'btn btn-default'  %>
+              categorie_path, :class => 'btn btn-default',method: :get  %>

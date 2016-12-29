@@ -47,13 +47,13 @@
 
 </dl>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
-            edit_carrello_path, :class => 'btn btn-default' %>
+            edit_carrello_path, :class => 'btn btn-default' ,method: :get%>
 <% if current_utente.actable_type == "Cliente" %>
   <%= link_to t('.profilo', :default => t("helpers.links.profilo")),
-              cliente_path(id: current_utente.actable_id), :class => 'btn btn-default' %>
+              cliente_path(id: current_utente.actable_id), :class => 'btn btn-default' ,method: :get%>
 <% else %>
   <%= link_to t('.profilo', :default => t("helpers.links.profilo")),
-              titolare_path(id: current_utente.actable_id), :class => 'btn btn-default'%>
+              titolare_path(id: current_utente.actable_id), :class => 'btn btn-default',method: :get%>
 <% end %>
 
 <% if !@carrello.empty? %>

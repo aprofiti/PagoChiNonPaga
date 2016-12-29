@@ -15,13 +15,13 @@
   <tbody>
     <% @ordini.each do |ordine| %>
       <tr>
-        <td><%= link_to ordine.id, ordine_path(ordine) %></td>
+        <td><%= link_to ordine.id, ordine_path(ordine),method: :get %></td>
         <td><%= ordine.created_at %></td>
         <td><%= ordine.cliente_id %></td>
         <td><%= ordine.impresa_id %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_ordine_path(ordine), :class => 'btn btn-default btn-xs' %>
+                      edit_ordine_path(ordine), :class => 'btn btn-default btn-xs' ,method: :get%>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       ordine_path(ordine),
                       :method => :delete,
@@ -34,4 +34,4 @@
 </table>
 
 <%= link_to t('.profilo', :default => t("helpers.links.profilo")),
-            cliente_path(id: current_utente.actable_id), :class => 'btn btn-default btn-xs' %>
+            cliente_path(id: current_utente.actable_id), :class => 'btn btn-default btn-xs',method: :get %>

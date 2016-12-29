@@ -31,17 +31,17 @@
   <tbody>
     <% @citta.getImprese.each do |impresa| %>
       <tr>
-        <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id) %></td>
+        <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id) ,method: :get%></td>
         <td><%= impresa.id %></td>
         <td><%= impresa.getIndirizzo %></td>
         <td><% impresa.getCategorie %>
           <% impresa.getCategorie.each do |categoria|%>
-            <%= link_to categoria.at(0) ,   categoria_sottocategorie_path(categoria_nome: categoria)%>
+            <%= link_to categoria.at(0) ,   categoria_sottocategorie_path(categoria_nome: categoria),method: :get%>
           <% end %>
         </td>
         <td>
           <% impresa.getSottocategorie.each do |sottocategoria|%>
-            <%= link_to sottocategoria.at(0) , categoria_sottocategoria_path(categoria_nome: sottocategoria.at(1),nome: sottocategoria.at(0))%>
+            <%= link_to sottocategoria.at(0) , categoria_sottocategoria_path(categoria_nome: sottocategoria.at(1),nome: sottocategoria.at(0)),method: :get%>
           <% end %>
         </td>
       </tr>
@@ -50,4 +50,4 @@
 </table>
 
 <%= link_to t('.lista_citta', :default => t("helpers.links.lista_citta")),
-              citta_index_path, :class => 'btn btn-default'  %>
+              citta_index_path, :class => 'btn btn-default',method: :get  %>

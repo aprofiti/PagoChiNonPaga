@@ -15,7 +15,7 @@
     <% @categorie.each do |categoria| %>
       <tr>
         <td><%=  categoria.id %></td>
-        <td><%= link_to categoria.nome, categoria_sottocategorie_path(categoria_nome: categoria.nome) %></td>
+        <td><%= link_to categoria.nome, categoria_sottocategorie_path(categoria_nome: categoria.nome),method: :get %></td>
         <td><%=l categoria.created_at %></td>
 
       </tr>

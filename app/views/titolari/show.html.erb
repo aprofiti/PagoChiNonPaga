@@ -36,13 +36,13 @@
   <tbody>
     <% @titolare.getImprese.each do |impresa| %>
       <tr>
-        <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id) %></td>
+        <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id),method: :get %></td>
         <td><%= impresa.id %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
-                      impresa_path(nome: impresa.nome, id: impresa.id), :class => 'btn btn-default btn-xs' %>
+                      impresa_path(nome: impresa.nome, id: impresa.id), :class => 'btn btn-default btn-xs',method: :get %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_impresa_path(nome: impresa.nome, id: impresa.id), :class => 'btn btn-default btn-xs' %>
+                      edit_impresa_path(nome: impresa.nome, id: impresa.id), :class => 'btn btn-default btn-xs',method: :get %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       impresa_path(impresa),
                       :method => :delete,
@@ -55,9 +55,9 @@
 </table>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
-              titolari_path, :class => 'btn btn-default'  %>
+              root_path, :class => 'btn btn-default',method: :get  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_titolare_path(@titolare), :class => 'btn btn-default' %>
+              edit_titolare_path(@titolare), :class => 'btn btn-default',method: :get %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               titolare_path(@titolare),
               :method => 'delete',

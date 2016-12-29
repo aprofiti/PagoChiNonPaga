@@ -8,17 +8,16 @@ $(function() {
       prefetch: "/imprese/autocomplete"
     });
 
-
     imprese_typeahead.initialize();
 
     $(".form-control").typeahead(null, {
       displayKey: "nome",
       source: imprese_typeahead.ttAdapter()
     }).on('typeahead:selected ', function (e, datum) {
-        //console.log(datum.id);
+        //console.log(JSON.stringify(datum));
         document.getElementById('id_imp').value = datum.id;
-        //$('#id').val( datum.id.value);
         //console.log(document.getElementById('id_imp').value);
+
     });
   };
   return initialize_imprese_typeahead();

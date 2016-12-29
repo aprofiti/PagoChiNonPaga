@@ -15,5 +15,5 @@
   <%= hidden_field_tag(:id_p, @prodotto.id) %>
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default' %>
+                impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default',method: :get %>
 <% end %>

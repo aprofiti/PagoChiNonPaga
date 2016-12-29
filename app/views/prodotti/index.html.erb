@@ -20,7 +20,7 @@
     <% if prodotto.impresa_id.to_i == params[:id].to_i %>
       <tr>
         <td><%= prodotto.id %></td>
-        <td><%= link_to prodotto.nome, impresa_prodotto_path(impresa_nome: params[:impresa_nome],nome: prodotto.nome, id_p: prodotto.id) %></td>
+        <td><%= link_to prodotto.nome, impresa_prodotto_path(impresa_nome: params[:impresa_nome],nome: prodotto.nome, id_p: prodotto.id,method: :get) %></td>
         <td><%= prodotto.prezzo %></td>
         <td><%= prodotto.qta %></td>
         <td><%= prodotto.descrizione %></td>
@@ -29,7 +29,7 @@
         <td>
         <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_impresa_prodotto_path(nome: prodotto.nome,id_p: params[:id]), :class => 'btn btn-default btn-xs' %>
+              edit_impresa_prodotto_path(nome: prodotto.nome,id_p: params[:id]), :class => 'btn btn-default btn-xs',method: :get %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                 impresa_prodotti_path(),
                 :method => :delete,
@@ -46,9 +46,9 @@
 <%= hidden_field_tag(:id,params[:id]) %>
 <%= link_to t('.profilo_impresa', :default => t("helpers.links.profilo_impresa")),
           impresa_path(nome: params[:impresa_nome],id: params[:id]),
-          :class => 'btn btn-default' %>
+          :class => 'btn btn-default',method: :get %>
 <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
   <%= link_to t('.new', :default => t("helpers.links.new")),
             new_impresa_prodotto_path(id: params[:id]),
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-primary' ,method: :get%>
 <% end %>
