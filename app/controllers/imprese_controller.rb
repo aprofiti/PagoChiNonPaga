@@ -27,7 +27,8 @@ class ImpreseController < ApplicationController
     imprese = Impresa.all.map do |impresa|
       {
         nome: impresa.nome,
-        id: impresa.id.to_s
+        id: impresa.id.to_s,
+        citta: impresa.citta.nome
       }
     end
 

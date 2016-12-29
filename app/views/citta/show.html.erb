@@ -36,7 +36,7 @@
         <td><%= impresa.getIndirizzo %></td>
         <td><% impresa.getCategorie %>
           <% impresa.getCategorie.each do |categoria|%>
-            <%= link_to categoria.at(0) ,   categoria_sottocategorie_path(categoria_nome: categoria),method: :get%>
+            <%= link_to categoria ,   categoria_sottocategorie_path(categoria_nome: categoria),method: :get%>
           <% end %>
         </td>
         <td>
