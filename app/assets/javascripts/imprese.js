@@ -12,7 +12,11 @@ $(function() {
 
     $(".form-control").typeahead(null, {
       displayKey: "nome",
-      source: imprese_typeahead.ttAdapter()
+      source: imprese_typeahead.ttAdapter(),
+      // Modifica l'aspetto del finestra dei risultati
+      templates: {
+        suggestion: Handlebars.compile("<div> {{#if nome}} <strong>Impresa:</strong> {{nome}} {{/if}} {{#if nomeCategoria}} Categoria: <strong>{{nomeCategoria}}</strong> {{/if}} {{#if nomeSottocategoria}} Sottocategoria: <strong>{{nomeSottocategoria}}</strong> {{/if}} </div>")
+      }
     }).on('typeahead:selected ', function (e, datum) {
         //console.log(JSON.stringify(datum));
         document.getElementById('id_imp').value = datum.id;

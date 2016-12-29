@@ -16,6 +16,8 @@ gem 'active_record-acts_as'
 gem 'acts_as_shopping_cart', '~> 0.2.1'
 # View
 gem 'twitter-typeahead-rails', git: 'https://github.com/yourabi/twitter-typeahead-rails.git'
+gem 'bootstrap-typeahead-rails'
+gem 'handlebars_assets'
 gem 'paperclip', "~> 5.0.0"
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'railsstrap', git: 'https://github.com/toadkicker/railsstrap.git' # Sostituisce Twitter-Bootstrap-Rails
@@ -24,8 +26,6 @@ gem 'devise-bootstrap-views' , git: 'https://github.com/hisea/devise-bootstrap-v
 # Preprocessore Less per bootstrap
 gem "therubyracer"
 gem "less-rails"
-gem 'bootstrap-typeahead-rails'
-
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

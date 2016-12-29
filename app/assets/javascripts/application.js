@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-typeahead-rails
+//= require handlebars
 //= require imprese
