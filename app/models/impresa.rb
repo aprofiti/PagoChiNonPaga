@@ -8,8 +8,9 @@ class Impresa < ActiveRecord::Base
   # Validations necessarie per la registrazione
   validates :nome, :telefono, :email, :descrizione, :citta_id, :titolare_id, presence: true
   validates_numericality_of :telefono, on: :create
-  validates_numericality_of :fax, on: :create
-  validates :sitoweb, :format => URI::regexp(%w(http https))
+  validates_numericality_of :fax, on: :create, :allow_blank => true
+  validates_format_of :nome, :with => /\A[^\.]*\z/, :message => "non può avere all'interno il carattere '.'"
+  validates :sitoweb, :format => URI::regexp(%w(http https)), :allow_blank => true
   validate :unique_entry #custom validation
 
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
