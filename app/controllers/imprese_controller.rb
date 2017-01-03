@@ -32,8 +32,7 @@ class ImpreseController < ApplicationController
       {
         nome: impresa.nome,
         id: impresa.id.to_s,
-        citta: impresa.citta.nome,
-        categorie: impresa.getCategorie
+        citta: impresa.citta.nome
       }
     end
 

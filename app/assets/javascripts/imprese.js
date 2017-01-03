@@ -5,7 +5,11 @@ $(function() {
     imprese_typeahead = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("nome", "id","citta"),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: "/imprese/autocomplete"
+      prefetch:{
+        ttl: 1,
+        url: "/imprese/autocomplete"
+      }
+
     });
 
     imprese_typeahead.initialize();

@@ -54,17 +54,18 @@ Titolare.create(nome: 'Mimmo', cognome: 'Trippa', email: 'tito3@lare.it', passwo
 Titolare.create(nome: 'Edoardo', cognome: 'Dei Boschi', email: 'tito4@lare.it', password: '123456', password_confirmation: '123456', telefono: '634622', data_nascita: Date.parse('04/11/1991'), cf: 'ijgin')
 Titolare.create(nome: 'Dio', cognome: 'Bello', email: 'tito5@lare.it', password: '123456', password_confirmation: '123456', telefono: '987765654', data_nascita: Date.parse('08/08/1964'), cf: 'wefjun')
 
-Impresa.create(nome: 'La Cozza Felice', telefono: '32224', descrizione: 'Cozze belle', titolare_id: 1, citta_id: 1, verificato: true, congelato: false).save(validate: false)
-Impresa.create(nome: 'Ristorante La Minestra Riscaldata', telefono: '31331', descrizione: 'Minestre belle', titolare_id: 1, citta_id: 1, verificato: true, congelato: false).save(validate: false)
-Impresa.create(nome: 'Profumeria dal Lercio', telefono: '6564', descrizione: 'Profumi belli', titolare_id: 2, citta_id: 2, verificato: true, congelato: false).save(validate: false)
-Impresa.create(nome: 'Tabacchi & AK-47', telefono: '523221', descrizione: 'Tabacchi belli', titolare_id: 3,citta_id: 1, verificato: true, congelato: false).save(validate: false)
-Impresa.create(nome: 'Ricatti per la casa', telefono: '878787', descrizione: 'Ricatti belli', titolare_id: 3, citta_id: 1, verificato: true, congelato: false).save(validate: false)
-Impresa.create(nome: 'Panineria del tosto', telefono: '4354354', descrizione: 'Panini belli', titolare_id: 3, citta_id: 2, verificato: true, congelato: false).save(validate: false)
-Impresa.create(nome: 'Viaggi in Messico srl', telefono: '543522', descrizione: 'Viaggi belli', titolare_id: 4, citta_id: 2, verificato: true, congelato: false).save(validate: false)
-Impresa.create(nome: 'Calcolatrici Ipotetiche', telefono: '355221', descrizione: 'Calcoli belli', titolare_id: 3, citta_id: 2, verificato: true, congelato: false).save(validate: false)
-Impresa.create(nome: 'Stiamoci Male & co.', telefono: '777555', descrizione: 'Male belli', titolare_id: 5, citta_id: 3, verificato: true, congelato: false).save(validate: false)
-Impresa.create(nome: 'Non siamo mafiosi, fidati SPA', telefono: '88554', descrizione: 'Mafiosi belli', titolare_id: 2, citta_id: 3, verificato: true, congelato: false).save(validate: false)
-Impresa.create(nome: 'We uagliò bell stu orologgg', telefono: '36636', descrizione: 'Orolog belli', titolare_id: 4, citta_id: 3, verificato: true, congelato: true).save(validate: false) #TODO: assegnare ordine
+Impresa.create(nome: 'Impresa nuova', telefono: '2423', descrizione: 'Mah', titolare_id: 1, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 31').save(validate: false) #TODO: assegnare ordine
+Impresa.create(nome: 'La Cozza Felice', telefono: '32224', descrizione: 'Cozze belle', titolare_id: 1, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 31').save(validate: false)
+Impresa.create(nome: 'Ristorante La Minestra Riscaldata', telefono: '31331', descrizione: 'Minestre belle', titolare_id: 1, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 32').save(validate: false)
+Impresa.create(nome: 'Profumeria dal Lercio', telefono: '6564', descrizione: 'Profumi belli', titolare_id: 2, citta_id: 2, verificato: true, congelato: false,indirizzo: 'Via Catania 33').save(validate: false)
+Impresa.create(nome: 'Tabacchi & AK-47', telefono: '523221', descrizione: 'Tabacchi belli', titolare_id: 3,citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 34').save(validate: false)
+Impresa.create(nome: 'Ricatti per la casa', telefono: '878787', descrizione: 'Ricatti belli', titolare_id: 3, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 35').save(validate: false)
+Impresa.create(nome: 'Panineria del tosto', telefono: '4354354', descrizione: 'Panini belli', titolare_id: 3, citta_id: 2, verificato: true, congelato: false,indirizzo: 'Via Catania 35').save(validate: false)
+Impresa.create(nome: 'Viaggi in Messico srl', telefono: '543522', descrizione: 'Viaggi belli', titolare_id: 4, citta_id: 2, verificato: true, congelato: false,indirizzo: 'Via Catania 33').save(validate: false)
+Impresa.create(nome: 'Calcolatrici Ipotetiche', telefono: '355221', descrizione: 'Calcoli belli', titolare_id: 3, citta_id: 2, verificato: true, congelato: false,indirizzo: 'Via Catania 37').save(validate: false)
+Impresa.create(nome: 'Stiamoci Male & co.', telefono: '777555', descrizione: 'Male belli', titolare_id: 5, citta_id: 3, verificato: true, congelato: false,indirizzo: 'Via Catania 38').save(validate: false)
+Impresa.create(nome: 'Non siamo mafiosi, fidati SPA', telefono: '88554', descrizione: 'Mafiosi belli', titolare_id: 2, citta_id: 3, verificato: true, congelato: false,indirizzo: 'Via Catania 39').save(validate: false)
+Impresa.create(nome: 'We uagliò bell stu orologgg', telefono: '36636', descrizione: 'Orolog belli', titolare_id: 4, citta_id: 3, verificato: true, congelato: true,indirizzo: 'Via Catania 30').save(validate: false) #TODO: assegnare ordine
 
 Prodotto.create(nome:'Minestra di cozze', prezzo: 50, qta: 10, descrizione: 'Minestra bella', impresa_id: 1)
 Prodotto.create(nome:'Salami in salamoia', prezzo: 10, qta: 140, descrizione: 'Salami belli', impresa_id: 2)
