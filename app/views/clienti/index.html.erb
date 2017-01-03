@@ -12,7 +12,7 @@
       <th><%= model_class.human_attribute_name(:cf) %></th>
       <th><%= model_class.human_attribute_name(:data_nascita) %></th>
       <th><%= model_class.human_attribute_name(:telefono) %></th>
-      <th><%= model_class.human_attribute_name(:indirizzo_id) %></th>
+      <th><%= model_class.human_attribute_name(:indirizzo_cliente) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -27,7 +27,7 @@
         <td><%= cliente.cf %></td>
         <td><%= cliente.data_nascita %></td>
         <td><%= cliente.telefono %></td>
-        <td><%= cliente.indirizzo_id %></td>
+        <td><%= cliente.indirizzo_cliente %></td>
         <td><%=l cliente.created_at %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),

@@ -7,7 +7,6 @@ class Citta < ActiveRecord::Base
 
   belongs_to :polo
   has_many :imprese
-  has_many :indirizzi
 
   # Ritorna la lista delle imprese registrate presso la citta
   def getImprese

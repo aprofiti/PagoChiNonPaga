@@ -9,24 +9,24 @@
   <%= error_span(@impresa[:giorni_orari]) %>
   <%= f.input :email %>
   <%= error_span(@impresa[:email]) %>
+  <%= f.input :indirizzo %>
+  <%= error_span(@impresa[:indirizzo]) %>
   <%= f.input :sitoweb %>
   <%= error_span(@impresa[:sitoweb]) %>
   <%= f.input :facebook %>
   <%= error_span(@impresa[:facebook]) %>
   <%= f.input :descrizione %>
   <%= error_span(@impresa[:descrizione]) %>
-  <%= f.input :lat %>
-  <%= error_span(@impresa[:lat]) %>
-  <%= f.input :lng %>
-  <%= error_span(@impresa[:lng]) %>
+  <%= f.input :latitude %>
+  <%= error_span(@impresa[:latitude]) %>
+  <%= f.input :longitude %>
+  <%= error_span(@impresa[:longitude]) %>
   <%= f.input :verificato %>
   <%= error_span(@impresa[:verificato]) %>
   <%= f.input :congelato %>
   <%= error_span(@impresa[:congelato]) %>
   <%= f.input :citta_id %>
   <%= error_span(@impresa[:citta_id]) %>
-  <%= f.input :titolare_id %>
-  <%= error_span(@impresa[:titolare_id]) %>
   <%= hidden_field_tag(:id,@impresa.id) %>
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

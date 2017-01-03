@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215162226) do
+ActiveRecord::Schema.define(version: 20170103175436) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -68,17 +68,15 @@ ActiveRecord::Schema.define(version: 20161215162226) do
   add_index "citta", ["polo_id"], name: "index_citta_on_polo_id"
 
   create_table "clienti", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "nome"
     t.string   "cognome"
     t.string   "cf"
     t.date     "data_nascita"
     t.string   "telefono"
-    t.integer  "indirizzo_id"
+    t.string   "indirizzo_cliente"
   end
-
-  add_index "clienti", ["indirizzo_id"], name: "index_clienti_on_indirizzo_id"
 
   create_table "imprese", force: :cascade do |t|
     t.string   "nome"
@@ -89,14 +87,15 @@ ActiveRecord::Schema.define(version: 20161215162226) do
     t.string   "sitoweb"
     t.string   "facebook"
     t.string   "descrizione"
-    t.float    "lat"
-    t.float    "lng"
+    t.float    "latitude"
+    t.float    "longitude"
     t.boolean  "verificato"
     t.boolean  "congelato"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "citta_id"
     t.integer  "titolare_id"
+    t.string   "indirizzo"
   end
 
   add_index "imprese", ["citta_id"], name: "index_imprese_on_citta_id"
@@ -109,18 +108,6 @@ ActiveRecord::Schema.define(version: 20161215162226) do
 
   add_index "imprese_sottocategorie", ["impresa_id"], name: "index_imprese_sottocategorie_on_impresa_id"
   add_index "imprese_sottocategorie", ["sottocategoria_id"], name: "index_imprese_sottocategorie_on_sottocategoria_id"
-
-  create_table "indirizzi", force: :cascade do |t|
-    t.string   "via"
-    t.integer  "ncivico"
-    t.string   "cap"
-    t.string   "quartiere"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "citta_id"
-  end
-
-  add_index "indirizzi", ["citta_id"], name: "index_indirizzi_on_citta_id"
 
   create_table "ordini", force: :cascade do |t|
     t.datetime "created_at",      null: false
@@ -178,17 +165,15 @@ ActiveRecord::Schema.define(version: 20161215162226) do
 
   create_table "titolari", force: :cascade do |t|
     t.string   "piva"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "nome"
     t.string   "cognome"
     t.string   "cf"
     t.date     "data_nascita"
     t.string   "telefono"
-    t.integer  "indirizzo_id"
+    t.string   "indirizzo_titolare"
   end
-
-  add_index "titolari", ["indirizzo_id"], name: "index_titolari_on_indirizzo_id"
 
   create_table "utenti", force: :cascade do |t|
     t.datetime "created_at",                          null: false

@@ -20,22 +20,12 @@ class CreateRelations < ActiveRecord::Migration
       t.belongs_to :sottocategoria, index: true
     end
 
-    change_table :indirizzi do |t|
-      t.belongs_to :citta, index: true
-    end
 
     change_table :ordini do |t|
       t.belongs_to :cliente, index: true
       t.belongs_to :impresa, index: true
     end
 
-    change_table :clienti do |t|
-      t.belongs_to :indirizzo, index: true
-    end
-
-    change_table :titolari do |t|
-      t.belongs_to :indirizzo, index: true
-    end
 
     change_table :prodotti do |t|
       t.belongs_to :impresa, index: true
