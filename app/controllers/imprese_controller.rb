@@ -13,6 +13,10 @@ class ImpreseController < ApplicationController
   # GET /imprese/1
   # GET /imprese/1.json
   def show
+    @hash = Gmaps4rails.build_markers(@impresa) do |impresa, marker|
+      marker.lat impresa.latitude
+      marker.lng impresa.longitude
+    end
   end
 
   # GET /imprese/new
@@ -102,6 +106,6 @@ class ImpreseController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def impresa_params
-      params.require(:impresa).permit(:nome, :telefono, :fax, :giorni_orari, :email, :sitoweb, :facebook, :descrizione, :latitude, :longitude, :verificato, :congelato,:citta_id,:idirizzo)
+      params.require(:impresa).permit(:nome, :telefono, :fax, :giorni_orari, :email, :sitoweb, :facebook, :descrizione, :latitude, :longitude, :verificato, :congelato,:citta_id,:indirizzo)
     end
 end

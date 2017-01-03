@@ -4,7 +4,8 @@ class Impresa < ActiveRecord::Base
   has_many :prodotti
   has_many :ordini
   has_and_belongs_to_many :sottocategorie
-
+  geocoded_by :getIndirizzo
+  after_validation :geocode
   # Validations necessarie per la registrazione
   validates :nome, :telefono, :email, :descrizione, :citta_id, :titolare_id, presence: true
   validates_numericality_of :telefono, on: :create
@@ -38,7 +39,7 @@ class Impresa < ActiveRecord::Base
   end
 
   def getIndirizzo
-    # TODO
+    self.indirizzo + ', ' + self.citta.getNome
   end
 
   def getCategorie
