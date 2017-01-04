@@ -1,3 +1,8 @@
+{<img src="https://travis-ci.com/aprofiti/PagoChiNonPaga.svg?token=sEH49kUaCvv6DPGvX5yj&branch=master" alt="Build Status" />}[https://travis-ci.com/aprofiti/PagoChiNonPaga]
+{<img src="https://codeclimate.com/repos/5857d9aa8a16a3785e000242/badges/2189e03961ec6bb92fb1/gpa.svg" />}[https://codeclimate.com/repos/5857d9aa8a16a3785e000242/feed]
+{<img src="https://codeclimate.com/repos/5857d9aa8a16a3785e000242/badges/2189e03961ec6bb92fb1/coverage.svg" />}[https://codeclimate.com/repos/5857d9aa8a16a3785e000242/coverage]
+{<img src="https://codeclimate.com/repos/5857d9aa8a16a3785e000242/badges/2189e03961ec6bb92fb1/issue_count.svg" />}[https://codeclimate.com/repos/5857d9aa8a16a3785e000242/feed]
+
 == README
 
 This README would normally document whatever steps are necessary to get the
