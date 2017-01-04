@@ -13,8 +13,11 @@
   <%= error_span(@titolare[:data_nascita]) %>
   <%= f.input :telefono %>
   <%= error_span(@titolare[:telefono]) %>
-  <%= f.input :indirizzo_titolare %>
-  <%= error_span(@titolare[:indirizzo_titolare]) %>
+  <%= f.input :indirizzo %>
+  <%= error_span(@titolare[:indirizzo]) %>
+  <%= f.input :citta_id ,collection: Citta.all%>
+  <%= error_span(@titolare[:citta_id]) %>
+
   <%= f.input :password %>
   <%= error_span(@titolare[:password]) %>
   <%= f.input :password_confirmation %>
