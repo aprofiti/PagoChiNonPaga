@@ -19,6 +19,8 @@
 
   <%= f.input :indirizzo_cliente %> <!-- visualizzare?? tipo relazione -->
   <%= error_span(@cliente[:indirizzo_cliente]) %>
+  <%= f.input :citta_id ,collection: Citta.all%>
+  <%= error_span(@cliente[:citta_id]) %>
 
   <%= f.button :submit, :class => 'btn-primary' %>
 <!--

@@ -4,7 +4,7 @@ class Cliente < ActiveRecord::Base
   # Relazioni per funzionalita di Ecommerce
   has_one :carrello
   has_many :ordini
-
+  belongs_to :citta
   # Validations necessarie per la registrazione
   validates :nome, :cognome, :data_nascita, :cf, :telefono, :email, :password, :password_confirmation, presence: true
   #TODO: controllare presence indirizzo
