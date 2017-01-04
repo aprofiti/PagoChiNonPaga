@@ -25,7 +25,7 @@
   <%= error_span(@impresa[:verificato]) %>
   <%= f.input :congelato %>
   <%= error_span(@impresa[:congelato]) %>
-  <%= f.input :citta_id %>
+  <%= f.input :citta_id ,collection: Citta.all%>
   <%= error_span(@impresa[:citta_id]) %>
   <%= hidden_field_tag(:id,@impresa.id) %>
   <%= f.button :submit, :class => 'btn-primary' %>
