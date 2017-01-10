@@ -20,140 +20,51 @@ require 'rails_helper'
 
 RSpec.describe ClientiController, type: :controller do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Cliente. As you add validations to Cliente, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ClientiController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
-
-  describe "GET #index" do
-    it "assigns all clientis as @clientis" do
-      cliente = Cliente.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(assigns(:clienti)).to eq([cliente])
-    end
+  #titolare non loggato vuole vedere profilo -> NO
+  it "should redirect login page" do
+    cliente = createCliente("mario","rossi")
+    get :show, id: cliente.id
+    expect(response).to_not render_template :show
   end
 
-  describe "GET #show" do
-    it "assigns the requested cliente as @cliente" do
-      cliente = Cliente.create! valid_attributes
-      get :show, params: {id: cliente.to_param}, session: valid_session
-      expect(assigns(:cliente)).to eq(cliente)
-    end
+  #titolare loggato vuole vedere profilo -> SI
+  it "should redirect profile" do
+    cliente = createCliente("mario","rossi")
+    sign_in cliente
+    get :show, id: cliente.id
+    expect(response).to render_template :show
   end
 
-  describe "GET #new" do
-    it "assigns a new cliente as @cliente" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:cliente)).to be_a_new(Cliente)
-    end
+  #titolare loggato vuole fare edit -> SI
+  it "should edit cliente" do
+    cliente = createCliente("mario","rossi")
+    sign_in cliente
+    get :edit, id: cliente.id
+    expect(response).to render_template :edit
+  end
+  #titolare non loggato vuole fare edit -> NO
+  it "should not edit cliente" do
+    cliente = createCliente("mario","rossi")
+    get :edit, id: cliente.id
+    expect(response).to_not render_template :edit
+  end
+  #titolare loggato vuole fare edit di un altro titolare -> NO
+  it "should not edit another cliente from this cliente" do
+    cliente1 = createCliente("mario","rossi")
+    cliente2 = createCliente("mario","bianchi")
+    sign_in cliente1
+    get :edit, id: cliente2.id
+    expect(response).to_not render_template :edit
   end
 
-  describe "GET #edit" do
-    it "assigns the requested cliente as @cliente" do
-      cliente = Cliente.create! valid_attributes
-      get :edit, params: {id: cliente.to_param}, session: valid_session
-      expect(assigns(:cliente)).to eq(cliente)
-    end
+  #titolare loggato vuole fare show di un altro titolare -> NO
+  it "should not show another cliente from this cliente" do
+    cliente1 = createCliente("mario","rossi")
+    cliente2 = createCliente("mario","bianchi")
+    sign_in cliente1
+    get :show, id: cliente2.id
+    expect(response).to_not render_template :show
   end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Cliente" do
-        expect {
-          post :create, params: {cliente: valid_attributes}, session: valid_session
-        }.to change(Cliente, :count).by(1)
-      end
-
-      it "assigns a newly created cliente as @cliente" do
-        post :create, params: {cliente: valid_attributes}, session: valid_session
-        expect(assigns(:cliente)).to be_a(Cliente)
-        expect(assigns(:cliente)).to be_persisted
-      end
-
-      it "redirects to the created cliente" do
-        post :create, params: {cliente: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Cliente.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved cliente as @cliente" do
-        post :create, params: {cliente: invalid_attributes}, session: valid_session
-        expect(assigns(:cliente)).to be_a_new(Cliente)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: {cliente: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested cliente" do
-        cliente = Cliente.create! valid_attributes
-        put :update, params: {id: cliente.to_param, cliente: new_attributes}, session: valid_session
-        cliente.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested cliente as @cliente" do
-        cliente = Cliente.create! valid_attributes
-        put :update, params: {id: cliente.to_param, cliente: valid_attributes}, session: valid_session
-        expect(assigns(:cliente)).to eq(cliente)
-      end
-
-      it "redirects to the cliente" do
-        cliente = Cliente.create! valid_attributes
-        put :update, params: {id: cliente.to_param, cliente: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(cliente)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the cliente as @cliente" do
-        cliente = Cliente.create! valid_attributes
-        put :update, params: {id: cliente.to_param, cliente: invalid_attributes}, session: valid_session
-        expect(assigns(:cliente)).to eq(cliente)
-      end
-
-      it "re-renders the 'edit' template" do
-        cliente = Cliente.create! valid_attributes
-        put :update, params: {id: cliente.to_param, cliente: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested cliente" do
-      cliente = Cliente.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: cliente.to_param}, session: valid_session
-      }.to change(Cliente, :count).by(-1)
-    end
-
-    it "redirects to the clienti list" do
-      cliente = Cliente.create! valid_attributes
-      delete :destroy, params: {id: cliente.to_param}, session: valid_session
-      expect(response).to redirect_to(clienti_url)
-    end
-  end
-
+  
 end
