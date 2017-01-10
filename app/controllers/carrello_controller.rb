@@ -61,7 +61,7 @@ class CarrelloController < ApplicationController
 
   private
     def is_my_carrello?
-        if !(current_utente.isCliente? && current_utente.getCarrello.cliente_id == current_utente.actable_id)
+        if !(current_utente.isCliente? && @carrello.cliente_id == current_utente.actable_id)
           redirect_back
         end
     end
