@@ -4,6 +4,7 @@ class Impresa < ActiveRecord::Base
   has_many :prodotti
   has_many :ordini
   has_and_belongs_to_many :sottocategorie
+  has_paper_trail
   geocoded_by :getIndirizzo
   after_validation :geocode
   # Validations necessarie per la registrazione
