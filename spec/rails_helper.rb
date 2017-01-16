@@ -54,4 +54,18 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+   config.include Capybara::DSL
+      config.include Devise::TestHelpers, type: :controller
+end
+
+
+def createTitolare(nome,cognome)
+  titolare= Titolare.create(nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo")
+  return titolare
+end
+
+
+def createCliente(nome,cognome)
+  cliente= Cliente.create(nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo")
+  return cliente
 end
