@@ -28,6 +28,8 @@ gem 'wysiwyg-rails'
 # Api Google Maps
 gem 'gmaps4rails'
 gem 'geocoder'
+# I18n
+gem 'rails-i18n'
 
 # Preprocessore Less per bootstrap
 gem "therubyracer"

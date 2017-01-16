@@ -1,0 +1,23 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+it:
+  breadcrumbs:
+    application:
+      root: "Index"
+    pages:
+      pages: "Pagine"
+  helpers:
+    actions: "Azioni"
+    links:
+      back: "Indietro"
+      cancel: "Annulla"
+      confirm: "Sei Sicuro?"
+      destroy: "Cancella"
+      new: "Nuovo"
+      edit: "Modifica"
+    titles:
+      edit: "Modifica %{model}"
+      save: "Salva %{model}"
+      new: "Nuovo %{model}"
+      delete: "Cancella %{model}"
