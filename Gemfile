@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
 gem 'rails_admin_rollincode', git: 'https://github.com/rollincode/rails_admin_theme.git'
 gem 'rails_admin_history_rollback', git: 'https://github.com/rikkipitt/rails_admin_history_rollback.git'
+gem 'rails_admin_nestable', '~> 0.3.2'
 # Athenticazione e Authorizzazione
 gem 'devise'
 gem 'cancancan'
@@ -22,12 +23,16 @@ gem 'paperclip', "~> 5.0.0"
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'railsstrap', git: 'https://github.com/toadkicker/railsstrap.git' # Sostituisce Twitter-Bootstrap-Rails
 gem 'devise-bootstrap-views' , git: 'https://github.com/hisea/devise-bootstrap-views.git'
+gem 'font-awesome-rails'
+gem 'wysiwyg-rails'
+# Api Google Maps
+gem 'gmaps4rails'
+gem 'geocoder'
 
 # Preprocessore Less per bootstrap
 gem "therubyracer"
 gem "less-rails"
-gem 'gmaps4rails'
-gem 'geocoder'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
