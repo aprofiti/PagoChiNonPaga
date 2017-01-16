@@ -1,24 +1,36 @@
 <%- model_class = Categoria -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:nome) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @categorie.each do |categoria| %>
-      <tr>
-        <td><%=  categoria.id %></td>
-        <td><%= link_to categoria.nome, categoria_sottocategorie_path(categoria_nome: categoria.nome),method: :get %></td>
-        <td><%=l categoria.created_at %></td>
+<!-- Breadcumb -->
+  <ol class="breadcrumb">
+    <li><%= link_to "Home", root_path %></li>
+    <li class="active">Categorie</li>
+  </ol>
 
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- Lista delle Categorie -->
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="list-group">
+      <a class="list-group-item text-center active" data-remote="true" href="#" id="categoria_0" style="background-color: ;">
+        Tutte le Categorie e Sottocategorie
+      </a>
+      <!-- Elenco Categorie -->
+      <% @categorie.each do |categoria| %>
+        <%
+          # Usate per id e href
+          idCategoria = "categoria_#{categoria.nome}"
+          rifSottocategoria = "sottocategoria_#{categoria.nome}"
+          sottoCat = categoria.sottocategorie
+        %>
+        <div class="list-group-item" data-remote="true" href="#<%= rifSottocategoria %>" id="<%= idCategoria %>" data-toggle="collapse" data-parent="#<%= rifSottocategoria %>" style="padding-left: 25px;">
+          <span class="glyphicon glyphicon-menu-down"></span>
+          <span style="margin-left: 25px;"><%= link_to categoria.nome, categoria_sottocategorie_path(categoria_nome: categoria.nome) %></span>
+        </div>
+
+        <div class="collapse list-group-submenu" id="<%= rifSottocategoria %>">
+          <% sottoCat.each do |sottocategoria| %>
+            <%= link_to sottocategoria.nome, categoria_sottocategoria_path(categoria_nome: categoria.nome, nome: sottocategoria.nome), :class => "list-group-item sub-item", :data => "#sub_categoria_alimentari", :style => "padding-left: 78px;" %>
+          <% end %>
+       </div>
+      <% end %>
+    </div>
+  </div>
+</div>
