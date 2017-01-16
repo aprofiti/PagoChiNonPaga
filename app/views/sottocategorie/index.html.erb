@@ -1,28 +1,33 @@
 <%- model_class = Sottocategoria -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+<%
+   # Variabili Ausiliari per la ricerca
+   categoria_nome = params[:categoria_nome]
+   categoria = Categoria.find_by(nome: categoria_nome)
+%>
+<!-- Breadcumb -->
+  <ol class="breadcrumb">
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Categorie", categorie_path %></li>
+    <li class="active"><%= categoria_nome %></li>
+  </ol>
+
+<!-- Lista delle Sottocategorie -->
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="list-group">
+      <a class="list-group-item text-center active" data-remote="true" href="#" style="background-color: ;">
+        <%= "Tutte le Sottocategorie di #{categoria_nome}" %>
+      </a>
+      <!-- Elenco Sottocategorie -->
+      <% categoria.sottocategorie.each do |sottocategoria| %>
+        <div class="list-group-item">
+          <span class="glyphicon glyphicon-menu-right"></span>
+          <span style="margin-left: 25px;"><%= link_to sottocategoria.nome , categoria_sottocategoria_path(categoria_nome: params[:categoria_nome], nome: sottocategoria.nome),method: :get %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:nome) %></th>
-      <th><%= model_class.human_attribute_name(:categoria_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @sottocategorie.each do |sottocategoria| %>
-      <tr>
-        <td><%=  sottocategoria.id %></td>
-        <td><%= link_to sottocategoria.nome , categoria_sottocategoria_path(categoria_nome: params[:categoria_nome], nome: sottocategoria.nome),method: :get %></td>
-        <td><%= sottocategoria.categoria_id %></td>
-        <td><%=l sottocategoria.created_at %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <%= link_to t('.lista_categorie', :default => t("helpers.links.lista_categorie")),
               categorie_path, :class => 'btn btn-default',method: :get  %>

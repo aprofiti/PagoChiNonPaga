@@ -18,3 +18,5 @@
 //= require bootstrap-typeahead-rails
 //= require handlebars
 //= require imprese
+//= require underscore
+//= require gmaps/google

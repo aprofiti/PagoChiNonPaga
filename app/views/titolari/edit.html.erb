@@ -24,8 +24,8 @@
   <%= error_span(@titolare[:password_confirmation]) %>
 
 
-  <%= f.input :indirizzo_id %> <!-- visualizzare?? tipo relazione -->
-  <%= error_span(@titolare[:indirizzo_id]) %>
+  <%= f.input :indirizzo %> <!-- visualizzare?? tipo relazione -->
+  <%= error_span(@titolare[:indirizzo]) %>
 
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

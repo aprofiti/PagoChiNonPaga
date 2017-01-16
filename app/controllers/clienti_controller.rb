@@ -21,25 +21,6 @@ class ClientiController < ApplicationController
   def edit
   end
 
-  #POST -> Aggiunge al carrello il prodotto presente nella pagina in cui viene richamato
-  def add_cart
-    if current_utente.hasCarrello?
-      carrello= current_utente.getCarrello
-    else
-      carrello= Carrello.create(cliente_id: current_utente.actable_id)
-    end
-    prodotto= Prodotto.find(params[:prodotto_id])
-    qta_post = params[:prodotto][:qta].to_i
-    if prodotto.checkDisponibilita(qta_post,carrello)
-      carrello.add(prodotto,prodotto.prezzo,qta_post)
-      redirect_back
-    else
-      flash[:notice] = "Quantita selezionata non disponibile"
-      redirect_to(:back)
-    end
-  end
-
-  
   # POST /clienti
   # POST /clienti.json
   #Dopo la creazione PER ORA l'utente viene reindirizzato alla schermata di login
@@ -96,6 +77,6 @@ class ClientiController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cliente_params
       #params.fetch(:cliente, {})
-      params.require(:cliente).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:actable_id,:actable_type,:password,:password_confirmation)
+      params.require(:cliente).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:actable_id,:actable_type,:password,:password_confirmation,:citta_id,:indirizzo)
     end
 end

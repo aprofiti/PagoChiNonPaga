@@ -1,7 +1,7 @@
 class Titolare < ActiveRecord::Base
   # Implementa IS-A da Utenti
   acts_as :utente
-
+  belongs_to :citta
   # Validations necessarie per la registrazione
   validates :nome, :cognome, :email, :password, :password_confirmation, :telefono, :data_nascita, :cf, presence: true
   #TODO: controllare presence indirizzo
@@ -16,7 +16,6 @@ class Titolare < ActiveRecord::Base
   end
 
   has_many :imprese
-  belongs_to :indirizzo
 
   def getImprese
     self.imprese

@@ -17,8 +17,10 @@
   <%= error_span(@cliente[:password_confirmation]) %>
 
 
-  <%= f.input :indirizzo_id %> <!-- visualizzare?? tipo relazione -->
-  <%= error_span(@cliente[:indirizzo_id]) %>
+  <%= f.input :indirizzo %> <!-- visualizzare?? tipo relazione -->
+  <%= error_span(@cliente[:indirizzo]) %>
+  <%= f.input :citta_id ,collection: Citta.all%>
+  <%= error_span(@cliente[:citta_id]) %>
 
   <%= f.button :submit, :class => 'btn-primary' %>
 <!--

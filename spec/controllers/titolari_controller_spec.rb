@@ -20,140 +20,50 @@ require 'rails_helper'
 
 RSpec.describe TitolariController, type: :controller do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Titolare. As you add validations to Titolare, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # TitolariController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
-
-  describe "GET #index" do
-    it "assigns all titolaris as @titolaris" do
-      titolare = Titolare.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(assigns(:titolari)).to eq([titolare])
-    end
+  #titolare non loggato vuole vedere profilo -> NO
+  it "should redirect login page" do
+    titolare = createTitolare("mario","rossi")
+    get :show, id: titolare.id
+    expect(response).to_not render_template :show
   end
 
-  describe "GET #show" do
-    it "assigns the requested titolare as @titolare" do
-      titolare = Titolare.create! valid_attributes
-      get :show, params: {id: titolare.to_param}, session: valid_session
-      expect(assigns(:titolare)).to eq(titolare)
-    end
+  #titolare loggato vuole vedere profilo -> SI
+  it "should redirect profile" do
+    titolare = createTitolare("mario","rossi")
+    sign_in titolare
+    get :show, id: titolare.id
+    expect(response).to render_template :show
   end
 
-  describe "GET #new" do
-    it "assigns a new titolare as @titolare" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:titolare)).to be_a_new(Titolare)
-    end
+  #titolare loggato vuole fare edit -> SI
+  it "should edit titolare" do
+    titolare = createTitolare("mario","rossi")
+    sign_in titolare
+    get :edit, id: titolare.id
+    expect(response).to render_template :edit
+  end
+  #titolare non loggato vuole fare edit -> NO
+  it "should not edit titolare" do
+    titolare = createTitolare("mario","rossi")
+    get :edit, id: titolare.id
+    expect(response).to_not render_template :edit
+  end
+  #titolare loggato vuole fare edit di un altro titolare -> NO
+  it "should not edit another titolare from this titolare" do
+    titolare1 = createTitolare("mario","rossi")
+    titolare2 = createTitolare("mario","bianchi")
+    sign_in titolare1
+    get :edit, id: titolare2.id
+    expect(response).to_not render_template :edit
   end
 
-  describe "GET #edit" do
-    it "assigns the requested titolare as @titolare" do
-      titolare = Titolare.create! valid_attributes
-      get :edit, params: {id: titolare.to_param}, session: valid_session
-      expect(assigns(:titolare)).to eq(titolare)
-    end
-  end
-
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Titolare" do
-        expect {
-          post :create, params: {titolare: valid_attributes}, session: valid_session
-        }.to change(Titolare, :count).by(1)
-      end
-
-      it "assigns a newly created titolare as @titolare" do
-        post :create, params: {titolare: valid_attributes}, session: valid_session
-        expect(assigns(:titolare)).to be_a(Titolare)
-        expect(assigns(:titolare)).to be_persisted
-      end
-
-      it "redirects to the created titolare" do
-        post :create, params: {titolare: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Titolare.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved titolare as @titolare" do
-        post :create, params: {titolare: invalid_attributes}, session: valid_session
-        expect(assigns(:titolare)).to be_a_new(Titolare)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: {titolare: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested titolare" do
-        titolare = Titolare.create! valid_attributes
-        put :update, params: {id: titolare.to_param, titolare: new_attributes}, session: valid_session
-        titolare.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested titolare as @titolare" do
-        titolare = Titolare.create! valid_attributes
-        put :update, params: {id: titolare.to_param, titolare: valid_attributes}, session: valid_session
-        expect(assigns(:titolare)).to eq(titolare)
-      end
-
-      it "redirects to the titolare" do
-        titolare = Titolare.create! valid_attributes
-        put :update, params: {id: titolare.to_param, titolare: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(titolare)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the titolare as @titolare" do
-        titolare = Titolare.create! valid_attributes
-        put :update, params: {id: titolare.to_param, titolare: invalid_attributes}, session: valid_session
-        expect(assigns(:titolare)).to eq(titolare)
-      end
-
-      it "re-renders the 'edit' template" do
-        titolare = Titolare.create! valid_attributes
-        put :update, params: {id: titolare.to_param, titolare: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested titolare" do
-      titolare = Titolare.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: titolare.to_param}, session: valid_session
-      }.to change(Titolare, :count).by(-1)
-    end
-
-    it "redirects to the titolari list" do
-      titolare = Titolare.create! valid_attributes
-      delete :destroy, params: {id: titolare.to_param}, session: valid_session
-      expect(response).to redirect_to(titolari_url)
-    end
+  #titolare loggato vuole fare show di un altro titolare -> NO
+  it "should not edit another titolare from this titolare" do
+    titolare1 = createTitolare("mario","rossi")
+    titolare2 = createTitolare("mario","bianchi")
+    sign_in titolare1
+    get :show, id: titolare2.id
+    expect(response).to_not render_template :show
   end
 
 end

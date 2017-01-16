@@ -19,6 +19,24 @@ class CarrelloController < ApplicationController
     redirect_to carrello_path(id: carrello.id)
   end
 
+  #POST -> Aggiunge al carrello il prodotto presente nella pagina in cui viene richamato
+  def add_cart
+    if current_utente.hasCarrello?
+      carrello= current_utente.getCarrello
+    else
+      carrello= Carrello.create(cliente_id: current_utente.actable_id)
+    end
+    prodotto= Prodotto.find(params[:prodotto_id])
+    qta_post = params[:prodotto][:qta].to_i
+    if prodotto.checkDisponibilita(qta_post,carrello)
+      carrello.add(prodotto,prodotto.prezzo,qta_post)
+      redirect_back
+    else
+      flash[:notice] = "Quantita selezionata non disponibile"
+      redirect_to(:back)
+    end
+  end
+
   # POST /carrello
   # POST /carrello.json
   def create
@@ -61,9 +79,11 @@ class CarrelloController < ApplicationController
 
   private
     def is_my_carrello?
-        if !(current_utente.isCliente? && current_utente.getCarrello.cliente_id == current_utente.actable_id)
+      if @carrello != nil
+        if !(current_utente.isCliente? && @carrello.cliente_id == current_utente.actable_id)
           redirect_back
         end
+      end
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_carrello

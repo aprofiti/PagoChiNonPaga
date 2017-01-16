@@ -1,6 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+# Modulo Rails Admin
+require "paper_trail"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -27,3 +29,7 @@ module PagoChiNonPaga
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
+# Imposto la lingua di Default
+ Rails.application.config.i18n.default_locale = :it
+ Rails.application.config.i18n.available_locales = [:it, :en]

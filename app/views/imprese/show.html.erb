@@ -1,3 +1,6 @@
+<script src="//maps.google.com/maps/api/js?key=AIzaSyBzvisYtIWdt5PVvyiRkBdkVCvD2QIPJZY"></script>
+<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+
 <%- model_class = Impresa -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
@@ -20,10 +23,12 @@
   <dd><%= @impresa.facebook %></dd>
   <dt><strong><%= model_class.human_attribute_name(:descrizione) %>:</strong></dt>
   <dd><%= @impresa.descrizione %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:lat) %>:</strong></dt>
-  <dd><%= @impresa.lat %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:lng) %>:</strong></dt>
-  <dd><%= @impresa.lng %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:latitude) %>:</strong></dt>
+  <dd><%= @impresa.latitude %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:longitude) %>:</strong></dt>
+  <dd><%= @impresa.longitude %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:indirizzo) %>:</strong></dt>
+  <dd><%= @impresa.indirizzo %></dd>
   <dt><strong><%= model_class.human_attribute_name(:verificato) %>:</strong></dt>
   <dd><%= @impresa.verificato %></dd>
   <dt><strong><%= model_class.human_attribute_name(:congelato) %>:</strong></dt>
@@ -33,7 +38,20 @@
   <dt><strong><%= model_class.human_attribute_name(:titolare) %>:</strong></dt>
   <dd><%= @impresa.getTitolare %></dd>
 </dl>
+
 <%= link_to "I Nostri Prodotti", impresa_prodotti_path(impresa_nome: @impresa.nome,id: params[:id]), :class => 'btn btn-default' ,method: :get %>
 
 <%= link_to t('.tutte_le_imprese', :default => t("helpers.links.tutte_le_imprese")),
               imprese_path, :class => 'btn btn-default' ,method: :get %>
+
+  <div style='width: 800px;'>
+    <div id="map" style='width: 800px; height: 400px;'></div>
+  </div>
+  <script type="text/javascript">
+  handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+});
+  </script>

@@ -13,7 +13,7 @@
       <th><%= model_class.human_attribute_name(:piva) %></th>
       <th><%= model_class.human_attribute_name(:data_nascita) %></th>
       <th><%= model_class.human_attribute_name(:telefono) %></th>
-      <th><%= model_class.human_attribute_name(:indirizzo_id) %></th>
+      <th><%= model_class.human_attribute_name(:indirizzo) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -29,7 +29,7 @@
         <td><%= titolare.piva %></td>
         <td><%= titolare.data_nascita %></td>
         <td><%= titolare.telefono %></td>
-        <td><%= titolare.indirizzo_id %></td>
+        <td><%= titolare.indirizzo %></td>
         <td><%=l titolare.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
