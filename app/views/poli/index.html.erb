@@ -16,7 +16,7 @@
       <tr>
         <td><%= polo.id %></td>
         <td><%= link_to polo.nome , polo_path(nome: polo.nome),method: :get%></td>
-        <td><%=l polo.created_at %></td>
+        <td><%= polo.created_at %></td>
       </tr>
     <% end %>
   </tbody>
