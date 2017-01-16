@@ -29,15 +29,13 @@ Rails.application.routes.draw do
   end
 
   resources :titolari, except: [:index]
-  resources :clienti, except: [:index] do
-    member do
-      post :add_cart
-    end
-  end
+  resources :clienti, except: [:index]
+  
 
   resources :carrello, except: [:index, :new] do
     member do
       post :remove_item
+      post :add_cart
     end
   end
 
@@ -45,7 +43,6 @@ Rails.application.routes.draw do
 
 
 #*********************ROTTE CANCELLATE************************
-  #resources :indirizzi
   #resources :admins perchè si accede da rails_admin
   #resources :utenti
 #*************************************************************
