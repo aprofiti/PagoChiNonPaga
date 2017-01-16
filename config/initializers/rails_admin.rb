@@ -1,4 +1,6 @@
 RailsAdmin.config do |config|
+  # Titolo mostrato nel Pannello
+  config.main_app_name = ['PagoChiNonPaga', '- Pannello di Amministrazione -']
 
   ### Popular gems integration
   ## == Devise ==
