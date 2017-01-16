@@ -27,3 +27,7 @@ module PagoChiNonPaga
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
+# Imposto la lingua di Default
+ Rails.application.config.i18n.default_locale = :it
+ Rails.application.config.i18n.available_locales = [:it, :en]
