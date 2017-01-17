@@ -33,10 +33,11 @@ gem 'rails-i18n'
 
 # Preprocessore Less per bootstrap
 gem "therubyracer"
-gem "less-rails"
+gem 'less-rails', git: 'https://github.com/Genkilabs/less-rails' #fix for deprecated Sprockets ImportProcessor
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
+gem 'sprockets', '>= 3.7.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
