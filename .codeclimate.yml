@@ -70,6 +70,8 @@ engines:
     # not later. FIXME is also very simple, and is intended to provide a
     # 'Hello World' like example for potential Code Climate Platform engine authors.
     enabled: true
+    exclude_paths:
+    - .codeclimate.yml
   rubocop:
     # Style and quality checks for Ruby code.
     # Includes support for modern Rubies (2.2+).
