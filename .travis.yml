@@ -1,0 +1,22 @@
+{
+  "language": "ruby",
+  "rvm": "2.2.0",
+  "env": "DB=mysql",
+  "script": [
+    "RAILS_ENV=test bundle exec rake db:migrate --trace",
+    "bundle exec rspec spec/controllers/"
+  ],
+  "before_script": [
+    "mysql -e 'create database myapp_test'"
+  ],
+  "bundler_args": "--binstubs=./bundler_stubs",
+  "test": {
+    "adapter": "mysql2",
+    "database": "myapp_test",
+    "username": "travis",
+    "encoding": "utf8"
+  },
+  "group": "stable",
+  "dist": "precise",
+  "os": "linux"
+}
