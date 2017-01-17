@@ -28,6 +28,7 @@ gem 'wysiwyg-rails'
 # Api Google Maps
 gem 'gmaps4rails'
 gem 'geocoder'
+gem 'underscore-rails' # Richiesto da gmaps4rails
 # I18n
 gem 'rails-i18n'
 
