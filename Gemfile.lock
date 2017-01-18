@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/king601/devise-bootstrapped.git
+  revision: 152ef108593758f4c93d0e303e9f2a545371fe43
+  specs:
+    devise-bootstrapped (0.1.1)
+
+GIT
   remote: https://github.com/Genkilabs/less-rails
   revision: 7407431b8ae527b0d941c1919c5567c0e59130ea
   specs:
@@ -7,12 +13,6 @@ GIT
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
-
-GIT
-  remote: https://github.com/hisea/devise-bootstrap-views.git
-  revision: 89ae2a0607f76147c4458511f0ea652625da3237
-  specs:
-    devise-bootstrap-views (0.0.10)
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
@@ -373,7 +373,7 @@ DEPENDENCIES
   capybara
   coffee-rails (>= 4.1.0)
   devise
-  devise-bootstrap-views!
+  devise-bootstrapped!
   font-awesome-rails
   geocoder
   gmaps4rails

@@ -22,7 +22,7 @@ gem 'handlebars_assets'
 gem 'paperclip', ">= 5.0.0"
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'railsstrap', git: 'https://github.com/toadkicker/railsstrap.git' # Sostituisce Twitter-Bootstrap-Rails
-gem 'devise-bootstrap-views' , git: 'https://github.com/hisea/devise-bootstrap-views.git'
+gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped'
 gem 'font-awesome-rails'
 gem 'wysiwyg-rails'
 # Api Google Maps
