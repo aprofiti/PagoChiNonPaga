@@ -1,57 +1,100 @@
+<%- model_class = Impresa -%>
 <script src="//maps.google.com/maps/api/js?key=AIzaSyBzvisYtIWdt5PVvyiRkBdkVCvD2QIPJZY"></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+<script>
+// Inizializza la Mappa
+var coordinate = <%=raw @hash.to_json %>;
+if(coordinate == "") return false; 
 
-<%- model_class = Impresa -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-</div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
-  <dd><%= @impresa.nome %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
-  <dd><%= @impresa.telefono %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:fax) %>:</strong></dt>
-  <dd><%= @impresa.fax %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:giorni_orari) %>:</strong></dt>
-  <dd><%= @impresa.giorni_orari %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @impresa.email %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:sitoweb) %>:</strong></dt>
-  <dd><%= @impresa.sitoweb %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:facebook) %>:</strong></dt>
-  <dd><%= @impresa.facebook %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:descrizione) %>:</strong></dt>
-  <dd><%= @impresa.descrizione %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:latitude) %>:</strong></dt>
-  <dd><%= @impresa.latitude %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:longitude) %>:</strong></dt>
-  <dd><%= @impresa.longitude %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:indirizzo) %>:</strong></dt>
-  <dd><%= @impresa.indirizzo %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:verificato) %>:</strong></dt>
-  <dd><%= @impresa.verificato %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:congelato) %>:</strong></dt>
-  <dd><%= @impresa.congelato %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:citta) %>:</strong></dt>
-  <dd><%= @impresa.getCitta %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:titolare) %>:</strong></dt>
-  <dd><%= @impresa.getTitolare %></dd>
-</dl>
-
-<%= link_to "I Nostri Prodotti", impresa_prodotti_path(impresa_nome: @impresa.nome,id: params[:id]), :class => 'btn btn-default' ,method: :get %>
-
-<%= link_to t('.tutte_le_imprese', :default => t("helpers.links.tutte_le_imprese")),
-              imprese_path, :class => 'btn btn-default' ,method: :get %>
-
-  <div style='width: 800px;'>
-    <div id="map" style='width: 800px; height: 400px;'></div>
-  </div>
-  <script type="text/javascript">
+$(document).ready(function(){
   handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
+  handler.buildMap({ provider: {}, internal: {id: 'mappa'}}, function(){
+    markers = handler.addMarkers(coordinate);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(17);
+  });
 });
-  </script>
+</script>
+
+<!-- Hero Image -->
+<section id="hero" class="">
+  <%= image_tag("template/Sfondo Negozio.png", :id => "heroImg", :class => "img-responsive") %>
+</section>
+
+<!-- Breadcumb -->
+  <ol class="breadcrumb">
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Imprese", imprese_path %></li>
+    <li class="active"><%= @impresa.nome %></li>
+  </ol>
+
+<!-- Sezione Negozio -->
+<section class="container">
+  <!-- Info Negozio -->
+  <div id="infoNegozio" class="row">
+    <div id="nomeNegozio" class="col-md-4 col-xs-9">
+      <h2><%= @impresa.nome %></h2>
+    </div>
+    <div id="provinciaNegozio" class="col-md-4 col-md-offset-3 col-xs-1">
+      <h4><%= @impresa.citta.nome %></h4>
+    </div>
+  </div>
+  <!-- Descrizione Negozio -->
+  <div id="descrizioneNegozio" class="row">
+    <div class="col-md-12">
+      <h4>Descrizione:</h4>
+      <p><%= @impresa.descrizione.html_safe %></p>
+    </div>
+  </div>
+  <!-- Catalogo -->
+  <div id="catalogo" class="row">
+    <div id="descrizioneCatalogo" class="col-md-6 col-xs-4">
+      <span class="glyphicon glyphicon-shopping-cart"></span>
+      <h3>
+        <%= link_to "Consulta il catalogo", impresa_prodotti_path(impresa_nome: @impresa.nome,id: params[:id]) , class: "txtCatalogo", method: :get %>
+      </h3>
+    </div>
+    <div id="iconeCatalogo" class="col-xs-2 col-md-offset-4 col-xs-offset-4">
+      <% if @impresa.sitoweb %>
+        <%= link_to "#{@impresa.sitoweb}" do %>
+          <span class="fa fa-globe"></span>
+        <% end %>
+      <% end %>
+      <% if @impresa.facebook %>
+        <%= link_to "#{@impresa.facebook}" do %>
+          <span class="fa fa-facebook-official"></span>
+        <% end %>
+      <% end %>
+      <% if @impresa.email %>
+        <%= link_to "mailto:#{@impresa.email}" do %>
+          <span class="fa fa-envelope-o"></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- Mappa -->
+<section id="sezioneMappa" class="container">
+  <div class="row">
+    <div class="col-md-12 img-responsive" id="mappa"></div>
+    <div id="riquadro" class="">
+      <p>Informazioni</p>
+      <p>Indirizzo: <%= @impresa.indirizzo %></p>
+      <p>Telefono: <%= @impresa.telefono %></p>
+      <p>E-mail: <%= @impresa.email %></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- TODO: Serve? -->
+<!-- script for FROALA-WYSIWYG -->
+<script>
+$('#wysiwyg').froalaEditor({
+  inlineMode: false,
+  heightMin: '200px',
+  toolbarButtons: ['bold', 'italic', 'underline'],
+})
+</script>
