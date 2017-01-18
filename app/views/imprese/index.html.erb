@@ -2,7 +2,7 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-
+<div class="container">
 <table class="table table-striped">
   <thead>
     <tr>
@@ -64,6 +64,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <% if utente_signed_in? && current_utente.isTitolare?%>
   <%= link_to t('.new', :default => t("helpers.links.new")),
