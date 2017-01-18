@@ -28,11 +28,15 @@ RailsAdmin.config do |config|
     navigation_label 'Sezione Amministratori'
     navigation_icon 'fa fa-map-marker'
     weight 0
+
+    exclude_fields :created_at, :updated_at
   end
 
   config.model 'Citta' do
     parent Polo
     navigation_icon 'fa fa-globe'
+
+    exclude_fields :created_at, :updated_at
   end
 
   # Sezione Utenti
@@ -40,21 +44,29 @@ RailsAdmin.config do |config|
     navigation_label 'Utenti del Sistema'
     navigation_icon 'fa fa-users'
     weight +3
+
+    exclude_fields :created_at, :updated_at
   end
 
   config.model 'Admin' do
     parent Utente
     navigation_icon 'fa fa-user-secret'
+
+    exclude_fields :created_at, :updated_at
   end
 
   config.model 'Titolare' do
     parent Utente
     navigation_icon 'fa fa-user'
+
+    exclude_fields :created_at, :updated_at
   end
 
   config.model 'Cliente' do
     parent Utente
     navigation_icon 'fa fa-user'
+
+    exclude_fields :created_at, :updated_at
   end
 
   # Sezione Imprese
@@ -62,23 +74,38 @@ RailsAdmin.config do |config|
     navigation_label 'Sezione Imprese'
     navigation_icon 'fa fa-industry'
     weight +1
+
+    edit do
+      field :nome
+      field :descrizione, :froala
+      # Mostro i campi restanti
+      include_all_fields
+    end
+
+    exclude_fields :created_at, :updated_at
   end
 
   config.model 'Prodotto' do
     parent Impresa
     navigation_icon 'fa fa-shopping-bag'
+
+    exclude_fields :created_at, :updated_at
   end
 
   config.model 'Categoria' do
     parent Impresa
     navigation_icon 'fa fa-list'
     weight +1
+
+    exclude_fields :created_at, :updated_at
   end
 
   config.model 'Sottocategoria' do
     parent Impresa
     navigation_icon 'fa fa-list'
     weight +2
+
+    exclude_fields :created_at, :updated_at
   end
 
   # Sezione Ecommerce
@@ -86,21 +113,29 @@ RailsAdmin.config do |config|
     navigation_label 'Sezione Ecommerce'
     navigation_icon 'fa fa-shopping-cart'
     weight +2
+
+    exclude_fields :created_at, :updated_at
   end
 
   config.model 'Ordine' do
     parent Carrello
     navigation_icon 'fa fa-euro'
+
+    exclude_fields :created_at, :updated_at
   end
 
   config.model 'CarrelloProdotto' do
     parent Carrello
     navigation_icon 'fa fa-cart-arrow-down'
+
+    exclude_fields :created_at, :updated_at
   end
 
   config.model 'StatoOrdine' do
     parent Carrello
     navigation_icon 'fa fa-truck'
+
+    exclude_fields :created_at, :updated_at
   end
 
 
