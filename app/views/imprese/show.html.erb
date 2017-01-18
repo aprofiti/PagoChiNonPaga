@@ -4,15 +4,17 @@
 <script>
 // Inizializza la Mappa
 var coordinate = <%=raw @hash.to_json %>;
-if(coordinate == "") return false; 
 
 $(document).ready(function(){
+  // Controlla che siano impostate le coordinate
+  if(coordinate[0].lat == null && coordinate[0].lng== null) return;
+  // Mostro la mappa
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {}, internal: {id: 'mappa'}}, function(){
     markers = handler.addMarkers(coordinate);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
-    handler.getMap().setZoom(17);
+    handler.getMap().setZoom(18);
   });
 });
 </script>
@@ -87,14 +89,3 @@ $(document).ready(function(){
     </div>
   </div>
 </section>
-
-
-<!-- TODO: Serve? -->
-<!-- script for FROALA-WYSIWYG -->
-<script>
-$('#wysiwyg').froalaEditor({
-  inlineMode: false,
-  heightMin: '200px',
-  toolbarButtons: ['bold', 'italic', 'underline'],
-})
-</script>
