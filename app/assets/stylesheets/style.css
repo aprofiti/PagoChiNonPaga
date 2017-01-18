@@ -1,0 +1,43 @@
+/* Necessario per evitare che la barra del menu copra il contenuto della pagina */
+body {
+  padding-top: 60px;
+  background: #fff;
+}
+
+navbar-brand{
+  height:100%;
+  padding:0px;
+}
+
+navbar-nav{
+  padding-top:10px;
+}
+
+.txtCatalogo{
+    color: #45A2FF;
+}
+
+#logo{
+  height:60px;
+}
+
+#notice {
+  color: green;
+}
+
+/* Generati dallo Scaffolding
+*/
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
