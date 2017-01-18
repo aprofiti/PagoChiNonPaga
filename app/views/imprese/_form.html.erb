@@ -15,7 +15,7 @@
   <%= error_span(@impresa[:sitoweb]) %>
   <%= f.input :facebook %>
   <%= error_span(@impresa[:facebook]) %>
-  <%= f.input :descrizione %>
+  <%= f.input :descrizione, as: :text %>
   <%= error_span(@impresa[:descrizione]) %>
   <%= f.input :latitude %>
   <%= error_span(@impresa[:latitude]) %>
