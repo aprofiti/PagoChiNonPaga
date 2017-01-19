@@ -1,1 +1,43 @@
 it:
+  activerecord:
+    models:
+      admin:
+        one: Admin
+        other: Admins
+      carrello:
+        one: Carrello
+        other: Carrelli
+      carrello_prodotto:
+        one: Prodotto nel Carrello
+        other: Prodotti nel Carrello
+      categoria:
+        one: Categoria
+        other: Categorie
+      citta: Citta
+      cliente:
+        one: Cliente
+        other: Clienti
+      impresa:
+        one: Impresa
+        other: Imprese
+      ordine:
+        one: Ordine
+        other: Ordini
+      polo:
+        one: Polo
+        other: Poli
+      prodotto:
+        one: Prodotto
+        other: Prodotti
+      sottocategoria:
+        one: Sottocategoria
+        other: Sottocategorie
+      stato_ordine:
+        one: Stato Ordine
+        other: Stato Ordini
+      titolare:
+        one: Titolare
+        other: Titolari
+      utente:
+        one: Utente
+        other: Utenti
