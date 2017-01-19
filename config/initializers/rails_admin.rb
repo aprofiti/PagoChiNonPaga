@@ -118,31 +118,35 @@ RailsAdmin.config do |config|
   end
 
   # Sezione Ecommerce
-  config.model 'Carrello' do
+  config.model 'Ordine' do
     navigation_label 'Sezione Ecommerce'
-    navigation_icon 'fa fa-shopping-cart'
+    navigation_icon 'fa fa-euro'
     weight +2
 
     exclude_fields :created_at, :updated_at
   end
 
-  config.model 'Ordine' do
-    parent Carrello
-    navigation_icon 'fa fa-euro'
+  # Sezione Ecommerce
+  config.model 'Carrello' do
+    parent Ordine
+    navigation_icon 'fa fa-shopping-cart'
+    weight +1
 
     exclude_fields :created_at, :updated_at
   end
 
   config.model 'CarrelloProdotto' do
-    parent Carrello
+    parent Ordine
     navigation_icon 'fa fa-cart-arrow-down'
+    weight +2
 
     exclude_fields :created_at, :updated_at
   end
 
   config.model 'StatoOrdine' do
-    parent Carrello
+    parent Ordine
     navigation_icon 'fa fa-truck'
+    weight +3
 
     exclude_fields :created_at, :updated_at
   end
