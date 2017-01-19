@@ -66,5 +66,10 @@ RSpec.describe ClientiController, type: :controller do
     expect(response).to_not render_template :show
   end
 
-  
+  it "should destroy cliente" do
+    cliente = createCliente("mario","rossi")
+    sign_in cliente
+    post :destroy, id: cliente.id
+    expect(Cliente.count).to eq(0)
+  end
 end

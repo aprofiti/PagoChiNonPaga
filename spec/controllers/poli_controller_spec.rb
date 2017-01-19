@@ -20,4 +20,15 @@ require 'rails_helper'
 
 RSpec.describe PoliController, type: :controller do
 
+  it "should get polo" do
+    polo = Polo.create(nome: "Roma")
+    get :show , nome: polo.nome
+    expect(response).to render_template :show
+  end
+
+  it "should get poli index" do
+    get :index
+    expect(response).to render_template :index
+
+  end
 end
