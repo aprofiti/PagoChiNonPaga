@@ -366,7 +366,7 @@ PLATFORMS
 DEPENDENCIES
   active_record-acts_as
   activerecord (>= 4.2.6)
-  acts_as_shopping_cart (>= 0.2.1)
+  acts_as_shopping_cart (~> 0.4.1)
   bootstrap-typeahead-rails
   byebug
   cancancan

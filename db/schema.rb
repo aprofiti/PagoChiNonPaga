@@ -45,9 +45,10 @@ ActiveRecord::Schema.define(version: 20170104173658) do
     t.integer  "quantity"
     t.integer  "item_id"
     t.string   "item_type"
-    t.float    "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "price_cents",    default: 0,     null: false
+    t.string   "price_currency", default: "USD", null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "categorie", force: :cascade do |t|

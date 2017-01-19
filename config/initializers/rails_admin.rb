@@ -89,6 +89,15 @@ RailsAdmin.config do |config|
     parent Impresa
     navigation_icon 'fa fa-shopping-bag'
 
+    edit do
+      field :nome
+      field :prezzo
+      field :qta
+      field :descrizione, :froala
+      # Mostro i campi restanti
+      include_all_fields
+    end
+
     exclude_fields :created_at, :updated_at
   end
 

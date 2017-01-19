@@ -56,6 +56,6 @@
               titolare_path(id: current_utente.actable_id), :class => 'btn btn-default',method: :get%>
 <% end %>
 
-<% if !@carrello.empty? %>
+<% if @carrello.has_items? %>
   <%= link_to "Procedi all' acquisto",  prepara_ordini_ordine_path(id: current_utente.actable_id) ,method: :post%>
 <% end %>
