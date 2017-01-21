@@ -1,0 +1,21 @@
+<%- model_class = Ordine -%>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:impresa_id) %></th>
+      <th><%= model_class.human_attribute_name(:stato_ordine) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cliente.ordini.each do |ordine| %>
+    <tr>
+      <td><%= ordine.created_at %></td>
+      <td><%= ordine.id %></td>
+      <td><%= Impresa.find(ordine.impresa_id).name %></td>
+      <td><%= ordine.stato_ordine.name %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

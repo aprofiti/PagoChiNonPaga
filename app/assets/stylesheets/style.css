@@ -41,3 +41,11 @@ navbar-nav{
   margin-bottom: 20px;
   background-color: #f0f0f0;
 }
+
+/* Visualizzazione in linea degli elementi dt nelle pagine dei profili */
+.container dt, .container dd{
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: auto;
+  width: auto;
+}
