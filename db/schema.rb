@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104173658) do
+ActiveRecord::Schema.define(version: 20170121170904) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -118,19 +118,23 @@ ActiveRecord::Schema.define(version: 20170104173658) do
     t.integer  "cliente_id"
     t.integer  "impresa_id"
     t.integer  "stato_ordine_id"
+    t.float    "totale"
   end
 
   add_index "ordini", ["cliente_id"], name: "index_ordini_on_cliente_id"
   add_index "ordini", ["impresa_id"], name: "index_ordini_on_impresa_id"
   add_index "ordini", ["stato_ordine_id"], name: "index_ordini_on_stato_ordine_id"
+  add_index "ordini", ["totale"], name: "index_ordini_on_totale"
 
   create_table "ordini_prodotti", id: false, force: :cascade do |t|
     t.integer "ordine_id"
     t.integer "prodotto_id"
     t.integer "qta"
+    t.float   "prezzo"
   end
 
   add_index "ordini_prodotti", ["ordine_id"], name: "index_ordini_prodotti_on_ordine_id"
+  add_index "ordini_prodotti", ["prezzo"], name: "index_ordini_prodotti_on_prezzo"
   add_index "ordini_prodotti", ["prodotto_id"], name: "index_ordini_prodotti_on_prodotto_id"
 
   create_table "poli", force: :cascade do |t|
