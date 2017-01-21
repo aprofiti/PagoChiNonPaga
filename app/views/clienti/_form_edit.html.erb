@@ -1,0 +1,61 @@
+<%- model_class = Cliente -%>
+<%= simple_form_for @cliente, :html => { :class => 'form-horizontal' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  } do |f| %>
+
+<div class="row">
+  <div class="col-md-6">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4>Dati di accesso</h4>
+    </div>
+    <div class="panel-body">
+      <%= f.input :email %>
+      <%= error_span(@cliente[:email]) %>
+      <%= f.input :password %>
+      <%= error_span(@cliente[:password]) %>
+      <%= f.input :password_confirmation %>
+      <%= error_span(@cliente[:password_confirmation]) %>
+    </div>
+    <div class="panel-footer text-right">
+      <%= f.submit "Modifica Dati Accesso", :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    cliente_path(id: current_utente.actable_id), :class => 'btn btn-default',method: :get %>
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4>Dati Anagrafica</h4>
+    </div>
+    <div class="panel-body">
+      <div class="text-center">
+      <%= f.input :nome, :disabled => true %>
+      <%= error_span(@cliente[:nome]) %>
+      <%= f.input :cognome, :disabled => true %>
+      <%= error_span(@cliente[:cognome]) %>
+      <%= f.input :data_nascita, as: :string, input_html: {type: :date}, :disabled => true %>
+      <%= error_span(@cliente[:data_nascita]) %>
+      <%= f.input :cf, :disabled => true %>
+      <%= error_span(@cliente[:cf]) %>
+      <%= f.input :telefono %>
+      <%= error_span(@cliente[:telefono]) %>
+      <%= f.input :indirizzo %> <!-- visualizzare?? tipo relazione -->
+      <%= error_span(@cliente[:indirizzo]) %>
+    </div>
+    <div class="panel-footer text-right">
+      <%= f.submit "Modifica Anagrafica", :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    cliente_path(id: current_utente.actable_id), :class => 'btn btn-default',method: :get %>
+    </div>
+</div>
+</div>
+</div>
+
+<% end %>

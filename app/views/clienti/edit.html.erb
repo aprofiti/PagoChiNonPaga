@@ -1,33 +1,9 @@
 <%- model_class = Cliente -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+<div class="container">
+  <div class="page-header">
+    <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+  </div>
+  
+  <%= render "clienti/form_edit" %>
+
 </div>
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
-  <dd><%= @cliente.nome %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:cognome) %>:</strong></dt>
-  <dd><%= @cliente.cognome %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:data_nascita) %>:</strong></dt>
-  <dd><%= @cliente.data_nascita %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:cf) %>:</strong></dt>
-  <dd><%= @cliente.cf %></dd>
-</dl>
-
-<%= simple_form_for @cliente, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :email %>
-  <%= error_span(@cliente[:email]) %>
-  <%= f.input :telefono %>
-  <%= error_span(@cliente[:telefono]) %>
-  <%= f.input :password %>
-  <%= error_span(@cliente[:password]) %>
-  <%= f.input :password_confirmation %>
-  <%= error_span(@cliente[:password_confirmation]) %>
-
-
-  <%= f.input :indirizzo %> <!-- visualizzare?? tipo relazione -->
-  <%= error_span(@cliente[:indirizzo]) %>
-
-  <%= f.button :submit, :class => 'btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                cliente_path(id: current_utente.actable_id), :class => 'btn btn-default',method: :get %>
-<% end %>
