@@ -1,7 +1,9 @@
 class OrdiniController < ApplicationController
   before_action :set_ordine, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente!
-  before_filter :is_mio_ordine?, only: [:show,:edit,:destroy]
+  before_filter :is_mio_ordine?, only: [:show,:destroy]
+  before_filter :is_titolare?, only: :edit
+  before_filter :is_in_attesa?, only: :destroy
   # GET /ordini
   # GET /ordini.json
   def index
@@ -119,10 +121,24 @@ class OrdiniController < ApplicationController
     else redirect_back
     end
   end
+
+  def is_titolare?
+     if (current_utente.isTitolare? && current_utente.isMyImpresa?(Impresa.find(@ordine.impresa_id)))
+     else redirect_back
+     end
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_ordine
       @ordine = Ordine.find(params[:id])
     end
+
+  def is_in_attesa?
+    if (@ordine.getStato == 'In attesa')
+    else
+      flash[:notice] = "Non puoi annullare questo ordine"
+      redirect_back
+    end
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordine_params

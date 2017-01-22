@@ -39,8 +39,6 @@ RSpec.describe CarrelloController, type: :controller do
     cliente1= createCliente("mario","rossi")
     carrello1 = Carrello.create(cliente_id: cliente1.id)
     cliente2= createCliente("mario","bianchi")
-    cliente1= createCliente("mario","rossi")
-    carrello1 = Carrello.create(cliente_id: cliente1.id)
     carrello2 = Carrello.create(cliente_id: cliente2.id)
     sign_in cliente1
     get :show, id: cliente2.carrello

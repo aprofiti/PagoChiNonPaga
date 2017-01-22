@@ -4,6 +4,7 @@ class ImpreseController < ApplicationController
   before_filter :controllo_titolare_impresa, only: [:edit,:destroy]
   before_filter :is_titolare, only: :new
   before_filter :id_nome_match, only: [:show,:edit]
+  before_filter :is_abilitata, only: [:edit,:destroy,:show]
   # GET /imprese
   # GET /imprese.json
   def index
@@ -29,11 +30,13 @@ class ImpreseController < ApplicationController
   end
   def autocomplete
     imprese = Impresa.all.map do |impresa|
-      {
-        nome: impresa.nome,
-        id: impresa.id.to_s,
-        citta: impresa.citta.nome
-      }
+      if impresa.verificato && !(impresa.congelato)  #in autocomplete ci sonno imprese verificate e NON congelate
+        {
+          nome: impresa.nome,
+          id: impresa.id.to_s,
+          citta: impresa.citta.nome
+        }
+      end
     end
 
     render json: imprese
@@ -79,7 +82,11 @@ class ImpreseController < ApplicationController
   end
 
   private
-
+    def is_abilitata #impresa deve essere verificata e NON congelata
+      if !(@impresa.verificato && !(@impresa.congelato))
+        redirect_back
+      end
+    end
     def is_titolare
        if !(current_utente.isTitolare?)
          redirect_back

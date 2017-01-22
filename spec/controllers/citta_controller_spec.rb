@@ -19,5 +19,21 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe CittaController, type: :controller do
+  it "should get citta index" do
+    get :index
+    expect(response).to render_template :index
+  end
+
+  it "should get citta show" do
+    citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    get :show, nome: citta.nome, id: citta.id
+    expect(response).to render_template :show
+  end
+
+  it "should check url and redirect citta show" do
+    citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    get :show, nome: "Ro", id: citta.id #nome sbagliato
+    expect(response).to redirect_to citta_path(nome: citta.nome, id: citta.id)
+  end
 
 end

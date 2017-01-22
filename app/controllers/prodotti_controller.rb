@@ -3,10 +3,16 @@ class ProdottiController < ApplicationController
   before_action :authenticate_utente!, only: [:new, :edit]
   before_filter :id_index_match, only: :index
   before_filter :prodotto_impresa_match , only: [:show, :edit]
+  before_filter :impresa_abilitata , only: [:show, :edit,:create,:destroy,:update]
   # GET /prodotti
   # GET /prodotti.json
   def index       #rotta rimossa
-    @prodotti = Prodotto.all
+    impresa= Impresa.find(params[:id].to_i)     #prima di index controllo che l'id inserito corrisponda a una impresa verificata e NON congelata
+    if !(impresa.verificato && !(impresa.congelato))
+      redirect_back
+    else
+      @prodotti = Prodotto.all
+    end
   end
 
   # GET /prodotti/1
@@ -16,8 +22,8 @@ class ProdottiController < ApplicationController
 
   # GET /prodotti/new
   def new
-   imp_list = Impresa.where(titolare_id: current_utente.actable_id).select("id")
-   if !(current_utente.actable_type == "Titolare" && (imp_list.ids.include? params[:id].to_i ))
+   imp_list = Impresa.where(titolare_id: current_utente.actable_id).select("id") #imp_list contiene lista imprese del titolare loggato
+   if !(current_utente.actable_type == "Titolare" && (imp_list.ids.include? params[:id].to_i ))  #se l'impresa attuale non è sua ho redirect
      redirect_back
    end
     @prodotto = Prodotto.new
@@ -86,7 +92,11 @@ class ProdottiController < ApplicationController
       end
     end
 
-
+    def impresa_abilitata #impresa deve essere verificata e NON congelata
+      if !(@prodotto.impresa.verificato && !(@prodotto.impresa.congelato))
+        redirect_back
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_prodotto
       @prodotto = Prodotto.find(params[:id_p])
