@@ -19,49 +19,46 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe TitolariController, type: :controller do
-
+  before :each do
+    @citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    @titolare = createTitolare("Mario","Rossi",@citta)
+  end
   #titolare non loggato vuole vedere profilo -> NO
   it "should redirect login page" do
-    titolare = createTitolare("mario","rossi")
-    get :show, id: titolare.id
+    get :show, id: @titolare.id
     expect(response).to_not render_template :show
   end
 
   #titolare loggato vuole vedere profilo -> SI
   it "should redirect profile" do
-    titolare = createTitolare("mario","rossi")
-    sign_in titolare
-    get :show, id: titolare.id
+    sign_in @titolare
+    get :show, id: @titolare.id
     expect(response).to render_template :show
   end
 
   #titolare loggato vuole fare edit -> SI
   it "should edit titolare" do
-    titolare = createTitolare("mario","rossi")
-    sign_in titolare
-    get :edit, id: titolare.id
+    sign_in @titolare
+    get :edit, id: @titolare.id
     expect(response).to render_template :edit
   end
   #titolare non loggato vuole fare edit -> NO
   it "should not edit titolare" do
-    titolare = createTitolare("mario","rossi")
-    get :edit, id: titolare.id
+    get :edit, id: @titolare.id
     expect(response).to_not render_template :edit
   end
   #titolare loggato vuole fare edit di un altro titolare -> NO
   it "should not edit another titolare from this titolare" do
-    titolare1 = createTitolare("mario","rossi")
-    titolare2 = createTitolare("mario","bianchi")
-    sign_in titolare1
+    titolare2 = createTitolare("mario","bianchi",@citta)
+    sign_in @titolare
     get :edit, id: titolare2.id
     expect(response).to_not render_template :edit
   end
 
   #titolare loggato vuole fare show di un altro titolare -> NO
   it "should not edit another titolare from this titolare" do
-    titolare1 = createTitolare("mario","rossi")
-    titolare2 = createTitolare("mario","bianchi")
-    sign_in titolare1
+    titolare2 = createTitolare("mario","bianchi",@citta)
+    sign_in @titolare
     get :show, id: titolare2.id
     expect(response).to_not render_template :show
   end

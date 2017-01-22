@@ -20,56 +20,53 @@ require 'rails_helper'
 
 RSpec.describe ClientiController, type: :controller do
 
+  before :each do
+    @citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    @cliente = createCliente("Mario","Rossi",@citta)
+  end
   #titolare non loggato vuole vedere profilo -> NO
   it "should redirect login page" do
-    cliente = createCliente("mario","rossi")
-    get :show, id: cliente.id
+    get :show, id: @cliente.id
     expect(response).to_not render_template :show
   end
 
   #titolare loggato vuole vedere profilo -> SI
   it "should redirect profile" do
-    cliente = createCliente("mario","rossi")
-    sign_in cliente
-    get :show, id: cliente.id
+    sign_in @cliente
+    get :show, id: @cliente.id
     expect(response).to render_template :show
   end
 
   #titolare loggato vuole fare edit -> SI
   it "should edit cliente" do
-    cliente = createCliente("mario","rossi")
-    sign_in cliente
-    get :edit, id: cliente.id
+    sign_in @cliente
+    get :edit, id: @cliente.id
     expect(response).to render_template :edit
   end
   #titolare non loggato vuole fare edit -> NO
   it "should not edit cliente" do
-    cliente = createCliente("mario","rossi")
-    get :edit, id: cliente.id
+    get :edit, id: @cliente.id
     expect(response).to_not render_template :edit
   end
   #titolare loggato vuole fare edit di un altro titolare -> NO
   it "should not edit another cliente from this cliente" do
-    cliente1 = createCliente("mario","rossi")
-    cliente2 = createCliente("mario","bianchi")
-    sign_in cliente1
+    cliente2 = createCliente("mario","bianchi",@citta)
+    sign_in @cliente
     get :edit, id: cliente2.id
     expect(response).to_not render_template :edit
   end
 
   #titolare loggato vuole fare show di un altro titolare -> NO
   it "should not show another cliente from this cliente" do
-    cliente1 = createCliente("mario","rossi")
-    cliente2 = createCliente("mario","bianchi")
-    sign_in cliente1
+    cliente2 = createCliente("mario","bianchi",@citta)
+    sign_in @cliente
     get :show, id: cliente2.id
     expect(response).to_not render_template :show
   end
 
   it "should destroy cliente" do
-    cliente = createCliente("mario","rossi")
-    sign_in cliente
-    post :destroy, id: cliente.id
+    sign_in @cliente
+    post :destroy, id: @cliente.id
     expect(Cliente.count).to eq(0)
   end
 end

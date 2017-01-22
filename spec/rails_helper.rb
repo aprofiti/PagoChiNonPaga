@@ -59,18 +59,20 @@ RSpec.configure do |config|
 end
 
 
-def createTitolare(nome,cognome)
-  titolare= Titolare.create(nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo")
+def createTitolare(nome,cognome,citta)
+  titolare= Titolare.create(nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "via catania 2",citta_id: citta.id)
   return titolare
 end
 
 
-def createCliente(nome,cognome)
-  cliente= Cliente.create(nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo")
+def createCliente(nome,cognome,citta)
+  cliente= Cliente.create(nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "via catania 2",citta_id: citta.id)
   return cliente
 end
 
-def createImpresa(nome,email,citta,titolare,congelata)
-  return Impresa.create(nome: "imp",telefono: "1234",email: "ema@ail.com",sitoweb: "http://www.google.com",descrizione: "impresa",
-   verificato: true,congelato: congelata ,citta_id: citta.id,titolare_id: titolare.id, indirizzo: "via catania 2")
+def createImpresa(nome,email,citta,titolare,congelata,verificata)
+  impresa= Impresa.create(nome: nome,telefono: "1234",email: email,descrizione: "impresa",
+   verificato: verificata,congelato: congelata ,citta_id: citta.id,titolare_id: titolare.id, indirizzo: "via catania 2").save(validate: false)
+  Impresa.first.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
+return Impresa.first
 end

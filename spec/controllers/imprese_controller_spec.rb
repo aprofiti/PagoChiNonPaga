@@ -25,64 +25,70 @@ RSpec.describe ImpreseController, type: :controller do
     expect(response).to redirect_to new_utente_session_path
   end
 
-  it "should not let a cliente to create an impresa" do
-    cliente = createCliente("Mario","Rossi")
+  it "should not let a cliente to create an impresa" , :skip_before do
+    citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    cliente = createCliente("Bianco","Bianco",citta)
     sign_in cliente
     get :new
     expect(response).to redirect_to root_path
   end
 
   it "should let create an impresa" do
-    titolare = createTitolare("Mario","Rossi")
+    citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    titolare = createTitolare("Mario","Rossi",citta)
     sign_in titolare
     get :new
     expect(response).to render_template :new
   end
 
   it "should let edit an impresa" do
-    titolare = createTitolare("Mario","Rossi")
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
-    impresa = Impresa.create(nome: "imp",telefono: "1234",email: "em@ail.com",sitoweb: "http://www.google.com",descrizione: "impresa",
-    verificato: true,congelato: false,citta_id: citta.id,titolare_id: titolare.id, indirizzo: "via catania 2")
+    titolare = createTitolare("Mario","Rossi",citta)
+    verificata= true
+    congelata=false
+    impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
     sign_in titolare
     get :edit, id: impresa.id ,nome: impresa.nome
     expect(response).to render_template :edit
   end
-
   it "should let destroy an impresa" do
-    titolare = createTitolare("Mario","Rossi")
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
-    impresa = Impresa.create(nome: "imp",telefono: "1234",email: "em@ail.com",sitoweb: "http://www.google.com",descrizione: "impresa",
-    verificato: true,congelato: false,citta_id: citta.id,titolare_id: titolare.id, indirizzo: "via catania 2")
+    titolare = createTitolare("Mario","Rossi",citta)
+    verificata= true
+    congelata=false
+    impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
     sign_in titolare
     put :destroy , id: impresa.id ,nome: impresa.nome
     expect(response).to redirect_to imprese_path
   end
 
   it "should not let a titolare edit anoter titolare impresa" do
-    titolare1 = createTitolare("Mario","Rossi")
-    titolare2 = createTitolare("Mario","Bianchi")
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
-    impresa = Impresa.create(nome: "imp",telefono: "1234",email: "em@ail.com",sitoweb: "http://www.google.com",descrizione: "impresa",
-    verificato: true,congelato: false,citta_id: citta.id,titolare_id: titolare1.id, indirizzo: "via catania 2")
+    titolare = createTitolare("Mario","Rossi",citta)
+    titolare2 = createTitolare("Mario","Bianchi",citta)
+    verificata= true
+    congelata=false
+    impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
     sign_in titolare2
     get :edit , id: impresa.id ,nome: impresa.nome
   end
 
   it "should check url if modified" do
-    titolare = createTitolare("Mario","Rossi")
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
-    impresa = Impresa.create(nome: "imp",telefono: "1234",email: "em@ail.com",sitoweb: "http://www.google.com",descrizione: "impresa",
-    verificato: true,congelato: false,citta_id: citta.id,titolare_id: titolare.id, indirizzo: "via catania 2")
-    get :show, nome: "impresa", id: impresa.id
+    titolare = createTitolare("Mario","Rossi",citta)
+    verificata= true
+    congelata=false
+    impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
+    get :show, nome: "errato", id: impresa.id
     expect(response).to redirect_to impresa_path(nome: impresa.nome, id: impresa.id)
   end
 
   it "should not edit impresa" do
-    titolare = createTitolare("Mario","Rossi")
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
-    impresa = Impresa.create(nome: "imp",telefono: "1234",email: "em@ail.com",sitoweb: "http://www.google.com",descrizione: "impresa",
-    verificato: true,congelato: true,citta_id: citta.id,titolare_id: titolare.id, indirizzo: "via catania 2")
+    titolare = createTitolare("Mario","Rossi",citta)
+    verificata= true
+    congelata=true
+    impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
     sign_in titolare
     get :edit , nome: impresa.nome, id: impresa.id
     expect(response).to_not render_template :edit
@@ -90,21 +96,22 @@ RSpec.describe ImpreseController, type: :controller do
 
 
   it "should not edit impresa" do
-    titolare = createTitolare("Mario","Rossi")
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
-    impresa = Impresa.create(nome: "imp",telefono: "1234",email: "em@ail.com",sitoweb: "http://www.google.com",descrizione: "impresa",
-    verificato: false,congelato: true,citta_id: citta.id,titolare_id: titolare.id, indirizzo: "via catania 2")
+    titolare = createTitolare("Mario","Rossi",citta)
+    verificata= false
+    congelata=true
+    impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
     sign_in titolare
     get :edit , nome: impresa.nome, id: impresa.id
     expect(response).to_not render_template :edit
   end
 
   it "should not edit impresa" do
-    titolare = createTitolare("Mario","Rossi")
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
-    impresa = Impresa.create(nome: "imp",telefono: "1234",email: "em@ail.com",sitoweb: "http://www.google.com",descrizione: "impresa",
-    verificato: false,congelato: false,citta_id: citta.id,titolare_id: titolare.id, indirizzo: "via catania 2")
-    sign_in titolare
+    titolare = createTitolare("Mario","Rossi",citta)
+    verificata= false
+    congelata=false
+    impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
     get :edit , nome: impresa.nome, id: impresa.id
     expect(response).to_not render_template :edit
   end

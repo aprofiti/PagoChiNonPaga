@@ -20,10 +20,10 @@ require 'rails_helper'
 
 RSpec.describe OrdiniController, type: :controller do
   before :each do
-    @cliente= createCliente("Mario","Rossi")
-    @titolare = createTitolare("Romeo","Bianchi")
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
-    @impresa = createImpresa("impresa","imp@resa.com",citta,@titolare,false)
+    @cliente= createCliente("Mario","Rossi",citta)
+    @titolare = createTitolare("Romeo","Bianchi",citta)
+    @impresa = createImpresa("impresa","imp@resa.com",citta,@titolare,false,true)
     @prodotto = Prodotto.create(nome: "prodotto",qta: 10, prezzo: 10, impresa_id: @impresa.id,descrizione: "descrizioneee")
     @stato = StatoOrdine.create(stato: "In attesa")
   end

@@ -19,28 +19,26 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe CarrelloController, type: :controller do
-
+  before :each do
+    @citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    @cliente = createCliente("Mario","Rossi",@citta)
+    @carrello = Carrello.create(cliente_id: @cliente.id)
+  end
   it "should not get carrello" do
-    cliente= createCliente("mario","rossi")
-    carrello = Carrello.create(cliente_id: cliente.id)
-    get :show, id: cliente.carrello
+    get :show, id: @cliente.carrello
     expect(response).to_not render_template :show
    end
 
   it "should get carrello" do
-    cliente= createCliente("mario","rossi")
-    carrello = Carrello.create(cliente_id: cliente.id)
-    sign_in cliente
-    get :show,  id: cliente.carrello
+    sign_in @cliente
+    get :show,  id: @cliente.carrello
     expect(response).to render_template :show
   end
 
   it "should not get other cliente carrello" do
-    cliente1= createCliente("mario","rossi")
-    carrello1 = Carrello.create(cliente_id: cliente1.id)
-    cliente2= createCliente("mario","bianchi")
+    cliente2= createCliente("mario","bianchi",@citta)
     carrello2 = Carrello.create(cliente_id: cliente2.id)
-    sign_in cliente1
+    sign_in @cliente
     get :show, id: cliente2.carrello
     expect(response).to_not render_template :show
    end

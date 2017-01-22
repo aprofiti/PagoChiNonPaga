@@ -20,13 +20,14 @@ require 'rails_helper'
 
 RSpec.describe ProdottiController, type: :controller do
   before :each do
-    @titolare = createTitolare("Mario","Rossi")
     @citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    @titolare = createTitolare("Mario","Rossi",@citta)
   end
 
     it "should get new prodotto" do
       congelata=false
-      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata)
+      verificata=true
+      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata,verificata)
       sign_in @titolare
       get :new, impresa_nome: impresa.nome, id: impresa.id
       expect(response).to render_template :new
@@ -34,7 +35,8 @@ RSpec.describe ProdottiController, type: :controller do
 
     it "should get show prodotto" do
       congelata=false
-      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata)
+      verificata=true
+      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata,verificata)
       sign_in @titolare
       prodotto = Prodotto.create(nome: "prodotto",qta: 10, prezzo: 10, impresa_id: impresa.id,descrizione: "descrizioneee")
       get :show, impresa_nome: impresa.nome, nome: prodotto.nome, id_p: prodotto.id
@@ -43,13 +45,15 @@ RSpec.describe ProdottiController, type: :controller do
 
     it "should get prodotto index" do
       congelata=false
-      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata)
+      verificata=true
+      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata,verificata)
       get :index, impresa_nome: impresa.nome, id: impresa.id
     end
 
     it "should not edit prodotto" do
       congelata=false
-      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata)
+      verificata=true
+      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata,verificata)
       prodotto = Prodotto.create(nome: "prodotto",qta: 10, prezzo: 10, impresa_id: impresa.id,descrizione: "descrizioneee")
       get :edit, impresa_nome: impresa.nome, nome: prodotto.nome, id_p: prodotto.id
       expect(response).to_not render_template :edit
@@ -57,7 +61,8 @@ RSpec.describe ProdottiController, type: :controller do
 
     it "should not get prodotti impresa congelata" do
       congelata=true
-      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata)
+      verificata=true
+      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata,verificata)
       prodotto = Prodotto.create(nome: "prodotto",qta: 10, prezzo: 10, impresa_id: impresa.id,descrizione: "descrizioneee")
       get :index , impresa_nome: impresa.nome, id: impresa.id
       expect(response).to_not render_template :index
@@ -65,7 +70,8 @@ RSpec.describe ProdottiController, type: :controller do
 
     it "should not get prodotto impresa congelata" do
       congelata=true
-      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata)
+      verificata=true
+      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata,verificata)
       prodotto = Prodotto.create(nome: "prodotto",qta: 10, prezzo: 10, impresa_id: impresa.id,descrizione: "descrizioneee")
       get :show , impresa_nome: impresa.nome, nome: prodotto.nome,id_p: prodotto.id
       expect(response).to_not render_template :show
