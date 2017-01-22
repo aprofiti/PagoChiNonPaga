@@ -3,6 +3,7 @@ class OrdiniController < ApplicationController
   before_action :authenticate_utente!
   before_filter :is_mio_ordine?, only: [:show,:destroy]
   before_filter :is_titolare?, only: :edit
+  before_filter :is_in_attesa?, only: :destroy
   # GET /ordini
   # GET /ordini.json
   def index
@@ -130,6 +131,14 @@ class OrdiniController < ApplicationController
     def set_ordine
       @ordine = Ordine.find(params[:id])
     end
+
+  def is_in_attesa?
+    if (@ordine.getStato == 'In attesa')
+    else
+      flash[:notice] = "Non puoi annullare questo ordine"
+      redirect_back
+    end
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordine_params
