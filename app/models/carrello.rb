@@ -4,6 +4,8 @@ class Carrello < ActiveRecord::Base
   # Associo ogni carrello ad un cliente
   belongs_to :cliente
 
+  validates :cliente_id, presence: true
+
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
     cliente = self.cliente

@@ -6,8 +6,7 @@ class Cliente < ActiveRecord::Base
   has_many :ordini
   belongs_to :citta
   # Validations necessarie per la registrazione
-  validates :nome, :cognome, :data_nascita, :cf, :telefono, :email, :password, :password_confirmation, presence: true
-  #TODO: controllare presence indirizzo
+  validates :nome, :cognome, :data_nascita, :cf, :telefono, :email, :password, :password_confirmation, :indirizzo, presence: true
   validate :unique_entry #custom validation
   validates_numericality_of :telefono, on: :create
 

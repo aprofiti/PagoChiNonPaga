@@ -3,8 +3,7 @@ class Titolare < ActiveRecord::Base
   acts_as :utente
   belongs_to :citta
   # Validations necessarie per la registrazione
-  validates :nome, :cognome, :email, :password, :password_confirmation, :telefono, :data_nascita, :cf, presence: true
-  #TODO: controllare presence indirizzo
+  validates :nome, :cognome, :email, :password, :citta_id, :password_confirmation, :telefono, :data_nascita, :cf, :indirizzo, presence: true
   validates_numericality_of :telefono, on: :create
   validate :unique_entry #custom validation
 

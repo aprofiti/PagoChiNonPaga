@@ -4,6 +4,8 @@ class Prodotto < ActiveRecord::Base
 
   # Validations necessarie per la registrazione
   validates :nome, :prezzo, :qta, :descrizione, :impresa_id, presence: true
+  validates_numericality_of :qta, on: :create
+  validates_numericality_of :prezzo, on: :create, only_float: true
   #TODO: servono controlli sui duplicati?
 
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
