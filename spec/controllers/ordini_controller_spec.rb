@@ -19,5 +19,61 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe OrdiniController, type: :controller do
+  before :each do
+    @cliente= createCliente("Mario","Rossi")
+    @titolare = createTitolare("Romeo","Bianchi")
+    citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    @impresa = createImpresa("impresa","imp@resa.com",citta,@titolare,false)
+    @prodotto = Prodotto.create(nome: "prodotto",qta: 10, prezzo: 10, impresa_id: @impresa.id,descrizione: "descrizioneee")
+    @stato = StatoOrdine.create(stato: "In attesa")
+  end
+
+  it "should get ordine" do
+    prodotti = [@prodotto]
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti)
+    sign_in @cliente
+    get :show , id: ordine.id
+    expect(response).to render_template :show
+  end
+
+  it "should not get ordine" do
+    prodotti = [@prodotto]
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti)
+    get :show , id: ordine.id
+    expect(response).to_not render_template :show
+  end
+
+  it "should not get edit ordine to cliente" do
+    prodotti = [@prodotto]
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti)
+    sign_in @cliente
+    get :edit , id: ordine.id
+    expect(response).to_not render_template :edit
+  end
+=begin
+  it "should get edit ordine to titolare" do
+    prodotti = [@prodotto]
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti)
+    sign_in @titolare
+    get :edit , id: ordine.id
+    expect(response).to render_template :edit
+  end
+=end
+  it "should destroy order" do
+    prodotti = [@prodotto]
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti)
+    sign_in @cliente
+    put :destroy, id: ordine.id
+    expect(Ordine.count).to eq(0)
+  end
+
+  it "should destroy order" do
+    prodotti = [@prodotto]
+    stato2 = StatoOrdine.create(stato: "Pagato")
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: stato2.id,prodotti: prodotti)
+    sign_in @cliente
+    put :destroy, id: ordine.id
+    expect(Ordine.count).to eq(1)
+  end
 
 end
