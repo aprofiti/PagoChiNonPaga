@@ -4,9 +4,15 @@ class Prodotto < ActiveRecord::Base
 
   # Validations necessarie per la registrazione
   validates :nome, :prezzo, :qta, :descrizione, :impresa_id, presence: true
-  validates_numericality_of :qta, on: :create
-  validates_numericality_of :prezzo, on: :create, only_float: true
-  #TODO: servono controlli sui duplicati?
+  validates_numericality_of :qta, :greater_than_or_equal_to => 0, on: :create
+  validates_numericality_of :prezzo, :greater_than_or_equal_to => 0, on: :create, only_float: true
+  validate :unique_entry #custom validation
+
+  # Custom validation per controllare unicita tra piu campi senza case_sensitive
+  def unique_entry
+    matched_entry = Prodotto.where(['LOWER(nome) = LOWER(?) AND impresa_id=?', self.nome, self.impresa_id]).first #il '?' e' un parametro per SQL passato da self.campo
+    errors.add(:base, 'Prodotto già presente.') if matched_entry && (matched_entry.id != self.id) #se non sono io stesso allora c'e' un errore
+  end
 
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name

@@ -7,6 +7,7 @@ class Ordine < ActiveRecord::Base
   # Validations necessarie per la registrazione
   validates :cliente_id, :impresa_id, :stato_ordine_id, presence: true
   validate :has_prodotti #custom validation
+  validates_numericality_of :totale, :greater_than_or_equal_to => 0, on: :create
 
   # Una relazione habtm ha bisogno di una custom validation
   def has_prodotti
@@ -23,5 +24,5 @@ class Ordine < ActiveRecord::Base
   def name
     "#" + self.id.to_s + "Cliente: " + self.cliente_id.to_s
   end
-  
+
 end
