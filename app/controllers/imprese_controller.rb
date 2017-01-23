@@ -36,6 +36,8 @@ class ImpreseController < ApplicationController
           id: impresa.id.to_s,
           citta: impresa.citta.nome
         }
+      else  #Se impresa è congelata o non verificata mando un JSON vuoto
+        {}
       end
     end
 
@@ -51,6 +53,7 @@ class ImpreseController < ApplicationController
         format.html { redirect_to impresa_path(nome: @impresa.nome,id: @impresa.id), notice: 'Impresa was successfully created.' }
         format.json { render :show, status: :created, location: @impresa }
       else
+        flash[:error] = "Errore. Ricontrollare tutti i valori inseriti!"
         format.html { render :new }
         format.json { render json: @impresa.errors, status: :unprocessable_entity }
       end
@@ -112,6 +115,6 @@ class ImpreseController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def impresa_params
-      params.require(:impresa).permit(:nome, :telefono, :fax, :giorni_orari, :email, :sitoweb, :facebook, :descrizione, :latitude, :longitude, :verificato, :congelato,:citta_id,:indirizzo)
+      params.require(:impresa).permit(:nome, :telefono, :fax, :giorni_orari, :email, :sitoweb, :facebook, :descrizione, :latitude, :longitude, :verificato, :congelato,:citta_id,:indirizzo,:sottocategoria_ids => [])
     end
 end
