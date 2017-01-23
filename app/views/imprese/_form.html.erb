@@ -26,6 +26,8 @@
   <%= f.input :congelato %>
   <%= error_span(@impresa[:congelato]) %>
   <%= f.input :citta_id ,collection: Citta.all%>
+  <%= f.association :sottocategorie %>
+  <%= error_span(@impresa[:sottocategorie]) %>
   <%= error_span(@impresa[:citta_id]) %>
   <%= hidden_field_tag(:id,@impresa.id) %>
   <%= f.button :submit, :class => 'btn-primary' %>
