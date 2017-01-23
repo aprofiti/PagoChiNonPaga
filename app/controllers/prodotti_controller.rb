@@ -3,7 +3,7 @@ class ProdottiController < ApplicationController
   before_action :authenticate_utente!, only: [:new, :edit]
   before_filter :id_index_match, only: :index
   before_filter :prodotto_impresa_match , only: [:show, :edit]
-  before_filter :impresa_abilitata , only: [:show, :edit,:create,:destroy,:update]
+  before_filter :impresa_abilitata , only: [:show, :edit,:destroy,:update]
   # GET /prodotti
   # GET /prodotti.json
   def index       #rotta rimossa
@@ -72,7 +72,7 @@ class ProdottiController < ApplicationController
   def destroy
     @prodotto.destroy
     respond_to do |format|
-      format.html { redirect_to prodotti_url, notice: 'Prodotto was successfully destroyed.' }
+      format.html { redirect_to impresa_prodotti_path(id: @prodotto.impresa_id ), notice: 'Prodotto was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
