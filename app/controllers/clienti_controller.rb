@@ -2,7 +2,7 @@ class ClientiController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente! , except: [:new,:create]
   before_filter :controllo_id_cliente, except: [:new, :create]
-
+  before_filter :controllo_ordini_cliente, only: :destroy
 
   # GET /clienti/1
   # GET /clienti/1.json
@@ -57,7 +57,7 @@ class ClientiController < ApplicationController
   def destroy
     @cliente.destroy
     respond_to do |format|
-      format.html { redirect_to clienti_url, notice: 'Cliente was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Cliente was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -72,6 +72,16 @@ class ClientiController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_cliente
       @cliente = Cliente.find(params[:id])
+    end
+
+    def controllo_ordini_cliente
+      ordini = @cliente.getOrdini
+      ordini.each do |ordine|
+        if  ['Spedito','Pagato'].include? ordine.getStato
+          flash[:notice] = "Ordini in sospeso. Impossibile eliminare il tuo profilo"
+          return redirect_back
+        end
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

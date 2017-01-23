@@ -19,4 +19,8 @@ class Cliente < ActiveRecord::Base
     #per l'email ci pensa devise
   end
 
+
+  def getOrdini
+    self.ordini
+  end
 end
