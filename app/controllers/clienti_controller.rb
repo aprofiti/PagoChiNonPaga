@@ -78,7 +78,7 @@ class ClientiController < ApplicationController
       ordini = @cliente.getOrdini
       ordini.each do |ordine|
         if  ['Spedito','Pagato'].include? ordine.getStato
-          flash[:notice] = "Ordini in sospeso. Impossibile eliminare il tuo profilo"
+          flash[:error] = "Ordini in sospeso. Impossibile eliminare il tuo profilo"
           return redirect_back
         end
       end
