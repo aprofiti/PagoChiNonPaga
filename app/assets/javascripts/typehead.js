@@ -20,13 +20,15 @@ $(function() {
       source: imprese_typeahead.ttAdapter(),
       // Modifica l'aspetto del finestra dei risultati
       templates: {
+        empty: [
+                '<div class="empty-message">',
+                'Nessuna impresa corrispondente',
+                '</div>'
+            ].join('\n'),
         suggestion: Handlebars.compile("<div> {{#if nome}} <strong>Impresa:</strong> {{nome}} {{/if}} {{#if citta}} <strong>Citta:</strong> {{citta}} {{/if}}  </div>")
       }
     }).on('typeahead:selected ', function (e, datum) {
-        //console.log(JSON.stringify(datum));
         document.getElementById('id_imp').value = datum.id;
-        //console.log(document.getElementById('id_imp').value);
-
     });
   };
   return initialize_imprese_typeahead();
