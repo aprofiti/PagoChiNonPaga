@@ -9,6 +9,9 @@ class Ordine < ActiveRecord::Base
   validate :has_prodotti #custom validation
   validates_numericality_of :totale, :greater_than_or_equal_to => 0, on: :create
 
+
+#validate sul totale disabilitato altrimenti non crea l'ordine. TODO metodo per il calcolo del totale
+
   # Una relazione habtm ha bisogno di una custom validation
   def has_prodotti
     errors.add(:base, 'Un ordine deve contenere almeno un prodotto.') if self.prodotti.blank?
@@ -19,6 +22,23 @@ class Ordine < ActiveRecord::Base
   def getStato
     stato_ordine.stato
   end
+
+  def occorrenzeProdotto(prodotto)
+    self.prodotti.where(id: prodotto).count
+  end
+
+  def setTotale
+    ids = self.prodotti.ids.uniq
+    totale = 0.0
+    ids.each do |id_prodotto|
+      prezzo = Prodotto.find(id_prodotto).prezzo
+      puts(prezzo.to_s + " Prezzo")
+      totale += occorrenzeProdotto(id_prodotto)*prezzo
+    end
+    new_totale= self.totale + totale
+    self.update_attribute('totale', new_totale)
+  end
+
 
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name

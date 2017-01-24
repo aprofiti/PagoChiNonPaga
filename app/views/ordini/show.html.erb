@@ -28,17 +28,18 @@
       </tr>
     </thead>
     <tbody>
-      <% @ordine.prodotti.each do |prodotto| %>
+      <% @ordine.prodotti.uniq.each do |prodotto| %>
       <tr>
         <td><%= prodotto.id %></td>
         <td><%= prodotto.nome %></td>
         <td><%= prodotto.impresa.nome %></td>
-        <td><%= prodotto.qta %></td>
+        <td><%= @ordine.occorrenzeProdotto(prodotto.id)%></td>
       </tr>
       <% end %>
     </tbody>
   </table>
-
+  <dt><strong><%= model_class.human_attribute_name(:totale) %>:</strong></dt>
+  <dd><%= @ordine.totale %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

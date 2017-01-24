@@ -32,19 +32,20 @@ class OrdiniController < ApplicationController
   end
 
   def prepara_ordini
-    successo= true
-    carrello= current_utente.getCarrello
-    imprese = carrello.impreseCarrello
-    impresa_prodotti= carrello.impresaElemento
+    ordine_riuscito= true
+    carrello= current_utente.getCarrello              #carrello utente attuale
+    imprese = carrello.impreseCarrello                #imprese implicate in carrello
+    impresa_prodotti= carrello.impresaElemento        #array di tuple (impresa, carrello_prodotti)
     imprese.each do |impresa|
       prodotti= setOrdine(impresa_prodotti,impresa)
       if prodotti == nil
-        successo= false
+        ordine_riuscito= false
       else
-      Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti)
+        @ordine= Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti,totale: 0.0)
+        @ordine.setTotale
     end
     end
-    if successo
+    if ordine_riuscito
       carrello.destroy
       redirect_to root_path
     else
@@ -93,20 +94,24 @@ class OrdiniController < ApplicationController
   end
 
   private
+=begin
+prende in ingresso il carrello e l'id di una impresa, cerca tutti i prodotti del carrello che appartengono a quella impresa
+e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'aggiunta di ogni oggetto
 
-#prende in ingresso il carrello e l'id di una impresa, cerca tutti i prodotti del carrello che appartengono a quella impresa
-#e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'aggiunta di ogni oggetto
-  def setOrdine(impresa_prodotti,impresa)
+{impresa_id,elemento_carrello}
+=end
+
+  def setOrdine(impresa_prodotto,impresa)                         #ingresso => tupla (impresa_id,carrello_prodotti). impresa_id
     prodotti= []
-    impresa_prodotti.each do |elemento|
+    impresa_prodotto.each do |elemento|
       if elemento.at(0) == impresa
         prodotto= Prodotto.find(elemento.at(1).item_id)
         qta= elemento.at(1).quantity.to_i
         if prodotto.checkDisponibilitaOrdine(qta)
-          for i in 1..qta
+          qta.times do
             prodotti.push(prodotto)
           end
-          prodotto.setQuantita(qta)    #COMMENTATO PER TEST NOSTRI. FUNZIONA E VA ABILITATO ALLA FINE. SCALA QUANTITÀ DA DB
+          prodotto.setQuantita(qta)    # SCALA QUANTITÀ DA DB. È un metodo del model di prodotto
         else
           return nil
         end
