@@ -17,7 +17,7 @@ class Admin < ActiveRecord::Base
   end
 
   def superadmin?
-    false
+    true
   end
 
   # Necessario per mostrare il nome dell'Entita in RailsAdmin

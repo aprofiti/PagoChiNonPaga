@@ -9,6 +9,9 @@ class AdminAbility
     can :access, :rails_admin   # grant access to rails_admin
     can :dashboard              # grant access to the dashboard
 
+    #TODO: da mettere eventualmente solo in superadmin
+    can :import, Citta
+
     if (user.superadmin?)
       can :manage, :all
     else

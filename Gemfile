@@ -5,6 +5,7 @@ gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
 gem 'rails_admin_rollincode', git: 'https://github.com/rollincode/rails_admin_theme.git'
 gem 'rails_admin_history_rollback', git: 'https://github.com/rikkipitt/rails_admin_history_rollback.git'
 gem 'rails_admin_nestable', '~> 0.3.2'
+gem "rails_admin_import", ">= 2.0"
 # Athenticazione e Authorizzazione
 gem 'devise'
 gem 'cancancan'

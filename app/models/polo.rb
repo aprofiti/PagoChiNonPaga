@@ -9,6 +9,7 @@ class Polo < ActiveRecord::Base
     self.citta
   end
 
+  # restituisce ids delle imprese appartenenti al polo
   def get_imprese
     imprese_ids= []
     self.citta.each do |citta|
@@ -17,6 +18,7 @@ class Polo < ActiveRecord::Base
     imprese_ids
   end
 
+  # restituisce emails di tutti gli utenti appartenenti al polo
   def get_utenti_emails
     emails=[]
 
@@ -33,6 +35,7 @@ class Polo < ActiveRecord::Base
   def getAdmins
     self.admins
   end
+  
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
     self.nome
