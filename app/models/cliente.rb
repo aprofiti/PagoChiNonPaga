@@ -19,6 +19,10 @@ class Cliente < ActiveRecord::Base
     #per l'email ci pensa devise
   end
 
+  def is_my_polo?(user_polo_id)
+    user_polo_id==self.citta.polo.id
+  end
+
 
   def getOrdini
     self.ordini

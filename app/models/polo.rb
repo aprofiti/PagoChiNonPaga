@@ -9,11 +9,25 @@ class Polo < ActiveRecord::Base
     self.citta
   end
 
-  def getImprese
-    # Ritorna una collezione, trovare un modo per risolvere
+  def get_imprese
+    imprese_ids= []
+    self.citta.each do |citta|
+      imprese_ids << citta.imprese.ids
+    end
+    imprese_ids
+  end
 
-    #listaCitta = self.getCitta
-    #getImprese
+  def get_utenti_emails
+    emails=[]
+
+    Utente.all.each do |utente|
+      u= utente.get_act_utente #salvo titola/cliente relativo a utente
+      if (self.citta.ids.include?(u.citta_id))
+        emails << u.email
+      end
+    end
+
+    emails
   end
 
   def getAdmins

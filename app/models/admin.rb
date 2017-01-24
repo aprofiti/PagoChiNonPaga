@@ -16,7 +16,6 @@ class Admin < ActiveRecord::Base
     errors.add(:base, 'Email già utilizzata.') if matched_entry && (matched_entry.id != self.id) #se non sono io stesso allora c'e' un errore
   end
 
-  # TODO: Da sostituire con implementazione ruoli
   def superadmin?
     false
   end

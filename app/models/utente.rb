@@ -26,6 +26,14 @@ class Utente < ActiveRecord::Base
     utente.nome
   end
 
+  def get_act_utente
+    if(isTitolare?)
+      Titolare.find(self.actable_id)
+    else
+      Cliente.find(self.actable_id)
+    end
+  end
+
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
     getNome()
