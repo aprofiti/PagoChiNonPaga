@@ -1,0 +1,49 @@
+it:
+  admin:
+    actions:
+      import:
+        title: "Importa"
+        menu: "Importa"
+        breadcrumb: "Importa"
+        link: "Importa"
+        bulk_link: "Importa"
+        done: "Importati"
+    import:
+      model_fields: "Campi del Modello"
+      association_fields: "Campi dell'associazione"
+
+      file: "File dei Dati"
+      missing_file: "Devi selezionare un file"
+      format: "Formato File"
+      invalid_format: "Formato file di import invalido."
+      missing_update_lookup: "Il tuo file deve contenere una colonna per il 'Campo di ricerca' che hai selezionato."
+      invalid_json: "Il file JSON dei dati, deve esser un array di recor oppure un oggetto con una chiave '%{root_key}' impostata ad un array di record"
+      update_if_exists: "Aggiorna se presente"
+      update_lookup: "Sostituisci campo di ricerca"
+      mapping: "si mappa su"
+      encoding: "Codifica"
+      legend:
+        fields: "Campi da Importare"
+        upload: "Carica File"
+        mapping: "Mappatura dei campi correlati"
+      import_success:
+        create: "Creato %{name}"
+        update: "Aggiornato %{name}"
+      import_error:
+        create: "Fallita la creazione di %{name}: %{error}"
+        update: "Fallito aggiornamento di %{name}: %{error}"
+        general: "Errore durante l'importazione: %{error}"
+        line_item_limit: "Attenzione limitare il file a %{limit} linee."
+        old_import_hook: >
+          L'hook di importazione %{model}.%{method} deve prendere solo 1 argomento.
+          I Dati potrebbero non essere stati importati correttamente.
+          Guardare la sezione 'Upgrading' nel file readme di Rails Admin Import.
+      association_not_found: "Associazione non trovata. %{error}"
+      help:
+        model_fields: "I seguenti campi possono essere inclusi nel file da importare."
+        association_fields: >
+          I seguenti campi si mappano su altre tabelle nel database, consultare attraverso i campi selezionati.
+          Per le associzioni "many", potresti dover includere nel tuo file CSV colonne multiple con la stessa intestazione.
+        update_if_exists: "Aggiorna i record trovati con il campo di ricerca selezionato, invece di crearne dei nuovi"
+        file_limit: "Attenzione limitare il file a %{limit} linee."
+        encoding: "Selezionare codifica del file. Lasciare vuoto per la selezione automatica. Ignorare per il formato JSON."
