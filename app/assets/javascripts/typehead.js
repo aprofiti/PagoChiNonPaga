@@ -1,6 +1,7 @@
 // Inizializza typehead
+var selected= false;                              //indica se c'è stata una selezione e un autocomplete con il tab
+
 $(function() {
-  var selected= false;                              //indica se c'è stata una selezione e un autocomplete con il tab
   var initialize_imprese_typeahead;
   initialize_imprese_typeahead = function() {
     var imprese_typeahead;
@@ -43,3 +44,11 @@ $(function() {
   };
   return initialize_imprese_typeahead();
 });
+
+//controllo input typeahead al click pulsante cerca
+$(document).ready(function(){
+ $('#typesearch').click(function (e) {
+   if(selected) return true;
+   else  e.preventDefault();
+  });
+ });
