@@ -4,6 +4,7 @@ class OrdiniController < ApplicationController
   before_filter :is_mio_ordine?, only: [:show,:destroy]
   before_filter :is_titolare?, only: :edit
   before_filter :is_in_attesa?, only: :destroy
+  before_action :restore_quantita, only: :destroy
   # GET /ordini
   # GET /ordini.json
   def index
@@ -22,7 +23,6 @@ class OrdiniController < ApplicationController
   # GET /ordini/1
   # GET /ordini/1.json
   def show
-
   end
 
 
@@ -86,6 +86,7 @@ class OrdiniController < ApplicationController
   # DELETE /ordini/1
   # DELETE /ordini/1.json
   def destroy
+
     @ordine.destroy
     respond_to do |format|
       format.html { redirect_to ordini_url, notice: 'Ordine was successfully destroyed.' }
@@ -142,6 +143,16 @@ e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'a
     else
       flash[:notice] = "Non puoi annullare questo ordine"
       redirect_back
+    end
+  end
+
+  def restore_quantita
+    ids = @ordine.prodotti.ids.uniq
+    ids.each do |id|
+      qta = @ordine.occorrenzeProdotto(id)
+      @prodotto = Prodotto.find(id)
+      qta_attuale = @prodotto.getQuantita
+      @prodotto.update_attribute('qta',qta + qta_attuale)
     end
   end
 

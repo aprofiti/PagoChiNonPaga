@@ -32,7 +32,6 @@ class Ordine < ActiveRecord::Base
     totale = 0.0
     ids.each do |id_prodotto|
       prezzo = Prodotto.find(id_prodotto).prezzo
-      puts(prezzo.to_s + " Prezzo")
       totale += occorrenzeProdotto(id_prodotto)*prezzo
     end
     new_totale= self.totale + totale
