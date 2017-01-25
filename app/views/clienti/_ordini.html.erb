@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @cliente.ordini.each do |ordine| %>
+    <% @cliente.getOrdiniAttivi.each do |ordine| %>
     <tr>
       <td><%= ordine.created_at %></td>
       <td><%= ordine.id %></td>

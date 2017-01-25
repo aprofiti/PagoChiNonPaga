@@ -1,0 +1,24 @@
+<%- model_class = Ordine -%>
+<!-- Lista Ordini -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:ordine_id) %></th>
+      <th><%= model_class.human_attribute_name(:impresa_id) %></th>
+      <th><%= model_class.human_attribute_name(:stato_ordine) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @titolare.imprese.each do |impresa| %>
+      <% impresa.getOrdiniAttivi.each do |ordine| %>
+      <tr>
+        <td><%= link_to ordine.id, ordine_path(ordine),method: :get  %></td>
+        <td><%= Impresa.find(ordine.impresa_id).name %></td>
+        <td><%= ordine.stato_ordine.name %></td>
+        <td><%= ordine.created_at %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

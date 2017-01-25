@@ -69,4 +69,17 @@ class Impresa < ActiveRecord::Base
     nomi
   end
 
+  # Restituisce una array con gli ordini del Cliente che non sono ancora stati completati
+  def getOrdiniAttivi
+    ordini = []
+    # Controllo lo stato di ogni ordine
+    self.ordini.each do |ordine|
+      if ordine.getStato != "Ricevuto"
+        # Aggiungo all'array
+        ordini << ordine
+      end
+    end
+    ordini
+  end
+
 end
