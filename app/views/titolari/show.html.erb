@@ -1,65 +1,92 @@
 <%- model_class = Titolare -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-</div>
+<div class="container">
+  <!-- Sezione Anagrafica Titolare -->
+  <div class="panel panel-default" style="margin-top: 10px;">
+    <div class="panel-heading">
+      <%= link_to t('.ModificaDati', :default => t("helpers.links.ModificaDati")),
+                    edit_titolare_path(@titolare), :class => 'btn btn-success pull-right' ,method: :get%>
+      <h4>Profilo <%=t '.title', :default => model_class.model_name.human.titleize %></h4>
+    </div>
+    <div class="panel-body">
+      <dl class="dl-horizzontal">
+        <div class="row">
+          <div class="col col-md-3 col-md-offset-3">
+            <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+            <dd><%= @titolare.nome %></dd>
+          </div>
+          <div class="col col-md-3">
+            <dt><strong><%= model_class.human_attribute_name(:cognome) %>:</strong></dt>
+            <dd><%= @titolare.cognome %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-3 col-md-offset-3">
+            <dt><strong><%= model_class.human_attribute_name(:cf) %>:</strong></dt>
+            <dd><%= @titolare.cf %></dd>
+          </div>
+          <div class="col col-md-3">
+            <dt><strong><%= model_class.human_attribute_name(:data_nascita) %>:</strong></dt>
+            <dd><%= @titolare.data_nascita %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-3 col-md-offset-3">
+            <dt><strong><%= model_class.human_attribute_name(:indirizzo) %>:</strong></dt>
+            <dd><%= @titolare.indirizzo %></dd>
+          </div>
+          <div class="col col-md-3">
+            <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
+            <dd><%= @titolare.telefono %></dd>
+          </div>
+        </div>
+        <div class="page-header"></div>
+        <div class="row">
+          <div class="col col-md-3 col-md-offset-3">
+            <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+            <dd><%= @titolare.email %></dd>
+          </div>
+          <div class="col col-md-3">
+            <dt><strong><%= model_class.human_attribute_name(:piva) %>:</strong></dt>
+            <dd><%= @titolare.piva %></dd>
+          </div>
+        </div>
+    </div>
+    </dl>
+  </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
-  <dd><%= @titolare.nome %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:cognome) %>:</strong></dt>
-  <dd><%= @titolare.cognome %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @titolare.email %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:cf) %>:</strong></dt>
-  <dd><%= @titolare.cf %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:piva) %>:</strong></dt>
-  <dd><%= @titolare.piva %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:data_nascita) %>:</strong></dt>
-  <dd><%= @titolare.data_nascita %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
-  <dd><%= @titolare.telefono %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:indirizzo) %>:</strong></dt>
-  <dd><%= @titolare.indirizzo %></dd>
-</dl>
+  <!-- Sezione Ordini -->
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h4>Ordini Attivi</h4>
+    </div>
+    <div class="panel-body">
+      <%= render "ordini" %>
+    </div>
+  </div>
 
-<div class="page-header">
-  <h3><%= model_class.human_attribute_name(:imprese) %></h3>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:nome) %></th>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @titolare.getImprese.each do |impresa| %>
-      <tr>
-        <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id),method: :get %></td>
-        <td><%= impresa.id %></td>
-        <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      impresa_path(nome: impresa.nome, id: impresa.id), :class => 'btn btn-default btn-xs',method: :get %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_impresa_path(nome: impresa.nome, id: impresa.id), :class => 'btn btn-default btn-xs',method: :get %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      impresa_path(impresa),
-                      :method => :delete,
+  <!-- Sezione Gestione Imprese -->
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4>Le mie Imprese</h4>
+    </div>
+    <div class="panel-body">
+      <%= render "imprese" %>
+    </div>
+   </div>
+
+   <!-- Sezione Gestione Elimina Utente -->
+   <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h4>Elimina Profilo Titolare</h4>
+      </div>
+      <div class="panel-body">
+        <%= link_to t('.elimina', :default => t("helpers.links.elimina")),
+                      titolare_path(@titolare),
+                      :method => 'delete',
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                      :class => 'btn btn-danger' %>
+        <b>Attenzione le modifiche non possono essere annullate!</b>
+      </div>
+    </div>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              root_path, :class => 'btn btn-default',method: :get  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_titolare_path(@titolare), :class => 'btn btn-default',method: :get %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              titolare_path(@titolare),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+</div>
