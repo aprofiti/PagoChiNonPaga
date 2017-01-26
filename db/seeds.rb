@@ -68,6 +68,7 @@ Sottocategoria.create(nome: 'Caseifici', categoria_id: 15)
 Admin.create(email: 'gab@riele.com', password: '123456', password_confirmation: '123456', polo_id: 1)
 Admin.create(email: 'lor@enzo.com', password: '1q2w3e', password_confirmation: '1q2w3e', polo_id: 2)
 Admin.create(email: 'alex@email.it', password: 'password', password_confirmation: 'password', polo_id: 3)
+Admin.create(email: 'super@email.it', password: 'password', password_confirmation: 'password', polo_id: 1, superadmin: true)
 
 Cliente.create(nome: 'Gigi', cognome: 'Meraviglia', cf: 'ajsjsan', telefono: '12345', data_nascita: Date.parse('08/08/1964'), email: 'cli1@ente.it', password: '123456', password_confirmation: '123456', indirizzo: 'via dal cazzo', citta_id: 1)
 Cliente.create(nome: 'Rino', cognome: 'Rino', cf: 'dsahju', telefono: '1354', data_nascita: Date.parse('04/11/1991'), email: 'cli2@ente.it', password: '123456', password_confirmation: '123456', indirizzo: 'via dalle palle', citta_id: 1)
