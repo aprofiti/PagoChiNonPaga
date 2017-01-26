@@ -12,4 +12,14 @@ class ApplicationController < ActionController::Base
   rescue ActionController::RedirectBackError
     redirect_to root_path
   end
+
+  def after_sign_in_path_for(resource)
+    if current_utente == nil
+      rails_admin_path
+    elsif (current_utente.isCliente? )
+      cliente_path(current_utente.actable_id)
+    elsif (current_utente.isTitolare? )
+      titolare_path(current_utente.actable_id)
+    end
+  end
 end
