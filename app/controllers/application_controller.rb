@@ -19,7 +19,11 @@ class ApplicationController < ActionController::Base
     elsif (current_utente.isCliente? )
       cliente_path(current_utente.actable_id)
     elsif (current_utente.isTitolare? )
+      if current_utente.sign_in_count == 1
+        new_impresa_path
+      else
       titolare_path(current_utente.actable_id)
+      end
     end
   end
 end
