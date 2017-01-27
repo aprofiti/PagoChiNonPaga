@@ -30,6 +30,18 @@ class Impresa < ActiveRecord::Base
     errors.add(:base, 'Una impresa deve avere almeno una SOTTOCATEGORIA.') if err
   end
 
+  def isAttiva?
+    self.isVerificata? && !self.isCongelata?
+  end
+
+  def isVerificata?
+    self.verificato
+  end
+
+  def isCongelata?
+    self.congelato
+  end
+
   def getNome
     self.nome
   end
