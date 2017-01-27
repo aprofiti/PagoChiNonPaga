@@ -1,6 +1,6 @@
 <%- model_class = Impresa -%>
 <!-- Lista Imprese -->
-<table class="table table-striped">
+<table class="table table-hover">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:nome) %></th>
@@ -10,19 +10,37 @@
   </thead>
   <tbody>
     <% @titolare.imprese.each do |impresa| %>
-    <tr>
+    <% if impresa.isCongelata?
+        congelata = true
+        tipoClasse = 'danger'
+       elsif !impresa.isVerificata?
+        verificata = false
+        tipoClasse = 'warning'
+       else
+        tipoClasse = ''
+       end
+    %>
+    <tr class = <%= "#{tipoClasse}" %> >
       <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id),method: :get %></td>
       <td><%= impresa.created_at %></td>
       <td>
-        <%= link_to "",
+        <% if impresa.isAttiva? %>
+          <%= link_to "",
                     impresa_path(nome: impresa.nome, id: impresa.id), :class => 'fa fa-share',method: :get %>
-        <%= link_to "",
+          <%= link_to "",
                     edit_impresa_path(nome: impresa.nome, id: impresa.id), :class => 'fa fa-pencil',method: :get %>
-        <%= link_to "",
+          <%= link_to "",
                     impresa_path(impresa),
                     :method => :delete,
                     :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                     :class => 'danger fa fa-trash' %>
+        <% else %>
+          <% if congelata %>
+            <span>Congelata</span>
+          <% elsif !verificata %>
+            <span>Non verificata</span>
+          <% end %>
+        <% end %>
       </td>
     </tr>
     <% end %>
