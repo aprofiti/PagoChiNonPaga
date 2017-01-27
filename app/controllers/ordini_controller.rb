@@ -32,24 +32,33 @@ class OrdiniController < ApplicationController
   end
 
   def prepara_ordini
+
+    #SETUP VARIABILI
     ordine_riuscito= true
     carrello= current_utente.getCarrello              #carrello utente attuale
     imprese = carrello.impreseCarrello                #imprese implicate in carrello
     impresa_prodotti= carrello.impresaElemento        #array di tuple (impresa, carrello_prodotti)
-    imprese.each do |impresa|
-      prodotti= setOrdine(impresa_prodotti,impresa)
-      if prodotti == nil
-        ordine_riuscito= false
-      else
-        @ordine= Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti,totale: 0.0)
-        @ordine.setTotale
-    end
+    #SETUP VARIABILI
+
+    if check_imprese(imprese)
+      #A QUESTO PUNTO TUTTE LE IMPRESE SONO O VERIFICATE E NON CONGELATE
+      imprese.each do |impresa|
+        prodotti= setOrdine(impresa_prodotti,impresa)
+        if prodotti == nil
+          ordine_riuscito= false
+        else
+          @ordine= Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti,totale: 0.0)
+          @ordine.setTotale
+        end
+      end
+    else
+      return redirect_to carrello_path(id: carrello.id)
     end
     if ordine_riuscito
       carrello.destroy
       redirect_to root_path
     else
-      flash[:notice] = "Errore con la disponibilità dei prodotti"
+      flash[:error] = "Errore con la disponibilità dei prodotti. Controlla e leva quelli terminati"
       redirect_to carrello_path(id: carrello.id)
     end
   end
@@ -125,6 +134,19 @@ e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'a
     if(current_utente.isCliente? && @ordine.cliente_id == current_utente.actable_id)
     elsif (current_utente.isTitolare? && current_utente.isMyImpresa?(Impresa.find(@ordine.impresa_id)))
     else redirect_back
+    end
+  end
+
+  #controlla che nessuna delle imprese sia congelata
+  def check_imprese(imprese)
+    imprese.each do |impresa|
+      impresa_corrente= Impresa.find(impresa)
+      if !(impresa_corrente.isAttiva?)
+        flash[:error] = "L'impresa #{impresa_corrente.nome} è congelata. Rimuovi i suoi prodotti"
+        return false
+      else
+        true
+      end
     end
   end
 
