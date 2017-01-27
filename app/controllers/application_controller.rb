@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if current_utente == nil
+    if current_admin
       rails_admin_path
     elsif (current_utente.isCliente? )
       cliente_path(current_utente.actable_id)
