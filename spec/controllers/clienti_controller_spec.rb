@@ -23,6 +23,7 @@ RSpec.describe ClientiController, type: :controller do
   before :each do
     @citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     @cliente = createCliente("Mario","Rossi",@citta)
+    Utente.where(actable_id: @cliente.id).first.confirm
   end
   #titolare non loggato vuole vedere profilo -> NO
   it "should redirect login page" do
@@ -51,6 +52,7 @@ RSpec.describe ClientiController, type: :controller do
   #titolare loggato vuole fare edit di un altro titolare -> NO
   it "should not edit another cliente from this cliente" do
     cliente2 = createCliente("mario","bianchi",@citta)
+    Utente.where(actable_id: cliente2.id).first.confirm
     sign_in @cliente
     get :edit, id: cliente2.id
     expect(response).to_not render_template :edit
@@ -59,6 +61,7 @@ RSpec.describe ClientiController, type: :controller do
   #titolare loggato vuole fare show di un altro titolare -> NO
   it "should not show another cliente from this cliente" do
     cliente2 = createCliente("mario","bianchi",@citta)
+    Utente.where(actable_id: cliente2.id).first.confirm
     sign_in @cliente
     get :show, id: cliente2.id
     expect(response).to_not render_template :show

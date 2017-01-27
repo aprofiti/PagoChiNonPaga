@@ -23,6 +23,8 @@ RSpec.describe OrdiniController, type: :controller do
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     @cliente= createCliente("Mario","Rossi",citta)
     @titolare = createTitolare("Romeo","Bianchi",citta)
+    Utente.where(actable_id: @cliente.id).first.confirm
+    Utente.where(actable_id: @titolare.id).first.confirm
     @impresa = createImpresa("impresa","imp@resa.com",citta,@titolare,false,true)
     @prodotto = Prodotto.create(nome: "prodotto",qta: 10, prezzo: 10, impresa_id: @impresa.id,descrizione: "descrizioneee")
     @stato = StatoOrdine.create(stato: "In attesa")

@@ -22,6 +22,7 @@ RSpec.describe CarrelloController, type: :controller do
   before :each do
     @citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     @cliente = createCliente("Mario","Rossi",@citta)
+    Utente.where(actable_id: @cliente.id).first.confirm
     @carrello = Carrello.create(cliente_id: @cliente.id)
   end
   it "should not get carrello" do
@@ -37,6 +38,7 @@ RSpec.describe CarrelloController, type: :controller do
 
   it "should not get other cliente carrello" do
     cliente2= createCliente("mario","bianchi",@citta)
+    Utente.where(actable_id: cliente2.id).first.confirm
     carrello2 = Carrello.create(cliente_id: cliente2.id)
     sign_in @cliente
     get :show, id: cliente2.carrello

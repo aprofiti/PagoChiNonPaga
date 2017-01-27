@@ -28,6 +28,7 @@ RSpec.describe ImpreseController, type: :controller do
   it "should not let a cliente to create an impresa" , :skip_before do
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     cliente = createCliente("Bianco","Bianco",citta)
+    Utente.where(actable_id: cliente.id).first.confirm
     sign_in cliente
     get :new
     expect(response).to redirect_to root_path
@@ -36,6 +37,7 @@ RSpec.describe ImpreseController, type: :controller do
   it "should let create an impresa" do
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     titolare = createTitolare("Mario","Rossi",citta)
+    Utente.where(actable_id: titolare.id).first.confirm
     sign_in titolare
     get :new
     expect(response).to render_template :new
@@ -44,6 +46,8 @@ RSpec.describe ImpreseController, type: :controller do
   it "should let edit an impresa" do
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     titolare = createTitolare("Mario","Rossi",citta)
+    Utente.where(actable_id: titolare.id).first.confirm
+
     verificata= true
     congelata=false
     impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
@@ -54,6 +58,8 @@ RSpec.describe ImpreseController, type: :controller do
   it "should let destroy an impresa" do
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     titolare = createTitolare("Mario","Rossi",citta)
+    Utente.where(actable_id: titolare.id).first.confirm
+
     verificata= true
     congelata=false
     impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
@@ -65,7 +71,9 @@ RSpec.describe ImpreseController, type: :controller do
   it "should not let a titolare edit anoter titolare impresa" do
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     titolare = createTitolare("Mario","Rossi",citta)
+    Utente.where(actable_id: titolare.id).first.confirm
     titolare2 = createTitolare("Mario","Bianchi",citta)
+    Utente.where(actable_id: titolare2.id).first.confirm
     verificata= true
     congelata=false
     impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
@@ -76,6 +84,7 @@ RSpec.describe ImpreseController, type: :controller do
   it "should check url if modified" do
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     titolare = createTitolare("Mario","Rossi",citta)
+    Utente.where(actable_id: titolare.id).first.confirm
     verificata= true
     congelata=false
     impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
@@ -86,6 +95,7 @@ RSpec.describe ImpreseController, type: :controller do
   it "should not edit impresa" do
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     titolare = createTitolare("Mario","Rossi",citta)
+    Utente.where(actable_id: titolare.id).first.confirm
     verificata= true
     congelata=true
     impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
@@ -98,6 +108,7 @@ RSpec.describe ImpreseController, type: :controller do
   it "should not edit impresa" do
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     titolare = createTitolare("Mario","Rossi",citta)
+    Utente.where(actable_id: titolare.id).first.confirm
     verificata= false
     congelata=true
     impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
@@ -109,6 +120,7 @@ RSpec.describe ImpreseController, type: :controller do
   it "should not edit impresa" do
     citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     titolare = createTitolare("Mario","Rossi",citta)
+    Utente.where(actable_id: titolare.id).first.confirm
     verificata= false
     congelata=false
     impresa =createImpresa("impresa","imp@resa.com",citta,titolare,congelata,verificata)
