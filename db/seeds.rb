@@ -116,6 +116,7 @@ Prodotto.create(nome:'Lavapanni', prezzo: 20, qta: 3, descrizione: 'Lavapanni be
 Prodotto.create(nome:'Panino alla carbonara', prezzo: 30, qta: 60, descrizione: 'Carbonare belle', impresa_id: 6)
 Prodotto.create(nome:'Boeing 747', prezzo: 3445540, qta: 60, descrizione: 'Boeing belli', impresa_id: 7)
 Prodotto.create(nome:'Aeroplano senza ali', prezzo: 100000, descrizione: 'Aerei belli', qta: 60, impresa_id: 7)
+Prodotto.create(nome:'Barca di cemento armato', prezzo: 23450, descrizione: 'Mamma mia che Barca', qta: 5, impresa_id: 12)
 
 StatoOrdine.create(stato: 'In attesa')
 StatoOrdine.create(stato: 'Pagato')
