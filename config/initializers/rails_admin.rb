@@ -78,6 +78,15 @@ RailsAdmin.config do |config|
     edit do
       field :nome
       field :descrizione, :froala
+=begin
+      Nascondo la relazione verso titolare
+      Perchè non potrei assegnare nell'edit un titolare non appartenente al polo
+      che sta facendo la modifica
+=end
+      configure :titolare do
+        hide
+      end
+
       # Mostro i campi restanti
       include_all_fields
     end
@@ -122,7 +131,11 @@ RailsAdmin.config do |config|
     navigation_label 'Sezione Ecommerce'
     navigation_icon 'fa fa-euro'
     weight +2
-
+    edit do
+      configure :cliente do
+        hide
+      end
+    end
     exclude_fields :created_at, :updated_at
   end
 
