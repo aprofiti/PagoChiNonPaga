@@ -163,12 +163,16 @@ RailsAdmin.config do |config|
       except [Cliente, Titolare]
     end
 
+    # Lista delle Azioni abilitate per tutte le Entita:
     export
     bulk_delete
     show
     edit
     delete
     show_in_app
+
+    # Lista delle Azioni disabilitate per tutte le Entita:
+    #show_in_app
 
     ## With an audit adapter, you can add:
      history_index
