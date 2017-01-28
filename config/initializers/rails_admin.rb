@@ -58,14 +58,22 @@ RailsAdmin.config do |config|
   config.model 'Titolare' do
     parent Utente
     navigation_icon 'fa fa-user'
-
+    #permette di cercare anche per citta nonostante sia una associazione
+    configure :citta do
+      searchable [{Citta => :nome}]
+      queryable true
+    end
     exclude_fields :created_at, :updated_at
   end
 
   config.model 'Cliente' do
     parent Utente
     navigation_icon 'fa fa-user'
-
+    #permette di cercare anche per citta nonostante sia una associazione
+    configure :citta do
+      searchable [{Citta => :nome}]
+      queryable true
+    end
     exclude_fields :created_at, :updated_at
   end
 
@@ -74,6 +82,23 @@ RailsAdmin.config do |config|
     navigation_label 'Sezione Imprese'
     navigation_icon 'fa fa-industry'
     weight +1
+
+    #permette di cercare anche per città nonostante sia una associazione
+    configure :citta do
+      searchable [{Citta => :nome}]
+      queryable true
+    end
+    #permette di cercare anche per titolare nonostante sia una associazione
+    configure :titolare do
+      searchable [{Titolare => :nome}]
+      queryable true
+    end
+    #permette di cercare anche per sottocategorie nonostante sia una associazione
+    configure :sottocategorie do
+      searchable [{Sottocategoria => :nome}]
+      queryable true
+    end
+
 
     edit do
       field :nome
@@ -86,9 +111,7 @@ RailsAdmin.config do |config|
       configure :titolare do
         hide
       end
-
-      # Mostro i campi restanti
-      include_all_fields
+      include_all_fields  # Mostro i campi restanti
     end
 
     exclude_fields :created_at, :updated_at
@@ -98,6 +121,11 @@ RailsAdmin.config do |config|
     parent Impresa
     navigation_icon 'fa fa-shopping-bag'
 
+    #permette di cercare anche per imprese nonostante sia una associazione
+    configure :impresa do
+      searchable [{Impresa => :nome}]
+      queryable true
+    end
     edit do
       field :nome
       field :prezzo
@@ -114,7 +142,11 @@ RailsAdmin.config do |config|
     parent Impresa
     navigation_icon 'fa fa-list'
     weight +1
-
+    #permette di cercare anche per sottocategorie nonostante sia una associazione
+    configure :sottocategorie do
+      searchable [{Sottocategoria => :nome}]
+      queryable true
+    end
     exclude_fields :created_at, :updated_at
   end
 
@@ -122,7 +154,11 @@ RailsAdmin.config do |config|
     parent Impresa
     navigation_icon 'fa fa-list'
     weight +2
-
+    #permette di cercare anche per categoria nonostante sia una associazione
+    configure :categoria do
+      searchable [{Categoria => :nome}]
+      queryable true
+    end
     exclude_fields :created_at, :updated_at
   end
 
@@ -131,6 +167,22 @@ RailsAdmin.config do |config|
     navigation_label 'Sezione Ecommerce'
     navigation_icon 'fa fa-euro'
     weight +2
+
+    #permette di cercare anche per imprese nonostante sia una associazione
+    configure :impresa do
+      searchable [{Impresa => :nome}]
+      queryable true
+    end
+    #permette di cercare anche per stato nonostante sia una associazione
+    configure :stato do
+      searchable [{StatoOrdine => :stato}]
+      queryable true
+    end
+    #permette di cercare anche per cliente nonostante sia una associazione
+    configure :cliente do
+      searchable [{Cliente => :nome}]
+      queryable true
+    end
     edit do
       configure :cliente do
         hide
