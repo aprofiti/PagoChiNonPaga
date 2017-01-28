@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126165728) do
+ActiveRecord::Schema.define(version: 20170128161020) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20170126165728) do
     t.integer  "citta_id"
     t.integer  "titolare_id"
     t.string   "indirizzo"
+    t.string   "image"
   end
 
   add_index "imprese", ["citta_id"], name: "index_imprese_on_citta_id"

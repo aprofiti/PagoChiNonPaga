@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: 9ef68325dd5ea465b4d340af9a9def10934cd677
+  specs:
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+
+GIT
   remote: git://github.com/king601/devise-bootstrapped.git
   revision: 152ef108593758f4c93d0e303e9f2a545371fe43
   specs:
@@ -382,6 +391,7 @@ DEPENDENCIES
   byebug
   cancancan
   capybara
+  carrierwave!
   coffee-rails (>= 4.1.0)
   devise
   devise-bootstrapped!
