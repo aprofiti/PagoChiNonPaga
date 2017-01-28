@@ -19,6 +19,12 @@
 //= require handlebars
 //= require underscore
 //= require gmaps/google
+//= require jcrop.js
+//= require_self
+
+$(document).ready(function() {
+        document.jcrop.init({ file_input_id: 'impresa_image' });
+    });
 
 // File EDITOR WYSIWYG Froala
 //

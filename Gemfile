@@ -16,6 +16,8 @@ gem 'activerecord', '>= 4.2.6'
 gem 'active_record-acts_as'
 # Upload immagini
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave-crop-on-fly'
+gem 'rmagick'
 # Carrello
 gem 'acts_as_shopping_cart', '~> 0.4.1'
 # View

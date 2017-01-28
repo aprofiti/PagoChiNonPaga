@@ -8,6 +8,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
+  include CarrierWave::RMagick
+
+  process crop: [1280, 720] #TODO: decidere la risoluzione
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
