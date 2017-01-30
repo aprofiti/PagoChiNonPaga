@@ -174,8 +174,8 @@ RailsAdmin.config do |config|
       queryable true
     end
     #permette di cercare anche per stato nonostante sia una associazione
-    configure :stato do
-      searchable [{StatoOrdine => :stato}]
+    configure :stato_ordine do
+      searchable [{StatoOrdine => :stato_ordine}]
       queryable true
     end
     #permette di cercare anche per cliente nonostante sia una associazione
