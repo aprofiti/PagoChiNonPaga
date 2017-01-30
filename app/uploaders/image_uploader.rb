@@ -1,16 +1,13 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
-  # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
-
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
 
-  include CarrierWave::RMagick
+  include CarrierWave::MiniMagick
 
-  process crop: [1280, 720] #TODO: decidere la risoluzione
+  process crop: [640, 360]
+  process :quality => 100
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
