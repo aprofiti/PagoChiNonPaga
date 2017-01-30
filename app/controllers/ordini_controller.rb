@@ -5,18 +5,23 @@ class OrdiniController < ApplicationController
   before_filter :is_titolare?, only: :edit
   before_filter :is_in_attesa?, only: :destroy
   before_action :restore_quantita, only: :destroy
+  
   # GET /ordini
   # GET /ordini.json
   def index
+    id = current_utente.actable_id
     if current_utente.isCliente?
-      @ordini = Cliente.find(current_utente.actable_id).ordini
+      @ordini = Cliente.find(id).ordini
+      @ordiniAttivi = Cliente.find(id).getOrdiniAttivi
+      @ordiniCompletati = @ordini - @ordiniAttivi
     elsif current_utente.isTitolare?
-      @ordini=[]
-      titolare= Titolare.find(current_utente.actable_id)
-      titolare.imprese.each do |impresa|
-        @ordini+= impresa.ordini
+      @ordini = []
+      @ordiniAttivi = []
+      Titolare.find(id).imprese.each do |impresa|
+        @ordiniAttivi += impresa.getOrdiniAttivi
+        @ordini += impresa.ordini
       end
-      @ordini
+      @ordiniCompletati = @ordini - @ordiniAttivi
     end
   end
 
