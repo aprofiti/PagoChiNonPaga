@@ -67,6 +67,8 @@
   <!-- Sezione Gestione Imprese -->
   <div class="panel panel-info">
     <div class="panel-heading">
+      <%= link_to t('.CreaImpresa', :default => t("helpers.links.CreaImpresa")),
+                    new_impresa_path(@titolare), :class => 'btn btn-success pull-right' ,method: :get%>
       <h4>Le mie Imprese</h4>
     </div>
     <div class="panel-body">
