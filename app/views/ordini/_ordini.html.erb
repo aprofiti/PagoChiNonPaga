@@ -9,12 +9,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @cliente.getOrdiniAttivi.each do |ordine| %>
-    <tr>
+    <% @ordiniCompletati.each do |ordine| %>
+    <tr onclick="location.href='<%= ordine_path(id: ordine.id) %>'">
       <td><%= ordine.id %></td>
       <td><%= Impresa.find(ordine.impresa_id).name %></td>
       <td><%= ordine.created_at %></td>
-      <td><%= ordine.stato_ordine.name %></td>      
+      <td><%= ordine.stato_ordine.name %></td>
     </tr>
     <% end %>
   </tbody>
