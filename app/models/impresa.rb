@@ -16,6 +16,8 @@ class Impresa < ActiveRecord::Base
   validates :facebook, :format => URI::regexp(%w(http https)), :allow_blank => true
   validate :unique_entry #custom validation per l'unicita
   validate :has_sottocategoria #custom validation per la presenza di almeno una sottocategoria
+  # Upload immagini
+  mount_uploader :image, ImageUploader
 
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry

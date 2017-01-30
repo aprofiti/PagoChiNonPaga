@@ -1,4 +1,6 @@
 <%= simple_form_for @impresa, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.file_field :image %>
+  <%= f.cropbox :image %>
   <%= f.input :nome %>
   <%= error_span(@impresa[:nome]) %>
   <%= f.input :telefono %>

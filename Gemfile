@@ -14,16 +14,19 @@ gem 'paper_trail'
 # Implementazione IS-A
 gem 'activerecord', '>= 4.2.6'
 gem 'active_record-acts_as'
+# Upload immagini
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave-crop-on-fly'
+gem "mini_magick"
 # Carrello
 gem 'acts_as_shopping_cart', '~> 0.4.1'
 # View
 gem 'twitter-typeahead-rails', git: 'https://github.com/yourabi/twitter-typeahead-rails.git'
 gem 'bootstrap-typeahead-rails'
 gem 'handlebars_assets'
-gem 'paperclip', ">= 5.0.0"
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'railsstrap', git: 'https://github.com/toadkicker/railsstrap.git' # Sostituisce Twitter-Bootstrap-Rails
-gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped'
+gem 'devise-bootstrapped', git: 'https://github.com/king601/devise-bootstrapped.git'
 gem 'font-awesome-rails'
 gem 'wysiwyg-rails'
 # Api Google Maps

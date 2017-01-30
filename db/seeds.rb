@@ -93,7 +93,7 @@ Titolare.create(nome: 'Mimmo', cognome: 'Trippa', email: 'tito3@lare.it', passwo
 Titolare.create(nome: 'Edoardo', cognome: 'Dei Boschi', email: 'tito4@lare.it', password: '123456', password_confirmation: '123456', telefono: '634622', data_nascita: Date.parse('04/11/1991'), cf: 'ijgin', indirizzo: 'via del sospiro', citta_id: 2, confirmed_at: Date.parse('01/01/2017'))
 Titolare.create(nome: 'Dio', cognome: 'Bello', email: 'tito5@lare.it', password: '123456', password_confirmation: '123456', telefono: '987765654', data_nascita: Date.parse('08/08/1964'), cf: 'wefjun', indirizzo: 'via alla menta', citta_id: 3, confirmed_at: Date.parse('01/01/2017'))
 
-Impresa.create(nome: 'Impresa nuova', telefono: '2423', descrizione: 'Mah', titolare_id: 1, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 31', email: 'impre1@sa.it').save(validate: false)
+Impresa.create(nome: 'Bazzecole al chilo', telefono: '2423', descrizione: 'Mah', titolare_id: 1, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 31', email: 'impre1@sa.it').save(validate: false)
 Impresa.create(nome: 'La Cozza Felice', telefono: '32224', descrizione: 'Cozze belle', titolare_id: 1, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 31', email: 'impre2@sa.it').save(validate: false)
 Impresa.create(nome: 'Ristorante La Minestra Riscaldata', telefono: '31331', descrizione: 'Minestre belle', titolare_id: 1, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 32', email: 'impre3@sa.it').save(validate: false)
 Impresa.create(nome: 'Profumeria dal Lercio', telefono: '6564', descrizione: 'Profumi belli', titolare_id: 2, citta_id: 2, verificato: true, congelato: false,indirizzo: 'Via Catania 33', email: 'impre4@sa.it').save(validate: false)
@@ -117,6 +117,7 @@ Prodotto.create(nome:'Panino alla carbonara', prezzo: 30, qta: 60, descrizione: 
 Prodotto.create(nome:'Boeing 747', prezzo: 3445540, qta: 60, descrizione: 'Boeing belli', impresa_id: 7)
 Prodotto.create(nome:'Aeroplano senza ali', prezzo: 100000, descrizione: 'Aerei belli', qta: 60, impresa_id: 7)
 Prodotto.create(nome:'Orologi', prezzo: 100, descrizione: 'Orologi Napoletani', qta: 50, impresa_id: 12)
+Prodotto.create(nome:'Barca di cemento armato', prezzo: 23450, descrizione: 'Mamma mia che Barca', qta: 5, impresa_id: 12)
 
 StatoOrdine.create(stato: 'In attesa')
 StatoOrdine.create(stato: 'Pagato')
