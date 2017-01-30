@@ -1,37 +1,21 @@
 <%- model_class = Ordine -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+<div class="container">
+  <!-- Sezione Ordini Attivi -->
+  <div class="panel panel-success" style="margin-top: 10px;">
+    <div class="panel-heading">
+      <h4>Ordini Attivi</h4>
+    </div>
+    <div class="panel-body">
+      <%= render "ordini_attivi" %>
+    </div>
+  </div>
+  <!-- Sezione Gestione Imprese -->
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4>Ordini Completati</h4>
+    </div>
+    <div class="panel-body">
+      <%= render "ordini" %>
+    </div>
+  </div>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:data) %></th>
-      <th><%= model_class.human_attribute_name(:cliente_id) %></th>
-      <th><%= model_class.human_attribute_name(:impresa_id) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @ordini.each do |ordine| %>
-      <tr>
-        <td><%= link_to ordine.id, ordine_path(ordine),method: :get %></td>
-        <td><%= ordine.created_at %></td>
-        <td><%= ordine.cliente_id %></td>
-        <td><%= ordine.impresa_id %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_ordine_path(ordine), :class => 'btn btn-default btn-xs' ,method: :get%>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      ordine_path(ordine),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to t('.profilo', :default => t("helpers.links.profilo")),
-            cliente_path(id: current_utente.actable_id), :class => 'btn btn-default btn-xs',method: :get %>
