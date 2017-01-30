@@ -2,6 +2,7 @@ class TitolariController < ApplicationController
   before_action :set_titolare, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente!, except: [:new,:create]
   before_filter :controllo_id_titolare, except:  [:new,:create]
+  before_filter :controllo_ordini_titolare, only: :destroy
 
 
   # GET /titolari/1
@@ -54,9 +55,9 @@ class TitolariController < ApplicationController
   # DELETE /titolari/1
   # DELETE /titolari/1.json
   def destroy
-    @titolare.destroy
+    #@titolare.congelato = true;
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Titolare was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Account disabilitato con successo.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +72,22 @@ class TitolariController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_titolare
       @titolare = Titolare.find(params[:id])
+    end
+
+    # Controlla almeno una impresa del titolare ha degli ordini attivi
+    def controllo_ordini_titolare
+      imprese = @titolare.imprese
+      # Itero nelle varie imprese
+      imprese.each do |impresa|
+        ordini = impresa.getOrdiniAttivi
+        if !ordini.empty?
+          # Ho degli ordini attivi in almeno una impresa
+          # Non elimino il profilo
+          flash[:error] = "Ordini in sospeso. Impossibile eliminare il tuo profilo"
+          return redirect_back
+        end
+      end
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
