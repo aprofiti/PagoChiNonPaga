@@ -116,6 +116,7 @@ Prodotto.create(nome:'Lavapanni', prezzo: 20, qta: 3, descrizione: 'Lavapanni be
 Prodotto.create(nome:'Panino alla carbonara', prezzo: 30, qta: 60, descrizione: 'Carbonare belle', impresa_id: 6)
 Prodotto.create(nome:'Boeing 747', prezzo: 3445540, qta: 60, descrizione: 'Boeing belli', impresa_id: 7)
 Prodotto.create(nome:'Aeroplano senza ali', prezzo: 100000, descrizione: 'Aerei belli', qta: 60, impresa_id: 7)
+Prodotto.create(nome:'Orologi', prezzo: 100, descrizione: 'Orologi Napoletani', qta: 50, impresa_id: 12)
 
 StatoOrdine.create(stato: 'In attesa')
 StatoOrdine.create(stato: 'Pagato')
@@ -131,6 +132,8 @@ Ordine.create(cliente_id: 5, impresa_id: 5, stato_ordine_id: 2).save(validate: f
 Ordine.create(cliente_id: 3, impresa_id: 4, stato_ordine_id: 2).save(validate: false)
 Ordine.create(cliente_id: 4, impresa_id: 4, stato_ordine_id: 3).save(validate: false)
 Ordine.create(cliente_id: 5, impresa_id: 6, stato_ordine_id: 4).save(validate: false)
+# Ordine verso impresa Congelata
+Ordine.create(cliente_id: 1, impresa_id: 12, stato_ordine_id: 1).save(validate: false)
 
 Prodotto.find(1).ordini << Ordine.find(1)
 Prodotto.find(2).ordini << Ordine.find(2)
@@ -144,6 +147,7 @@ Prodotto.find(6).ordini << Ordine.find(7)
 Prodotto.find(6).ordini << Ordine.find(7)
 Prodotto.find(6).ordini << Ordine.find(8)
 Prodotto.find(8).ordini << Ordine.find(9)
+Prodotto.find(11).ordini << Ordine.find(10)
 
 Impresa.find(1).sottocategorie << Sottocategoria.find(1)
 Impresa.find(1).sottocategorie << Sottocategoria.find(5)
@@ -160,3 +164,4 @@ Impresa.find(6).sottocategorie << Sottocategoria.find(2)
 Impresa.find(7).sottocategorie << Sottocategoria.find(1)
 Impresa.find(7).sottocategorie << Sottocategoria.find(8)
 Impresa.find(8).sottocategorie << Sottocategoria.find(4)
+Impresa.find(12).sottocategorie << Sottocategoria.find(19)
