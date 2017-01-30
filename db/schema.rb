@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170128161020) do
+ActiveRecord::Schema.define(version: 20170130164831) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 20170128161020) do
     t.integer  "impresa_id"
     t.integer  "stato_ordine_id"
     t.float    "totale"
+    t.float    "spedizione"
   end
 
   add_index "ordini", ["cliente_id"], name: "index_ordini_on_cliente_id"
