@@ -234,7 +234,6 @@ RailsAdmin.config do |config|
     show
     edit
     delete
-    show_in_app
 
     # Lista delle Azioni disabilitate per tutte le Entita:
     #show_in_app
