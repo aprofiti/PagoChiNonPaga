@@ -1,11 +1,14 @@
 class OrdiniController < ApplicationController
+  require 'paypal-sdk-rest'
+  include PayPal::SDK::REST
+  include PayPal::SDK::Core::Logging
   before_action :set_ordine, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente!
   before_filter :is_mio_ordine?, only: [:show,:destroy]
   before_filter :is_titolare?, only: :edit
   before_filter :is_in_attesa?, only: :destroy
   before_action :restore_quantita, only: :destroy
-  
+
   # GET /ordini
   # GET /ordini.json
   def index
@@ -61,7 +64,8 @@ class OrdiniController < ApplicationController
     end
     if ordine_riuscito
       carrello.destroy
-      redirect_to root_path
+      flash[:notice] = "Il titolare dell'impresa calcolerà e ti comunicherà le spese di spedizione. Attendi che lo stato diventi in attesa di conferma"
+      redirect_to ordini_path
     else
       flash[:error] = "Errore con la disponibilità dei prodotti. Controlla e leva quelli terminati"
       redirect_to carrello_path(id: carrello.id)
@@ -108,6 +112,68 @@ class OrdiniController < ApplicationController
     end
   end
 
+  def paypal_url
+    @ordine = Ordine.find(params[:id])
+    @payment = Payment.new({
+      :intent =>  "sale",
+
+      :payer =>  {
+        :payment_method =>  "paypal" },
+
+      :redirect_urls => {
+        :return_url => "http://localhost:3000/mieiOrdini/#{@ordine.id}/checkout",
+        :cancel_url => "http://localhost:3000/" },
+
+      :transactions =>  [{
+        :payee => {
+          :email => "fakeaccount@account.com",#@ordine.impresa.titolare.email
+        },
+        :item_list => {
+          #Items vuota, viene riempita in ciclo sottostante
+          :items => []},
+        :amount =>  {
+          :total =>  @ordine.totale,
+          :currency =>  "EUR" },
+        :description =>  "This is the payment transaction description." }]})
+
+        unique_ids= @ordine.prodotti.uniq
+        unique_ids.each do |prodotto|
+          @payment.transactions.at(0).item_list.items.merge!({
+            :name => prodotto.nome,
+            :price => prodotto.prezzo,
+            :currency => "EUR",
+            :quantity => @ordine.occorrenzeProdotto(prodotto.id)
+            })
+        end
+    if @payment.create
+      # Redirect the user to given approval url
+      @redirect_url = @payment.links.find{|v| v.rel == "approval_url" }.href
+      logger.info "Payment[#{@payment.id}]"
+      logger.info "Redirect: #{@redirect_url}"
+
+      redirect_to @redirect_url
+    else
+      logger.error @payment.error.inspect
+    end
+  end
+
+  def checkout
+
+    payment = Payment.find(params[:paymentId])
+    if payment.execute( :payer_id => params[:PayerID] )
+
+      @pagato = StatoOrdine.find_by_stato(StatoOrdine.PAGATO)
+      @ordine = Ordine.find(params[:id])
+      @ordine.update_attribute('stato_ordine',@pagato)
+      flash[:notice]= "Pagamento effettuato correttamente"
+      redirect_to cliente_path(id: current_utente.actable_id)
+    else
+      payment.error # Error Hash
+      flash[:error]= "Pagamento Non effettuato correttamente"
+      redirect_to cliente_path(id: current_utente.actable_id)
+    end
+
+  end
   private
 =begin
 prende in ingresso il carrello e l'id di una impresa, cerca tutti i prodotti del carrello che appartengono a quella impresa
@@ -166,7 +232,7 @@ e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'a
     end
 
   def is_in_attesa?
-    if (@ordine.getStato == 'In attesa')
+    if (@ordine.getStato == StatoOrdine.ATTESA)
     else
       flash[:notice] = "Non puoi annullare questo ordine"
       redirect_back

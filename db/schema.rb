@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130164831) do
+ActiveRecord::Schema.define(version: 20170130172616) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20170130164831) do
     t.string   "telefono"
     t.string   "indirizzo"
     t.integer  "citta_id"
+    t.string   "email_paypal"
   end
 
   add_index "titolari", ["citta_id"], name: "index_titolari_on_citta_id"

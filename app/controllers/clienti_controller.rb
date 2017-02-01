@@ -77,7 +77,7 @@ class ClientiController < ApplicationController
     def controllo_ordini_cliente
       ordini = @cliente.getOrdini
       ordini.each do |ordine|
-        if  ['Spedito','Pagato'].include? ordine.getStato
+        if  [StatoOrdine.SPEDITO,StatoOrdine.PAGATO].include? ordine.getStato
           flash[:error] = "Ordini in sospeso. Impossibile eliminare il tuo profilo"
           return redirect_back
         end

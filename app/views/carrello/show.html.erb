@@ -57,5 +57,5 @@
 <% end %>
 
 <% if @carrello.has_items? %>
-  <%= link_to "Procedi all' acquisto",  prepara_ordini_ordine_path(id: current_utente.actable_id) ,method: :post%>
+  <%= link_to "Prepara ordine",  prepara_ordini_ordine_path(id: current_utente.actable_id) ,method: :post%>
 <% end %>

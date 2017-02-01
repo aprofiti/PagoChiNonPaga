@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :ordini, except: :new, path: '/mieiOrdini' do
     member do
       post :prepara_ordini
+      post :paypal_url
+      get :checkout
     end
   end
   get "imprese/autocomplete" => "imprese#autocomplete"
