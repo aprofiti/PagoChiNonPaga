@@ -16,14 +16,17 @@ class Impresa < ActiveRecord::Base
   validates :facebook, :format => URI::regexp(%w(http https)), :allow_blank => true
   validate :unique_entry #custom validation per l'unicita
   validate :has_sottocategoria #custom validation per la presenza di almeno una sottocategoria
+  validates :email, email: true
   # Upload immagini
   mount_uploader :image, ImageUploader
   validate :file_size
 
   def file_size
     max_file_size_mb= 5
-    if image.file.size.to_f/(1000*1000) > max_file_size_mb
-      errors.add(:image, "La dimensione dell'immagine (in megabyte) è troppo grande.")
+    if self.image?
+      if image.file.size.to_f/(1000*1000) > max_file_size_mb
+        errors.add(:image, "La dimensione dell'immagine (in megabyte) è troppo grande.")
+      end
     end
   end
 

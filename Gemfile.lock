@@ -164,6 +164,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    email_validator (1.6.0)
+      activemodel
     erubis (2.7.0)
     execjs (2.7.0)
     font-awesome-rails (4.7.0.1)
@@ -391,6 +393,7 @@ DEPENDENCIES
   coffee-rails (>= 4.1.0)
   devise
   devise-bootstrapped!
+  email_validator
   font-awesome-rails
   geocoder
   gmaps4rails
