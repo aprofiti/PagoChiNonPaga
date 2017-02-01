@@ -20,6 +20,7 @@ gem 'carrierwave-crop-on-fly'
 gem "mini_magick"
 # Carrello
 gem 'acts_as_shopping_cart', '~> 0.4.1'
+gem 'paypal-sdk-rest'
 # View
 gem 'twitter-typeahead-rails', git: 'https://github.com/yourabi/twitter-typeahead-rails.git'
 gem 'bootstrap-typeahead-rails'
