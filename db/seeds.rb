@@ -102,8 +102,8 @@ Impresa.create(nome: 'Ricatti per la casa', telefono: '878787', descrizione: 'Ri
 Impresa.create(nome: 'Panineria del tosto', telefono: '4354354', descrizione: 'Panini belli', titolare_id: 3, citta_id: 2, verificato: true, congelato: false,indirizzo: 'Via Catania 35', email: 'impre7@sa.it').save(validate: false)
 Impresa.create(nome: 'Viaggi in Messico srl', telefono: '543522', descrizione: 'Viaggi belli', titolare_id: 4, citta_id: 2, verificato: true, congelato: false,indirizzo: 'Via Catania 33', email: 'impre8@sa.it').save(validate: false)
 Impresa.create(nome: 'Calcolatrici Ipotetiche', telefono: '355221', descrizione: 'Calcoli belli', titolare_id: 3, citta_id: 2, verificato: true, congelato: false,indirizzo: 'Via Catania 37', email: 'impre9@sa.it').save(validate: false)
-Impresa.create(nome: 'Stiamoci Male & co.', telefono: '777555', descrizione: 'Male belli', titolare_id: 5, citta_id: 3, verificato: true, congelato: false,indirizzo: 'Via Catania 38', email: 'impre10@sa.it').save(validate: false)
-Impresa.create(nome: 'Non siamo mafiosi, fidati SPA', telefono: '88554', descrizione: 'Mafiosi belli', titolare_id: 2, citta_id: 3, verificato: true, congelato: false,indirizzo: 'Via Catania 39', email: 'impre11@sa.it').save(validate: false)
+Impresa.create(nome: 'Stiamoci Male & co', telefono: '777555', descrizione: 'Male belli', titolare_id: 5, citta_id: 3, verificato: true, congelato: false,indirizzo: 'Via Catania 38', email: 'impre10@sa.it').save(validate: false)
+Impresa.create(nome: 'Non siamo mafiosi - fidati SPA', telefono: '88554', descrizione: 'Mafiosi belli', titolare_id: 2, citta_id: 3, verificato: true, congelato: false,indirizzo: 'Via Catania 39', email: 'impre11@sa.it').save(validate: false)
 Impresa.create(nome: 'We uagliò bell stu orologgg', telefono: '36636', descrizione: 'Orolog belli', titolare_id: 4, citta_id: 3, verificato: true, congelato: true,indirizzo: 'Via Catania 30', email: 'impre12@sa.it').save(validate: false)
 
 Prodotto.create(nome:'Minestra di cozze', prezzo: 50, qta: 10, descrizione: 'Minestra bella', impresa_id: 1)
