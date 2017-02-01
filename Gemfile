@@ -15,7 +15,7 @@ gem 'paper_trail'
 gem 'activerecord', '>= 4.2.6'
 gem 'active_record-acts_as'
 # Upload immagini
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave', git: 'https://github.com/carrierwaveuploader/carrierwave.git'
 gem 'carrierwave-crop-on-fly'
 gem "mini_magick"
 # Carrello
@@ -71,6 +71,9 @@ gem 'sdoc', '>= 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# Webserver
+gem 'puma'
 
 group :development, :test do
   # Test Engine

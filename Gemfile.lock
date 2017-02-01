@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/carrierwaveuploader/carrierwave.git
-  revision: 9ef68325dd5ea465b4d340af9a9def10934cd677
-  specs:
-    carrierwave (1.0.0)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      mime-types (>= 1.16)
-
-GIT
   remote: https://github.com/Genkilabs/less-rails
   revision: 7407431b8ae527b0d941c1919c5567c0e59130ea
   specs:
@@ -16,6 +7,15 @@ GIT
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
+
+GIT
+  remote: https://github.com/carrierwaveuploader/carrierwave.git
+  revision: 9ef68325dd5ea465b4d340af9a9def10934cd677
+  specs:
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
 
 GIT
   remote: https://github.com/king601/devise-bootstrapped.git
@@ -245,6 +245,7 @@ GEM
       activerecord (>= 4.0, < 5.2)
       request_store (~> 1.1)
     public_suffix (2.0.5)
+    puma (3.6.2)
     rack (1.6.5)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
@@ -400,6 +401,7 @@ DEPENDENCIES
   less-rails!
   mini_magick
   paper_trail
+  puma
   railroady
   rails (~> 4.2)
   rails-erd
@@ -426,4 +428,4 @@ DEPENDENCIES
   wysiwyg-rails
 
 BUNDLED WITH
-   1.13.1
+   1.14.3
