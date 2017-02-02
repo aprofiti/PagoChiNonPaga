@@ -108,8 +108,12 @@ class Impresa < ActiveRecord::Base
   end
 
   # Ritorna il numero totale di imprese presenti in tutto il DB che sono verificate e NON congelate
-  def num_imprese
+  def self.get_num_imprese
     Impresa.where(:congelato=>false, :verificato=>true).count
+  end
+
+  def self.get_random_imprese
+    1
   end
 
 end
