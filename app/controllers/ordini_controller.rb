@@ -126,7 +126,7 @@ class OrdiniController < ApplicationController
 
       :transactions =>  [{
         :payee => {
-          :email => "fakeaccount@account.com",#@ordine.impresa.titolare.email
+          :email => @ordine.impresa.titolare.email_paypal
         },
         :item_list => {
           #Items vuota, viene riempita in ciclo sottostante
