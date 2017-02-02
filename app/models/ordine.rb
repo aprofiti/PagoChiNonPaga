@@ -39,6 +39,14 @@ class Ordine < ActiveRecord::Base
     self.update_attribute('totale', new_totale)
   end
 
+  def setSpedizione(sped)
+    if(sped>=0)
+      self.update_attribute('spedizione',sped)
+    else
+      errors.add(:spedizione, "La spedizione deve essere >= 0€")
+    end
+  end
+
 
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
