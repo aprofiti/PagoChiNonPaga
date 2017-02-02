@@ -112,8 +112,10 @@ class Impresa < ActiveRecord::Base
     Impresa.where(:congelato=>false, :verificato=>true).count
   end
 
+  # Ritorna un array di max 5 imprese presenti nel DB verificate e NON congelate
   def self.get_random_imprese
-    1
+    imprese= Impresa.where(:congelato=>false, :verificato=>true)
+    imprese.sample(5)
   end
 
 end
