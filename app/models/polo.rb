@@ -4,6 +4,7 @@ class Polo < ActiveRecord::Base
 
   # Validations necessarie per la registrazione
   validates :nome, presence: true
+  validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
 
   def getCitta
     self.citta
@@ -35,7 +36,7 @@ class Polo < ActiveRecord::Base
   def getAdmins
     self.admins
   end
-  
+
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
     self.nome
