@@ -165,6 +165,10 @@ class OrdiniController < ApplicationController
       @pagato = StatoOrdine.find_by_stato(StatoOrdine.PAGATO)
       @ordine = Ordine.find(params[:id])
       @ordine.update_attribute('stato_ordine',@pagato)
+      @cliente= Cliente.find(@ordine.cliente)
+      @titolare= Titolare.find(@ordine.impresa.titolare)
+      OrdineMailer.pagamento_riuscito_cliente(@cliente).deliver_now
+      OrdineMailer.pagamento_riuscito_titolare(@titolare).deliver_now
       flash[:notice]= "Pagamento effettuato correttamente"
       redirect_to cliente_path(id: current_utente.actable_id)
     else
