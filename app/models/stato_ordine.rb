@@ -1,15 +1,6 @@
 class StatoOrdine < ActiveRecord::Base
 
   has_many :ordini
-  @ATTESA = StatoOrdine.find(1).stato
-  @PAGATO = StatoOrdine.find(3).stato
-  @SPEDITO = StatoOrdine.find(4).stato
-  @RICEVUTO = StatoOrdine.find(5).stato
-  @CONFERMA = StatoOrdine.find(2).stato
-
-  class << self
-    attr_accessor :ATTESA,:PAGATO,:SPEDITO,:RICEVUTO,:CONFERMA
-  end
 
 
   # Validations necessarie per la registrazione
@@ -27,7 +18,21 @@ class StatoOrdine < ActiveRecord::Base
     self.stato
   end
 
-
+  def self.ATTESA
+    StatoOrdine.find(1).stato
+  end
+  def self.CONFERMA
+    StatoOrdine.find(2).stato
+  end
+  def self.PAGATO
+    StatoOrdine.find(3).stato
+  end
+  def self.SPEDITO
+    StatoOrdine.find(4).stato
+  end
+  def self.RICEVUTO
+    StatoOrdine.find(5).stato
+  end
 
 
 end
