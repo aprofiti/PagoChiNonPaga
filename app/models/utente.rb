@@ -65,4 +65,9 @@ class Utente < ActiveRecord::Base
     Carrello.find_by! cliente_id: self.actable_id
   end
 
+  # Ritorna il numero totale di Utenti presenti dentro l'intero DB VERIFICATI
+  def self.get_num_utenti
+    Utente.where("confirmed_at NOT NULL").count
+  end
+
 end

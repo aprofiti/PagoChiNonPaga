@@ -7,6 +7,8 @@ class Cliente < ActiveRecord::Base
   belongs_to :citta
   # Validations necessarie per la registrazione
   validates :nome, :cognome, :data_nascita, :cf, :telefono, :email, :password, :password_confirmation, :indirizzo, :citta_id, presence: true
+  validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
+  validates_format_of :cognome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validate :unique_entry #custom validation
   validates_numericality_of :telefono, on: :create
 
@@ -40,6 +42,11 @@ class Cliente < ActiveRecord::Base
       end
     end
     ordini
+  end
+
+  # Ritorna il numero totale di Clienti (sostenitori) all'interno di tutto il DB VERIFICATI
+  def self.get_num_clienti
+    Utente.where("actable_type= 'Cliente' AND confirmed_at NOT NULL").count
   end
 
 end

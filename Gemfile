@@ -18,6 +18,8 @@ gem 'active_record-acts_as'
 gem 'carrierwave', git: 'https://github.com/carrierwaveuploader/carrierwave.git'
 gem 'carrierwave-crop-on-fly'
 gem "mini_magick"
+# Validate email
+gem 'email_validator'
 # Carrello
 gem 'acts_as_shopping_cart', '~> 0.4.1'
 gem 'paypal-sdk-rest'

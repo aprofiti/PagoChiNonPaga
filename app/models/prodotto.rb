@@ -7,6 +7,7 @@ class Prodotto < ActiveRecord::Base
   validates_numericality_of :qta, :greater_than_or_equal_to => 0, on: :create
   validates_numericality_of :prezzo, :greater_than_or_equal_to => 0, on: :create, only_float: true
   validate :unique_entry #custom validation
+  validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
 
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry

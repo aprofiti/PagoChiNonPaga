@@ -11,13 +11,24 @@ class Impresa < ActiveRecord::Base
   validates :nome, :telefono, :email, :descrizione, :citta_id, :titolare_id, :indirizzo, presence: true
   validates_numericality_of :telefono, on: :create
   validates_numericality_of :fax, on: :create, :allow_blank => true
-  validates_format_of :nome, :with => /\A[^\.]*\z/, :message => "non può avere all'interno il carattere '.'"
+  validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates :sitoweb, :format => URI::regexp(%w(http https)), :allow_blank => true
   validates :facebook, :format => URI::regexp(%w(http https)), :allow_blank => true
   validate :unique_entry #custom validation per l'unicita
   validate :has_sottocategoria #custom validation per la presenza di almeno una sottocategoria
+  validates :email, email: true
   # Upload immagini
   mount_uploader :image, ImageUploader
+  validate :file_size
+
+  def file_size
+    max_file_size_mb= 5
+    if self.image?
+      if image.file.size.to_f/(1000*1000) > max_file_size_mb
+        errors.add(:image, "La dimensione dell'immagine (in megabyte) è troppo grande.")
+      end
+    end
+  end
 
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry
@@ -94,6 +105,17 @@ class Impresa < ActiveRecord::Base
       end
     end
     ordini
+  end
+
+  # Ritorna il numero totale di imprese presenti in tutto il DB che sono verificate e NON congelate
+  def self.get_num_imprese
+    Impresa.where(:congelato=>false, :verificato=>true).count
+  end
+
+  # Ritorna un array di max 5 imprese presenti nel DB verificate e NON congelate
+  def self.get_random_imprese
+    imprese= Impresa.where(:congelato=>false, :verificato=>true)
+    imprese.sample(5)
   end
 
 end
