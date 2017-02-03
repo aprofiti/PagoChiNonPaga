@@ -1,32 +1,94 @@
-<%= simple_form_for @titolare, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :nome %>
-  <%= error_span(@titolare[:nome]) %>
-  <%= f.input :cognome %>
-  <%= error_span(@titolare[:cognome]) %>
-  <%= f.input :email %>
-  <%= error_span(@titolare[:email]) %>
-  <%= f.input :cf %>
-  <%= error_span(@titolare[:cf]) %>
-  <%= f.input :piva %>
-  <%= error_span(@titolare[:piva]) %>
-  <%= f.input :data_nascita %>
-  <%= error_span(@titolare[:data_nascita]) %>
-  <%= f.input :telefono %>
-  <%= error_span(@titolare[:telefono]) %>
-  <%= f.input :indirizzo %>
-  <%= error_span(@titolare[:indirizzo]) %>
-  <%= f.input :citta_id ,collection: Citta.all%>
-  <%= error_span(@titolare[:citta_id]) %>
+<%- model_class = Titolare -%>
+<%= simple_form_for @titolare, :html => { :class => 'form-horizontal' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  } do |f| %>
 
-  <%= f.input :password %>
-  <%= error_span(@titolare[:password]) %>
-  <%= f.input :password_confirmation %>
-  <%= error_span(@titolare[:password_confirmation]) %>
+  <div class="row">
+
+    <div class="col-md-12">
+      <!-- Sezione Anagrafica -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4>Dati Anagrafica</h4>
+        </div>
+        <div class="panel-body">
+          <div class="text-center">
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.input :nome %>
+                <%= error_span(@titolare[:nome]) %>
+                <%= f.input :cognome%>
+                <%= error_span(@titolare[:cognome]) %>
+
+              </div>
+              <div class="col-md-6">
+                <%= f.input :cf %>
+                <%= error_span(@titolare[:cf]) %>
+                <%= f.input :data_nascita, as: :string, input_html: {type: :date} %>
+                <%= error_span(@titolare[:data_nascita]) %>
+
+              </div>
+            </div>
+            <div class="page-header"></div>
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.input :indirizzo %> <!-- visualizzare?? tipo relazione -->
+                <%= error_span(@titolare[:indirizzo]) %>
+                <%= f.input :telefono %>
+                <%= error_span(@titolare[:telefono]) %>
+              </div>
+              <div class="col-md-6">
+                <%= f.input :citta_id ,collection: Citta.all%>
+                <%= error_span(@titolare[:citta_id]) %>
+              </div>
+            </div>
+            <div class="page-header"></div>
+            <div class="row">
+              <div class="col-md-6">
+
+                <%= f.input :piva %>
+                <%= error_span(@titolare[:piva]) %>
+              </div>
+            <div class="col-md-6">
+              <%= f.input :email_paypal %>
+              <%= error_span(@titolare[:email_paypal]) %>
+            </div>
+          </div>
+
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+<div class="row">
 
 
-  <%= f.button :submit, :class => 'btn-primary' %>
-  <!--
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                titolari_path, :class => 'btn btn-default' %>
-              -->
+    <div class="col-md-12">
+      <!-- Sezione Dati di Accesso -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4>Dati di accesso</h4>
+        </div>
+        <div class="panel-body">
+          <%= f.input :email %>
+          <%= error_span(@titolare[:email]) %>
+          <%= f.input :password %>
+          <%= error_span(@titolare[:password]) %>
+          <%= f.input :password_confirmation %>
+          <%= error_span(@titolare[:password_confirmation]) %>
+        </div>
+        <div class="panel-footer text-right">
+          <%= f.button :submit, :class => 'btn-primary' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+              root_path, :class => 'btn btn-default',method: :get %>
+        </div>
+      </div>
+    </div>
+</div>
 <% end %>
