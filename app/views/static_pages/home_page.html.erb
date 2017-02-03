@@ -21,3 +21,129 @@
   <li><%= link_to "Crea cliente", new_cliente_path	,method: :get %> </li>
   <li><%= link_to "Crea titolare", new_titolare_path	,method: :get %> </li>
 </ul>
+
+<!-- -->
+
+<div class="jumbotron" style="/* Sfondo: */
+    background-image: radial-gradient(50% 177%, #428BCA 50%, rgba(73,143,225,0.70) 100%);
+    border: 1px solid #979797;">
+  <div class="" style="">
+
+    <%= form_tag(impresa_path(:impresa , :id), method: "get", class: "navbar-form navbar-center",style:"
+      text-align:center;") do %>
+      <div class="form-group" style="width: 60%;">
+      <%= text_field_tag :impresa ,"", class: "form-control typeahead", style: "
+         width: 100%;
+         /* Rectangle 28: */
+         background: #FFFFFF;
+         border: 1px solid #CCCCCC;
+         box-shadow: inset 0px 1px 0px 0px #ECECEC;
+         border-radius: 0px 3px 3px 3px 3px;"%>
+         <%= hidden_field_tag "id", "", :id => "id_imp" %>
+      </div>
+      <%= button_tag(type: 'submit',id: "typesearch", class: "btn btn-default", style: "") do %>
+        <span class="glyphicon glyphicon-search">
+      <% end %>
+
+    <% end %>
+  </div>
+  <h1 class="text-center" style="color:white;">Hello, world!</h1>
+  <p class="text-center" style="color:white;">Rinuncia al addio al pizzo!<br> Entra nella nostra rete di imprese per un mondo migliore</p>
+
+  <!--
+  <div class="row">
+    <div class="col-xs-2 col-xs-offset-2 col-sm-offset-4">
+      <a class="btn btn-primary btn-lg" href="#" role="button" style="/* Bottone Accedi: */
+        background: #F0AD4E;
+        border: 1px solid #ECF2F8;
+        border-radius: 5px;
+        width:150px;">Accedi</a>
+    </div>
+    <div class="col-xs-2 col-xs-offset-1 col-sm-offset-0">
+      <a class="btn btn-primary btn-lg" href="#" role="button" style="/* Bottone Registra: */
+        background: #F0AD4E;
+        border: 1px solid #ECF2F8;
+        border-radius: 5px;
+        width:150px">Registrati</a>
+    </div>
+  </div>
+  -->
+
+</div>
+<div class="container">
+  <div class="row">
+  <!-- Statistiche Sezione SX -->
+    <div class="col-md-6">
+      <div class="" style="
+          color: #4A90E2;
+          border-bottom: 2px solid #4A90E2;
+          padding-bottom: 5px;">
+        <h3>I Nostri Numeri:</h3>
+      </div>
+      <!-- Dati Piattaforma-->
+      <div class="row">
+        <div class="col-xs-7 col-xs-offset-1">
+          <h3>Attivita' Aderenti:</h3>
+        </div>
+        <div class="col-sm-4">
+          <h3><%= Impresa.count %></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-7 col-xs-offset-1">
+          <h3>Marchio Certificato:</h3>
+        </div>
+        <div class="col-sm-4">
+          <h3><%= Impresa.get_num_imprese %></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-7 col-xs-offset-1">
+          <h3>Utenti Iscritti:</h3>
+        </div>
+        <div class="col-sm-4">
+          <h3><%= Utente.get_num_utenti %></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-7 col-xs-offset-1">
+          <h3>Sostenitori:</h3>
+        </div>
+        <div class="col-sm-4">
+          <h3><%= Cliente.get_num_clienti %></h3>
+        </div>
+      </div>
+    </div>
+    <!-- Statistiche Sezione DX -->
+    <div class="col-md-6">
+      <div class="" style="
+          color: #4A90E2;
+          border-bottom: 2px solid #4A90E2;
+          padding-bottom: 5px;">
+        <h3>5 Negozi per te:</h3>
+      </div>
+      <!-- Imprese -->
+      <% Impresa.get_random_imprese.each do |impresa| %>
+        <div class="row">
+          <div class="col-xs-11 col-xs-offset-1">
+            <h3><%= link_to impresa.nome, impresa_path(nome: impresa.nome, id: impresa.id), method: :get %></h3>
+            <h4>
+              <%
+                # Stampo la lista delle categorie separate da una virgola
+                str = ""
+              %>
+              <% impresa.getCategorie.each do |categoria| %>
+                <% str += "#{categoria}, " %>
+              <% end %>
+              <%=
+                # Elimino la punteggiatura all'ultima categoria
+                str.gsub(/\, $/, '')
+              %>
+            </h4>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
