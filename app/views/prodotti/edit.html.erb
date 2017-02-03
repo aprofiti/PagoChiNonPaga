@@ -1,19 +1,6 @@
 <%- model_class = Prodotto -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+<div class="container">
+  <div class="col-md-12">
+    <%= render "form_edit" %>
+  </div>
 </div>
-<%= simple_form_for @prodotto, url: impresa_prodotto_path ,:html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :nome %>
-  <%= error_span(@prodotto[:nome]) %>
-  <%= f.input :prezzo %>
-  <%= error_span(@prodotto[:prezzo]) %>
-  <%= f.input :qta %>
-  <%= error_span(@prodotto[:qta]) %>
-  <%= f.input :descrizione %>
-  <%= error_span(@prodotto[:descrizione]) %>
-
-  <%= hidden_field_tag(:id_p, @prodotto.id) %>
-  <%= f.button :submit, :class => 'btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default',method: :get %>
-<% end %>

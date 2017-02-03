@@ -1,0 +1,35 @@
+<%- model_class = Prodotto -%>
+<%= simple_form_for @prodotto, url: impresa_prodotto_path, :html => { :class => 'form-horizontal' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+  radio_buttons: :horizontal_radio_and_checkboxes,
+  file: :horizontal_file_input,
+  boolean: :horizontal_boolean
+  } do |f| %>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h3>
+    </div>
+    <div class="panel-body">
+      <%= f.input :nome, disabled: true %>
+      <%= error_span(@prodotto[:nome]) %>
+      <%= f.input :prezzo %>
+      <%= error_span(@prodotto[:prezzo]) %>
+      <%= f.input :qta %>
+      <%= error_span(@prodotto[:qta]) %>
+      <div class="page-header"></div>
+      <%= f.label :descrizione %>
+      <%= f.text_area :descrizione, :class => "WYSIWYG" %>
+      <%= error_span(@prodotto[:descrizione]) %>
+    </div>
+    <div class="panel-footer">
+      <%= f.button :submit, :class => 'btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default',method: :get %>
+    </div>
+  </div>
+
+  <%= hidden_field_tag(:id_p, @prodotto.id) %>
+<% end %>
