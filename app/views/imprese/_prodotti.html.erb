@@ -1,0 +1,54 @@
+<%- model_class = Prodotto -%>
+<%= simple_form_for @impresa, :html => { :class => 'form-horizontal' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+  radio_buttons: :horizontal_radio_and_checkboxes,
+  file: :horizontal_file_input,
+  boolean: :horizontal_boolean
+  } do |f| %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Sezione Catalogo-->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <%= link_to t('.AggiungiProdotto', :default => t("helpers.links.AggiungiProdotto")),
+                        new_impresa_prodotto_path(@impresa), :class => 'btn btn-success pull-right', method: :get%>
+          <h4>Catalogo Prodotti</h4>
+        </div>
+        <div class="panel-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th><%= model_class.human_attribute_name(:id) %></th>
+                <th><%= model_class.human_attribute_name(:nome) %></th>
+                <th><%= model_class.human_attribute_name(:prezzo) %></th>
+                <th><%= model_class.human_attribute_name(:qta) %></th>
+                <th><%= model_class.human_attribute_name(:created_at) %></th>
+                <th><%=t '.actions', :default => t("helpers.actions") %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @impresa.prodotti.each do |prodotto| %>
+              <tr>
+                <td><%= link_to prodotto.id, impresa_prodotto_path(impresa_nome: @impresa.nome, id_p: prodotto.id), method: :get %></td>
+                <td><%= prodotto.nome %></td>
+                <td><%= prodotto.prezzo %></td>
+                <td><%= prodotto.qta %></td>
+                <td><%= prodotto.created_at %></td>
+                <td><%= link_to "", edit_impresa_prodotto_path(impresa_nome: @impresa.nome, nome: prodotto.nome, id_p: prodotto.id), :class => 'fa fa-pencil',method: :get %>
+                    <%= link_to "", impresa_prodotto_path(impresa_nome: @impresa.nome, nome: prodotto.nome, id_p: prodotto.id),
+                            :method => :delete,
+                            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                            :class => 'fa fa-trash'  %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
