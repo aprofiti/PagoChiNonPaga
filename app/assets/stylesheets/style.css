@@ -25,6 +25,10 @@ navbar-nav{
   color: green;
 }
 
+.page-header{
+  color: #428BCA;
+}
+
 /* Generati dallo Scaffolding
 */
 .field_with_errors {
