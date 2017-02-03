@@ -5,6 +5,8 @@
   <%= error_span(@ordine[:cliente_id]) %>
   <%= f.input :impresa_id %>
   <%= error_span(@ordine[:impresa_id]) %>
+  <%= f.input :spedizione %>
+  <%= error_span(@ordine[:spedizione]) %>
 
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

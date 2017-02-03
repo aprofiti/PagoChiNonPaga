@@ -17,7 +17,6 @@
   <div class="page-header">
     <h3>Lista dei prodotti</h3>
   </div>
-
   <table class="table table-striped">
     <thead>
       <tr>
@@ -38,6 +37,9 @@
       <% end %>
     </tbody>
   </table>
+  <!-- Totale e Spedizione -->
+  <dt><strong><%= model_class.human_attribute_name(:spedizione) %>:</strong></dt>
+  <dd><%= @ordine.spedizione %></dd>
   <dt><strong><%= model_class.human_attribute_name(:totale) %>:</strong></dt>
   <dd><%= @ordine.totale %></dd>
 </dl>
