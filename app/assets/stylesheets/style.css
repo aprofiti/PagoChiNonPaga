@@ -54,3 +54,8 @@ navbar-nav{
   text-align: center;
   margin-bottom: 0px;
 }
+
+/* Pagina Negozio */
+.cropbox_wrapper img, .previewbox_wrapper img{
+  width: 100%;
+}

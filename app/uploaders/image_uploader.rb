@@ -6,7 +6,9 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::MiniMagick
 
-  process crop: [1920,1080]
+  # TODO: Sistemare risoluzione
+  process crop: [640,360]
+  #process crop: [1920,1080]
   process :quality => 100
 
   # Override the directory where uploaded files will be stored.
