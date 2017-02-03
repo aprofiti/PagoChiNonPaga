@@ -28,6 +28,10 @@ RSpec.describe OrdiniController, type: :controller do
     @impresa = createImpresa("impresa","imp@resa.com",citta,@titolare,false,true)
     @prodotto = Prodotto.create(nome: "prodotto",qta: 10, prezzo: 10, impresa_id: @impresa.id,descrizione: "descrizioneee")
     @stato = StatoOrdine.create(stato: "In attesa")
+    @stato2 = StatoOrdine.create(stato: 'Richiesta conferma')
+    @stato3 = StatoOrdine.create(stato: 'Pagato')
+    @stato4 = StatoOrdine.create(stato: 'Spedito')
+    @stato5 = StatoOrdine.create(stato: 'Ricevuto')
   end
 
   it "should get ordine" do
@@ -52,15 +56,7 @@ RSpec.describe OrdiniController, type: :controller do
     get :edit , id: ordine.id
     expect(response).to_not render_template :edit
   end
-=begin
-  it "should get edit ordine to titolare" do
-    prodotti = [@prodotto]
-    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti)
-    sign_in @titolare
-    get :edit , id: ordine.id
-    expect(response).to render_template :edit
-  end
-=end
+
   it "should destroy order" do
     prodotti = [@prodotto]
     ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti,totale: 0.0)
@@ -69,10 +65,10 @@ RSpec.describe OrdiniController, type: :controller do
     expect(Ordine.count).to eq(0)
   end
 
-  it "should destroy order" do
+
+  it "should not destroy order" do
     prodotti = [@prodotto]
-    stato2 = StatoOrdine.create(stato: "Pagato")
-    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: stato2.id,prodotti: prodotti,totale: 0.0)
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato3.id,prodotti: prodotti,totale: 0.0,spedizione:1.0)
     sign_in @cliente
     put :destroy, id: ordine.id
     expect(Ordine.count).to eq(1)
