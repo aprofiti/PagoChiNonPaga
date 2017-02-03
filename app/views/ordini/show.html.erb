@@ -42,7 +42,10 @@
   <dd><%= @ordine.totale %></dd>
 </dl>
 
+<!-- Pagamento disponibile solo se si è in conferma richiesta -->
+<% if @ordine.getStato == StatoOrdine.CONFERMA %>
 <%= link_to "Pocedi al pagamento con paypal", paypal_url_ordine_path(id: @ordine.id), method: :post %>
+<%end%>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               ordini_path, :class => 'btn btn-default' ,method: :get %>

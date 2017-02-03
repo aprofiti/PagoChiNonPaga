@@ -42,12 +42,16 @@ class Ordine < ActiveRecord::Base
   def setSpedizione(sped)
     if(sped>=0)
       self.update_attribute('spedizione',sped)
+      @conferma = StatoOrdine.find_by_stato(StatoOrdine.CONFERMA)
+      self.update_attribute('stato_ordine_id',@conferma.id) #lo stato va in conferma, in attesa della decisione del cliente
     else
       errors.add(:spedizione, "La spedizione deve essere >= 0€")
     end
   end
 
-
+  def getTotale
+    self.totale + self.spedizione
+  end
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
     "#" + self.id.to_s + "Cliente: " + self.cliente_id.to_s

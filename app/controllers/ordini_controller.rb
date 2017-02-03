@@ -6,9 +6,9 @@ class OrdiniController < ApplicationController
   before_action :authenticate_utente!
   before_filter :is_mio_ordine?, only: [:show,:destroy]
   before_filter :is_titolare?, only: :edit
-  before_filter :is_in_attesa?, only: :destroy
+  before_filter :is_eliminabile?, only: :destroy
   before_action :restore_quantita, only: :destroy
-
+  before_action :is_in_conferma?, only: :paypal_url
   # GET /ordini
   # GET /ordini.json
   def index
@@ -55,7 +55,7 @@ class OrdiniController < ApplicationController
         if prodotti == nil
           ordine_riuscito= false
         else
-          @ordine= Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti,totale: 0.0)
+          @ordine= Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti,totale: 0.0,spedizione: 0.0)
           @ordine.setTotale
         end
       end
@@ -132,9 +132,14 @@ class OrdiniController < ApplicationController
           #Items vuota, viene riempita in ciclo sottostante
           :items => []},
         :amount =>  {
-          :total =>  @ordine.totale,
-          :currency =>  "EUR" },
-        :description =>  "This is the payment transaction description." }]})
+          :total =>  @ordine.getTotale,
+          :currency =>  "EUR" ,
+          :details => {
+            :shipping => @ordine.spedizione,
+            :subtotal => @ordine.totale
+          }
+        },
+        :description =>  "Transazione ordine #{@ordine.id}, impresa #{@ordine.impresa.getNome}" }]})
 
         unique_ids= @ordine.prodotti.uniq
         unique_ids.each do |prodotto|
@@ -142,7 +147,7 @@ class OrdiniController < ApplicationController
             :name => prodotto.nome,
             :price => prodotto.prezzo,
             :currency => "EUR",
-            :quantity => @ordine.occorrenzeProdotto(prodotto.id)
+            :quantity => @ordine.occorrenzeProdotto(prodotto.id),
             })
         end
     if @payment.create
@@ -165,10 +170,12 @@ class OrdiniController < ApplicationController
       @pagato = StatoOrdine.find_by_stato(StatoOrdine.PAGATO)
       @ordine = Ordine.find(params[:id])
       @ordine.update_attribute('stato_ordine',@pagato)
+=begin  Decommentare per mandare mail a titolare e cliente dopo ordine pagato
       @cliente= Cliente.find(@ordine.cliente)
       @titolare= Titolare.find(@ordine.impresa.titolare)
       OrdineMailer.pagamento_riuscito_cliente(@cliente).deliver_now
       OrdineMailer.pagamento_riuscito_titolare(@titolare).deliver_now
+=end
       flash[:notice]= "Pagamento effettuato correttamente"
       redirect_to cliente_path(id: current_utente.actable_id)
     else
@@ -235,8 +242,9 @@ e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'a
       @ordine = Ordine.find(params[:id])
     end
 
-  def is_in_attesa?
-    if (@ordine.getStato == StatoOrdine.ATTESA)
+  def is_eliminabile?
+    @ordine = Ordine.find(params[:id])
+    if (@ordine.getStato == StatoOrdine.ATTESA || @ordine.getStato == StatoOrdine.CONFERMA)
     else
       flash[:notice] = "Non puoi annullare questo ordine"
       redirect_back
@@ -250,6 +258,14 @@ e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'a
       @prodotto = Prodotto.find(id)
       qta_attuale = @prodotto.getQuantita
       @prodotto.update_attribute('qta',qta + qta_attuale)
+    end
+  end
+
+  def is_in_conferma?
+    @ordine = Ordine.find(params[:id])
+    if (@ordine.getStato == StatoOrdine.CONFERMA)
+    else
+      redirect_back
     end
   end
 
