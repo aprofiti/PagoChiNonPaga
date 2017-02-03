@@ -1,38 +1,86 @@
-<%= simple_form_for @impresa, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.file_field :image %>
-  <%= f.cropbox :image %>
-  <%= f.input :nome %>
-  <%= error_span(@impresa[:nome]) %>
-  <%= f.input :telefono %>
-  <%= error_span(@impresa[:telefono]) %>
-  <%= f.input :fax %>
-  <%= error_span(@impresa[:fax]) %>
-  <%= f.input :giorni_orari %>
-  <%= error_span(@impresa[:giorni_orari]) %>
-  <%= f.input :email %>
-  <%= error_span(@impresa[:email]) %>
-  <%= f.input :indirizzo %>
-  <%= error_span(@impresa[:indirizzo]) %>
-  <%= f.input :sitoweb %>
-  <%= error_span(@impresa[:sitoweb]) %>
-  <%= f.input :facebook %>
-  <%= error_span(@impresa[:facebook]) %>
-  <%= f.input :descrizione, as: :text %>
-  <%= error_span(@impresa[:descrizione]) %>
+<%= simple_form_for @impresa, :html => { :class => 'form-horizontal' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+  radio_buttons: :horizontal_radio_and_checkboxes,
+  file: :horizontal_file_input,
+  boolean: :horizontal_boolean
+  } do |f| %>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4>Dati impresa</h4>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :nome%>
+          <%= error_span(@impresa[:nome]) %>
+          <%= f.input :indirizzo%>
+          <%= error_span(@impresa[:indirizzo]) %>
+          <%= f.input :citta_id ,collection: Citta.all %>
+          <%= error_span(@impresa[:citta_id]) %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :email %>
+          <%= error_span(@impresa[:email]) %>
+          <%= f.input :telefono %>
+          <%= error_span(@impresa[:telefono]) %>
+          <%= f.input :fax %>
+          <%= error_span(@impresa[:fax]) %>
+        </div>
+      </div>
+      <div class="page-header"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.association :sottocategorie, input_html: { size: 10 }%>
+          <%= error_span(@impresa[:sottocategorie]) %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :giorni_orari%>
+          <%= error_span(@impresa[:giorni_orari]) %>
+          <%= f.input :sitoweb %>
+          <%= error_span(@impresa[:sitoweb]) %>
+          <%= f.input :facebook %>
+          <%= error_span(@impresa[:facebook]) %>
+        </div>
+      </div>
+      <div class="page-header"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.label :descrizione %>
+          <%= f.text_area :descrizione, :class => "WYSIWYG" %>
+          <%= error_span(@impresa[:descrizione]) %>
+        </div>
+      </div>
+
+      <div class="page-header"></div>
+      <div class="row">
+        <div class="col-xs-12 col-md-7">
+          <%= f.previewbox :image, :class => "previewCopertina" %>
+        </div>
+        <div class="col-xs-12 col-md-5">
+          <%= f.label :image %>
+          <%= f.file_field :image %>
+          <%= f.cropbox :image, height: 200, width: 300, :class => "previewCopertina" %>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <%= f.button :submit, :class => 'btn-primary' %>
+    </div>
+  </div>
+
+  <!-- TMP da risolvere -->
   <%= f.input :latitude %>
   <%= error_span(@impresa[:latitude]) %>
   <%= f.input :longitude %>
   <%= error_span(@impresa[:longitude]) %>
   <%= f.input :verificato %>
   <%= error_span(@impresa[:verificato]) %>
-  <%= f.input :congelato %>
-  <%= error_span(@impresa[:congelato]) %>
-  <%= f.input :citta_id ,collection: Citta.all%>
-  <%= f.association :sottocategorie %>
-  <%= error_span(@impresa[:sottocategorie]) %>
-  <%= error_span(@impresa[:citta_id]) %>
-  <%= hidden_field_tag(:id,@impresa.id) %>
-  <%= f.button :submit, :class => 'btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                imprese_path, :class => 'btn btn-default' %>
+    <%= f.input :congelato %>
+    <%= error_span(@impresa[:congelato]) %>
+
+    <%= hidden_field_tag(:id,@impresa.id) %>
+
 <% end %>
