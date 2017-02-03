@@ -1,4 +1,15 @@
 it:
+  simple_form:
+    hints:
+      impresa:
+        giorni_orari: "es. lun-ven 10:00-13:00, sab: 15:00-18:00"
+        sottocategorie: Tenere premuto CTRL per selezioni multiple
+        sitoweb: es. http://www.tuosito.it
+        facebook: link alla pagina Facebook
+    labels:
+      impresa:
+        giorni_orari: Orario Lavorativo
+
   activerecord:
     models:
       admin:
