@@ -10,44 +10,50 @@
     <div class="panel-body">
       <dl class="dl-horizzontal">
         <div class="row">
-          <div class="col col-md-3 col-md-offset-3">
+          <div class="col col-sm-3 col-sm-offset-3">
             <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
             <dd><%= @titolare.nome %></dd>
           </div>
-          <div class="col col-md-3">
+          <div class="col col-sm-3">
             <dt><strong><%= model_class.human_attribute_name(:cognome) %>:</strong></dt>
             <dd><%= @titolare.cognome %></dd>
           </div>
         </div>
         <div class="row">
-          <div class="col col-md-3 col-md-offset-3">
+          <div class="col col-sm-3 col-sm-offset-3">
             <dt><strong><%= model_class.human_attribute_name(:cf) %>:</strong></dt>
             <dd><%= @titolare.cf %></dd>
           </div>
-          <div class="col col-md-3">
+          <div class="col col-sm-3">
             <dt><strong><%= model_class.human_attribute_name(:data_nascita) %>:</strong></dt>
             <dd><%= @titolare.data_nascita %></dd>
           </div>
         </div>
         <div class="row">
-          <div class="col col-md-3 col-md-offset-3">
+          <div class="col col-sm-3 col-sm-offset-3">
             <dt><strong><%= model_class.human_attribute_name(:indirizzo) %>:</strong></dt>
             <dd><%= @titolare.indirizzo %></dd>
           </div>
-          <div class="col col-md-3">
+          <div class="col col-sm-3">
             <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
             <dd><%= @titolare.telefono %></dd>
           </div>
         </div>
         <div class="page-header"></div>
         <div class="row">
-          <div class="col col-md-3 col-md-offset-3">
+          <div class="col col-sm-3 col-sm-offset-3">
             <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
             <dd><%= @titolare.email %></dd>
           </div>
-          <div class="col col-md-3">
+          <div class="col col-sm-3">
             <dt><strong><%= model_class.human_attribute_name(:piva) %>:</strong></dt>
             <dd><%= @titolare.piva %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-sm-3 col-sm-offset-3">
+            <dt><strong><%= model_class.human_attribute_name(:paypal) %>:</strong></dt>
+            <dd><%= @titolare.email_paypal %></dd>
           </div>
         </div>
     </div>

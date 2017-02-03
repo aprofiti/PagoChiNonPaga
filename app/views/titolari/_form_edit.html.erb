@@ -52,6 +52,9 @@
             <%= error_span(@titolare[:telefono]) %>
             <%= f.input :indirizzo %> <!-- visualizzare?? tipo relazione -->
             <%= error_span(@titolare[:indirizzo]) %>
+            <div class="page-header"></div>
+            <%= f.input :email_paypal %>
+            <%= error_span(@titolare[:email_paypal]) %>
           </div>
           <div class="panel-footer text-right">
             <%= f.submit "Modifica Anagrafica", :class => 'btn btn-primary' %>
