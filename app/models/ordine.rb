@@ -49,9 +49,14 @@ class Ordine < ActiveRecord::Base
     end
   end
 
-  def getTotale
-    self.totale + self.spedizione
+  def getSpedizione
+    self.spedizione
   end
+
+  def getTotale
+    self.totale + self.getSpedizione
+  end
+
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
     "#" + self.id.to_s + "Cliente: " + self.cliente_id.to_s
