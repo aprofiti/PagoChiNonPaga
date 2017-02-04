@@ -2,7 +2,8 @@
 <div class="col-md-12" style="margin-top: 10px">
   <div class="panel panel-info">
     <div class="panel-heading">
-      <h2>Resoconto Ordine</h2>
+      <h3 class="pull-right" style="margin-right: 20px"><%= @ordine.getStato %></h3>
+      <h2>Resoconto Ordine #<%= @ordine.id %></h2>
     </div>
     <div class="panel-body">
       <dl class="dl-horizontal">
@@ -24,6 +25,8 @@
             <tr>
               <th><%= model_class.human_attribute_name(:prodotto_id) %></th>
               <th><%= model_class.human_attribute_name(:nome) %></th>
+
+              <th><%= model_class.human_attribute_name(:prezzo) %></th>
               <th><%= model_class.human_attribute_name(:qta) %></th>
             </tr>
           </thead>
@@ -32,7 +35,8 @@
             <tr>
               <td><%= prodotto.id %></td>
               <td><%= prodotto.nome %></td>
-              <td><%= @ordine.occorrenzeProdotto(prodotto.id)%></td>
+              <td><%= prodotto.prezzo %></td>
+              <td><%= @ordine.occorrenzeProdotto(prodotto.id) %></td>
             </tr>
             <% end %>
           </tbody>
@@ -40,9 +44,9 @@
         <!-- Totale e Spedizione -->
         <div class="align-rigth">
           <dt><strong><%= model_class.human_attribute_name(:spedizione) %>:</strong></dt>
-          <dd><%= @ordine.spedizione %></dd>
+          <dd><%= @ordine.getSpedizione %></dd>
           <dt><strong><%= model_class.human_attribute_name(:totale) %>:</strong></dt>
-          <dd><%= @ordine.totale %></dd>
+          <dd><%= @ordine.getTotale %></dd>
         </div>
       </dl>
 
@@ -50,10 +54,12 @@
 
     </div>
     <div class="panel-footer">
-      <!-- Pagamento disponibile solo se si è in conferma richiesta -->
-      <% if @ordine.getStato == StatoOrdine.CONFERMA %>
-      <%= link_to "Pocedi al pagamento con paypal", paypal_url_ordine_path(id: @ordine.id), method: :post %>
-      <%end%>
+      <% if current_utente.isCliente? %>
+        <!-- Pagamento disponibile solo se si è in conferma richiesta -->
+        <% if @ordine.getStato == StatoOrdine.CONFERMA %>
+          <%= link_to "Pocedi al pagamento con paypal", paypal_url_ordine_path(id: @ordine.id), method: :post %>
+        <%end%>
+      <% end %>
 
       <%= link_to t('.back', :default => t("helpers.links.back")),
                     ordini_path, :class => 'btn btn-default' ,method: :get %>

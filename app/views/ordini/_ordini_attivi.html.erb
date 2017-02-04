@@ -5,16 +5,31 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:impresa_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:totale) %></th>
       <th><%= model_class.human_attribute_name(:stato_ordine) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @ordiniAttivi.each do |ordine| %>
-    <tr>
+    <% stato = ordine.stato_ordine.stato %>
+    <% if stato == StatoOrdine.ATTESA
+        tipoClasse = 'warning'
+       elsif stato == StatoOrdine.SPEDITO
+        tipoClasse = 'success'
+      elsif stato == StatoOrdine.CONFERMA
+        tipoClasse = 'info'
+      elsif stato == StatoOrdine.PAGATO
+        tipoClasse = 'danger'
+       else
+        tipoClasse = 'default'
+       end
+    %>
+    <tr class = <%= "#{tipoClasse}" %> >
       <td><%= link_to ordine.id, ordine_path(ordine), method: :get %></td>
       <td><%= Impresa.find(ordine.impresa_id).name %></td>
       <td><%= ordine.created_at %></td>
+      <td><%= ordine.getTotale %></td>
       <td><%= ordine.stato_ordine.name %></td>
       <td>
         <%= link_to "", ordine_path(ordine), :class => 'fa fa-share', method: :get%>
