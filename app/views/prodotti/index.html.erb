@@ -27,11 +27,12 @@
         <td><%= prodotto.impresa_id %></td>
         <td><%= prodotto.created_at %></td>
         <td>
-
+        <% if utente_signed_in? && current_utente.isCliente? %>
           <%= simple_form_for prodotto, url:  add_cart_carrello_path(current_utente.actable_id, prodotto_id: prodotto.id),method: :post , :html => { :class => 'form-horizontal' } do |f| %>
             <%= f.button :submit , "Aggiungi al carrello"%>
             <%= f.number_field :qta, :class => 'text_field',:value => 1 %>
           <%end%>
+        <%end%>
         <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_impresa_prodotto_path(nome: prodotto.nome,id_p: params[:id]), :class => 'btn btn-default btn-xs',method: :get %>
