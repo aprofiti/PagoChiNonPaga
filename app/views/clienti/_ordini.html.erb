@@ -11,10 +11,10 @@
   <tbody>
     <% @cliente.getOrdiniAttivi.each do |ordine| %>
     <tr>
-      <td><%= ordine.id %></td>
+      <td><%= link_to ordine.id, ordine_path(ordine), method: :get %></td>
       <td><%= Impresa.find(ordine.impresa_id).name %></td>
       <td><%= ordine.created_at %></td>
-      <td><%= ordine.stato_ordine.name %></td>      
+      <td><%= ordine.stato_ordine.name %></td>
     </tr>
     <% end %>
   </tbody>
