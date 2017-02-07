@@ -13,25 +13,25 @@
       <h3><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h3>
     </div>
     <div class="panel-body">
-      <%= f.input :nome, disabled: true %>
-      <%= error_span(@prodotto[:nome]) %>
-      <%= f.input :prezzo %>
-      <%= error_span(@prodotto[:prezzo]) %>
-      <%= f.input :qta %>
-      <%= error_span(@prodotto[:qta]) %>
-      <div class="page-header"></div>
-      <%= f.label :descrizione %>
-      <%= f.text_area :descrizione, :class => "WYSIWYG" %>
-      <%= error_span(@prodotto[:descrizione]) %>
-      <div class="page-header"></div>
       <div class="row">
-        <div class="col-xs-12 col-md-7">
-          <%= f.previewbox :image, :class => "previewCopertina" %>
+        <div class="col-md-6" style="margin-top:30px;">
+          <%= f.input :nome, disabled: true %>
+          <%= error_span(@prodotto[:nome]) %>
+          <%= f.input :prezzo %>
+          <%= error_span(@prodotto[:prezzo]) %>
+          <%= f.input :qta %>
         </div>
-        <div class="col-xs-12 col-md-5">
+        <div class="col-md-6">
           <%= f.label :image %>
           <%= f.file_field :image %>
-          <%= f.cropbox :image, height: 200, width: 300, :class => "previewCopertina" %>
+          <%= f.cropbox :image, height: 200, width: 300 %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.label :descrizione %>
+          <%= f.text_area :descrizione, :class => "WYSIWYG" %>
+          <%= error_span(@prodotto[:descrizione]) %>
         </div>
       </div>
     </div>
