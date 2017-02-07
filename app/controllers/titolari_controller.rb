@@ -29,6 +29,7 @@ class TitolariController < ApplicationController
 
     respond_to do |format|
       if @titolare.save
+        CustomMailer.titolare_creato(@titolare).deliver_now
         format.html { redirect_to @titolare, notice: 'Titolare was successfully created.' }
         format.json { render :show, status: :created, location: @titolare }
       else

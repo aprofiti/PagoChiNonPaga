@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      La spedizione del tuo ordine <%= @ordine.id %> è stata aggiornata. Prosegui con l'acquisto.<br>
+      <%= link_to" Mostra ordine", ordine_path(id: @ordine.id)  %>
+    </p
+  </body>
+</html>

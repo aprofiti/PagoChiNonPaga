@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+
+      <p>
+        È stato creato un nuovo ordine relativo all'impresa <%= @ordine.impresa.nome %>. <br>
+        Calcolare e aggiornare i costi di spedizione per permettere al cliente di poter completare l'ordine e continuare con l'acquisto.<br>
+        <%= link_to "Vai alla pagina dell'ordine", ordine_path(id: @ordine.id) %> <br>
+        ----Dettagli Ordine----
+      <br>
+        Id Ordine: <%= @ordine.id %><br>
+        Totale: <%= @ordine.totale %>
+      </p
+
+  </body>
+</html>

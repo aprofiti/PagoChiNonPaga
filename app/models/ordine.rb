@@ -41,9 +41,11 @@ class Ordine < ActiveRecord::Base
 
   def setSpedizione(sped)
     if(sped>=0)
+      @cliente= Cliente.find(self.cliente.id)
       self.update_attribute('spedizione',sped)
       @conferma = StatoOrdine.find_by_stato(StatoOrdine.CONFERMA)
       self.update_attribute('stato_ordine_id',@conferma.id) #lo stato va in conferma, in attesa della decisione del cliente
+      CustomMailer.modifica_stato_ordine(@cliente,self).deliver_now
     else
       errors.add(:spedizione, "La spedizione deve essere >= 0€")
     end

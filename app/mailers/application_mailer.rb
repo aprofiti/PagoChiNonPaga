@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "pricetrackerservice@gmail.com"
+  default from: "pricetrackerservicemail@gmail.com"
   layout 'mailer'
 end

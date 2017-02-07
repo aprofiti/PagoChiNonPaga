@@ -57,6 +57,8 @@ class OrdiniController < ApplicationController
         else
           @ordine= Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti,totale: 0.0,spedizione: 0.0)
           @ordine.setTotale
+          @titolare = Titolare.find(@ordine.impresa.titolare.id)
+          CustomMailer.ordine_creato(@titolare,@ordine).deliver_now
         end
       end
     else
@@ -104,9 +106,11 @@ class OrdiniController < ApplicationController
   # DELETE /ordini/1
   # DELETE /ordini/1.json
   def destroy
-
+    @titolare = Titolare.find(@ordine.impresa.titolare.id)
     @ordine.destroy
     respond_to do |format|
+      CustomMailer.ordine_annullato(@titolare,@ordine).deliver_now
+
       format.html { redirect_to ordini_url, notice: 'Ordine was successfully destroyed.' }
       format.json { head :no_content }
     end
