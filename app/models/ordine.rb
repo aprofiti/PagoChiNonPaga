@@ -61,7 +61,7 @@ class Ordine < ActiveRecord::Base
 
   # Necessario per mostrare il nome dell'Entita in RailsAdmin
   def name
-    "#" + self.id.to_s + "Cliente: " + self.cliente_id.to_s
+    "#Ordine: #{self.id} del Cliente: #{self.cliente_id}"
   end
 
 end
