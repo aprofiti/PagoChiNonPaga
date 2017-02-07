@@ -171,11 +171,12 @@ class OrdiniController < ApplicationController
       @ordine = Ordine.find(params[:id])
       @ordine.update_attribute('stato_ordine',@pagato)
 =begin  Decommentare per mandare mail a titolare e cliente dopo ordine pagato
+
+=end
       @cliente= Cliente.find(@ordine.cliente)
       @titolare= Titolare.find(@ordine.impresa.titolare)
-      OrdineMailer.pagamento_riuscito_cliente(@cliente).deliver_now
-      OrdineMailer.pagamento_riuscito_titolare(@titolare).deliver_now
-=end
+      CustomMailer.pagamento_riuscito_cliente(@cliente).deliver_now
+      CustomMailer.pagamento_riuscito_titolare(@titolare).deliver_now
       flash[:notice]= "Pagamento effettuato correttamente"
       redirect_to cliente_path(id: current_utente.actable_id)
     else

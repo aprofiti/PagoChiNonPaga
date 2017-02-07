@@ -1,4 +1,4 @@
-class OrdineMailer < ApplicationMailer
+class CustomMailer < ApplicationMailer
   def pagamento_riuscito_cliente(user)
     @user = user
     mail(to: @user.email, subject: 'Pagamento Riuscito Cliente')
