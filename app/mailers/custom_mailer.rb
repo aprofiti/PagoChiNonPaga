@@ -31,7 +31,7 @@ class CustomMailer < ApplicationMailer
   def ordine_annullato(titolare,ordine)
     @titolare = titolare
     @ordine= ordine
-    mail(to: @cliente.email, subject: "Ordine per #{@ordine.impresa.nome} annullato")
+    mail(to: @titolare.email, subject: "Ordine per #{@ordine.impresa.nome} annullato")
   end
 
   def modifica_stato_ordine(cliente,ordine)
