@@ -14,7 +14,7 @@
       <div class="panel panel-info">
         <div class="panel-heading">
           <%= link_to t('.AggiungiProdotto', :default => t("helpers.links.AggiungiProdotto")),
-                        new_impresa_prodotto_path(@impresa), :class => 'btn btn-success pull-right', method: :get%>
+                        new_impresa_prodotto_path(impresa_nome: params[:nome], id: params[:id]), :class => 'btn btn-success pull-right', method: :get%>
           <h4>Catalogo Prodotti</h4>
         </div>
         <div class="panel-body">
