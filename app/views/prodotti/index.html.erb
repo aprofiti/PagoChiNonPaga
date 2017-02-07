@@ -18,32 +18,39 @@
   <tbody>
     <% @prodotti.each do |prodotto| %>
     <% if prodotto.impresa_id.to_i == params[:id].to_i %>
-      <tr>
-        <td><%= prodotto.id %></td>
-        <td><%= link_to prodotto.nome, impresa_prodotto_path(impresa_nome: params[:impresa_nome],nome: prodotto.nome, id_p: prodotto.id,method: :get) %></td>
-        <td><%= prodotto.prezzo %></td>
-        <td><%= prodotto.qta %></td>
-        <td><%= prodotto.descrizione %></td>
-        <td><%= prodotto.impresa_id %></td>
-        <td><%= prodotto.created_at %></td>
-        <td>
-        <% if utente_signed_in? && current_utente.isCliente? %>
-          <%= simple_form_for prodotto, url:  add_cart_carrello_path(current_utente.actable_id, prodotto_id: prodotto.id),method: :post , :html => { :class => 'form-horizontal' } do |f| %>
-            <%= f.button :submit , "Aggiungi al carrello"%>
-            <%= f.number_field :qta, :class => 'text_field',:value => 1 %>
+      <% if !prodotto.eliminato %>
+
+          <tr>
+          <td><%= prodotto.id %></td>
+          <td><%= link_to prodotto.nome, impresa_prodotto_path(impresa_nome: params[:impresa_nome],nome: prodotto.nome, id_p: prodotto.id,method: :get) %></td>
+          <td><%= prodotto.prezzo %></td>
+          <td><%= prodotto.qta %></td>
+          <td><%= prodotto.descrizione %></td>
+          <td><%= prodotto.impresa_id %></td>
+          <td><%= prodotto.created_at %></td>
+          <td>
+          <% if utente_signed_in? && current_utente.isCliente? %>
+            <%= simple_form_for prodotto, url:  add_cart_carrello_path(current_utente.actable_id, prodotto_id: prodotto.id),method: :post , :html => { :class => 'form-horizontal' } do |f| %>
+              <%= f.button :submit , "Aggiungi al carrello"%>
+              <%= f.number_field :qta, :class => 'text_field',:value => 1 %>
+            <%end%>
           <%end%>
+          <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_impresa_prodotto_path(nome: prodotto.nome,id_p: params[:id]), :class => 'btn btn-default btn-xs',method: :get %>
+<!--
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  impresa_prodotto_path(nome: prodotto.nome, id_p: prodotto.id),
+                  :method => :delete,
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-xs btn-danger' %>
+-->
+            <%= link_to "",impresa_prodotto_elimina_prodotto_path(impresa_nome: prodotto.impresa.nome, prodotto_nome: prodotto.nome, id_p: prodotto.id), :method => :post,:class => 'fa fa-trash'  %>
+
+          <% end %>
+          </td>
+          </tr>
         <%end%>
-        <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_impresa_prodotto_path(nome: prodotto.nome,id_p: params[:id]), :class => 'btn btn-default btn-xs',method: :get %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                impresa_prodotto_path(nome: prodotto.nome, id_p: prodotto.id),
-                :method => :delete,
-                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                :class => 'btn btn-xs btn-danger' %>
-        <% end %>
-       </td>
-      </tr>
       <%end%>
     <% end %>
   </tbody>

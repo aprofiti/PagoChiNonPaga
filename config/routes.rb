@@ -22,7 +22,9 @@ Rails.application.routes.draw do
 
   #PATH del tipo /imprese/:nome/prodotti/:nome
   resources :imprese, param: :nome , :nome => /[^\/]+/ do
-    resources :prodotti, param: :nome, :nome => /[^\/]+/
+    resources :prodotti, param: :nome, :nome => /[^\/]+/ do
+      post :elimina_prodotto
+    end
   end
 
   #PATH del tipo /categorie/:nome/sottocategorie/:nome

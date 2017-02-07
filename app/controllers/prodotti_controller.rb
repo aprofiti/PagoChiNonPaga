@@ -77,6 +77,13 @@ class ProdottiController < ApplicationController
     end
   end
 
+  def elimina_prodotto
+    @prodotto= Prodotto.find(params[:id_p])
+    @prodotto.clearQuantita
+    @prodotto.setEliminato(true)
+    redirect_back#impresa_prodotti_path(impresa_nome: @prodotto.impresa.nome,id: @prodotto.impresa.id)
+  end
+
   private
 
     def id_index_match
@@ -104,6 +111,6 @@ class ProdottiController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prodotto_params
-      params.require(:prodotto).permit(:nome, :prezzo, :qta, :descrizione,:impresa_id, :image)
+      params.require(:prodotto).permit(:nome, :prezzo, :qta, :descrizione,:impresa_id, :image, :eliminato)
     end
 end

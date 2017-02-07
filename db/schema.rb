@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207140123) do
+ActiveRecord::Schema.define(version: 20170207171617) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20170207140123) do
     t.integer  "impresa_id"
     t.string   "avimage"
     t.string   "image"
+    t.boolean  "eliminato"
   end
 
   add_index "prodotti", ["impresa_id"], name: "index_prodotti_on_impresa_id"

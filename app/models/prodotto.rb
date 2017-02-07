@@ -21,10 +21,10 @@ class Prodotto < ActiveRecord::Base
       end
     end
   end
-  
+
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry
-    matched_entry = Prodotto.where(['LOWER(nome) = LOWER(?) AND impresa_id=?', self.nome, self.impresa_id]).first #il '?' e' un parametro per SQL passato da self.campo
+    matched_entry = Prodotto.where(['LOWER(nome) = LOWER(?) AND impresa_id=? AND eliminato=?', self.nome, self.impresa_id, false]).first #il '?' e' un parametro per SQL passato da self.campo
     errors.add(:base, 'Prodotto già presente.') if matched_entry && (matched_entry.id != self.id) #se non sono io stesso allora c'e' un errore
   end
 
@@ -54,4 +54,14 @@ class Prodotto < ActiveRecord::Base
     nuova_qta = self.qta - qta
     self.update_attribute('qta', nuova_qta)
   end
+
+  def clearQuantita
+    self.update_attribute('qta', 0)
+  end
+
+
+  def setEliminato(eliminato)
+    self.update_attribute('eliminato', eliminato)
+  end
+
 end
