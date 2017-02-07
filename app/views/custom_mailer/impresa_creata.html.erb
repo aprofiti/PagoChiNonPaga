@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      È stata creata una nuova impresa assegnata a questo polo. Non è attualmente verificata e non comparirà sul portale.
+      Verificarla per renderla visibile </br>
+       </br>
+      -----Dettagli impresa----
+       </br>
+      Nome: <%= @impresa.nome %> <br>
+      Titolare: <%= @impresa.titolare.nome %> <%=@impresa.titolare.cognome %><br>
+      Email titolare: <%= @impresa.titolare.email %>
+    </p>
+
+  </body>
+</html>

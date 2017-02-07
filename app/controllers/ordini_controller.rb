@@ -31,12 +31,38 @@ class OrdiniController < ApplicationController
   # GET /ordini/1
   # GET /ordini/1.json
   def show
+    case @ordine.stato_ordine.stato
+    when StatoOrdine.ATTESA
+      # Il titolare puo' modificare i dati per inserire costo di spedizione
+      flash[:alert] = "In attesa che il titolare inserisca le spese di Spedizione"
+    when StatoOrdine.CONFERMA
+      # In attesa che il clienti accetti i costi di spedizione e paghi l'ordine
+      flash[:notice] = "In attesa di conferma da parte dell'utente"
+    when StatoOrdine.PAGATO
+      # In attesa che il Titolare contrassegni l'ordine come spedito
+      # Non puo' essere modificato dal Titolare
+      flash[:error] = "Ordine gia' pagato dal cliente. Impossibile modificare ordine."
+    when StatoOrdine.SPEDITO
+      # In attesa di conferma ricezione da parte del cliente
+      # Non puo' essere modificato dal Titolare
+      flash[:notice] = "Ordine in attesa che il cliente confermi il ricevimento dell'ordine"
+    when StatoOrdine.RICEVUTO
+      # L'ordine e' completato e non puo' essere modificato
+      flash[:success] = "Ordine completato"
+    else
+    end
   end
-
-
 
   # GET /ordini/1/edit
   def edit
+    # Si puo' modificare solamente se e' in ATTESA oppure in CONFERMA
+    stato = @ordine.stato_ordine.stato
+    if (stato == StatoOrdine.PAGATO) ||
+       (stato == StatoOrdine.SPEDITO) ||
+       (stato == StatoOrdine.RICEVUTO)
+       # Reindirizzo poiche' e' un ordine non modificabile
+       redirect_to ordine_path(@ordine)
+    end
   end
 
   def prepara_ordini
@@ -57,6 +83,11 @@ class OrdiniController < ApplicationController
         else
           @ordine= Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti,totale: 0.0,spedizione: 0.0)
           @ordine.setTotale
+=begin
+          decommentare per invio email ordine creato
+          @titolare = Titolare.find(@ordine.impresa.titolare.id)
+          CustomMailer.ordine_creato(@titolare,@ordine).deliver_now
+=end
         end
       end
     else
@@ -105,8 +136,15 @@ class OrdiniController < ApplicationController
   # DELETE /ordini/1.json
   def destroy
 
+=begin
+    decommentare per inviare email a destroy ordine
+    @titolare = Titolare.find(@ordine.impresa.titolare.id)
+    @cliente = Cliente.find(@ordine.cliente.id)
+=end
     @ordine.destroy
     respond_to do |format|
+      #CustomMailer.ordine_annullato(@titolare,@cliente,@ordine).deliver_now
+
       format.html { redirect_to ordini_url, notice: 'Ordine was successfully destroyed.' }
       format.json { head :no_content }
     end
@@ -170,11 +208,12 @@ class OrdiniController < ApplicationController
       @pagato = StatoOrdine.find_by_stato(StatoOrdine.PAGATO)
       @ordine = Ordine.find(params[:id])
       @ordine.update_attribute('stato_ordine',@pagato)
-=begin  Decommentare per mandare mail a titolare e cliente dopo ordine pagato
+=begin
+      Decommentare per mandare mail a titolare e cliente dopo ordine pagato
       @cliente= Cliente.find(@ordine.cliente)
       @titolare= Titolare.find(@ordine.impresa.titolare)
-      OrdineMailer.pagamento_riuscito_cliente(@cliente).deliver_now
-      OrdineMailer.pagamento_riuscito_titolare(@titolare).deliver_now
+      CustomMailer.pagamento_riuscito_cliente(@cliente).deliver_now
+      CustomMailer.pagamento_riuscito_titolare(@titolare).deliver_now
 =end
       flash[:notice]= "Pagamento effettuato correttamente"
       redirect_to cliente_path(id: current_utente.actable_id)
@@ -271,6 +310,6 @@ e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'a
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordine_params
-      params.require(:ordine).permit(:data, :cliente_id, :impresa_id, :stato_ordine_id)
+      params.require(:ordine).permit(:data, :cliente_id, :impresa_id, :stato_ordine_id, :spedizione)
     end
 end
