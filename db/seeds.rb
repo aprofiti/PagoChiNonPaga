@@ -89,11 +89,16 @@ Cliente.create(nome: 'Bello Figo', cognome: 'Gu', cf: 'uh21ueh', telefono: '7467
 Cliente.create(nome: 'Sancho', cognome: 'Panza', cf: 'ncknskc', telefono: '9566656', data_nascita: Date.parse('01/03/1995'), email: 'cli17@ente.it', password: '123456', password_confirmation: '123456', indirizzo: 'Via agnellone', citta_id: 3)
 Cliente.create(nome: 'Miss', cognome: 'Mr', cf: 'dkowmsmc', telefono: '78446778', data_nascita: Date.parse('01/03/1991'), email: 'cli18@ente.it', password: '123456', password_confirmation: '123456', indirizzo: 'Via vitello', citta_id: 6)
 
-Titolare.create(nome: 'Tito', cognome: 'Lare', email: 'tito1@lare.it', password: '123456', password_confirmation: '123456', telefono: '3423556', data_nascita: Date.parse('01/05/1930'), cf: 'sdgsg', indirizzo: 'via della vita', citta_id: 8,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
-Titolare.create(nome: 'Giangiovanni', cognome: 'Itto', email: 'tito2@lare.it', password: '123456', password_confirmation: '123456', telefono: '73249', data_nascita: Date.parse('09/06/1955'), cf: 'kfmkimke', indirizzo: 'via in culo', citta_id: 1,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
-Titolare.create(nome: 'Mimmo', cognome: 'Trippa', email: 'tito3@lare.it', password: '123456', password_confirmation: '123456', telefono: '000222', data_nascita: Date.parse('03/05/1907'), cf: 'einjnf', indirizzo: 'via stanchezza', citta_id: 10,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
-Titolare.create(nome: 'Edoardo', cognome: 'Dei Boschi', email: 'tito4@lare.it', password: '123456', password_confirmation: '123456', telefono: '634622', data_nascita: Date.parse('04/11/1991'), cf: 'ijgin', indirizzo: 'via del sospiro', citta_id: 2,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
-Titolare.create(nome: 'Dio', cognome: 'Bello', email: 'tito5@lare.it', password: '123456', password_confirmation: '123456', telefono: '987765654', data_nascita: Date.parse('08/08/1964'), cf: 'wefjun', indirizzo: 'via alla menta', citta_id: 3,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
+Titolare.create(nome: 'Tito', cognome: 'Lare', email: 'tito1@lare.it', password: '123456', password_confirmation: '123456', telefono: '3423556',
+piva: "abcde", data_nascita: Date.parse('01/05/1930'), cf: 'sdgsg', indirizzo: 'via della vita', citta_id: 8,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
+Titolare.create(nome: 'Giangiovanni', cognome: 'Itto', email: 'tito2@lare.it', password: '123456', password_confirmation: '123456', telefono: '73249',
+piva: "abcde", data_nascita: Date.parse('09/06/1955'), cf: 'kfmkimke', indirizzo: 'via in culo', citta_id: 1,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
+Titolare.create(nome: 'Mimmo', cognome: 'Trippa', email: 'tito3@lare.it', password: '123456', password_confirmation: '123456', telefono: '000222',
+piva: "abcde", data_nascita: Date.parse('03/05/1907'), cf: 'einjnf', indirizzo: 'via stanchezza', citta_id: 10,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
+Titolare.create(nome: 'Edoardo', cognome: 'Dei Boschi', email: 'tito4@lare.it', password: '123456', password_confirmation: '123456', telefono: '634622',
+piva: "abcde", data_nascita: Date.parse('04/11/1991'), cf: 'ijgin', indirizzo: 'via del sospiro', citta_id: 2,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
+Titolare.create(nome: 'Dio', cognome: 'Bello', email: 'tito5@lare.it', password: '123456', password_confirmation: '123456', telefono: '987765654',
+piva: "abcde", data_nascita: Date.parse('08/08/1964'), cf: 'wefjun', indirizzo: 'via alla menta', citta_id: 3,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
 
 Impresa.create(nome: 'Bazzecole al chilo', telefono: '2423', descrizione: 'Mah', titolare_id: 1, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 31', email: 'impre1@sa.it').save(validate: false)
 Impresa.create(nome: 'La Cozza Felice', telefono: '32224', descrizione: 'Cozze belle', titolare_id: 1, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 31', email: 'impre2@sa.it').save(validate: false)
