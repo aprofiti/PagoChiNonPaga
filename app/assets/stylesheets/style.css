@@ -1,6 +1,6 @@
 /* Necessario per evitare che la barra del menu copra il contenuto della pagina */
 body {
-  padding-top: 60px;
+  padding-top: 50px;
   background: #fff;
 }
 
