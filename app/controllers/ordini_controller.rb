@@ -31,12 +31,38 @@ class OrdiniController < ApplicationController
   # GET /ordini/1
   # GET /ordini/1.json
   def show
+    case @ordine.stato_ordine.stato
+    when StatoOrdine.ATTESA
+      # Il titolare puo' modificare i dati per inserire costo di spedizione
+      flash[:alert] = "In attesa che il titolare inserisca le spese di Spedizione"
+    when StatoOrdine.CONFERMA
+      # In attesa che il clienti accetti i costi di spedizione e paghi l'ordine
+      flash[:notice] = "In attesa di conferma da parte dell'utente"
+    when StatoOrdine.PAGATO
+      # In attesa che il Titolare contrassegni l'ordine come spedito
+      # Non puo' essere modificato dal Titolare
+      flash[:error] = "Ordine gia' pagato dal cliente. Impossibile modificare ordine."
+    when StatoOrdine.SPEDITO
+      # In attesa di conferma ricezione da parte del cliente
+      # Non puo' essere modificato dal Titolare
+      flash[:notice] = "Ordine in attesa che il cliente confermi il ricevimento dell'ordine"
+    when StatoOrdine.RICEVUTO
+      # L'ordine e' completato e non puo' essere modificato
+      flash[:success] = "Ordine completato"
+    else
+    end
   end
-
-
 
   # GET /ordini/1/edit
   def edit
+    # Si puo' modificare solamente se e' in ATTESA oppure in CONFERMA
+    stato = @ordine.stato_ordine.stato
+    if (stato == StatoOrdine.PAGATO) ||
+       (stato == StatoOrdine.SPEDITO) ||
+       (stato == StatoOrdine.RICEVUTO)
+       # Reindirizzo poiche' e' un ordine non modificabile
+       redirect_to ordine_path(@ordine)
+    end
   end
 
   def prepara_ordini
@@ -271,6 +297,6 @@ e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'a
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordine_params
-      params.require(:ordine).permit(:data, :cliente_id, :impresa_id, :stato_ordine_id)
+      params.require(:ordine).permit(:data, :cliente_id, :impresa_id, :stato_ordine_id, :spedizione)
     end
 end
