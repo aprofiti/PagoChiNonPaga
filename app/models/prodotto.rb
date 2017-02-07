@@ -9,6 +9,19 @@ class Prodotto < ActiveRecord::Base
   validate :unique_entry #custom validation
   validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
 
+  # Uploaer Immagini
+  mount_uploader :image, ImageUploader
+  validate :file_size
+
+  def file_size
+    max_file_size_mb= 5
+    if self.image?
+      if image.file.size.to_f/(1000*1000) > max_file_size_mb
+        errors.add(:image, "La dimensione dell'immagine (in megabyte) è troppo grande.")
+      end
+    end
+  end
+  
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry
     matched_entry = Prodotto.where(['LOWER(nome) = LOWER(?) AND impresa_id=?', self.nome, self.impresa_id]).first #il '?' e' un parametro per SQL passato da self.campo

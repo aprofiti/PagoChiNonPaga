@@ -23,6 +23,17 @@
       <%= f.label :descrizione %>
       <%= f.text_area :descrizione, :class => "WYSIWYG" %>
       <%= error_span(@prodotto[:descrizione]) %>
+      <div class="page-header"></div>
+      <div class="row">
+        <div class="col-xs-12 col-md-7">
+          <%= f.previewbox :image, :class => "previewCopertina" %>
+        </div>
+        <div class="col-xs-12 col-md-5">
+          <%= f.label :image %>
+          <%= f.file_field :image %>
+          <%= f.cropbox :image, height: 200, width: 300, :class => "previewCopertina" %>
+        </div>
+      </div>
     </div>
     <div class="panel-footer">
       <%= f.button :submit, :class => 'btn-primary' %>

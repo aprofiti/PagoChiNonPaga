@@ -12,10 +12,11 @@
   <dt><strong><%= model_class.human_attribute_name(:qta) %>:</strong></dt>
   <dd><%= @prodotto.qta %></dd>
   <dt><strong><%= model_class.human_attribute_name(:descrizione) %>:</strong></dt>
-  <dd><%= @prodotto.descrizione %></dd>
+  <dd><%= @prodotto.descrizione.html_safe %></dd>
   <dt><strong><%= model_class.human_attribute_name(:impresa_id) %>:</strong></dt>
   <dd><%= @prodotto.impresa_id %></dd>
 </dl>
+<%= image_tag(@prodotto.image, :class => "img-responsive") %>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default' ,method: :get %>

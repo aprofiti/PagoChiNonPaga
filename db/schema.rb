@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130172616) do
+ActiveRecord::Schema.define(version: 20170206133245) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(version: 20170130172616) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "impresa_id"
+    t.string   "avimage"
+    t.string   "image"
   end
 
   add_index "prodotti", ["impresa_id"], name: "index_prodotti_on_impresa_id"
