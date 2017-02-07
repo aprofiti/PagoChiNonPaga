@@ -60,7 +60,7 @@ end
 
 
 def createTitolare(nome,cognome,citta)
-  titolare= Titolare.create(nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "via catania 2",citta_id: citta.id,piva: 'piva')
+  titolare= Titolare.create(nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "via catania 2",citta_id: citta.id,piva: 'piva',email_paypal: "email@fake.com")
   return titolare
 end
 
