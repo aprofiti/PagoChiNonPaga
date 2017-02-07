@@ -50,8 +50,12 @@ class ImpreseController < ApplicationController
     @impresa.titolare_id = current_utente.actable_id
     respond_to do |format|
       if @impresa.save
+
+=begin
+        decommentare per inviare email creazione impresa
         @titolare= Titolare.find(@impresa.titolare.id)
         CustomMailer.impresa_creata(@titolare,@impresa).deliver_now
+=end
         format.html { redirect_to impresa_path(nome: @impresa.nome,id: @impresa.id), notice: 'Impresa was successfully created.' }
         format.json { render :show, status: :created, location: @impresa }
       else

@@ -83,8 +83,11 @@ class OrdiniController < ApplicationController
         else
           @ordine= Ordine.create(cliente_id: current_utente.actable_id, stato_ordine_id: 1,impresa_id: impresa ,prodotti: prodotti,totale: 0.0,spedizione: 0.0)
           @ordine.setTotale
+=begin
+          decommentare per invio email ordine creato
           @titolare = Titolare.find(@ordine.impresa.titolare.id)
           CustomMailer.ordine_creato(@titolare,@ordine).deliver_now
+=end
         end
       end
     else
@@ -132,10 +135,15 @@ class OrdiniController < ApplicationController
   # DELETE /ordini/1
   # DELETE /ordini/1.json
   def destroy
+
+=begin
+    decommentare per inviare email a destroy ordine
     @titolare = Titolare.find(@ordine.impresa.titolare.id)
+    @cliente = Cliente.find(@ordine.cliente.id)
+=end
     @ordine.destroy
     respond_to do |format|
-      CustomMailer.ordine_annullato(@titolare,@ordine).deliver_now
+      #CustomMailer.ordine_annullato(@titolare,@cliente,@ordine).deliver_now
 
       format.html { redirect_to ordini_url, notice: 'Ordine was successfully destroyed.' }
       format.json { head :no_content }
@@ -200,13 +208,13 @@ class OrdiniController < ApplicationController
       @pagato = StatoOrdine.find_by_stato(StatoOrdine.PAGATO)
       @ordine = Ordine.find(params[:id])
       @ordine.update_attribute('stato_ordine',@pagato)
-=begin  Decommentare per mandare mail a titolare e cliente dopo ordine pagato
-
-=end
+=begin
+      Decommentare per mandare mail a titolare e cliente dopo ordine pagato
       @cliente= Cliente.find(@ordine.cliente)
       @titolare= Titolare.find(@ordine.impresa.titolare)
       CustomMailer.pagamento_riuscito_cliente(@cliente).deliver_now
       CustomMailer.pagamento_riuscito_titolare(@titolare).deliver_now
+=end
       flash[:notice]= "Pagamento effettuato correttamente"
       redirect_to cliente_path(id: current_utente.actable_id)
     else

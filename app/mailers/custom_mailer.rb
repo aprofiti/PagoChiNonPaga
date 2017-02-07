@@ -1,3 +1,19 @@
+=begin
+I seguenti metodi sono commentati per la fase di testing.
+Decommentare per corretto funzionamento
+
+  -Invio email creazione impresa
+  -Invio email destroy ordine
+  -Invio email pagamento paypal riuscito
+  -Invio email ordine creato prepara_ordini
+  -Invio email creazione titolare
+  -Invio email modifica costo spedizione model ordine
+=end
+
+
+
+
+
 class CustomMailer < ApplicationMailer
   def pagamento_riuscito_cliente(cliente,ordine)
     @cliente = cliente
@@ -28,10 +44,11 @@ class CustomMailer < ApplicationMailer
     mail(to: @titolare.email, subject: "Nuovo ordine per #{@ordine.impresa.nome}")
   end
 
-  def ordine_annullato(titolare,ordine)
+  def ordine_annullato(titolare,cliente,ordine)
     @titolare = titolare
+    @cliente = cliente
     @ordine= ordine
-    mail(to: @titolare.email, subject: "Ordine per #{@ordine.impresa.nome} annullato")
+    mail(to: [@titolare.email,@cliente.email], subject: "Ordine per #{@ordine.impresa.nome} annullato")
   end
 
   def modifica_stato_ordine(cliente,ordine)
