@@ -8,9 +8,9 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # TODO: Sistemare risoluzione
   process crop: [640,360], :if => :checkModelProdotto
-  process crop: [2560,640], :if => :checkModelImpresa
+  process crop: [1920,600], :if => :checkModelImpresa
   #process crop: [1920,1080]
-  process :quality => 100
+  process :quality => 70
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
