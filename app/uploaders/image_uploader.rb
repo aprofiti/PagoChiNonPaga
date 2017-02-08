@@ -7,9 +7,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # TODO: Sistemare risoluzione
-  process crop: [640,360]
+  process crop: [640,360], :if => :checkModelProdotto
+  process crop: [1920,600], :if => :checkModelImpresa
   #process crop: [1920,1080]
-  process :quality => 100
+  process :quality => 70
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -40,7 +41,21 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
-    "/assets/template/Sfondo Negozio.png"
+    if  model.class.name == "Prodotto"
+      "/assets/template/missing.png"
+    else
+      "/assets/template/Sfondo Negozio.png"
+    end
+  end
+
+  private
+  def checkModelImpresa(impresa)
+    model.class.name == "Impresa"
+  end
+
+  private
+  def checkModelProdotto(prodotto)
+    model.class.name == "Prodotto"
   end
 
   # Process files as they are uploaded:
