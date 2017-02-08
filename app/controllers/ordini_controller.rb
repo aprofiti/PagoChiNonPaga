@@ -41,7 +41,7 @@ class OrdiniController < ApplicationController
     when StatoOrdine.PAGATO
       # In attesa che il Titolare contrassegni l'ordine come spedito
       # Non puo' essere modificato dal Titolare
-      flash[:error] = "Ordine gia' pagato dal cliente. Impossibile modificare ordine."
+      flash[:notice] = "Ordine pagato. In attesa di spedizione da parte del titolare"
     when StatoOrdine.SPEDITO
       # In attesa di conferma ricezione da parte del cliente
       # Non puo' essere modificato dal Titolare
@@ -55,9 +55,9 @@ class OrdiniController < ApplicationController
 
   # GET /ordini/1/edit
   def edit
-    # Si puo' modificare solamente se e' in ATTESA oppure in CONFERMA
+    # Si puo' modificare solamente se e' in ATTESA oppure in PAGATO
     stato = @ordine.stato_ordine.stato
-    if (stato == StatoOrdine.PAGATO) ||
+    if (stato == StatoOrdine.CONFERMA) ||
        (stato == StatoOrdine.SPEDITO) ||
        (stato == StatoOrdine.RICEVUTO)
        # Reindirizzo poiche' e' un ordine non modificabile
@@ -121,6 +121,11 @@ class OrdiniController < ApplicationController
   # PATCH/PUT /ordini/1
   # PATCH/PUT /ordini/1.json
   def update
+    if @ordine.stato_ordine.stato == StatoOrdine.ATTESA
+      @ordine.setSpedizione(params[:ordine][:spedizione].to_i)
+    elsif @ordine.stato_ordine.stato == StatoOrdine.PAGATO
+      @ordine.update_attribute('stato_ordine',StatoOrdine.find_by_stato(params[:ordine][:stato]))
+    end
     respond_to do |format|
       if @ordine.update(ordine_params)
         format.html { redirect_to @ordine, notice: 'Ordine was successfully updated.' }

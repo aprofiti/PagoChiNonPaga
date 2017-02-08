@@ -22,11 +22,11 @@
     <div class="page-header"></div>
     <div class="row">
       <div class="col-sm-3 col-sm-offset-2">
-        <%= f.input :spedizione %>
+        <%= f.input :spedizione , :disabled => @ordine.spedizione?%>
         <%= error_span(@ordine[:spedizione]) %>
       </div>
       <div class="col-sm-3 col-sm-offset-2">
-        <%= f.association :stato_ordine %>
+        <%= f.association :stato_ordine ,prompt: @ordine.stato_ordine.stato,collection: @ordine.getStatiDisponibili,:disabled =>!@ordine.spedizione?%>
         <%= error_span(@ordine[:stato]) %>
       </div>
 </div>
