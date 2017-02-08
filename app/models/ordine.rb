@@ -64,4 +64,15 @@ class Ordine < ActiveRecord::Base
     "#Ordine: #{self.id} del Cliente: #{self.cliente_id}"
   end
 
+  def getStatiDisponibili
+    stati =[ self.stato_ordine]
+    if self.stato_ordine.stato == StatoOrdine.PAGATO
+      stati << StatoOrdine.find(4)
+    end
+    stati
+  end
+
+  def spedizione?
+    self.stato_ordine.stato == StatoOrdine.PAGATO
+  end
 end
