@@ -19,6 +19,7 @@
     <tbody>
       <% @prodotti.each do |prodotto| %>
         <% if prodotto.impresa_id.to_i == params[:id].to_i %>
+          <% if !prodotto.eliminato %>
         <tr>
           <td><%= prodotto.id %></td>
           <td><%= link_to prodotto.nome, impresa_prodotto_path(impresa_nome: params[:impresa_nome],nome: prodotto.nome, id_p: prodotto.id,method: :get) %></td>
@@ -45,12 +46,13 @@
             <% end %>
             </td>
           </tr>
+            <% end %>
           <% end %>
       <% end %>
     </tbody>
   </table>
   <%= hidden_field_tag(:id,params[:id]) %>
-  
+
   <%= link_to t('.profilo_impresa', :default => t("helpers.links.profilo_impresa")),
         impresa_path(nome: params[:impresa_nome],id: params[:id]),
         :class => 'btn btn-default',method: :get %>
