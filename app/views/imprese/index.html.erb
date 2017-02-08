@@ -1,73 +1,76 @@
 <%- model_class = Impresa -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
 <div class="container">
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:nome) %></th>
-      <th><%= model_class.human_attribute_name(:telefono) %></th>
-      <th><%= model_class.human_attribute_name(:fax) %></th>
-      <th><%= model_class.human_attribute_name(:giorni_orari) %></th>
-      <th><%= model_class.human_attribute_name(:email) %></th>
-      <th><%= model_class.human_attribute_name(:sitoweb) %></th>
-      <th><%= model_class.human_attribute_name(:facebook) %></th>
-      <th><%= model_class.human_attribute_name(:descrizione) %></th>
-      <th><%= model_class.human_attribute_name(:latitude) %></th>
-      <th><%= model_class.human_attribute_name(:longitude) %></th>
-      <th><%= model_class.human_attribute_name(:indirizzo) %></th>
-      <th><%= model_class.human_attribute_name(:verificato) %></th>
-      <th><%= model_class.human_attribute_name(:congelato) %></th>
-      <th><%= model_class.human_attribute_name(:citta_id) %></th>
-      <th><%= model_class.human_attribute_name(:titolare_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @imprese.each do |impresa| %>
+  <div class="page-header">
+    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  </div>
+  <div class="container">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%=  impresa.id %></td>
-        <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id),method: :get %></td>
-        <td><%= impresa.telefono %></td>
-        <td><%= impresa.fax %></td>
-        <td><%= impresa.giorni_orari %></td>
-        <td><%= impresa.email %></td>
-        <td><%= impresa.sitoweb %></td>
-        <td><%= impresa.facebook %></td>
-        <td><%= impresa.descrizione %></td>
-        <td><%= impresa.latitude %></td>
-        <td><%= impresa.longitude %></td>
-        <td><%= impresa.indirizzo %></td>
-        <td><%= impresa.verificato %></td>
-        <td><%= impresa.congelato %></td>
-        <td><%= impresa.citta_id %></td>
-        <td><%= impresa.titolare_id %></td>
-        <td><%= impresa.created_at %></td>
-        <td>
-          <% # Controllo se l'utente e' il titolare dell'impresa %>
-          <% if  utente_signed_in? && current_utente.isTitolare? %>
-            <% if  current_utente.isMyImpresa?(impresa) %>
-              <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_impresa_path(nome: impresa.nome, id: impresa.id), :class => 'btn btn-default btn-xs',method: :get %>
-              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      impresa_path(impresa),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-            <% end %>
-          <% end %>
-       </td>
+        <th><%= model_class.human_attribute_name(:id) %></th>
+        <th><%= model_class.human_attribute_name(:nome) %></th>
+        <th><%= model_class.human_attribute_name(:telefono) %></th>
+        <th><%= model_class.human_attribute_name(:fax) %></th>
+        <th><%= model_class.human_attribute_name(:giorni_orari) %></th>
+        <th><%= model_class.human_attribute_name(:email) %></th>
+        <th><%= model_class.human_attribute_name(:sitoweb) %></th>
+        <th><%= model_class.human_attribute_name(:facebook) %></th>
+        <th><%= model_class.human_attribute_name(:descrizione) %></th>
+        <th><%= model_class.human_attribute_name(:latitude) %></th>
+        <th><%= model_class.human_attribute_name(:longitude) %></th>
+        <th><%= model_class.human_attribute_name(:indirizzo) %></th>
+        <th><%= model_class.human_attribute_name(:verificato) %></th>
+        <th><%= model_class.human_attribute_name(:congelato) %></th>
+        <th><%= model_class.human_attribute_name(:citta_id) %></th>
+        <th><%= model_class.human_attribute_name(:titolare_id) %></th>
+        <th><%= model_class.human_attribute_name(:created_at) %></th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
+    </thead>
+    <tbody>
+      <% @imprese.each do |impresa| %>
+        <tr>
+          <td><%=  impresa.id %></td>
+          <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id),method: :get %></td>
+          <td><%= impresa.telefono %></td>
+          <td><%= impresa.fax %></td>
+          <td><%= impresa.giorni_orari %></td>
+          <td><%= impresa.email %></td>
+          <td><%= impresa.sitoweb %></td>
+          <td><%= impresa.facebook %></td>
+          <td><%= impresa.descrizione %></td>
+          <td><%= impresa.latitude %></td>
+          <td><%= impresa.longitude %></td>
+          <td><%= impresa.indirizzo %></td>
+          <td><%= impresa.verificato %></td>
+          <td><%= impresa.congelato %></td>
+          <td><%= impresa.citta_id %></td>
+          <td><%= impresa.titolare_id %></td>
+          <td><%= impresa.created_at %></td>
+          <td>
+            <% # Controllo se l'utente e' il titolare dell'impresa %>
+            <% if  utente_signed_in? && current_utente.isTitolare? %>
+              <% if  current_utente.isMyImpresa?(impresa) %>
+                <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_impresa_path(nome: impresa.nome, id: impresa.id), :class => 'btn btn-default btn-xs',method: :get %>
+                <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        impresa_path(impresa),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-xs btn-danger' %>
+              <% end %>
+            <% end %>
+         </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
 
-<% if utente_signed_in? && current_utente.isTitolare?%>
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_impresa_path,
-            :class => 'btn btn-primary',method: :get %>
-<% end %>
+  <% if utente_signed_in? && current_utente.isTitolare?%>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_impresa_path,
+              :class => 'btn btn-primary',method: :get %>
+  <% end %>
+
+</div>
