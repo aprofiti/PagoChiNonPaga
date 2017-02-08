@@ -1,32 +1,57 @@
 <%- model_class = Prodotto -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+<div class="container">
+  <div class="page-header">
+    <h1><%= @prodotto.nome %></h1>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-6">
+              <%= image_tag(@prodotto.image, :class => "img-responsive") %>
+            </div>
+            <div class="col-md-6">
+              <dl class="dl-horizontal text-right">
+                <div class="row">
+                  <dt><strong><%= model_class.human_attribute_name(:impresa_id) %>:</strong></dt>
+                  <dd><%= Impresa.find(@prodotto.impresa_id).getNome %></dd>
+                </div>
+                <div class="row">
+                  <dt><strong><%= model_class.human_attribute_name(:prezzo) %>:</strong></dt>
+                  <dd><%= @prodotto.prezzo %></dd>
+                </div>
+                <div class="row">
+                  <dt><strong><%= model_class.human_attribute_name(:quantità_Disponibile) %>:</strong></dt>
+                  <dd><%= @prodotto.qta %></dd>
+                </div>
+                <div class="row">
+                  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+                  <dd><%= @prodotto.nome %></dd>
+                </div>
+                <div class="row">
+                  <dt><strong><%= model_class.human_attribute_name(:descrizione) %>:</strong></dt>
+                  <dd><%= @prodotto.descrizione.html_safe %></dd>
+                </div>
+              </dl>
+            </div>
+          <div class="pull-right">
+            <% if utente_signed_in? %>
+              <% if !current_utente.isTitolare? %>
+                <%= simple_form_for @prodotto,url:  add_cart_carrello_path(current_utente.actable_id, prodotto_id: params[:id_p]),method: :post , :html => { :class => 'form-horizontal' } do |f| %>
+                  <%= f.button :submit , "Aggiungi al carrello" %>
+                  <%= f.number_field :qta, :class => 'text_field',:value => 1 %>
+                <%end%>
+              <%end%>
+            <% else %>
+              <%= button_to "Aggiungi al carrello",  new_utente_session_path, :class => "btn btn-info" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="panel-footer">
+            <%= link_to t('.back', :default => t("helpers.links.back")),
+                        impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default' ,method: :get %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<p id="notice"><%= notice %></p>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
-  <dd><%= @prodotto.nome %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:prezzo) %>:</strong></dt>
-  <dd><%= @prodotto.prezzo %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:qta) %>:</strong></dt>
-  <dd><%= @prodotto.qta %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:descrizione) %>:</strong></dt>
-  <dd><%= @prodotto.descrizione.html_safe %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:impresa_id) %>:</strong></dt>
-  <dd><%= @prodotto.impresa_id %></dd>
-</dl>
-<%= image_tag(@prodotto.image, :class => "img-responsive") %>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              impresa_prodotti_path(id: @prodotto.impresa_id), :class => 'btn btn-default' ,method: :get %>
-<% if utente_signed_in? %>
-  <% if !current_utente.isTitolare? %>
-  <%= simple_form_for @prodotto,url:  add_cart_carrello_path(current_utente.actable_id, prodotto_id: params[:id_p]),method: :post , :html => { :class => 'form-horizontal' } do |f| %>
-    <%= f.button :submit , "Aggiungi al carrello"%>
-      <%= f.number_field :qta, :class => 'text_field',:value => 1 %>
-    <%end%>
-  <%end%>
-  <% else %>
-    <%= button_to "Aggiungi al carrello",  new_utente_session_path%>
-<% end %>
