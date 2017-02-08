@@ -42,16 +42,13 @@
           </tbody>
         </table>
         <!-- Totale e Spedizione -->
-        <div class="align-rigth">
+        <div class="pull-right">
           <dt><strong><%= model_class.human_attribute_name(:spedizione) %>:</strong></dt>
           <dd><%= @ordine.getSpedizione %></dd>
           <dt><strong><%= model_class.human_attribute_name(:totale) %>:</strong></dt>
           <dd><%= @ordine.getTotale %></dd>
         </div>
       </dl>
-
-
-
     </div>
     <div class="panel-footer">
       <% if current_utente.isCliente? %>
@@ -60,7 +57,6 @@
           <%= link_to "Pocedi al pagamento con paypal", paypal_url_ordine_path(id: @ordine.id), method: :post %>
         <%end%>
       <% end %>
-
       <%= link_to t('.back', :default => t("helpers.links.back")),
                     ordini_path, :class => 'btn btn-default' ,method: :get %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
