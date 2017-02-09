@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.describe ClientiController, type: :routing do
   describe "routing" do
 
-    it "routes to #index" do
-      expect(:get => "/clienti").to route_to("clienti#index")
-    end
-
     it "routes to #new" do
       expect(:get => "/clienti/new").to route_to("clienti#new")
     end

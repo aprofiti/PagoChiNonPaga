@@ -12,11 +12,11 @@ RSpec.describe ImpreseController, type: :routing do
     end
 
     it "routes to #show" do
-      expect(:get => "/imprese/1").to route_to("imprese#show", :id => "1")
+      expect(:get => "/imprese/CozzaFelice").to route_to("imprese#show", :nome => "CozzaFelice")
     end
 
     it "routes to #edit" do
-      expect(:get => "/imprese/1/edit").to route_to("imprese#edit", :id => "1")
+      expect(:get => "/imprese/CozzaFelice/edit").to route_to("imprese#edit", :nome => "CozzaFelice")
     end
 
     it "routes to #create" do
@@ -24,15 +24,15 @@ RSpec.describe ImpreseController, type: :routing do
     end
 
     it "routes to #update via PUT" do
-      expect(:put => "/imprese/1").to route_to("imprese#update", :id => "1")
+      expect(:put => "/imprese/CozzaFelice").to route_to("imprese#update", :nome => "CozzaFelice")
     end
 
     it "routes to #update via PATCH" do
-      expect(:patch => "/imprese/1").to route_to("imprese#update", :id => "1")
+      expect(:patch => "/imprese/CozzaFelice").to route_to("imprese#update", :nome => "CozzaFelice")
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/imprese/1").to route_to("imprese#destroy", :id => "1")
+      expect(:delete => "/imprese/CozzaFelice").to route_to("imprese#destroy", :nome => "CozzaFelice")
     end
 
   end

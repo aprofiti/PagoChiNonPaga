@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.describe TitolariController, type: :routing do
   describe "routing" do
 
-    it "routes to #index" do
-      expect(:get => "/titolari").to route_to("titolari#index")
-    end
-
     it "routes to #new" do
       expect(:get => "/titolari/new").to route_to("titolari#new")
     end

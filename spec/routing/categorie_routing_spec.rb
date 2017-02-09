@@ -7,32 +7,20 @@ RSpec.describe CategorieController, type: :routing do
       expect(:get => "/categorie").to route_to("categorie#index")
     end
 
-    it "routes to #new" do
-      expect(:get => "/categorie/new").to route_to("categorie#new")
-    end
-
-    it "routes to #show" do
-      expect(:get => "/categorie/1").to route_to("categorie#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      expect(:get => "/categorie/1/edit").to route_to("categorie#edit", :id => "1")
-    end
-
     it "routes to #create" do
       expect(:post => "/categorie").to route_to("categorie#create")
     end
 
     it "routes to #update via PUT" do
-      expect(:put => "/categorie/1").to route_to("categorie#update", :id => "1")
+      expect(:put => "/categorie/Alimentari").to route_to("categorie#update", :nome => "Alimentari")
     end
 
     it "routes to #update via PATCH" do
-      expect(:patch => "/categorie/1").to route_to("categorie#update", :id => "1")
+      expect(:patch => "/categorie/Alimentari").to route_to("categorie#update", :nome => "Alimentari")
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/categorie/1").to route_to("categorie#destroy", :id => "1")
+      expect(:delete => "/categorie/Alimentari").to route_to("categorie#destroy", :nome => "Alimentari")
     end
 
   end
