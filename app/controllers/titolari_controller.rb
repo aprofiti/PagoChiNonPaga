@@ -43,7 +43,12 @@ class TitolariController < ApplicationController
   # PATCH/PUT /titolari/1.json
   def update
     respond_to do |format|
-      if @titolare.update(titolare_params)
+      if params[:titolare][:password].blank?
+        ret = @titolare.update_no_password_titolare(params[:titolare])
+      else
+        ret =@titolare.update(titolare_params)
+      end
+      if ret
         format.html { redirect_to @titolare, notice: 'Titolare was successfully updated.' }
         format.json { render :show, status: :ok, location: @titolare }
       else
