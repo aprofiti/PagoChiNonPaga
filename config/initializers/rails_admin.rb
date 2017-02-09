@@ -225,14 +225,16 @@ RailsAdmin.config do |config|
     # Rimuove la possibilita' di creare un nuovo Cliente o Titolare via pannello
     # Incompatibilita' con la gemma 'active_record-acts_as'
     new do
-      except [Cliente, Titolare]
+      except [Utente, Cliente, Titolare]
     end
 
     # Lista delle Azioni abilitate per tutte le Entita:
     export
     bulk_delete
     show
-    edit
+    edit do
+      except [Utente, Cliente, Titolare]
+    end
     delete
 
     # Lista delle Azioni disabilitate per tutte le Entita:
