@@ -19,8 +19,10 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe ProdottiController, type: :controller do
+  before{ Impresa.skip_callback(:validation, :before, :assegna_coordinate)}
+
   before :each do
-    @citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    @citta= Citta.create(nome: "Palermo", provincia: "Pa", regione: "Lazio",polo_id: 1)
     @titolare = createTitolare("Mario","Rossi",@citta)
     Utente.where(actable_id: @titolare.id).first.confirm
 

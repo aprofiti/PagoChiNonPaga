@@ -5,8 +5,9 @@ class Impresa < ActiveRecord::Base
   has_many :ordini
   has_and_belongs_to_many :sottocategorie
   has_paper_trail
-  geocoded_by :getIndirizzo
-  after_validation :geocode
+  #geocoded_by :getIndirizzo
+  #after_validation :geocode
+  before_validation :assegna_coordinate
   # Validations necessarie per la registrazione
   validates :nome, :telefono, :email, :descrizione, :citta_id, :titolare_id, :indirizzo, presence: true
   validates_numericality_of :telefono, on: :create
@@ -20,6 +21,17 @@ class Impresa < ActiveRecord::Base
   # Upload immagini
   mount_uploader :image, ImageUploader
   validate :file_size
+
+  def assegna_coordinate
+    coord = Geocoder.coordinates(getIndirizzo)
+    if coord == nil
+      return false
+    else
+      self.update_attribute('latitude',coord.at(0))
+      self.update_attribute('longitude',coord.at(1))
+      return true
+    end
+  end
 
   def file_size
     max_file_size_mb= 5

@@ -19,6 +19,7 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe ImpreseController, type: :controller do
+  before{ Impresa.skip_callback(:validation, :before, :assegna_coordinate)}
 
   it "should not create impresa" do
     get :new
@@ -26,7 +27,7 @@ RSpec.describe ImpreseController, type: :controller do
   end
 
   it "should not let a cliente to create an impresa" , :skip_before do
-    citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
+    citta= Citta.create(nome: "Palermo", provincia: "Pa", regione: "Sicilia",polo_id: 1)
     cliente = createCliente("Bianco","Bianco",citta)
     Utente.where(actable_id: cliente.id).first.confirm
     sign_in cliente
