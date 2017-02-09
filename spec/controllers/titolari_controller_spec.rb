@@ -19,6 +19,8 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe TitolariController, type: :controller do
+  include Devise::Test::ControllerHelpers
+
   before :each do
     @citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     @titolare = createTitolare("Mario","Rossi",@citta)

@@ -19,6 +19,8 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe ProdottiController, type: :controller do
+  include Devise::Test::ControllerHelpers
+
   before{ Impresa.skip_callback(:validation, :before, :assegna_coordinate)}
 
   before :each do

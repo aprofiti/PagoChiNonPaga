@@ -19,5 +19,5 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe UtentiController, type: :controller do
-
+  include Devise::Test::ControllerHelpers
 end

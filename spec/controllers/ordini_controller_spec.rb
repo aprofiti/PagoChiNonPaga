@@ -19,6 +19,8 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe OrdiniController, type: :controller do
+  include Devise::Test::ControllerHelpers
+
   before{ Impresa.skip_callback(:validation, :before, :assegna_coordinate)}
   before :each do
     citta= Citta.create(nome: "Palermo", provincia: "Pa", regione: "Sicilia",polo_id: 1)
