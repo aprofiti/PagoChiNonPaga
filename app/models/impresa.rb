@@ -5,9 +5,9 @@ class Impresa < ActiveRecord::Base
   has_many :ordini
   has_and_belongs_to_many :sottocategorie
   has_paper_trail
-  #geocoded_by :getIndirizzo
-  #after_validation :geocode
-  before_validation :assegna_coordinate
+  geocoded_by :getIndirizzo
+  after_validation :geocode
+  #before_validation :assegna_coordinate
   # Validations necessarie per la registrazione
   validates :nome, :telefono, :email, :descrizione, :citta_id, :titolare_id, :indirizzo, presence: true
   validates_numericality_of :telefono, on: :create
