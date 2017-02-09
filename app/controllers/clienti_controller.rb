@@ -41,8 +41,14 @@ class ClientiController < ApplicationController
   # PATCH/PUT /clienti/1
   # PATCH/PUT /clienti/1.json
   def update
+
     respond_to do |format|
-      if @cliente.update(cliente_params)
+      if params[:cliente][:password].blank?
+        ret = @cliente.update_no_password_cliente(params[:cliente])
+      else
+        ret =@cliente.update(cliente_params)
+      end
+      if ret
         format.html { redirect_to @cliente, notice: 'Cliente was successfully updated.' }
         format.json { render :show, status: :ok, location: @cliente }
       else

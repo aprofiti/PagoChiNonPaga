@@ -10,8 +10,7 @@ class Cliente < ActiveRecord::Base
   validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates_format_of :cognome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validate :unique_entry #custom validation
-  validates_numericality_of :telefono, on: :create
-
+  validates_numericality_of :telefono
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry
     matched_entry = Cliente.where(['LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?) AND LOWER(cf) = LOWER(?) AND data_nascita=?',
@@ -42,6 +41,11 @@ class Cliente < ActiveRecord::Base
       end
     end
     ordini
+  end
+
+  def update_no_password_cliente(params)
+    self.update_attribute('telefono',params[:telefono])
+    self.update_attribute('indirizzo',params[:indirizzo])
   end
 
   # Ritorna il numero totale di Clienti (sostenitori) all'interno di tutto il DB VERIFICATI
