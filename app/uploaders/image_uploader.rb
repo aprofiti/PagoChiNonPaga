@@ -7,7 +7,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # TODO: Sistemare risoluzione
-  process crop: [640,360], :if => :checkModelProdotto
+  process crop: [640,480], :if => :checkModelProdotto
   process crop: [1920,600], :if => :checkModelImpresa
   #process crop: [1920,1080]
   process :quality => 70

@@ -1,9 +1,4 @@
 <%- model_class = Impresa -%>
-<script>
-$(document).ready(function() {
-        document.jcrop.init({ file_input_id: 'impresa_image' });
-    });
-</script>
 <div class="container">
   <div class="page-header">
     <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => @impresa.nome %></h1>
