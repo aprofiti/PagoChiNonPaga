@@ -13,20 +13,103 @@ navbar-nav{
   padding-top:10px;
 }
 
+/* Intestazione nelle pagini prima del contenuto */
+.page-header{
+  color: #428BCA;
+}
+
+/* Sezione centrale della pagina */
+.contenuto{
+  min-height:500px;
+  padding-bottom: 20px;
+}
+
+/*
+  Sezione del Home Page
+*/
+
+#logo{
+  height:50px;
+  /* Fix per l'allineameto del collapse con il logo della barra */
+  float: left;
+}
+
+.jumbotronColor{
+  background-image: radial-gradient(50% 177%, #428BCA 50%, rgba(73,143,225,0.70) 100%);
+  border: 1px solid #979797;
+}
+
+.txtJumbotron, .jumbotron h1{
+  color: white;
+}
+
+/* Sezione Statistiche Home Page */
+.statistiche{
+  color: #4A90E2;
+  border-bottom: 2px solid #4A90E2;
+  padding-bottom: 5px;
+}
+
+#DatiStatistiche{
+  margin-top:10px;
+}
+
 .txtCatalogo{
     color: #45A2FF;
 }
 
-#logo{
-  height:60px;
+/*
+  Sezione del Footer
+*/
+#footer{
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+#logoFooter{
+  max-height: 150px;
+  margin-left: 10%;
+}
+
+.footerSeparator{
+  background-color: white;
+  border-top: 1px;
+  border-style: solid;
+  border-color: lightgrey;
+  border-bottom: 0;
+  border-right: 0;
+  border-left: 0;
+}
+
+.footerLogo{
+  border-right:1px;
+  border-style: solid;
+  border-color: lightgrey;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.footerInfo{
+  padding-top:20px;
+  padding-bottom:10px;
+
+  border-left:0px;
+  border-style: solid;
+  border-color: lightgrey;
+  border-top: 0;
+  border-bottom: 0;
+  border-right: 0;
+}
+
+/* Stile per il Flash dei Messaggi */
+.alert{
+  text-align: center;
+  margin-bottom: 0px;
 }
 
 #notice {
   color: green;
-}
-
-.page-header{
-  color: #428BCA;
 }
 
 /* Generati dallo Scaffolding
@@ -47,20 +130,36 @@ navbar-nav{
 }
 
 /* Visualizzazione in linea degli elementi dt nelle pagine dei profili */
-.container dt, .container dd{
+.datiProfilo dt, .datiProfilo dd{
   display: inline-block;
   margin-top: 10px;
   margin-left: auto;
   width: auto;
 }
 
+.foorterInfo dl, .footerInfo dt{
+    text-align: left;
+    width: auto;
+    padding-right: 1em;
+}
+
+.foorterInfo dl, .footerInfo dd{
+    margin-left: 0;
+    text-align: left;
+}
 .alert{
   text-align: center;
   margin-bottom: 0px;
 }
 
-/* Pagina Negozio
-.cropbox_wrapper img, .previewbox_wrapper img{
-  width: 100%;
-}
+/*
+  Per il plugin del Crop (Da sistemare)
 */
+#impresa_image_previewbox_wrapper{
+    height:100%;
+
+}
+
+.previewCopertina img{
+  height: 100%;
+}
