@@ -33,7 +33,9 @@
       <td><%= ordine.stato_ordine.name %></td>
       <td>
         <%= link_to "", ordine_path(ordine), :class => 'fa fa-share', method: :get%>
-        <%= link_to "", edit_ordine_path(ordine), :class => 'fa fa-pencil', method: :get%>
+        <% if current_utente.isTitolare? %>
+            <%= link_to "", edit_ordine_path(ordine), :class => 'fa fa-pencil', method: :get%>
+        <% end %>
         <%= link_to "", ordine_path(ordine),
                     :method => :delete,
                     :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
