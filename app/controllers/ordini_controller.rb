@@ -165,7 +165,7 @@ class OrdiniController < ApplicationController
 
       :redirect_urls => {
         :return_url => "http://localhost:3000/mieiOrdini/#{@ordine.id}/checkout",
-        :cancel_url => "http://localhost:3000/" },
+        :cancel_url => root_path },
 
       :transactions =>  [{
         :payee => {

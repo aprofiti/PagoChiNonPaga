@@ -21,7 +21,6 @@ require 'rails_helper'
 RSpec.describe ProdottiController, type: :controller do
   include Devise::Test::ControllerHelpers
 
-  before{ Impresa.skip_callback(:validation, :before, :assegna_coordinate)}
 
   before :each do
     @citta= Citta.create(nome: "Palermo", provincia: "Pa", regione: "Lazio",polo_id: 1)

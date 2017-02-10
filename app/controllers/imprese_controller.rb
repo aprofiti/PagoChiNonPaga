@@ -46,11 +46,12 @@ class ImpreseController < ApplicationController
   # POST /imprese
   # POST /imprese.json
   def create
+    puts "SONO IN CREATE"
     @impresa = Impresa.new(impresa_params)
     @impresa.titolare_id = current_utente.actable_id
     respond_to do |format|
       if @impresa.save
-
+        puts "SALVATA"
 =begin
         decommentare per inviare email creazione impresa
         @titolare= Titolare.find(@impresa.titolare.id)
@@ -59,6 +60,7 @@ class ImpreseController < ApplicationController
         format.html { redirect_to impresa_path(nome: @impresa.nome,id: @impresa.id), notice: 'Impresa was successfully created.' }
         format.json { render :show, status: :created, location: @impresa }
       else
+        puts "ERRORE IN CREAZIONE"
         flash[:error] = "Errore. Ricontrollare tutti i valori inseriti!"
         format.html { render :new }
         format.json { render json: @impresa.errors, status: :unprocessable_entity }

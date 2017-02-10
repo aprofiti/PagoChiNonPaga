@@ -21,7 +21,6 @@ require 'rails_helper'
 RSpec.describe ImpreseController, type: :controller do
   include Devise::Test::ControllerHelpers
 
-  before{ Impresa.skip_callback(:validation, :before, :assegna_coordinate)}
 
   it "should not create impresa" do
     get :new

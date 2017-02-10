@@ -159,6 +159,10 @@ Prodotto.find(6).ordini << Ordine.find(8)
 Prodotto.find(8).ordini << Ordine.find(9)
 Prodotto.find(11).ordini << Ordine.find(10)
 
+Ordine.all.each do |ordine|
+  ordine.setTotale
+end
+
 Impresa.find(1).sottocategorie << Sottocategoria.find(1)
 Impresa.find(1).sottocategorie << Sottocategoria.find(5)
 Impresa.find(1).sottocategorie << Sottocategoria.find(2)
