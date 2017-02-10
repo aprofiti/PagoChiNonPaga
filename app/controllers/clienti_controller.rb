@@ -4,8 +4,8 @@ class ClientiController < ApplicationController
   before_filter :controllo_id_cliente, except: [:new, :create]
   before_filter :controllo_ordini_cliente, only: :destroy
 
-  # GET /clienti/1
-  # GET /clienti/1.json
+  # GET /clienti/:id
+  # GET /clienti/:id.json
   def show
   end
 
@@ -17,13 +17,12 @@ class ClientiController < ApplicationController
     @cliente = Cliente.new
   end
 
-  # GET /clienti/1/edit
+  # GET /clienti/:id/edit
   def edit
   end
 
   # POST /clienti
   # POST /clienti.json
-  #Dopo la creazione PER ORA l'utente viene reindirizzato alla schermata di login
   def create
     @cliente = Cliente.new(cliente_params)
 
@@ -38,8 +37,8 @@ class ClientiController < ApplicationController
     end
   end
 
-  # PATCH/PUT /clienti/1
-  # PATCH/PUT /clienti/1.json
+  # PATCH/PUT /clienti/:id
+  # PATCH/PUT /clienti/:id.json
   def update
 
     respond_to do |format|
@@ -58,8 +57,8 @@ class ClientiController < ApplicationController
     end
   end
 
-  # DELETE /clienti/1
-  # DELETE /clienti/1.json
+  # DELETE /clienti/:id
+  # DELETE /clienti/:id.json
   def destroy
     @cliente.destroy
     respond_to do |format|
@@ -90,9 +89,7 @@ class ClientiController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def cliente_params
-      #params.fetch(:cliente, {})
       params.require(:cliente).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:actable_id,:actable_type,:password,:password_confirmation,:citta_id,:indirizzo)
     end
 end

@@ -40,12 +40,12 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   #Aggiungo url_option di devise
-
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   #Abilito devise all'invio di email
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.delivery_method = :smtp
- config.action_mailer.smtp_settings = {
+  config.action_mailer.smtp_settings = {
    user_name:      'pricetrackerservicemail@gmail.com',
    password:       'pricetracke',
    domain:         'localhost:3000',

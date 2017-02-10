@@ -4,8 +4,8 @@ class ProdottiController < ApplicationController
   before_filter :id_index_match, only: :index
   before_filter :prodotto_impresa_match , only: [:show, :edit]
   before_filter :impresa_abilitata , only: [:show, :edit,:destroy,:update]
-  # GET /prodotti
-  # GET /prodotti.json
+  # GET /imprese/:impresa_nome/prodotti/:nome?id=id_impresa
+  # GET /imprese/:impresa_nome/prodotti/:nome.json?id=id_impresa
   def index       #rotta rimossa
     impresa= Impresa.find(params[:id].to_i)     #prima di index controllo che l'id inserito corrisponda a una impresa verificata e NON congelata
     if !(impresa.verificato && !(impresa.congelato))
@@ -15,12 +15,12 @@ class ProdottiController < ApplicationController
     end
   end
 
-  # GET /prodotti/1
-  # GET /prodotti/1.json
+  # GET /imprese/:impresa_nome/prodotti/:nome?id_p=id_prodotto
+  # GET /imprese/:impresa_nome/prodotti/:nome.json?id_p=id_prodotto
   def show
   end
 
-  # GET /prodotti/new
+  # GET /imprese/:impresa_nome/prodotti/new?id=id_impresa
   def new
    imp_list = Impresa.where(titolare_id: current_utente.actable_id).select("id") #imp_list contiene lista imprese del titolare loggato
    if !(current_utente.actable_type == "Titolare" && (imp_list.ids.include? params[:id].to_i ))  #se l'impresa attuale non è sua ho redirect
@@ -29,7 +29,7 @@ class ProdottiController < ApplicationController
     @prodotto = Prodotto.new
   end
 
-  # GET /prodotti/1/edit
+  # GET /imprese/:impresa_nome/prodotti/:nome/edit?id_p=id_prodotto
   def edit
    imp_list = Impresa.where(titolare_id: current_utente.actable_id).select("id")
    if !(current_utente.actable_type == "Titolare" && (imp_list.ids.include? @prodotto.impresa_id.to_i ))
@@ -37,8 +37,8 @@ class ProdottiController < ApplicationController
    end
   end
 
-  # POST /prodotti
-  # POST /prodotti.json
+  # POST /imprese/:impresa_nome/prodotti?id=id_impresa
+  # POST /imprese/:impresa_nome/prodotti.json?id=id_impresa
   def create
     @prodotto = Prodotto.new(prodotto_params)
     @prodotto.impresa_id= params[:id]
@@ -53,8 +53,8 @@ class ProdottiController < ApplicationController
     end
   end
 
-  # PATCH/PUT /prodotti/1
-  # PATCH/PUT /prodotti/1.json
+  # PATCH/PUT /imprese/:impresa_nome/prodotti?id=id_impresa
+  # PATCH/PUT /imprese/:impresa_nome/prodotti.json?id=id_impresa
   def update
     respond_to do |format|
       if @prodotto.update(prodotto_params)
@@ -67,8 +67,8 @@ class ProdottiController < ApplicationController
     end
   end
 
-  # DELETE /prodotti/1
-  # DELETE /prodotti/1.json
+  # DELETE /imprese/:impresa_nome/prodotti?id=id_impresa
+  # DELETE /imprese/:impresa_nome/prodotti.json?id=id_impresa
   def destroy
     @prodotto.destroy
     respond_to do |format|
@@ -76,22 +76,23 @@ class ProdottiController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  #POST  /imprese/:impresa_nome/prodotti/:prodotto_nome/elimina_prodotto?id_p=id_prodotto
   def elimina_prodotto
     @prodotto= Prodotto.find(params[:id_p])
     @prodotto.clearQuantita
     @prodotto.setEliminato(true)
-    redirect_back#impresa_prodotti_path(impresa_nome: @prodotto.impresa.nome,id: @prodotto.impresa.id)
+    redirect_back
   end
 
   private
-
+    #Check su url cambiato manualmente
     def id_index_match
       impresa = Impresa.find(params[:id].to_i)
       if impresa.nome != params[:impresa_nome]
         redirect_to(impresa_prodotti_path(impresa_nome: impresa.nome, id: impresa.id))
       end
     end
+    #Check su url cambiato manualmente
     def prodotto_impresa_match
       prodotto = Prodotto.find(params[:id_p])
       if prodotto.nome != params[:nome] || prodotto.impresa.nome != params[:impresa_nome]
@@ -109,7 +110,6 @@ class ProdottiController < ApplicationController
       @prodotto = Prodotto.find(params[:id_p])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def prodotto_params
       params.require(:prodotto).permit(:nome, :prezzo, :qta, :descrizione,:impresa_id, :image, :eliminato)
     end

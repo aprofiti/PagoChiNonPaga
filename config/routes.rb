@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   resources :clienti, except: [:index]
 
 
-  resources :carrello, except: [:index, :new] do
+  resources :carrello, except: [:index, :new,:edit] do
     member do
       post :remove_item
       post :add_cart

@@ -28,8 +28,8 @@ class OrdiniController < ApplicationController
     end
   end
 
-  # GET /ordini/1
-  # GET /ordini/1.json
+  # GET /mieiOrdini/:id
+  # GET /mieiOrdini/:id.json
   def show
     case @ordine.stato_ordine.stato
     when StatoOrdine.ATTESA
@@ -53,7 +53,7 @@ class OrdiniController < ApplicationController
     end
   end
 
-  # GET /ordini/1/edit
+  # GET /mieiOrdini/:id/edit
   def edit
     # Si puo' modificare solamente se e' in ATTESA oppure in PAGATO
     stato = @ordine.stato_ordine.stato
@@ -64,7 +64,7 @@ class OrdiniController < ApplicationController
        redirect_to ordine_path(@ordine)
     end
   end
-
+  # POST /mieiOrdini/:id/prepara_ordini
   def prepara_ordini
 
     #SETUP VARIABILI
@@ -103,7 +103,7 @@ class OrdiniController < ApplicationController
     end
   end
 
-
+  # POST  /mieiOrdini
   def create
     @ordine = Ordine.new(ordine_params)
 
@@ -118,8 +118,8 @@ class OrdiniController < ApplicationController
     end
   end
 
-  # PATCH/PUT /ordini/1
-  # PATCH/PUT /ordini/1.json
+  # PATCH/PUT  /mieiOrdini/:id
+  # PATCH/PUT /mieiOrdini/:id.json
   def update
     if @ordine.stato_ordine.stato == StatoOrdine.ATTESA
       @ordine.setSpedizione(params[:ordine][:spedizione].to_i)
@@ -137,8 +137,8 @@ class OrdiniController < ApplicationController
     end
   end
 
-  # DELETE /ordini/1
-  # DELETE /ordini/1.json
+  # DELETE /mieiOrdini/:id
+  # DELETE /mieiOrdini/:id.json
   def destroy
 
 =begin
@@ -155,6 +155,8 @@ class OrdiniController < ApplicationController
     end
   end
 
+  #POST /mieiOrdini/:id/paypal_url
+  #Esegue transazione paypal
   def paypal_url
     @ordine = Ordine.find(params[:id])
     @payment = Payment.new({
@@ -204,9 +206,9 @@ class OrdiniController < ApplicationController
       logger.error @payment.error.inspect
     end
   end
-
+  #GET /mieiOrdini/:id/checkout
+  #Dopo il pagamento effettuato viene eseguita una get a questa risorsa per completare il pagamento
   def checkout
-
     payment = Payment.find(params[:paymentId])
     if payment.execute( :payer_id => params[:PayerID] )
 
@@ -231,7 +233,7 @@ class OrdiniController < ApplicationController
   end
   private
 =begin
-prende in ingresso il carrello e l'id di una impresa, cerca tutti i prodotti del carrello che appartengono a quella impresa
+Prende in ingresso il carrello e l'id di una impresa, cerca tutti i prodotti del carrello che appartengono a quella impresa
 e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'aggiunta di ogni oggetto
 
 {impresa_id,elemento_carrello}
@@ -313,7 +315,6 @@ e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'a
     end
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def ordine_params
       params.require(:ordine).permit(:data, :cliente_id, :impresa_id, :stato_ordine_id, :spedizione)
     end

@@ -5,8 +5,8 @@ class TitolariController < ApplicationController
   before_filter :controllo_ordini_titolare, only: :destroy
 
 
-  # GET /titolari/1
-  # GET /titolari/1.json
+  # GET /titolari/:id
+  # GET /titolari/:id.json
   def show
   end
 
@@ -18,7 +18,7 @@ class TitolariController < ApplicationController
     @titolare = Titolare.new
   end
 
-  # GET /titolari/1/edit
+  # GET /titolari/:id/edit
   def edit
   end
 
@@ -39,8 +39,8 @@ class TitolariController < ApplicationController
     end
   end
 
-  # PATCH/PUT /titolari/1
-  # PATCH/PUT /titolari/1.json
+  # PATCH/PUT /titolari/:id
+  # PATCH/PUT /titolari/:id.json
   def update
     respond_to do |format|
       if params[:titolare][:password].blank?
@@ -58,8 +58,8 @@ class TitolariController < ApplicationController
     end
   end
 
-  # DELETE /titolari/1
-  # DELETE /titolari/1.json
+  # DELETE /titolari/:id
+  # DELETE /titolari/:id.json
   def destroy
     #@titolare.congelato = true;
     respond_to do |format|
@@ -96,7 +96,6 @@ class TitolariController < ApplicationController
 
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def titolare_params
       params.require(:titolare).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:piva,:actable_id,:actable_type,:password,:password_confirmation,:indirizzo,:citta_id,:email_paypal)
     end
