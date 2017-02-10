@@ -8,15 +8,14 @@
 </head>
 <body>
   <% if current_page?(root_path) %>
-    <%= render "layouts/barra_navigazione_home" %>
+    <%= render "layouts/home/barra_navigazione_home" %>
   <% else %>
     <%= render "shared/barra_navigazione" %>
   <% end %>
-
-  <div class="">
+  <div class="contenuto">
     <%= flash_messages %>
     <%= yield %>
   </div>
-
+  <%= render "layouts/footer" %>
 </body>
 </html>

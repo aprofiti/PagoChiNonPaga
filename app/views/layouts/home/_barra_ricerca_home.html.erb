@@ -1,0 +1,17 @@
+<%= form_tag(impresa_path(:impresa , :id), method: "get", class: "navbar-form navbar-center",style:"
+  text-align:center;") do %>
+  <div class="form-group" style="width: 60%;">
+  <%= text_field_tag :impresa ,"", class: "form-control typeahead", style: "
+     width: 100%;
+     /* Rectangle 28: */
+     background: #FFFFFF;
+     border: 1px solid #CCCCCC;
+     box-shadow: inset 0px 1px 0px 0px #ECECEC;
+     border-radius: 0px 3px 3px 3px 3px;"%>
+     <%= hidden_field_tag "id", "", :id => "id_imp" %>
+  </div>
+  <%= button_tag(type: 'submit',id: "typesearch", class: "btn btn-default", style: "") do %>
+    <span class="glyphicon glyphicon-search">
+  <% end %>
+
+<% end %>
