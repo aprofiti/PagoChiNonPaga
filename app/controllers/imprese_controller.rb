@@ -11,8 +11,8 @@ class ImpreseController < ApplicationController
     @imprese = Impresa.where(congelato: false, verificato: true)#Impresa.all  #SOLO IMPRESE NON CONGELATE O VERIFICATE
   end
 
-  # GET /imprese/1
-  # GET /imprese/1.json
+  # GET /imprese/:nome?id=:id
+  # GET /imprese/:nome.json?id=:id
   def show
     @hash = Gmaps4rails.build_markers(@impresa) do |impresa, marker|
       marker.lat impresa.latitude
@@ -25,7 +25,7 @@ class ImpreseController < ApplicationController
     @impresa = Impresa.new
   end
 
-  # GET /imprese/1/edit
+  # GET /imprese/:nome/edit?id=:id
   def edit
   end
   def autocomplete
@@ -68,8 +68,8 @@ class ImpreseController < ApplicationController
     end
   end
 
-  # PATCH/PUT /imprese/1
-  # PATCH/PUT /imprese/1.json
+  # PATCH/PUT /imprese/:nome?id=:id
+  # PATCH/PUT /imprese/:nome.json?id=:id
   def update
     respond_to do |format|
       if @impresa.update(impresa_params)
@@ -82,8 +82,8 @@ class ImpreseController < ApplicationController
     end
   end
 
-  # DELETE /imprese/1
-  # DELETE /imprese/1.json
+  # DELETE /imprese/:nome?id=:id
+  # DELETE /imprese/:nome.json?id=:id
   def destroy
     @impresa.destroy
     respond_to do |format|
@@ -104,7 +104,7 @@ class ImpreseController < ApplicationController
          redirect_back
        end
     end
-
+    # Check su cambiamento manuale dell'id nell'url
     def id_nome_match
       impresa= Impresa.find(params[:id].to_i)
       if impresa.nome != params[:nome]
@@ -122,7 +122,6 @@ class ImpreseController < ApplicationController
       @impresa = Impresa.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def impresa_params
       params.require(:impresa).permit(:image, :nome, :telefono, :fax, :giorni_orari, :email, :sitoweb, :facebook, :descrizione, :latitude, :longitude, :verificato, :congelato,:citta_id,:indirizzo,:sottocategoria_ids => [])
     end
