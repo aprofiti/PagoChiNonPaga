@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_filter :mailer_set_url_options
+
 
 #Quando posso faccio redirect a pagina precedente
 #Quando invece ho errore (ActionController::RedirectBackError) "No HTTP_REFERER was set ..."
@@ -25,5 +27,10 @@ class ApplicationController < ActionController::Base
       titolare_path(current_utente.actable_id)
       end
     end
+  end
+
+
+  def mailer_set_url_options
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
 end

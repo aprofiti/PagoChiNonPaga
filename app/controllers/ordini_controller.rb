@@ -164,8 +164,8 @@ class OrdiniController < ApplicationController
         :payment_method =>  "paypal" },
 
       :redirect_urls => {
-        :return_url => "http://localhost:3000/mieiOrdini/#{@ordine.id}/checkout",
-        :cancel_url => root_path },
+        :return_url => "#{root_url}mieiOrdini/#{@ordine.id}/checkout",
+        :cancel_url => root_url },
 
       :transactions =>  [{
         :payee => {
