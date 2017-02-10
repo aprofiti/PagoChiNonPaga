@@ -1,4 +1,4 @@
-<!-- Messaggio informativo -->
-<h1><%= flash[:notice] %></h1>
-
-<%= link_to "Torna indietro", root_path,method: :get %>
+  <div class="container" style="background-color:none;">
+    <%= image_tag "template/cart/cart-empty.png", :id => "cart", :class => "img-responsive col-md-12", :style =>  "height:500px;align:center;" %>
+    <%= link_to "Torna indietro", root_path,method: :get %>
+  </div>
