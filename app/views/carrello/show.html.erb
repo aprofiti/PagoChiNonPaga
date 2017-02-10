@@ -52,8 +52,6 @@
     </div>
   </dl>
   <div class="">
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                edit_carrello_path, :class => 'btn btn-default' ,method: :get%>
     <% if current_utente.actable_type == "Cliente" %>
       <%= link_to t('.profilo', :default => t("helpers.links.profilo")),
                   cliente_path(id: current_utente.actable_id), :class => 'btn btn-default' ,method: :get%>
