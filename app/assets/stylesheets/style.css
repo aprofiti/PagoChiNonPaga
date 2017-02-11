@@ -153,6 +153,18 @@ navbar-nav{
 }
 
 /*
+  Stili per la pagina del carrello vuoto
+*/
+#cart{
+  background-color:none;
+}
+
+#cart img{
+  min-height:300px;
+  align:center;
+}
+
+/*
   Per il plugin del Crop (Da sistemare)
 */
 #impresa_image_previewbox_wrapper{
