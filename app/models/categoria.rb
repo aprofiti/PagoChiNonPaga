@@ -11,8 +11,13 @@ class Categoria < ActiveRecord::Base
     errors.add(:base, 'Categoria già presente.') if matched_entry && (matched_entry.id != self.id) #se non sono io stesso allora c'e' un errore
   end
 
-  # Necessario per mostrare il nome dell'Entita in RailsAdmin
-  def name
+  def getNome
     self.nome
   end
+
+  # Necessario per mostrare il nome dell'Entita in RailsAdmin
+  def name
+    self.getNome
+  end
+  
 end

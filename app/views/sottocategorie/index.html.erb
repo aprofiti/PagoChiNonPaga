@@ -10,9 +10,8 @@
     <li><%= link_to "Categorie", categorie_path %></li>
     <li class="active"><%= categoria_nome %></li>
   </ol>
-
 <!-- Lista delle Sottocategorie -->
-<div class="row">
+<div class="container">
   <div class="col-md-10 col-md-offset-1">
     <div class="list-group">
       <a class="list-group-item text-center active" data-remote="true" href="#" style="background-color: ;">
@@ -26,8 +25,9 @@
         </div>
       <% end %>
     </div>
+    <div>
+      <%= link_to t('.lista_categorie', :default => t("helpers.links.lista_categorie")),
+                    categorie_path, :class => 'btn btn-default',method: :get  %>
+    </div>
   </div>
 </div>
-
-<%= link_to t('.lista_categorie', :default => t("helpers.links.lista_categorie")),
-              categorie_path, :class => 'btn btn-default',method: :get  %>
