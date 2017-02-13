@@ -176,23 +176,6 @@ form.navbar-form.navbar-center{
 }
 
 /*
-  Stili per la pagina del carrello vuoto
-*/
-#cart{
-  background-color:none;
-}
-
-#cart img{
-  min-height:300px;
-  align:center;
-}
-
-.table>tbody>tr>td, .table>tfoot>tr>td{
-  /* Centra il testo all'interno della tabella dei prodotti */
-  vertical-align: middle;
-}
-
-/*
   Stili per la pagina di scelta tipologia utente
 */
 .paginaRegistrati{
