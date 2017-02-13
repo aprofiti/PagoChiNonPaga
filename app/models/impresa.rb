@@ -24,9 +24,13 @@ class Impresa < ActiveRecord::Base
   validate :file_size
 
   def assegna_coordinate
-    coord = Geocoder.coordinates(getIndirizzo)
-    if coord == nil
+    if getIndirizzo == nil
       errors.add(:indirizzo,"Indirizzo non valido")
+    else
+      coord = Geocoder.coordinates(getIndirizzo)
+      if coord == nil
+        errors.add(:indirizzo,"Indirizzo non valido")
+      end
     end
   end
 
@@ -82,7 +86,11 @@ class Impresa < ActiveRecord::Base
   end
 
   def getIndirizzo
-    self.indirizzo + ', ' + self.citta.getNome
+    if self.indirizzo=='' || self.citta == nil
+      nil
+    else
+      self.indirizzo + ', ' + self.citta.getNome
+    end
   end
 
   def getCategorie

@@ -10,7 +10,7 @@ class Cliente < ActiveRecord::Base
   has_many :ordini
   belongs_to :citta
   # Validations necessarie per la registrazione
-  validates :nome, :cognome, :data_nascita, :cf, :telefono, :email, :password, :password_confirmation, :indirizzo, :citta_id, presence: true
+  validates :citta_nascita,:sesso,:nome, :cognome, :data_nascita, :cf, :telefono, :email, :password, :password_confirmation, :indirizzo, :citta_id, presence: true
   validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates_format_of :cognome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validate :unique_entry #custom validation
@@ -62,25 +62,29 @@ class Cliente < ActiveRecord::Base
 
   def check_CF
     unless Rails.env.test?
-      if self.sesso=='M'
-        sesso= :male
+      if self.citta_nascita == '' || self.sesso == ''
+        errors.add(:citta_nascita, "Inserire città di nascita")
       else
-        sesso= :female
-      end
-      citta = Citta.find(self.citta_nascita)
-      nome_nuovo= ''+self.nome
-      cognome_nuovo = ''+self.cognome
-      codice= CodiceFiscale.calculate(
-        :name          => nome_nuovo,
-        :surname       => cognome_nuovo,
-        :gender        => sesso,
-        :birthdate     => self.data_nascita,
-        :province_code => citta.provincia,
-        :city_name     => citta.nome
-      )
-      puts(codice)
-      if self.cf.upcase != codice
-        errors.add(:cf,"Codice fiscale non valido.")
+        if self.sesso=='M'
+          sesso= :male
+        else
+          sesso= :female
+        end
+        citta = Citta.find(self.citta_nascita)
+        nome_nuovo= ''+self.nome
+        cognome_nuovo = ''+self.cognome
+        codice= CodiceFiscale.calculate(
+          :name          => nome_nuovo,
+          :surname       => cognome_nuovo,
+          :gender        => sesso,
+          :birthdate     => self.data_nascita,
+          :province_code => citta.provincia,
+          :city_name     => citta.nome
+        )
+        puts(codice)
+        if self.cf.upcase != codice
+          errors.add(:cf,"Codice fiscale non valido.")
+        end
       end
     end
   end
@@ -90,9 +94,13 @@ class Cliente < ActiveRecord::Base
   end
 
   def check_indirizzo
-    coord = Geocoder.coordinates(self.getIndirizzo)
-    if coord == nil
+    if self.indirizzo=='' || self.citta == nil
       errors.add(:indirizzo,"Indirizzo non valido")
+    else
+      coord = Geocoder.coordinates(self.getIndirizzo)
+      if coord == nil
+        errors.add(:indirizzo,"Indirizzo non valido")
+      end
     end
   end
 end
