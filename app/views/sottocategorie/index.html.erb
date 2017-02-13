@@ -21,7 +21,10 @@
       <% categoria.sottocategorie.each do |sottocategoria| %>
         <div class="list-group-item">
           <span class="glyphicon glyphicon-menu-right"></span>
-          <span style="margin-left: 25px;"><%= link_to sottocategoria.nome , categoria_sottocategoria_path(categoria_nome: params[:categoria_nome], nome: sottocategoria.nome),method: :get %></span>
+          <span style="margin-left: 25px;">
+            <%= link_to sottocategoria.nome , categoria_sottocategoria_path(categoria_nome: params[:categoria_nome],
+                nome: sottocategoria.nome), method: :get %>
+          </span>
         </div>
       <% end %>
     </div>
