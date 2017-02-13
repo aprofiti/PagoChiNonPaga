@@ -49,6 +49,12 @@
       <%= f.input :indirizzo, :id => "indirizzo" %> <!-- visualizzare?? tipo relazione -->
       <%= error_span(@cliente[:indirizzo]) %>
       <%= f.input :descrizione_indirizzo %>
+      <%= f.text_field_tag :locality %>
+      <%= f.text_field_tag :route %>
+      <%= f.text_field_tag :administrative_area_level_1 %>
+      <%= f.text_field_tag :administrative_area_level_2 %>
+      <%= f.text_field_tag :neighborhood %>
+      <%= f.text_field_tag :country %>
       <%= error_span(@cliente[:descrizione_indirizzo]) %>
     </div>
     <div class="panel-footer text-right">
