@@ -45,13 +45,7 @@
                 <%= error_span(@titolare[:telefono]) %>
               </div>
               <div class="col-md-6">
-                <%= f.input :citta, required: true, input_html: { :id => "locality" } %>
-                <%= f.text_field_tag :route %>
-                <%= f.text_field_tag :administrative_area_level_1 %>
-                <%= f.text_field_tag :administrative_area_level_2 %>
-                <%= f.text_field_tag :neighborhood %>
-                <%= f.text_field_tag :country %>
-              <!--  <%= f.input :citta_id ,collection: Citta.all%> -->
+              <%= f.input :citta_id ,collection: Citta.all%>
                 <%= error_span(@titolare[:citta_id]) %>
               </div>
             </div>
