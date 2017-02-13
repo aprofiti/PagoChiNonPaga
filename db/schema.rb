@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208155143) do
+ActiveRecord::Schema.define(version: 20170213100525) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(version: 20170208155143) do
   add_index "citta", ["polo_id"], name: "index_citta_on_polo_id"
 
   create_table "clienti", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "nome"
     t.string   "cognome"
     t.string   "cf"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170208155143) do
     t.string   "telefono"
     t.string   "indirizzo"
     t.integer  "citta_id"
+    t.string   "descrizione_indirizzo"
   end
 
   add_index "clienti", ["citta_id"], name: "index_clienti_on_citta_id"
@@ -96,12 +97,13 @@ ActiveRecord::Schema.define(version: 20170208155143) do
     t.float    "longitude"
     t.boolean  "verificato"
     t.boolean  "congelato"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.integer  "citta_id"
     t.integer  "titolare_id"
     t.string   "indirizzo"
     t.string   "image"
+    t.string   "descrizione_indirizzo"
   end
 
   add_index "imprese", ["citta_id"], name: "index_imprese_on_citta_id"
@@ -179,8 +181,8 @@ ActiveRecord::Schema.define(version: 20170208155143) do
 
   create_table "titolari", force: :cascade do |t|
     t.string   "piva"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "nome"
     t.string   "cognome"
     t.string   "cf"
@@ -189,6 +191,7 @@ ActiveRecord::Schema.define(version: 20170208155143) do
     t.string   "indirizzo"
     t.integer  "citta_id"
     t.string   "email_paypal"
+    t.string   "descrizione_indirizzo"
   end
 
   add_index "titolari", ["citta_id"], name: "index_titolari_on_citta_id"

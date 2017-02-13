@@ -1,1 +1,0 @@
-json.array! @titolari, partial: 'titolari/titolare', as: :titolare

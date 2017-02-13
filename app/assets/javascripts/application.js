@@ -21,6 +21,7 @@
 //= require gmaps/google
 //= require jcrop.js
 //= require_self
+//= require bootstrap-table
 //
 // File EDITOR WYSIWYG Froala
 //

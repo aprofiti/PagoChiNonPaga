@@ -2,7 +2,7 @@ class Cliente < ActiveRecord::Base
   require 'codice_fiscale'
   attr_accessor :citta_nascita
   attr_accessor :sesso
-  
+
   # Implementa IS-A da Utenti
   acts_as :utente
   # Relazioni per funzionalita di Ecommerce
@@ -52,6 +52,7 @@ class Cliente < ActiveRecord::Base
   def update_no_password_cliente(params)
     self.assign_attributes('telefono' => params[:telefono])
     self.assign_attributes('indirizzo' => params[:indirizzo])
+    self.update_attribute('descrizione_indirizzo',params[:descrizione_indirizzo])
   end
 
   # Ritorna il numero totale di Clienti (sostenitori) all'interno di tutto il DB VERIFICATI

@@ -92,6 +92,6 @@ class TitolariController < ApplicationController
     end
 
     def titolare_params
-      params.require(:titolare).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:piva,:actable_id,:actable_type,:password,:password_confirmation,:indirizzo,:citta_id,:email_paypal,:sesso,:citta_nascita)
+      params.require(:titolare).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:piva,:actable_id,:actable_type,:password,:password_confirmation,:indirizzo,:citta_id,:email_paypal,:sesso,:citta_nascita, :descrizione_indirizzo)
     end
 end

@@ -19,8 +19,14 @@
           <%= error_span(@impresa[:nome]) %>
           <%= f.input :indirizzo, disabled: true %>
           <%= error_span(@impresa[:indirizzo]) %>
-          <%= f.input :citta_id ,collection: Citta.all, disabled: true%>
-          <%= error_span(@impresa[:citta_id]) %>
+    <!--      <%= f.input :citta_id ,collection: Citta.all, disabled: true%> -->
+          <%= f.input :citta, required: true, input_html: { :id => "locality" } %>
+          <%= f.text_field_tag :locality %>
+          <%= f.text_field_tag :route %>
+          <%= f.text_field_tag :administrative_area_level_1 %>
+          <%= f.text_field_tag :administrative_area_level_2 %>
+          <%= f.text_field_tag :neighborhood %>
+          <%= f.text_field_tag :country %>
         </div>
         <div class="col-md-6">
           <%= f.input :email %>
@@ -29,6 +35,8 @@
           <%= error_span(@impresa[:telefono]) %>
           <%= f.input :fax %>
           <%= error_span(@impresa[:fax]) %>
+          <%= f.input :descrizione_indirizzo %>
+          <%= error_span(@impresa[:descrizione_indirizzo]) %>
         </div>
       </div>
       <div class="page-header"></div>

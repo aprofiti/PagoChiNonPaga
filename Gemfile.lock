@@ -138,6 +138,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     arel (6.0.4)
     bcrypt (3.1.11)
+    bootstrap-table-rails (1.11.0)
     bootstrap-typeahead-rails (0.10.5.1)
       railties (>= 3.0)
     builder (3.2.3)
@@ -397,6 +398,7 @@ DEPENDENCIES
   active_record-acts_as
   activerecord (>= 4.2.6)
   acts_as_shopping_cart (~> 0.4.1)
+  bootstrap-table-rails
   bootstrap-typeahead-rails
   byebug
   cancancan

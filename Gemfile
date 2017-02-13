@@ -25,14 +25,17 @@ gem 'codice-fiscale', git: 'https://github.com/topac/codice_fiscale'
 gem 'acts_as_shopping_cart', '~> 0.4.1'
 gem 'paypal-sdk-rest'
 # View
-gem 'twitter-typeahead-rails', git: 'https://github.com/yourabi/twitter-typeahead-rails.git'
-gem 'bootstrap-typeahead-rails'
-gem 'handlebars_assets'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
-gem 'railsstrap', git: 'https://github.com/toadkicker/railsstrap.git' # Sostituisce Twitter-Bootstrap-Rails
-gem 'devise-bootstrapped', git: 'https://github.com/king601/devise-bootstrapped.git'
 gem 'font-awesome-rails'
 gem 'wysiwyg-rails'
+gem 'handlebars_assets'
+# Bootstrap per View
+gem 'twitter-typeahead-rails', git: 'https://github.com/yourabi/twitter-typeahead-rails.git'
+gem 'bootstrap-typeahead-rails'
+gem 'railsstrap', git: 'https://github.com/toadkicker/railsstrap.git' # Sostituisce Twitter-Bootstrap-Rails
+gem 'devise-bootstrapped', git: 'https://github.com/king601/devise-bootstrapped.git'
+gem 'bootstrap-table-rails'
+
 # Api Google Maps
 gem 'gmaps4rails'
 gem 'geocoder'

@@ -123,6 +123,6 @@ class ImpreseController < ApplicationController
     end
 
     def impresa_params
-      params.require(:impresa).permit(:image, :nome, :telefono, :fax, :giorni_orari, :email, :sitoweb, :facebook, :descrizione, :latitude, :longitude, :verificato, :congelato,:citta_id,:indirizzo,:sottocategoria_ids => [])
+      params.require(:impresa).permit(:image, :nome, :telefono, :fax, :giorni_orari, :email, :sitoweb, :facebook, :descrizione, :latitude, :longitude, :verificato, :congelato,:citta_id,:indirizzo,:descrizione_indirizzo, :sottocategoria_ids => [])
     end
 end

@@ -10,48 +10,54 @@
     <div class="panel-body">
       <dl class="datiProfilo dl-horizzontal">
         <div class="row">
-          <div class="col col-sm-3 col-sm-offset-3">
+          <div class="col-sm-4 col-md-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-2">
             <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
             <dd><%= @titolare.nome %></dd>
           </div>
-          <div class="col col-sm-3">
+          <div class="col-sm-4 col-md-4 col-xs-offset-1 col-md-offset-1">
             <dt><strong><%= model_class.human_attribute_name(:cognome) %>:</strong></dt>
             <dd><%= @titolare.cognome %></dd>
           </div>
         </div>
         <div class="row">
-          <div class="col col-sm-3 col-sm-offset-3">
+          <div class="col-sm-4 col-md-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-2">
             <dt><strong><%= model_class.human_attribute_name(:cf) %>:</strong></dt>
             <dd><%= @titolare.cf %></dd>
           </div>
-          <div class="col col-sm-3">
+          <div class="col-sm-4 col-md-4 col-xs-offset-1 col-md-offset-1">
             <dt><strong><%= model_class.human_attribute_name(:data_nascita) %>:</strong></dt>
             <dd><%= @titolare.data_nascita %></dd>
           </div>
         </div>
         <div class="row">
-          <div class="col col-sm-3 col-sm-offset-3">
+          <div class="col-sm-4 col-md-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-2">
             <dt><strong><%= model_class.human_attribute_name(:indirizzo) %>:</strong></dt>
             <dd><%= @titolare.indirizzo %></dd>
           </div>
-          <div class="col col-sm-3">
+          <div class="col-sm-4 col-md-4 col-xs-offset-1 col-md-offset-1">
             <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
             <dd><%= @titolare.telefono %></dd>
           </div>
         </div>
+        <div class="row">
+          <div class="col-sm-4 col-md-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-2">
+            <dt><strong><%= model_class.human_attribute_name(:descrizione_indirizzo) %>:</strong></dt>
+            <dd><%= @titolare.descrizione_indirizzo %></dd>
+          </div>
+        </div>
         <div class="page-header"></div>
         <div class="row">
-          <div class="col col-sm-3 col-sm-offset-3">
+          <div class="col-sm-4 col-md-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-2">
             <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
             <dd><%= @titolare.email %></dd>
           </div>
-          <div class="col col-sm-3">
+          <div class="col-sm-4 col-md-4 col-xs-offset-1 col-md-offset-1">
             <dt><strong><%= model_class.human_attribute_name(:piva) %>:</strong></dt>
             <dd><%= @titolare.piva %></dd>
           </div>
         </div>
         <div class="row">
-          <div class="col col-sm-3 col-sm-offset-3">
+          <div class="col-sm-6 col-md-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-2">
             <dt><strong><%= model_class.human_attribute_name(:paypal) %>:</strong></dt>
             <dd><%= @titolare.email_paypal %></dd>
           </div>
@@ -92,7 +98,7 @@
                       titolare_path(@titolare),
                       :method => 'delete',
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-danger' %>
+                      :class => 'btn btn-danger pull-right' %>
         <b>Attenzione le modifiche non possono essere annullate!</b>
       </div>
     </div>
