@@ -13,6 +13,29 @@ navbar-nav{
   padding-top:10px;
 }
 
+.navbar-inverse .navbar-nav > li > a{
+  color: whitesmoke;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover{
+  color: #F5A623;
+}
+
+/* Barra di ricerca */
+form.navbar-form.navbar-center{
+  /* Posizione la barra di ricerca al centro della barra di Navigazione */
+  text-align:center;
+}
+.typeahead{
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom-width: 1px;
+  border-bottom-color: white;
+  border-bottom-style: solid;
+  color:whitesmoke;
+}
+
 /* Intestazione nelle pagini prima del contenuto */
 .page-header{
   color: #428BCA;
