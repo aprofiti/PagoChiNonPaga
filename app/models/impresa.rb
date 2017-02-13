@@ -11,8 +11,8 @@ class Impresa < ActiveRecord::Base
   after_validation :geocode
   # Validations necessarie per la registrazione
   validates :nome, :telefono, :email, :descrizione, :citta_id, :titolare_id, :indirizzo, presence: true
-  validates_numericality_of :telefono, on: :create
-  validates_numericality_of :fax, on: :create, :allow_blank => true
+  validates_numericality_of :telefono
+  validates_numericality_of :fax, :allow_blank => true
   validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates :sitoweb, :format => URI::regexp(%w(http https)), :allow_blank => true
   validates :facebook, :format => URI::regexp(%w(http https)), :allow_blank => true
