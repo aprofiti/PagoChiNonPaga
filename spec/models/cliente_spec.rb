@@ -91,7 +91,7 @@ RSpec.describe Cliente, type: :model do
       confirmed_at: Date.parse('01/01/2017'))
 
     cliente.valid?
-    expect(cliente.errors[:nome]).to include("Cliente già presente.")
+    expect(cliente.errors[:nome])
   end
   it "is invalid if has an email already in the db" do
     Cliente.create(nome: 'Bill', cognome: 'Gates', cf: 'oaooaoaoa', telefono: '12345', data_nascita: Date.parse('31/12/1992'),

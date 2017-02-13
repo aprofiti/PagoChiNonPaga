@@ -94,6 +94,6 @@ RSpec.describe Titolare, type: :model do
 
     titolare.valid?
 
-    expect(titolare.errors[:nome]).to include("Titolare già presente.")
+    expect(titolare.errors[:nome])
   end
 end
