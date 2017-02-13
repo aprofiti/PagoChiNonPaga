@@ -187,6 +187,24 @@ form.navbar-form.navbar-center{
   align:center;
 }
 
+.table>tbody>tr>td, .table>tfoot>tr>td{
+  /* Centra il testo all'interno della tabella dei prodotti */
+  vertical-align: middle;
+}
+
+/*
+  Stili per la pagina di scelta tipologia utente
+*/
+.paginaRegistrati{
+  margin-top: 10px;
+  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100%;
+  min-height: 50vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
 /*
   Per il plugin del Crop (Da sistemare)
 */
