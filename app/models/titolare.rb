@@ -6,7 +6,7 @@ class Titolare < ActiveRecord::Base
   validates :nome, :cognome, :email, :password, :citta_id, :password_confirmation, :telefono, :data_nascita, :cf, :indirizzo, :piva, presence: true
   validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates_format_of :cognome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
-  validates :email_paypal, email: true
+  validates :email_paypal, email: true, :allow_blank => true
   validates_numericality_of :telefono
   validate :unique_entry #custom validation
 

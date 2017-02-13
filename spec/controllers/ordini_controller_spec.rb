@@ -38,7 +38,7 @@ RSpec.describe OrdiniController, type: :controller do
 
   it "should get ordine" do
     prodotti = [@prodotto]
-    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti,totale: 0.0)
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti,totale: 0.0,spedizione: 0.0)
     sign_in @cliente
     get :show , id: ordine.id
     expect(response).to render_template :show
@@ -46,14 +46,14 @@ RSpec.describe OrdiniController, type: :controller do
 
   it "should not get ordine" do
     prodotti = [@prodotto]
-    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti,totale: 0.0)
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti,totale: 0.0,spedizione: 0.0)
     get :show , id: ordine.id
     expect(response).to_not render_template :show
   end
 
   it "should not get edit ordine to cliente" do
     prodotti = [@prodotto]
-    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti,totale: 0.0)
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti,totale: 0.0,spedizione: 0.0)
     sign_in @cliente
     get :edit , id: ordine.id
     expect(response).to_not render_template :edit
@@ -61,7 +61,7 @@ RSpec.describe OrdiniController, type: :controller do
 
   it "should destroy order" do
     prodotti = [@prodotto]
-    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti,totale: 0.0)
+    ordine= Ordine.create(cliente_id: @cliente.id, impresa_id: @impresa.id, stato_ordine_id: @stato.id,prodotti: prodotti,totale: 0.0,spedizione: 0.0)
     sign_in @cliente
     put :destroy, id: ordine.id
     expect(Ordine.count).to eq(0)
