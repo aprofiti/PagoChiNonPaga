@@ -46,8 +46,10 @@
       <%= error_span(@cliente[:cf]) %>
       <%= f.input :telefono %>
       <%= error_span(@cliente[:telefono]) %>
-      <%= f.input :indirizzo %> <!-- visualizzare?? tipo relazione -->
+      <%= f.input :indirizzo, :id => "indirizzo" %> <!-- visualizzare?? tipo relazione -->
       <%= error_span(@cliente[:indirizzo]) %>
+      <%= f.input :descrizione_indirizzo %>
+      <%= error_span(@cliente[:descrizione_indirizzo]) %>
     </div>
     <div class="panel-footer text-right">
       <%= f.submit "Modifica Anagrafica", :class => 'btn btn-primary' %>

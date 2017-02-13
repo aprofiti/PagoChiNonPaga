@@ -46,6 +46,7 @@ class Cliente < ActiveRecord::Base
   def update_no_password_cliente(params)
     self.update_attribute('telefono',params[:telefono])
     self.update_attribute('indirizzo',params[:indirizzo])
+    self.update_attribute('descrizione_indirizzo',params[:descrizione_indirizzo])
   end
 
   # Ritorna il numero totale di Clienti (sostenitori) all'interno di tutto il DB VERIFICATI

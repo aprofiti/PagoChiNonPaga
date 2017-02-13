@@ -39,6 +39,8 @@
               <div class="col-md-6">
                 <%= f.input :indirizzo %> <!-- visualizzare?? tipo relazione -->
                 <%= error_span(@titolare[:indirizzo]) %>
+                <%= f.input :descrizione_indirizzo %>
+                <%= error_span(@titolare[:descrizione_indirizzo]) %>
                 <%= f.input :telefono %>
                 <%= error_span(@titolare[:telefono]) %>
               </div>

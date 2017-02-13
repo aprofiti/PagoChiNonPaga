@@ -90,6 +90,6 @@ class ClientiController < ApplicationController
     end
 
     def cliente_params
-      params.require(:cliente).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:actable_id,:actable_type,:password,:password_confirmation,:citta_id,:indirizzo)
+      params.require(:cliente).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:actable_id,:actable_type,:password,:password_confirmation,:citta_id,:indirizzo, :descrizione_indirizzo)
     end
 end

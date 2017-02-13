@@ -18,6 +18,8 @@
           <%= error_span(@impresa[:nome]) %>
           <%= f.input :indirizzo%>
           <%= error_span(@impresa[:indirizzo]) %>
+          <%= f.input :descrizione_indirizzo %>
+          <%= error_span(@impresa[:descrizione_indirizzo]) %>
           <%= f.input :citta_id ,collection: Citta.all %>
           <%= error_span(@impresa[:citta_id]) %>
         </div>

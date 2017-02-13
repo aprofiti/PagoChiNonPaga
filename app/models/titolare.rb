@@ -25,6 +25,7 @@ class Titolare < ActiveRecord::Base
   def update_no_password_titolare(params)
     self.update_attribute('telefono',params[:telefono])
     self.update_attribute('indirizzo',params[:indirizzo])
+    self.update_attribute('descrizione_indirizzo',params[:descrizione_indirizzo])
     self.update_attribute('piva',params[:piva])
     self.update_attribute('email_paypal',params[:email_paypal])
   end

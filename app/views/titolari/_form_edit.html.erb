@@ -52,6 +52,8 @@
             <%= error_span(@titolare[:telefono]) %>
             <%= f.input :indirizzo %> <!-- visualizzare?? tipo relazione -->
             <%= error_span(@titolare[:indirizzo]) %>
+            <%= f.input :descrizione_indirizzo %>
+            <%= error_span(@titolare[:descrizione_indirizzo]) %>
             <div class="page-header"></div>
             <%= f.input :email_paypal %>
             <%= error_span(@titolare[:email_paypal]) %>
