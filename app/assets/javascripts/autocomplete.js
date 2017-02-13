@@ -14,7 +14,7 @@ var componentForm = {
   administrative_area_level_2: 'short_name',
   //administrative_area_level_2: 'long_name',
   neighborhood: 'long_name',
-  //country: 'long_name',
+  country: 'long_name',
   //postal_code: 'short_name'
 };
 
