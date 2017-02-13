@@ -20,6 +20,7 @@ gem 'carrierwave-crop-on-fly'
 gem "mini_magick"
 # Validate email
 gem 'email_validator'
+gem 'codice-fiscale', git: 'https://github.com/topac/codice_fiscale'
 # Carrello
 gem 'acts_as_shopping_cart', '~> 0.4.1'
 gem 'paypal-sdk-rest'

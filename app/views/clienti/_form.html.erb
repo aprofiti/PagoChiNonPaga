@@ -46,6 +46,12 @@
                 <%= f.input :citta_id ,collection: Citta.all%>
                 <%= error_span(@cliente[:citta_id]) %>
               </div>
+              <div class="col-md-6">
+                <%= f.input :citta_nascita ,collection: Citta.all%>
+              </div>
+              <div class="col-md-6">
+                <%= f.input :sesso ,collection: ['M','F']%>
+              </div>
             </div>
             <div class="page-header"></div>
             <div class="row">
@@ -63,7 +69,6 @@
       </div>
     </div>
   </div>
-
 <div class="row">
     <div class="col-md-12">
       <!-- Sezione Dati di Accesso -->
@@ -87,4 +92,6 @@
       </div>
     </div>
 </div>
+
+
 <% end %>

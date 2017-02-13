@@ -26,9 +26,7 @@ class Impresa < ActiveRecord::Base
   def assegna_coordinate
     coord = Geocoder.coordinates(getIndirizzo)
     if coord == nil
-      return false
-    else
-      return true
+      errors.add(:indirizzo,"Indirizzo non valido")
     end
   end
 

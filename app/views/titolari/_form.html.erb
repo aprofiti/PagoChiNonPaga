@@ -47,6 +47,12 @@
                 <%= error_span(@titolare[:citta_id]) %>
               </div>
             </div>
+            <div class="col-md-6">
+              <%= f.input :citta_nascita ,collection: Citta.all%>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :sesso ,collection: ['M','F']%>
+            </div>
             <div class="page-header"></div>
             <div class="row">
               <div class="col-md-6">

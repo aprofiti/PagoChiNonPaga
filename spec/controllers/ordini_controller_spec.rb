@@ -22,7 +22,7 @@ RSpec.describe OrdiniController, type: :controller do
   include Devise::Test::ControllerHelpers
 
   before :each do
-    citta= Citta.create(nome: "Palermo", provincia: "Pa", regione: "Sicilia",polo_id: 1)
+    citta= Citta.create(nome: "Roma", provincia: "Rm", regione: "Lazio",polo_id: 1)
     @cliente= createCliente("Mario","Rossi",citta)
     @titolare = createTitolare("Romeo","Bianchi",citta)
     Utente.where(actable_id: @cliente.id).first.confirm

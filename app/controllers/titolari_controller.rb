@@ -43,12 +43,7 @@ class TitolariController < ApplicationController
   # PATCH/PUT /titolari/:id.json
   def update
     respond_to do |format|
-      if params[:titolare][:password].blank?
-        ret = @titolare.update_no_password_titolare(params[:titolare])
-      else
-        ret =@titolare.update(titolare_params)
-      end
-      if ret
+      if @titolare.update(titolare_params)
         format.html { redirect_to @titolare, notice: 'Titolare was successfully updated.' }
         format.json { render :show, status: :ok, location: @titolare }
       else
@@ -97,6 +92,6 @@ class TitolariController < ApplicationController
     end
 
     def titolare_params
-      params.require(:titolare).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:piva,:actable_id,:actable_type,:password,:password_confirmation,:indirizzo,:citta_id,:email_paypal)
+      params.require(:titolare).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:piva,:actable_id,:actable_type,:password,:password_confirmation,:indirizzo,:citta_id,:email_paypal,:sesso,:citta_nascita)
     end
 end

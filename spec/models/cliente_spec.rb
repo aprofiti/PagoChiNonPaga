@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Cliente, type: :model do
+  Citta.create(nome: :Messina,regione: :Sicilia, provincia: :ME,polo_id: 1)
+  Citta.create(nome: :Palermo,regione: :Sicilia, provincia: :PA,polo_id: 2)
+
   it "is invalid without a nome" do
     cliente= Cliente.new(nome: '', cognome: 'Gates', cf: 'oaooaoaoa', telefono: '12345', data_nascita: Date.parse('31/12/1992'),
      email: 'boh@boh.it', password: '123456', password_confirmation: '123456', indirizzo: 'via catania n.1', citta_id: 1,
@@ -64,13 +67,6 @@ RSpec.describe Cliente, type: :model do
 
      expect(cliente).not_to be_valid
   end
-  it "is invalid without a citta_id" do
-    cliente= Cliente.new(nome: 'Bill', cognome: 'Gates', cf: 'oaooaoaoa', telefono: '12345', data_nascita: Date.parse('31/12/1992'),
-     email: 'boh@boh.it', password: '123456', password_confirmation: '123456', indirizzo: 'via catania n.1',
-     confirmed_at: Date.parse('01/01/2017'))
-
-     expect(cliente).not_to be_valid
-  end
   it "is invalid with a nome with special characters" do
     cliente= Cliente.new(nome: 'Bill!', cognome: 'Gates', cf: 'oaooaoaoa', telefono: '12345', data_nascita: Date.parse('31/12/1992'),
      email: 'boh@boh.it', password: '123456', password_confirmation: '123456', indirizzo: 'via catania n.1', citta_id: 1,
@@ -91,7 +87,7 @@ RSpec.describe Cliente, type: :model do
      confirmed_at: Date.parse('01/01/2017'))
 
      cliente= Cliente.new(nome: 'Bill', cognome: 'Gates', cf: 'oaooaoaoa', telefono: '12345', data_nascita: Date.parse('31/12/1992'),
-      email: 'boh2@boh.it', password: '123456', password_confirmation: '123456', indirizzo: 'via catania n.1', citta_id: 3,
+      email: 'boh2@boh.it', password: '123456', password_confirmation: '123456', indirizzo: 'via catania n.1', citta_id: 2,
       confirmed_at: Date.parse('01/01/2017'))
 
     cliente.valid?

@@ -74,6 +74,14 @@ GIT
       therubyracer
 
 GIT
+  remote: https://github.com/topac/codice_fiscale
+  revision: 23d859a148466870c8a4132088b476ea7433d290
+  specs:
+    codice-fiscale (0.0.8)
+      activemodel
+      activesupport
+
+GIT
   remote: https://github.com/yourabi/twitter-typeahead-rails.git
   revision: fc343ac2f026589117bad0b7234c8bc69ef8bd6a
   specs:
@@ -395,6 +403,7 @@ DEPENDENCIES
   capybara
   carrierwave!
   carrierwave-crop-on-fly
+  codice-fiscale!
   coffee-rails (>= 4.1.0)
   devise
   devise-bootstrapped!

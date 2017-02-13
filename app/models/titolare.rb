@@ -1,4 +1,7 @@
 class Titolare < ActiveRecord::Base
+  require 'codice_fiscale'
+  attr_accessor :citta_nascita
+  attr_accessor :sesso
   # Implementa IS-A da Utenti
   acts_as :utente
   belongs_to :citta
@@ -9,7 +12,8 @@ class Titolare < ActiveRecord::Base
   validates :email_paypal, email: true
   validates_numericality_of :telefono
   validate :unique_entry #custom validation
-
+  validate :check_CF,on: :create
+  validate :check_indirizzo
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry
     matched_entry = Titolare.where(['LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?) AND LOWER(cf) = LOWER(?) AND data_nascita=?',
@@ -31,6 +35,42 @@ class Titolare < ActiveRecord::Base
   # Ritorna il numero totale di Utenti presenti dentro l'intero DB VERIFICATI
   def self.get_num_titolari
     Utente.where("actable_type= 'Titolare' AND confirmed_at NOT NULL").count
+  end
+
+  def check_CF
+    unless Rails.env.test?
+      if self.sesso=='M'
+        sesso= :male
+      else
+        sesso= :female
+      end
+      citta = Citta.find(self.citta_nascita)
+      nome_nuovo= ''+self.nome
+      cognome_nuovo = ''+self.cognome
+      codice= CodiceFiscale.calculate(
+        :name          => nome_nuovo,
+        :surname       => cognome_nuovo,
+        :gender        => sesso,
+        :birthdate     => self.data_nascita,
+        :province_code => citta.provincia,
+        :city_name     => citta.nome
+      )
+      puts(codice)
+      if self.cf.upcase != codice
+        errors.add(:cf,"Codice fiscale non valido.")
+      end
+    end
+  end
+
+  def getIndirizzo
+    self.indirizzo + ','+ self.citta.getNome
+  end
+
+  def check_indirizzo
+    coord = Geocoder.coordinates(self.getIndirizzo)
+    if coord == nil
+      errors.add(:indirizzo,"Indirizzo non valido")
+    end
   end
 
 end

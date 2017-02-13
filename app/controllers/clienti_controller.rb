@@ -25,7 +25,6 @@ class ClientiController < ApplicationController
   # POST /clienti.json
   def create
     @cliente = Cliente.new(cliente_params)
-
     respond_to do |format|
       if @cliente.save
         format.html { redirect_to @cliente, notice: 'Cliente was successfully created.' }
@@ -42,12 +41,7 @@ class ClientiController < ApplicationController
   def update
 
     respond_to do |format|
-      if params[:cliente][:password].blank?
-        ret = @cliente.update_no_password_cliente(params[:cliente])
-      else
-        ret =@cliente.update(cliente_params)
-      end
-      if ret
+      if @cliente.update(cliente_params)
         format.html { redirect_to @cliente, notice: 'Cliente was successfully updated.' }
         format.json { render :show, status: :ok, location: @cliente }
       else
@@ -90,6 +84,6 @@ class ClientiController < ApplicationController
     end
 
     def cliente_params
-      params.require(:cliente).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:actable_id,:actable_type,:password,:password_confirmation,:citta_id,:indirizzo)
+      params.require(:cliente).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:actable_id,:actable_type,:password,:password_confirmation,:citta_id,:indirizzo,:sesso,:citta_nascita)
     end
 end
