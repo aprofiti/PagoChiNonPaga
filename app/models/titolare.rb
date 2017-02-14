@@ -6,7 +6,7 @@ class Titolare < ActiveRecord::Base
   acts_as :utente
   belongs_to :citta
   # Validations necessarie per la registrazione
-  validates :sesso,:citta_nascita,:nome, :cognome, :email, :password, :citta_id, :password_confirmation, :telefono, :data_nascita, :cf, :indirizzo, :piva, presence: true
+  validates :nome, :cognome, :email, :password, :citta_id, :password_confirmation, :telefono, :data_nascita, :cf, :indirizzo, :piva, presence: true
   validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates_format_of :cognome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates :email_paypal, email: true, :allow_blank => true
@@ -14,6 +14,7 @@ class Titolare < ActiveRecord::Base
   validate :unique_entry #custom validation
   validate :check_CF,on: :create
   validate :check_indirizzo
+  validates :sesso,:citta_nascita, presence: true, on: :create
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry
     matched_entry = Titolare.where(['LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?) AND LOWER(cf) = LOWER(?) AND data_nascita=?',
@@ -80,6 +81,10 @@ class Titolare < ActiveRecord::Base
         errors.add(:indirizzo,"Indirizzo non valido")
       end
     end
+  end
+
+  def has_email_paypal
+    self.email_paypal != ''
   end
 
 end

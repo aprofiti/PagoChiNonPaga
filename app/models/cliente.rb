@@ -10,13 +10,15 @@ class Cliente < ActiveRecord::Base
   has_many :ordini
   belongs_to :citta
   # Validations necessarie per la registrazione
-  validates :citta_nascita,:sesso,:nome, :cognome, :data_nascita, :cf, :telefono, :email, :password, :password_confirmation, :indirizzo, :citta_id, presence: true
+  validates :nome, :cognome, :data_nascita, :cf, :telefono, :email, :password, :password_confirmation, :indirizzo, :citta_id, presence: true
   validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates_format_of :cognome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validate :unique_entry #custom validation
   validates_numericality_of :telefono
   validate :check_CF ,on: :create
   validate :check_indirizzo
+  validates :sesso,:citta_nascita, presence: true, on: :create
+
 
   def unique_entry
     matched_entry = Cliente.where(['LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?) AND LOWER(cf) = LOWER(?) AND data_nascita=?',

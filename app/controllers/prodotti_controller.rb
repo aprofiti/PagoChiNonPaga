@@ -4,6 +4,7 @@ class ProdottiController < ApplicationController
   before_filter :id_index_match, only: :index
   before_filter :prodotto_impresa_match , only: [:show, :edit]
   before_filter :impresa_abilitata , only: [:show, :edit,:destroy,:update]
+  before_filter :titolare_paypal?
   # GET /imprese/:impresa_nome/prodotti/:nome?id=id_impresa
   # GET /imprese/:impresa_nome/prodotti/:nome.json?id=id_impresa
   def index       #rotta rimossa
@@ -108,6 +109,17 @@ class ProdottiController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_prodotto
       @prodotto = Prodotto.find(params[:id_p])
+    end
+
+    def titolare_paypal?
+      if params[:id] != nil
+        impresa = Impresa.find(params[:id])
+      else
+        impresa= Prodotto.find(params[:id_p]).impresa
+      end
+      if !impresa.titolare.has_email_paypal
+        redirect_to impresa_path(id: params[:id],nome: params[:impresa_nome])
+      end
     end
 
     def prodotto_params

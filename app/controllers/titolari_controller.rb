@@ -43,10 +43,16 @@ class TitolariController < ApplicationController
   # PATCH/PUT /titolari/:id.json
   def update
     respond_to do |format|
-      if @titolare.update(titolare_params)
+      params.delete [:sesso,:citta_nascita]
+      puts(titolare_params)
+      ret = @titolare.update(titolare_params)
+      if ret
+        puts "SONO QUI DOPO UPDATE"
         format.html { redirect_to @titolare, notice: 'Titolare was successfully updated.' }
         format.json { render :show, status: :ok, location: @titolare }
       else
+        Rails.logger.info(@titolare.errors.messages.inspect)
+        puts "NIENTE UPDATE"
         format.html { render :edit }
         format.json { render json: @titolare.errors, status: :unprocessable_entity }
       end
