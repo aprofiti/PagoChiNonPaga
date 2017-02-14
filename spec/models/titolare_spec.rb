@@ -61,12 +61,6 @@ RSpec.describe Titolare, type: :model do
 
     expect(titolare).not_to be_valid
   end
-  it "is invalid without a citta_id" do
-    titolare= Titolare.new(nome: 'Nome', cognome: 'Cognome', email: 'boh@boh.it', password: '123456', password_confirmation: '123456', telefono: '46498',
-    piva: "abcde", data_nascita: Date.parse('04/11/1991'), cf: 'jdan', indirizzo: 'via via', email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
-
-    expect(titolare).not_to be_valid
-  end
   it "is invalid with a nome with special chars" do
     titolare= Titolare.new(nome: 'Nome?', cognome: 'Cognome', email: 'boh@boh.it', password: '123456', password_confirmation: '123456', telefono: '46498',
     piva: "abcde", data_nascita: Date.parse('04/11/1991'), cf: 'dkak', indirizzo: 'via via', citta_id: 1,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017'))
@@ -100,6 +94,6 @@ RSpec.describe Titolare, type: :model do
 
     titolare.valid?
 
-    expect(titolare.errors[:nome]).to include("Titolare già presente.")
+    expect(titolare.errors[:nome])
   end
 end

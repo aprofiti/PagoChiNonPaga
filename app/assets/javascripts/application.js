@@ -50,3 +50,11 @@
 //= require plugins/table.min.js
 //= require plugins/url.min.js
 //= require languages/it.js
+
+$(document).ready(function(){
+  $(".form-horizontal").on("keypress", function (e) {
+      if (e.keyCode == 13) {
+          return false;
+      }
+  });
+});

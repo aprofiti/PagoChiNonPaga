@@ -9,6 +9,7 @@ class OrdiniController < ApplicationController
   before_filter :is_eliminabile?, only: :destroy
   before_action :restore_quantita, only: :destroy
   before_action :is_in_conferma?, only: :paypal_url
+  before_filter :titolare_paypal?, only: [:create,:show]
   # GET /ordini
   # GET /ordini.json
   def index
@@ -312,6 +313,12 @@ e li mette in un array di prodotti, ripetendo eventualmente "quantita-volte" l'a
     if (@ordine.getStato == StatoOrdine.CONFERMA)
     else
       redirect_back
+    end
+  end
+
+  def titolare_paypal?
+    if !@ordine.impresa.titolare.has_email_paypal
+      redirect_to cliente_path(id: current_utente.actable_id)
     end
   end
 

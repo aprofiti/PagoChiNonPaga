@@ -52,10 +52,13 @@ $(document).ready(function(){
   <!-- Catalogo -->
   <div id="catalogo" class="row">
     <div id="descrizioneCatalogo" class="col-md-6 col-xs-4">
+      <% if @impresa.titolare.has_email_paypal %>
       <span class="glyphicon glyphicon-shopping-cart"></span>
       <h3>
         <%= link_to "Consulta il catalogo", impresa_prodotti_path(impresa_nome: @impresa.nome,id: params[:id]) , class: "txtCatalogo", method: :get %>
       </h3>
+      <% end %>
+
     </div>
     <div id="iconeCatalogo" class="col-xs-2 col-md-offset-4 col-xs-offset-4">
       <% if @impresa.sitoweb %>

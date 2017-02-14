@@ -1,4 +1,8 @@
 class Cliente < ActiveRecord::Base
+  require 'codice_fiscale'
+  attr_accessor :citta_nascita
+  attr_accessor :sesso
+
   # Implementa IS-A da Utenti
   acts_as :utente
   # Relazioni per funzionalita di Ecommerce
@@ -11,7 +15,11 @@ class Cliente < ActiveRecord::Base
   validates_format_of :cognome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validate :unique_entry #custom validation
   validates_numericality_of :telefono
-  # Custom validation per controllare unicita tra piu campi senza case_sensitive
+  validate :check_CF ,on: :create
+  validate :check_indirizzo
+  validates :sesso,:citta_nascita, presence: true, on: :create
+
+
   def unique_entry
     matched_entry = Cliente.where(['LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?) AND LOWER(cf) = LOWER(?) AND data_nascita=?',
        self.nome, self.cognome, self.cf, self.data_nascita]).first #il '?' e' un parametro per SQL passato da self.campo
@@ -44,8 +52,8 @@ class Cliente < ActiveRecord::Base
   end
 
   def update_no_password_cliente(params)
-    self.update_attribute('telefono',params[:telefono])
-    self.update_attribute('indirizzo',params[:indirizzo])
+    self.assign_attributes('telefono' => params[:telefono])
+    self.assign_attributes('indirizzo' => params[:indirizzo])
     self.update_attribute('descrizione_indirizzo',params[:descrizione_indirizzo])
   end
 
@@ -54,4 +62,51 @@ class Cliente < ActiveRecord::Base
     Utente.where("actable_type= 'Cliente' AND confirmed_at NOT NULL").count
   end
 
+  def check_CF
+    unless Rails.env.test?
+      if self.citta_nascita.blank? || self.sesso.blank? || self.nome.blank? || self.cognome.blank? || self.data_nascita.blank?
+        errors.add(:citta_nascita, "Ricontrollare campi codice fiscale")
+        errors.add(:sesso, "Ricontrollare campi codice fiscale")
+        errors.add(:cognome, "Ricontrollare campi codice fiscale")
+        errors.add(:data_nascita, "Ricontrollare campi codice fiscale")
+        errors.add(:nome, "Ricontrollare campi codice fiscale")
+      else
+        if self.sesso=='M'
+          sesso= :male
+        else
+          sesso= :female
+        end
+        citta = Citta.find(self.citta_nascita)
+        nome_nuovo= ''+self.nome
+        cognome_nuovo = ''+self.cognome
+        codice= CodiceFiscale.calculate(
+          :name          => nome_nuovo,
+          :surname       => cognome_nuovo,
+          :gender        => sesso,
+          :birthdate     => self.data_nascita,
+          :province_code => citta.provincia,
+          :city_name     => citta.nome
+        )
+        puts(codice)
+        if self.cf.upcase != codice
+          errors.add(:cf,"Codice fiscale non valido.")
+        end
+      end
+    end
+  end
+
+  def getIndirizzo
+    self.indirizzo + ','+ self.citta.getNome
+  end
+
+  def check_indirizzo
+    if self.indirizzo=='' || self.citta == nil
+      errors.add(:indirizzo,"Indirizzo non valido")
+    else
+      coord = Geocoder.coordinates(self.getIndirizzo)
+      if coord == nil
+        errors.add(:indirizzo,"Indirizzo non valido")
+      end
+    end
+  end
 end

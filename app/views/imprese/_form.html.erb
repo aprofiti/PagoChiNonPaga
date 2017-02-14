@@ -20,14 +20,7 @@
           <%= error_span(@impresa[:indirizzo]) %>
           <%= f.input :descrizione_indirizzo %>
           <%= error_span(@impresa[:descrizione_indirizzo]) %>
-    <!--      <%= f.input :citta_id ,collection: Citta.all %> -->
-          <%= f.input :citta, required: true, input_html: { :id => "locality" } %>
-          <%= error_span(@impresa[:citta_id]) %>
-          <%= f.text_field_tag :route %>
-          <%= f.text_field_tag :administrative_area_level_1 %>
-          <%= f.text_field_tag :administrative_area_level_2 %>
-          <%= f.text_field_tag :neighborhood %>
-          <%= f.text_field_tag :country %>
+          <%= f.input :citta_id ,collection: Citta.all %>
         </div>
         <div class="col-md-6">
           <%= f.input :email %>
@@ -64,9 +57,6 @@
 
       <div class="page-header"></div>
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-7">
-          <%= f.previewbox :image,height: 400, width: 600, :class => "" %>
-        </div>
         <div class="col-xs-12 col-sm-4 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-0">
           <%= f.label :image %>
           <%= f.file_field :image %>

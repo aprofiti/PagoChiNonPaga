@@ -7,8 +7,8 @@ class Ordine < ActiveRecord::Base
   # Validations necessarie per la registrazione
   validates :cliente_id, :impresa_id, :stato_ordine_id, presence: true
   validate :has_prodotti #custom validation
-  validates_numericality_of :totale, :greater_than_or_equal_to => 0, on: :create
-  validates_numericality_of :spedizione, :greater_than_or_equal_to => 0, on: :update
+  validates_numericality_of :totale, :greater_than_or_equal_to => 0
+  validates_numericality_of :spedizione, :greater_than_or_equal_to => 0
 
 
 #validate sul totale disabilitato altrimenti non crea l'ordine. TODO metodo per il calcolo del totale
