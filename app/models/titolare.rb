@@ -41,8 +41,12 @@ class Titolare < ActiveRecord::Base
 
   def check_CF
     unless Rails.env.test?
-      if self.citta_nascita == '' || self.sesso == ''
-        errors.add(:citta_nascita, "Inserire città di nascita")
+      if self.citta_nascita.blank? || self.sesso.blank? || self.nome.blank? || self.cognome.blank? || self.data_nascita.blank?
+        errors.add(:citta_nascita, "Ricontrollare campi codice fiscale")
+        errors.add(:sesso, "Ricontrollare campi codice fiscale")
+        errors.add(:cognome, "Ricontrollare campi codice fiscale")
+        errors.add(:data_nascita, "Ricontrollare campi codice fiscale")
+        errors.add(:nome, "Ricontrollare campi codice fiscale")
       else
         if self.sesso=='M'
           sesso= :male
