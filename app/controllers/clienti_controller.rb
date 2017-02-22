@@ -39,7 +39,7 @@ class ClientiController < ApplicationController
   # PATCH/PUT /clienti/:id
   # PATCH/PUT /clienti/:id.json
   def update
-
+    # Aggiorno il record nel DB
     respond_to do |format|
       if @cliente.update(cliente_params)
         format.html { redirect_to @cliente, notice: 'Cliente was successfully updated.' }
@@ -85,6 +85,6 @@ class ClientiController < ApplicationController
     end
 
     def cliente_params
-      params.require(:cliente).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:actable_id,:actable_type,:password,:password_confirmation,:citta_id,:indirizzo,:sesso,:citta_nascita,:descrizione_indirizzo)
+      params.require(:cliente).permit(:nome,:cognome,:cf,:data_nascita,:telefono,:email,:actable_id,:actable_type,:password,:password_confirmation,:citta_id,:indirizzo, :descrizione_indirizzo,:locality,:route,:administrative_area_level_1,:administrative_area_level_2,:administrative_area_level_3,:neighborhood,:country,:sesso,:citta_nascita,:provincia_nascita)
     end
 end

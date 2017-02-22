@@ -5,6 +5,7 @@ class ImpreseController < ApplicationController
   before_filter :is_titolare, only: :new
   before_filter :id_nome_match, only: [:show,:edit]
   before_filter :is_abilitata, only: [:edit,:destroy,:show]
+
   # GET /imprese
   # GET /imprese.json
   def index
@@ -40,18 +41,18 @@ class ImpreseController < ApplicationController
         {}
       end
     end
-
     render json: imprese
   end
+
   # POST /imprese
   # POST /imprese.json
   def create
-    puts "SONO IN CREATE"
+    # Salvo il record nel DB
     @impresa = Impresa.new(impresa_params)
+    # Assegno al titolare che l'ha creata
     @impresa.titolare_id = current_utente.actable_id
     respond_to do |format|
       if @impresa.save
-        puts "SALVATA"
 =begin
         decommentare per inviare email creazione impresa
         @titolare= Titolare.find(@impresa.titolare.id)
@@ -60,8 +61,6 @@ class ImpreseController < ApplicationController
         format.html { redirect_to impresa_path(nome: @impresa.nome,id: @impresa.id), notice: 'Impresa was successfully created.' }
         format.json { render :show, status: :created, location: @impresa }
       else
-        puts "ERRORE IN CREAZIONE"
-        flash[:error] = "Errore. Ricontrollare tutti i valori inseriti!"
         format.html { render :new }
         format.json { render json: @impresa.errors, status: :unprocessable_entity }
       end
@@ -124,6 +123,6 @@ class ImpreseController < ApplicationController
     end
 
     def impresa_params
-      params.require(:impresa).permit(:image, :nome, :telefono, :fax, :giorni_orari, :email, :sitoweb, :facebook, :descrizione, :latitude, :longitude, :verificato, :congelato,:citta_id,:indirizzo,:descrizione_indirizzo, :sottocategoria_ids => [])
+      params.require(:impresa).permit(:nome, :telefono, :fax, :giorni_orari, :email, :sitoweb, :facebook, :descrizione, :latitude, :longitude, :verificato, :congelato,:citta_id, :image, :indirizzo,:descrizione_indirizzo,:locality,:route,:administrative_area_level_1,:administrative_area_level_2,:administrative_area_level_3,:neighborhood,:country, :sottocategoria_ids => [])
     end
 end
