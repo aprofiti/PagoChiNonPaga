@@ -59,13 +59,13 @@ end
 
 
 def createTitolare(nome,cognome,citta)
-  titolare= Titolare.create(sesso: 'M',citta_nascita: 1,nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "via catania 2",citta_id: citta.id,piva: 'piva',email_paypal: "email@fake.com")
+  titolare= Titolare.create(sesso: "M", citta_nascita: "Palermo", provincia_nascita: "PA",nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "via catania 2",citta_id: citta.id,piva: 'piva',email_paypal: "email@fake.com")
   return titolare
 end
 
 
 def createCliente(nome,cognome,citta)
-  cliente= Cliente.create(sesso: 'M',citta_nascita: 1,nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "via catania 2",citta_id: citta.id)
+  cliente= Cliente.create(sesso: "M", citta_nascita: "Palermo", provincia_nascita: "PA",nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "via catania 2",citta_id: citta.id)
   return cliente
 end
 

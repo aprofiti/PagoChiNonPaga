@@ -1,7 +1,7 @@
 class Cliente < ActiveRecord::Base
   require 'codice_fiscale'
-  attr_accessor :citta_nascita
-  attr_accessor :sesso
+  # Attributi per CF
+  attr_accessor :sesso, :citta_nascita, :provincia_nascita
 
   # Implementa IS-A da Utenti
   acts_as :utente
@@ -9,16 +9,31 @@ class Cliente < ActiveRecord::Base
   has_one :carrello
   has_many :ordini
   belongs_to :citta
+
   # Validations necessarie per la registrazione
   validates :nome, :cognome, :data_nascita, :cf, :telefono, :email, :password, :password_confirmation, :indirizzo, :citta_id, presence: true
   validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates_format_of :cognome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validate :unique_entry #custom validation
   validates_numericality_of :telefono
-  validate :check_CF ,on: :create
+  # Validazioni per il Form
+  validates :sesso, :citta_nascita, :provincia_nascita, presence: true, on: :create
+  validates_length_of :provincia_nascita, :is => 2, on: :create
+  validate :check_CF, on: :create
   validate :check_indirizzo
-  validates :sesso,:citta_nascita, presence: true, on: :create
 
+  def check_CF
+    # Non Controllo il CF durante i Test con Rspec
+    unless Rails.env.test?
+      # Richiamo il metodo della Superclasse Utente per calcolare il CF
+      cf = self.acting_as.check_CF(self.nome,self.cognome,self.sesso,self.data_nascita,self.citta_nascita,self.provincia_nascita)
+      # Controllo che il codice fiscale coincida con quello inserito dall'utente nel Form
+      if self.cf != cf
+        errors.add(:cf,"Codice Fiscale non corretto")
+      end
+      puts(cf)
+    end
+  end
 
   def unique_entry
     matched_entry = Cliente.where(['LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?) AND LOWER(cf) = LOWER(?) AND data_nascita=?',
@@ -30,7 +45,7 @@ class Cliente < ActiveRecord::Base
 
   # Usato da cancancan per i permessi Admin
   def is_my_polo?(user_polo_id)
-    user_polo_id==self.citta.polo.id
+    user_polo_id == self.citta.polo.id
   end
 
   # Restituisce tutti gli ordini del Cliente

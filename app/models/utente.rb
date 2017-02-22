@@ -6,6 +6,53 @@ class Utente < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  #
+  # Metodi della Classe
+  #
+
+  # Ritorna il numero totale di Utenti presenti dentro l'intero DB VERIFICATI
+  def self.get_num_utenti
+    Utente.where("confirmed_at NOT NULL").count
+  end
+
+  #
+  # Metodi di Istanza
+  #
+
+  def check_CF(nome,cognome,sesso,data_nascita,citta_nascita,provincia_nascita)
+    if (citta_nascita == '' || sesso == '' ||
+      nome == '' || cognome == '' ||
+      data_nascita == '' || provincia_nascita == '')
+      # ERRORE: Parametri non corretti
+      return
+    end
+    # Controllo che la citta di nascita si corretta
+    # Uso un metodo della gemma che restituisce il codice per la citta
+    # In questo modo posso controllare che la citta esiste veramente
+    if (CodiceFiscale::Codes.city(citta_nascita,provincia_nascita) == "")
+      # ERRORE: Non esiste la citta fornita
+      return
+    end
+
+    # Fornisco i dati nel formato accettato dalla gemma
+    valoriSesso = {'M' => :male, 'F' => :female}
+    nome_nuovo = '' + nome
+    cognome_nuovo = '' + cognome
+
+    # Utilizzo la Gemma per calcolare il CF
+    codice = CodiceFiscale.calculate(
+    :name          => nome_nuovo,
+    :surname       => cognome_nuovo,
+    :gender        => valoriSesso[sesso],
+    :birthdate     => data_nascita,
+    :province_code => provincia_nascita,
+    :city_name     => citta_nascita
+    )
+    # Debug del CF
+    puts(codice)
+    return codice
+  end
+
   # Ritorna il nome dell'Utente
   # Viene utilizzato nelle view
   def getNome
@@ -63,11 +110,6 @@ class Utente < ActiveRecord::Base
 
   def getCarrello
     Carrello.find_by! cliente_id: self.actable_id
-  end
-
-  # Ritorna il numero totale di Utenti presenti dentro l'intero DB VERIFICATI
-  def self.get_num_utenti
-    Utente.where("confirmed_at NOT NULL").count
   end
 
 end

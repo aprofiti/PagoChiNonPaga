@@ -1,14 +1,22 @@
 class Impresa < ActiveRecord::Base
+  # Attributi per indirizzo
+  attr_accessor :locality
+
+  # Upload immagini
+  mount_uploader :image, ImageUploader
+  validate :file_size
+
+  # Associazioni
   belongs_to :citta
   belongs_to :titolare
   has_many :prodotti
   has_many :ordini
   has_and_belongs_to_many :sottocategorie
-  has_paper_trail
 
-  before_validation :assegna_coordinate
+  before_validation :check_indirizzo
   geocoded_by :getIndirizzo
   after_validation :geocode
+
   # Validations necessarie per la registrazione
   validates :nome, :telefono, :email, :descrizione, :citta_id, :titolare_id, :indirizzo, presence: true
   validates_numericality_of :telefono
@@ -19,9 +27,6 @@ class Impresa < ActiveRecord::Base
   validate :unique_entry #custom validation per l'unicita
   validate :has_sottocategoria #custom validation per la presenza di almeno una sottocategoria
   validates :email, email: true
-  # Upload immagini
-  mount_uploader :image, ImageUploader
-  validate :file_size
 
   def assegna_coordinate
     if getIndirizzo == nil
@@ -43,6 +48,12 @@ class Impresa < ActiveRecord::Base
     end
   end
 
+  # Custom validation per controllare la presenza di almeno una sottocategoria
+  def has_sottocategoria
+    err= self.sottocategorie.empty?
+    errors.add(:base, 'Una impresa deve avere almeno una SOTTOCATEGORIA.') if err
+  end
+
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry
     matched_entry = Impresa.where([' LOWER(nome) = LOWER(?) AND LOWER(telefono) = LOWER(?) AND LOWER(email) = LOWER(?) AND titolare_id=? AND citta_id=?',
@@ -50,11 +61,24 @@ class Impresa < ActiveRecord::Base
     errors.add(:base, 'Impresa già presente.') if matched_entry && (matched_entry.id != self.id) #se non sono io stesso allora c'e' un errore
   end
 
-  # Custom validation per controllare la presenza di almeno una sottocategoria
-  def has_sottocategoria
-    err= self.sottocategorie.empty?
-    errors.add(:base, 'Una impresa deve avere almeno una SOTTOCATEGORIA.') if err
+  #
+  # Metodi della Classe
+  #
+
+  # Ritorna il numero totale di imprese presenti in tutto il DB che sono verificate e NON congelate
+  def self.get_num_imprese
+    Impresa.where(:congelato=>false, :verificato=>true).count
   end
+
+  # Ritorna un array di max 5 imprese presenti nel DB verificate e NON congelate
+  def self.get_random_imprese
+    imprese= Impresa.where(:congelato=>false, :verificato=>true)
+    imprese.sample(5)
+  end
+
+  #
+  # Metodi di Istanza
+  #
 
   def isAttiva?
     self.isVerificata? && !self.isCongelata?

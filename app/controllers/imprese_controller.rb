@@ -93,6 +93,7 @@ class ImpreseController < ApplicationController
   end
 
   private
+
     def is_abilitata #impresa deve essere verificata e NON congelata
       if !(@impresa.verificato && !(@impresa.congelato))
         flash[:error] = "L'impresa e' stata congelata. {er maggiori informazioni, contattare il polo di appartenenza."

@@ -1,20 +1,43 @@
 class Titolare < ActiveRecord::Base
   require 'codice_fiscale'
-  attr_accessor :citta_nascita
-  attr_accessor :sesso
+  has_paper_trail
+
+  # Attributi per CF
+  attr_accessor :sesso, :citta_nascita, :provincia_nascita
+
   # Implementa IS-A da Utenti
   acts_as :utente
+  # Altre Relazioni
   belongs_to :citta
+  has_many :imprese
+
   # Validations necessarie per la registrazione
   validates :nome, :cognome, :email, :password, :citta_id, :password_confirmation, :telefono, :data_nascita, :cf, :indirizzo, :piva, presence: true
   validates_format_of :nome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates_format_of :cognome, :with => /\A([a-zA-Z '\-0-9òàùèé]+)$\z/, :message => "Sono permesse solo lettere da a-z, numeri 0-9, spazi, apostrofi, trattini."
   validates :email_paypal, email: true, :allow_blank => true
-  validates_numericality_of :telefono
   validate :unique_entry #custom validation
-  validate :check_CF,on: :create
+  validates_numericality_of :telefono
+  # Validazioni per il Form
+  validates :sesso,:citta_nascita,:provincia_nascita, presence: true, on: :create
+  validates_length_of :provincia_nascita, :is => 2, on: :create
+  validate :check_CF, on: :create
+  # Validations per indirizzo
+#  validates :locality, presence: true
   validate :check_indirizzo
-  validates :sesso,:citta_nascita, presence: true, on: :create
+
+  def check_CF
+    # Non Controllo il CF durante i Test con Rspec
+    unless Rails.env.test?
+      # Richiamo il metodo della Superclasse Utente per calcolare il CF
+      cf = self.acting_as.check_CF(self.nome,self.cognome,self.sesso,self.data_nascita,self.citta_nascita,self.provincia_nascita)
+      # Controllo che il codice fiscale coincida con quello inserito dall'utente nel Form
+      if self.cf != cf
+        errors.add(:cf,"Codice Fiscale non corretto")
+      end
+    end
+  end
+
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry
     matched_entry = Titolare.where(['LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?) AND LOWER(cf) = LOWER(?) AND data_nascita=?',
@@ -22,11 +45,14 @@ class Titolare < ActiveRecord::Base
     errors.add(:nome, 'Titolare già presente.') if matched_entry && (matched_entry.id != self.id) #se non sono io stesso allora c'e' un errore
   end
 
-  has_many :imprese
+  def getNumImprese
+    self.imprese.count
+  end
 
   def getImprese
     self.imprese
   end
+
   def update_no_password_titolare(params)
     self.update_attribute('telefono',params[:telefono])
     self.update_attribute('indirizzo',params[:indirizzo])
@@ -34,42 +60,10 @@ class Titolare < ActiveRecord::Base
     self.update_attribute('piva',params[:piva])
     self.update_attribute('email_paypal',params[:email_paypal])
   end
+
   # Ritorna il numero totale di Utenti presenti dentro l'intero DB VERIFICATI
   def self.get_num_titolari
     Utente.where("actable_type= 'Titolare' AND confirmed_at NOT NULL").count
-  end
-
-  def check_CF
-    unless Rails.env.test?
-      if self.citta_nascita.blank? || self.sesso.blank? || self.nome.blank? || self.cognome.blank? || self.data_nascita.blank?
-        errors.add(:citta_nascita, "Ricontrollare campi codice fiscale")
-        errors.add(:sesso, "Ricontrollare campi codice fiscale")
-        errors.add(:cognome, "Ricontrollare campi codice fiscale")
-        errors.add(:data_nascita, "Ricontrollare campi codice fiscale")
-        errors.add(:nome, "Ricontrollare campi codice fiscale")
-      else
-        if self.sesso=='M'
-          sesso= :male
-        else
-          sesso= :female
-        end
-        citta = Citta.find(self.citta_nascita)
-        nome_nuovo= ''+self.nome
-        cognome_nuovo = ''+self.cognome
-        codice= CodiceFiscale.calculate(
-          :name          => nome_nuovo,
-          :surname       => cognome_nuovo,
-          :gender        => sesso,
-          :birthdate     => self.data_nascita,
-          :province_code => citta.provincia,
-          :city_name     => citta.nome
-        )
-        puts(codice)
-        if self.cf.upcase != codice
-          errors.add(:cf,"Codice fiscale non valido.")
-        end
-      end
-    end
   end
 
   def getIndirizzo

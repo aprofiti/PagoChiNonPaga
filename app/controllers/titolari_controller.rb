@@ -26,7 +26,6 @@ class TitolariController < ApplicationController
   # POST /titolari.json
   def create
     @titolare = Titolare.new(titolare_params)
-
     respond_to do |format|
       if @titolare.save
         #CustomMailer.titolare_creato(@titolare).deliver_now
