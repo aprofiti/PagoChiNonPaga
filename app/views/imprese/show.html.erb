@@ -30,7 +30,7 @@
   <div id="descrizioneNegozio" class="row">
     <div class="col-md-12">
       <h4>Descrizione:</h4>
-      <p><%= @impresa.descrizione.html_safe %></p>
+      <p><%= sanitize @impresa.descrizione %></p>
     </div>
   </div>
   <!-- Catalogo -->
