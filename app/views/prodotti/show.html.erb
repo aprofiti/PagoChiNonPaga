@@ -30,7 +30,7 @@
                 </div>
                 <div class="row">
                   <dt><strong><%= model_class.human_attribute_name(:descrizione) %>:</strong></dt>
-                  <dd><%= @prodotto.descrizione.html_safe %></dd>
+                  <dd><%= sanitize @prodotto.descrizione %></dd>
                 </div>
               </dl>
             </div>

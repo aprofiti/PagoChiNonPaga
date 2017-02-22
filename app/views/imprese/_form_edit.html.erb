@@ -20,6 +20,13 @@
           <%= f.input :indirizzo, disabled: true %>
           <%= error_span(@impresa[:indirizzo]) %>
           <%= f.input :citta_id ,collection: Citta.all, disabled: true%>
+          <%= f.input :locality, :input_html => { :id => "locality" }, readonly: true %>
+          <%= f.hidden_field_tag :route %>
+          <%= f.hidden_field_tag :administrative_area_level_1 %>
+          <%= f.hidden_field_tag :administrative_area_level_2 %>
+          <%= f.hidden_field_tag :administrative_area_level_3 %>
+          <%= f.hidden_field_tag :neighborhood %>
+          <%= f.hidden_field_tag :country %>
         </div>
         <div class="col-md-6">
           <%= f.input :email %>
@@ -70,7 +77,7 @@
   </div>
 
 
-  <!-- TMP da risolvere -->
+  <!-- TODO TMP da risolvere -->
   <%= f.input :latitude %>
   <%= error_span(@impresa[:latitude]) %>
   <%= f.input :longitude %>

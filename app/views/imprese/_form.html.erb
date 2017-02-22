@@ -16,19 +16,34 @@
         <div class="col-md-6">
           <%= f.input :nome%>
           <%= error_span(@impresa[:nome]) %>
-          <%= f.input :indirizzo%>
-          <%= error_span(@impresa[:indirizzo]) %>
-          <%= f.input :descrizione_indirizzo %>
-          <%= error_span(@impresa[:descrizione_indirizzo]) %>
-          <%= f.input :citta_id ,collection: Citta.all %>
-        </div>
-        <div class="col-md-6">
           <%= f.input :email %>
           <%= error_span(@impresa[:email]) %>
+        </div>
+        <div class="col-md-6">
           <%= f.input :telefono %>
           <%= error_span(@impresa[:telefono]) %>
           <%= f.input :fax %>
           <%= error_span(@impresa[:fax]) %>
+        </div>
+      </div>
+      <div class="page-header"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :indirizzo%>
+          <%= error_span(@impresa[:indirizzo]) %>
+          <%= f.input :descrizione_indirizzo %>
+          <%= error_span(@impresa[:descrizione_indirizzo]) %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :locality, :input_html => { :id => "locality" }, readonly: true %>
+          <%= f.hidden_field_tag :route %>
+          <%= f.hidden_field_tag :administrative_area_level_1 %>
+          <%= f.hidden_field_tag :administrative_area_level_2 %>
+          <%= f.hidden_field_tag :administrative_area_level_3 %>
+          <%= f.hidden_field_tag :neighborhood %>
+          <%= f.hidden_field_tag :country %>
+          <%= f.input :citta_id, collection: Citta.all, default: 1 %>
+          <%= error_span(@impresa[:citta_id]) %>
         </div>
       </div>
       <div class="page-header"></div>
@@ -69,7 +84,7 @@
     </div>
   </div>
 
-  <!-- TMP da risolvere -->
+  <!-- TODO TMP da risolvere -->
   <%= f.input :latitude %>
   <%= error_span(@impresa[:latitude]) %>
   <%= f.input :longitude %>

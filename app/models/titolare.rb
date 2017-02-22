@@ -4,6 +4,8 @@ class Titolare < ActiveRecord::Base
 
   # Attributi per CF
   attr_accessor :sesso, :citta_nascita, :provincia_nascita
+  # Attributi per indirizzo
+  attr_accessor :locality
 
   # Implementa IS-A da Utenti
   acts_as :utente
@@ -38,6 +40,14 @@ class Titolare < ActiveRecord::Base
     end
   end
 
+  def check_indirizzo
+    ret = Citta.trovaIndirizzo(self.getIndirizzo)
+    puts(ret)
+    if ret == nil
+      errors.add(:indirizzo,"Indirizzo non valido")
+    end
+  end
+
   # Custom validation per controllare unicita tra piu campi senza case_sensitive
   def unique_entry
     matched_entry = Titolare.where(['LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?) AND LOWER(cf) = LOWER(?) AND data_nascita=?',
@@ -67,17 +77,12 @@ class Titolare < ActiveRecord::Base
   end
 
   def getIndirizzo
-    self.indirizzo + ','+ self.citta.getNome
-  end
-
-  def check_indirizzo
-    if self.indirizzo=='' || self.citta == nil
-      errors.add(:indirizzo,"Indirizzo non valido")
+    if(self.locality != nil)
+      # E' stato ricavato da Google Place, quindi ha gia' la citta nell'indirizzo
+      self.indirizzo
     else
-      coord = Geocoder.coordinates(self.getIndirizzo)
-      if coord == nil
-        errors.add(:indirizzo,"Indirizzo non valido")
-      end
+      # Non e' stato ricavato tramite Google Place; aggiungo la citta alla fine dell'indirizzo
+      "#{self.indirizzo}, #{self.citta.getNome}"
     end
   end
 

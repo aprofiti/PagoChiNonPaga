@@ -21,22 +21,31 @@ var componentForm = {
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search to geographical
   // location types.
-  if ($("#cliente_indirizzo").length != 0) {
+
+//  campo = $("#cliente_indirizzo") || $("#titolare_indirizzo") || $("#impresa_indirizzo");
+
+  if ($("#cliente_indirizzo").length !== 0) {
+    campo = 'cliente_indirizzo'
     autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('cliente_indirizzo')),
+        /** @type {!HTMLInputElement} */(document.getElementById(campo)),
         {types: ['geocode']});
   }
-  else if ($("#titolare_indirizzo").length != 0) {
+  else if ($("#titolare_indirizzo").length !== 0) {
+    campo = 'titolare_indirizzo'
     autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('titolare_indirizzo')),
+        /** @type {!HTMLInputElement} */(document.getElementById(campo)),
         {types: ['geocode']});
   }
-  else if ($("#impresa_indirizzo").length != 0) {
+  else if ($("#impresa_indirizzo").length !== 0) {
+    campo = 'impresa_indirizzo'
     autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('impresa_indirizzo')),
+        /** @type {!HTMLInputElement} */(document.getElementById(campo)),
         {types: ['geocode']});
   }
 
+  // Azzero i campi prima di inserire l'indirizzo
+  document.getElementById(campo).value = '';
+  document.getElementById("locality").value = '';
   // When the user selects an address from the dropdown, populate the address
   // fields in the form.
   autocomplete.addListener('place_changed', fillInAddress);
@@ -48,7 +57,7 @@ function fillInAddress() {
 
   for (var component in componentForm) {
     document.getElementById(component).value = '';
-    document.getElementById(component).disabled = false;
+    //document.getElementById(component).disabled = false;
   }
 
   // Get each component of the address from the place details

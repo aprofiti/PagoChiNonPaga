@@ -50,10 +50,17 @@
             <%= error_span(@titolare[:piva]) %>
             <%= f.input :telefono %>
             <%= error_span(@titolare[:telefono]) %>
-            <%= f.input :indirizzo %> <!-- visualizzare?? tipo relazione -->
+            <%= f.input :indirizzo %>
             <%= error_span(@titolare[:indirizzo]) %>
             <%= f.input :descrizione_indirizzo %>
             <%= error_span(@titolare[:descrizione_indirizzo]) %>
+            <%= f.input :locality, :input_html => { :id => "locality" }, readonly: true %>
+            <%= f.hidden_field_tag :route %>
+            <%= f.hidden_field_tag :administrative_area_level_1 %>
+            <%= f.hidden_field_tag :administrative_area_level_2 %>
+            <%= f.hidden_field_tag :administrative_area_level_3 %>
+            <%= f.hidden_field_tag :neighborhood %>
+            <%= f.hidden_field_tag :country %>
             <div class="page-header"></div>
             <%= f.input :email_paypal %>
             <%= error_span(@titolare[:email_paypal]) %>

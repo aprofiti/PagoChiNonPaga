@@ -38,15 +38,20 @@
             <div class="page-header"></div>
             <div class="row">
               <div class="col-md-6">
-                <%= f.input :indirizzo %> <!-- TODO visualizzare?? tipo relazione -->
+                <%= f.input :indirizzo %>
                 <%= error_span(@cliente[:indirizzo]) %>
                 <%= f.input :descrizione_indirizzo %>
                 <%= error_span(@cliente[:descrizione_indirizzo]) %>
-                <%= f.input :telefono %>
-                <%= error_span(@cliente[:telefono]) %>
               </div>
               <div class="col-md-6">
-              <%= f.input :citta_id ,collection: Citta.all %> 
+                <%= f.input :locality, :input_html => { :id => "locality" }, :as => :hidden  %>
+                <%= f.input :route, :as => :hidden  %>
+                <%= f.hidden_field_tag :administrative_area_level_1 %>
+                <%= f.hidden_field_tag :administrative_area_level_2 %>
+                <%= f.hidden_field_tag :administrative_area_level_3 %>
+                <%= f.hidden_field_tag :neighborhood %>
+                <%= f.hidden_field_tag :country %>
+                <%= f.input :citta_id, collection: Citta.all.order(:nome) %>
                 <%= error_span(@cliente[:citta_id]) %>
               </div>
               <div class="col-md-6">

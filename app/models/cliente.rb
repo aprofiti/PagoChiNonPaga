@@ -2,6 +2,8 @@ class Cliente < ActiveRecord::Base
   require 'codice_fiscale'
   # Attributi per CF
   attr_accessor :sesso, :citta_nascita, :provincia_nascita
+  # Attributi per indirizzo
+  attr_accessor :route, :locality
 
   # Implementa IS-A da Utenti
   acts_as :utente
@@ -20,6 +22,8 @@ class Cliente < ActiveRecord::Base
   validates :sesso, :citta_nascita, :provincia_nascita, presence: true, on: :create
   validates_length_of :provincia_nascita, :is => 2, on: :create
   validate :check_CF, on: :create
+  # Validations per indirizzo
+  #validates :locality, presence: true
   validate :check_indirizzo
 
   def check_CF
@@ -32,6 +36,34 @@ class Cliente < ActiveRecord::Base
         errors.add(:cf,"Codice Fiscale non corretto")
       end
       puts(cf)
+    end
+  end
+
+  def check_indirizzo
+    puts(self.locality)
+
+
+    if (self.locality == "")
+      puts("Senza GOOGLE place")
+      # Indirizzo inserito nel form senza l'ausilio di Google Place
+
+    else
+      puts("Con GOOGLE place")
+      #
+      if (self.locality != self.citta.getNome)
+        puts("Citta non corrisponde")
+        puts("CItta non corrisponde")
+      end
+      if (self.route == "")
+        errors.add(:indirizzo,"Non e' una via")
+        puts("NO VIA")
+      end
+
+    end
+    ret = Citta.trovaIndirizzo(self.getIndirizzo)
+    if ret == nil
+      puts("Check indirizzo non passato")
+      errors.add(:indirizzo,"Indirizzo non valido")
     end
   end
 
@@ -74,54 +106,17 @@ class Cliente < ActiveRecord::Base
 
   # Ritorna il numero totale di Clienti (sostenitori) all'interno di tutto il DB VERIFICATI
   def self.get_num_clienti
-    Utente.where("actable_type= 'Cliente' AND confirmed_at NOT NULL").count
-  end
-
-  def check_CF
-    unless Rails.env.test?
-      if self.citta_nascita.blank? || self.sesso.blank? || self.nome.blank? || self.cognome.blank? || self.data_nascita.blank?
-        errors.add(:citta_nascita, "Ricontrollare campi codice fiscale")
-        errors.add(:sesso, "Ricontrollare campi codice fiscale")
-        errors.add(:cognome, "Ricontrollare campi codice fiscale")
-        errors.add(:data_nascita, "Ricontrollare campi codice fiscale")
-        errors.add(:nome, "Ricontrollare campi codice fiscale")
-      else
-        if self.sesso=='M'
-          sesso= :male
-        else
-          sesso= :female
-        end
-        citta = Citta.find(self.citta_nascita)
-        nome_nuovo= ''+self.nome
-        cognome_nuovo = ''+self.cognome
-        codice= CodiceFiscale.calculate(
-          :name          => nome_nuovo,
-          :surname       => cognome_nuovo,
-          :gender        => sesso,
-          :birthdate     => self.data_nascita,
-          :province_code => citta.provincia,
-          :city_name     => citta.nome
-        )
-        puts(codice)
-        if self.cf.upcase != codice
-          errors.add(:cf,"Codice fiscale non valido.")
-        end
-      end
-    end
+    Utente.where("actable_type = 'Cliente' AND confirmed_at NOT NULL").count
   end
 
   def getIndirizzo
-    self.indirizzo + ','+ self.citta.getNome
-  end
-
-  def check_indirizzo
-    if self.indirizzo=='' || self.citta == nil
-      errors.add(:indirizzo,"Indirizzo non valido")
+    if(self.locality != "")
+      # E' stato ricavato da Google Place, quindi ha gia' la citta nell'indirizzo
+      self.indirizzo
     else
-      coord = Geocoder.coordinates(self.getIndirizzo)
-      if coord == nil
-        errors.add(:indirizzo,"Indirizzo non valido")
-      end
+      # Non e' stato ricavato tramite Google Place; aggiungo la citta alla fine dell'indirizzo
+      "#{self.indirizzo}, #{self.citta.getNome}"
     end
   end
+
 end

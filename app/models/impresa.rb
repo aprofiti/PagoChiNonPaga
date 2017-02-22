@@ -1,4 +1,5 @@
 class Impresa < ActiveRecord::Base
+  has_paper_trail
   # Attributi per indirizzo
   attr_accessor :locality
 
@@ -27,15 +28,14 @@ class Impresa < ActiveRecord::Base
   validate :unique_entry #custom validation per l'unicita
   validate :has_sottocategoria #custom validation per la presenza di almeno una sottocategoria
   validates :email, email: true
+  # Validations per indirizzo
+  #validates :locality, presence: true
+  validate :check_indirizzo
 
-  def assegna_coordinate
-    if getIndirizzo == nil
+  def check_indirizzo
+    ret = Citta.trovaIndirizzo(self.getIndirizzo)
+    if ret == nil
       errors.add(:indirizzo,"Indirizzo non valido")
-    else
-      coord = Geocoder.coordinates(getIndirizzo)
-      if coord == nil
-        errors.add(:indirizzo,"Indirizzo non valido")
-      end
     end
   end
 
@@ -110,10 +110,12 @@ class Impresa < ActiveRecord::Base
   end
 
   def getIndirizzo
-    if self.indirizzo=='' || self.citta == nil
-      nil
+    if(self.locality != nil)
+      # E' stato ricavato da Google Place, quindi ha gia' la citta nell'indirizzo
+      self.indirizzo
     else
-      self.indirizzo + ', ' + self.citta.getNome
+      # Non e' stato ricavato tramite Google Place; aggiungo la citta alla fine dell'indirizzo
+      "#{self.indirizzo}, #{self.citta.getNome}"
     end
   end
 
@@ -146,17 +148,6 @@ class Impresa < ActiveRecord::Base
       end
     end
     ordini
-  end
-
-  # Ritorna il numero totale di imprese presenti in tutto il DB che sono verificate e NON congelate
-  def self.get_num_imprese
-    Impresa.where(:congelato=>false, :verificato=>true).count
-  end
-
-  # Ritorna un array di max 5 imprese presenti nel DB verificate e NON congelate
-  def self.get_random_imprese
-    imprese= Impresa.where(:congelato=>false, :verificato=>true)
-    imprese.sample(5)
   end
 
 end

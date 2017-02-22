@@ -1,4 +1,6 @@
 class Prodotto < ActiveRecord::Base
+  has_paper_trail
+  # Associazioni
   belongs_to :impresa
   has_and_belongs_to_many :ordini
 
