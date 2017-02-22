@@ -1,6 +1,6 @@
 module ApplicationHelper
   # Helper usato nelle views per messaggi Flash
-  def bootstrap_class_for (flash_type)
+  def bootstrap_class_for(flash_type)
     case flash_type
     when "success"
         "alert-success" # Green
@@ -25,4 +25,5 @@ module ApplicationHelper
     end
     nil
   end
+  
 end
