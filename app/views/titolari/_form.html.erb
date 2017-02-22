@@ -9,7 +9,6 @@
   } do |f| %>
 
   <div class="row">
-
     <div class="col-md-12">
       <!-- Sezione Anagrafica -->
       <div class="panel panel-primary">
@@ -24,14 +23,15 @@
                 <%= error_span(@titolare[:nome]) %>
                 <%= f.input :cognome%>
                 <%= error_span(@titolare[:cognome]) %>
-
+                <%= f.input :citta_nascita %>
+                <%= f.input :provincia_nascita %>
               </div>
               <div class="col-md-6">
+                <%= f.input :sesso ,collection: ['M','F']%>
                 <%= f.input :cf %>
                 <%= error_span(@titolare[:cf]) %>
                 <%= f.input :data_nascita, as: :string, input_html: {type: :date} %>
                 <%= error_span(@titolare[:data_nascita]) %>
-
               </div>
             </div>
             <div class="page-header"></div>
@@ -61,6 +61,8 @@
 
                 <%= f.input :piva %>
                 <%= error_span(@titolare[:piva]) %>
+                <%= f.input :telefono %>
+                <%= error_span(@titolare[:telefono]) %>
               </div>
             <div class="col-md-6">
               <%= f.input :email_paypal %>

@@ -24,14 +24,15 @@
                 <%= error_span(@cliente[:nome]) %>
                 <%= f.input :cognome%>
                 <%= error_span(@cliente[:cognome]) %>
-
+                <%= f.input :citta_nascita %>
+                <%= f.input :provincia_nascita %>
               </div>
               <div class="col-md-6">
+                <%= f.input :sesso ,collection: ['M','F']%>
                 <%= f.input :cf %>
                 <%= error_span(@cliente[:cf]) %>
                 <%= f.input :data_nascita, as: :string, input_html: {type: :date} %>
                 <%= error_span(@cliente[:data_nascita]) %>
-
               </div>
             </div>
             <div class="page-header"></div>
@@ -49,10 +50,11 @@
                 <%= error_span(@cliente[:citta_id]) %>
               </div>
               <div class="col-md-6">
-                <%= f.input :citta_nascita ,collection: Citta.all%>
+                <%= f.input :telefono %>
+                <%= error_span(@cliente[:telefono]) %>
               </div>
               <div class="col-md-6">
-                <%= f.input :sesso ,collection: ['M','F']%>
+
               </div>
             </div>
             <div class="page-header"></div>
