@@ -40,6 +40,8 @@ Rails.application.routes.draw do
     member do
       post :remove_item
       post :add_cart
+      post :aggiungi_quantita
+      post :sottrai_quantita
     end
   end
 

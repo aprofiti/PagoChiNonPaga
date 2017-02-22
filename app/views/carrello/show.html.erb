@@ -30,6 +30,12 @@
                 <td><%= item.quantity %></td>
                 <td><%= link_to "Rimuovi", remove_item_carrello_path(id: params[:id],item: item),
                         :class => 'btn btn-danger btn-xs', method: :post %> </td>
+                <td>
+                  <%= link_to 'più uno', aggiungi_quantita_carrello_path(item: item.id,carrello_id: @carrello.id) ,method: :post %>
+                </td>
+                <td>
+                  <%= link_to 'meno uno', sottrai_quantita_carrello_path(item: item.id,carrello_id: @carrello.id) ,method: :post %>
+                </td>
               </tr>
             <% end %>
           </tbody>

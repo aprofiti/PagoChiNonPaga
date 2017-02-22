@@ -35,6 +35,20 @@ class CarrelloController < ApplicationController
     end
   end
 
+  def aggiungi_quantita
+    prodotto= CarrelloProdotto.find(params[:item])
+    prodotto.aggiungiQuantita
+    redirect_to carrello_path(id: params[:carrello_id])
+  end
+
+  def sottrai_quantita
+    prodotto= CarrelloProdotto.find(params[:item])
+    prodotto.scalaQuantita
+    if !prodotto.changed?
+      flash[:error] = "Impossibile scalare la quantità"
+    end
+    redirect_to carrello_path(id: params[:carrello_id])
+  end
   # POST /carrello
   # POST /carrello.json
   def create
