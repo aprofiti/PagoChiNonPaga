@@ -45,7 +45,7 @@
               </div>
               <div class="col-md-6">
                 <%= f.input :locality, :input_html => { :id => "locality" }, :as => :hidden  %>
-                <%= f.input :route, :as => :hidden  %>
+                <%= f.input :route, :input_html => { :id => "route" }, :as => :hidden  %>
                 <%= f.hidden_field_tag :administrative_area_level_1 %>
                 <%= f.hidden_field_tag :administrative_area_level_2 %>
                 <%= f.hidden_field_tag :administrative_area_level_3 %>

@@ -54,13 +54,15 @@
             <%= error_span(@titolare[:indirizzo]) %>
             <%= f.input :descrizione_indirizzo %>
             <%= error_span(@titolare[:descrizione_indirizzo]) %>
-            <%= f.input :locality, :input_html => { :id => "locality" }, readonly: true %>
-            <%= f.hidden_field_tag :route %>
+            <%= f.input :locality, :input_html => { :id => "locality" }, :as => :hidden  %>
+            <%= f.input :route, :input_html => { :id => "route" }, :as => :hidden  %>
             <%= f.hidden_field_tag :administrative_area_level_1 %>
             <%= f.hidden_field_tag :administrative_area_level_2 %>
             <%= f.hidden_field_tag :administrative_area_level_3 %>
             <%= f.hidden_field_tag :neighborhood %>
             <%= f.hidden_field_tag :country %>
+            <%= f.input :citta_id, collection: Citta.all.order(:nome) %>
+            <%= error_span(@titolare[:citta_id]) %>
             <div class="page-header"></div>
             <%= f.input :email_paypal %>
             <%= error_span(@titolare[:email_paypal]) %>

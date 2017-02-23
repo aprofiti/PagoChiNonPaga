@@ -40,29 +40,20 @@ class Cliente < ActiveRecord::Base
   end
 
   def check_indirizzo
-    puts(self.locality)
-
-
-    if (self.locality == "")
-      puts("Senza GOOGLE place")
-      # Indirizzo inserito nel form senza l'ausilio di Google Place
-
-    else
-      puts("Con GOOGLE place")
-      #
+    # Se ho il campo locality allora ho selezionato l'indirizzo tramite l'autocomplete di Google Place
+    if(self.locality != "")
+      # Controllo che la citta' dell'indirizzo selezionato, corrisponda alla Citta nel menu a tendina
       if (self.locality != self.citta.getNome)
-        puts("Citta non corrisponde")
-        puts("CItta non corrisponde")
+        errors.add(:citta_id,"L'indirizzo non corrisponde con la citta selezionata")
       end
+      # Controllo che la citta' dell'indirizzo selezionato, corrisponda alla Citta nel menu a tendina
       if (self.route == "")
-        errors.add(:indirizzo,"Non e' una via")
-        puts("NO VIA")
+        errors.add(:indirizzo,"L'indizzo immesso non e' una via oppure un Punto di Interesse con indirizzo")
       end
-
     end
+    # Controllo l'esistenza dell'indirizzo tramite Google Place API
     ret = Citta.trovaIndirizzo(self.getIndirizzo)
     if ret == nil
-      puts("Check indirizzo non passato")
       errors.add(:indirizzo,"Indirizzo non valido")
     end
   end

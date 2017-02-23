@@ -43,7 +43,7 @@ function initAutocomplete() {
         {types: ['geocode']});
   }
 
-  // Azzero i campi prima di inserire l'indirizzo
+  // Azzero i campi all'inizializzazione del Form
   document.getElementById(campo).value = '';
   document.getElementById("locality").value = '';
   // When the user selects an address from the dropdown, populate the address

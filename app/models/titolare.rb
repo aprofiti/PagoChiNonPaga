@@ -5,7 +5,7 @@ class Titolare < ActiveRecord::Base
   # Attributi per CF
   attr_accessor :sesso, :citta_nascita, :provincia_nascita
   # Attributi per indirizzo
-  attr_accessor :locality
+  attr_accessor :route, :locality
 
   # Implementa IS-A da Utenti
   acts_as :utente
@@ -41,8 +41,19 @@ class Titolare < ActiveRecord::Base
   end
 
   def check_indirizzo
+    # Se ho il campo locality allora ho selezionato l'indirizzo tramite l'autocomplete di Google Place
+    if(self.locality != "")
+      # Controllo che la citta' dell'indirizzo selezionato, corrisponda alla Citta nel menu a tendina
+      if (self.locality != self.citta.getNome)
+        errors.add(:citta_id,"L'indirizzo non corrisponde con la citta selezionata")
+      end
+      # Controllo che la citta' dell'indirizzo selezionato, corrisponda alla Citta nel menu a tendina
+      if (self.route == "")
+        errors.add(:indirizzo,"L'indizzo immesso non e' una via oppure un Punto di Interesse con indirizzo")
+      end
+    end
+    # Controllo l'esistenza dell'indirizzo tramite Google Place API
     ret = Citta.trovaIndirizzo(self.getIndirizzo)
-    puts(ret)
     if ret == nil
       errors.add(:indirizzo,"Indirizzo non valido")
     end

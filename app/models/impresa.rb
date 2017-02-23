@@ -1,7 +1,7 @@
 class Impresa < ActiveRecord::Base
   has_paper_trail
   # Attributi per indirizzo
-  attr_accessor :locality
+  attr_accessor :route, :locality
 
   # Upload immagini
   mount_uploader :image, ImageUploader
@@ -33,6 +33,18 @@ class Impresa < ActiveRecord::Base
   validate :check_indirizzo
 
   def check_indirizzo
+    # Se ho il campo locality allora ho selezionato l'indirizzo tramite l'autocomplete di Google Place
+    if(self.locality != "")
+      # Controllo che la citta' dell'indirizzo selezionato, corrisponda alla Citta nel menu a tendina
+      if (self.locality != self.citta.getNome)
+        errors.add(:citta_id,"L'indirizzo non corrisponde con la citta selezionata")
+      end
+      # Controllo che la citta' dell'indirizzo selezionato, corrisponda alla Citta nel menu a tendina
+      if (self.route == "")
+        errors.add(:indirizzo,"L'indizzo immesso non e' una via oppure un Punto di Interesse con indirizzo")
+      end
+    end
+    # Controllo l'esistenza dell'indirizzo tramite Google Place API
     ret = Citta.trovaIndirizzo(self.getIndirizzo)
     if ret == nil
       errors.add(:indirizzo,"Indirizzo non valido")
