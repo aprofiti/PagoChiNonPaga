@@ -12,7 +12,7 @@ class Utente < ActiveRecord::Base
 
   # Ritorna il numero totale di Utenti presenti dentro l'intero DB VERIFICATI
   def self.get_num_utenti
-    Utente.where("confirmed_at NOT NULL").count
+    Utente.where.not("confirmed_at" => nil).count
   end
 
   #

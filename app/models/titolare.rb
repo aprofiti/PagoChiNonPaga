@@ -84,7 +84,7 @@ class Titolare < ActiveRecord::Base
 
   # Ritorna il numero totale di Utenti presenti dentro l'intero DB VERIFICATI
   def self.get_num_titolari
-    Utente.where("actable_type= 'Titolare' AND confirmed_at NOT NULL").count
+    Utente.where("actable_type = ?", "Titolare").where("confirmed_at != ?", nil).count
   end
 
   def getIndirizzo
