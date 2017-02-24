@@ -54,12 +54,10 @@ class Citta < ActiveRecord::Base
     end
     # Verifico se le API Google mi restituiscono delle coordinate valide
     coord = Geocoder.coordinates(indirizzo)
-    puts(indirizzo)
     if coord == nil
       # Nessuna corrispondenza
       return nil
     end
-    puts(coord)
     return coord
   end
 

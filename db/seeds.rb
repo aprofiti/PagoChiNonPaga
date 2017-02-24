@@ -69,52 +69,52 @@ Admin.create(email: 'lor@enzo.com', password: '1q2w3e', password_confirmation: '
 Admin.create(email: 'alex@email.it', password: 'password', password_confirmation: 'password', polo_id: 3)
 Admin.create(email: 'super@email.it', password: 'password', password_confirmation: 'password', polo_id: 1, superadmin: true)
 
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Gigi', cognome: 'Meraviglia', cf: 'ajsjsan', telefono: '12345', data_nascita: Date.parse('08/08/1964'), email: 'cli1@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Gigi', cognome: 'Meraviglia', cf: 'ajsjsan', telefono: '12345', data_nascita: Date.parse('08/08/1964'), email: 'cli1@ente.it',
  password: '123456', password_confirmation: '123456', indirizzo: 'Via Italia', citta_id: 1, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Rino', cognome: 'Rino', cf: 'dsahju', telefono: '1354', data_nascita: Date.parse('04/11/1991'), email: 'cli2@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Rino', cognome: 'Rino', cf: 'dsahju', telefono: '1354', data_nascita: Date.parse('04/11/1991'), email: 'cli2@ente.it',
  password: '123456', password_confirmation: '123456', indirizzo: 'Via del Corso', citta_id: 1, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Franco', cognome: 'Massimo', cf: 'jasdnjd', telefono: '15325', data_nascita: Date.parse('01/01/1992'), email: 'cli3@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Franco', cognome: 'Massimo', cf: 'jasdnjd', telefono: '15325', data_nascita: Date.parse('01/01/1992'), email: 'cli3@ente.it',
 password: '123456', password_confirmation: '123456', indirizzo: 'Piazza della liberazione', citta_id: 1, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Tommaso', cognome: 'Meraviglia', cf: 'skanjd', telefono: '1242', data_nascita: Date.parse('03/05/1907'), email: 'cli4@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Tommaso', cognome: 'Meraviglia', cf: 'skanjd', telefono: '1242', data_nascita: Date.parse('03/05/1907'), email: 'cli4@ente.it',
  password: '123456', password_confirmation: '123456', indirizzo: 'Via Catania', citta_id: 2, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Massimo', cognome: 'Franco', cf: 'sdakcc', telefono: '15252', data_nascita: Date.parse('01/05/1930'), email: 'cli5@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Massimo', cognome: 'Franco', cf: 'sdakcc', telefono: '15252', data_nascita: Date.parse('01/05/1930'), email: 'cli5@ente.it',
  password: '123456', password_confirmation: '123456', indirizzo: 'Via Palermo', citta_id: 2, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Ambrogio', cognome: 'De Scrotiis', cf: 'nsjns', telefono: '98989', data_nascita: Date.parse('11/11/1952'), email: 'cli6@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Ambrogio', cognome: 'De Scrotiis', cf: 'nsjns', telefono: '98989', data_nascita: Date.parse('11/11/1952'), email: 'cli6@ente.it',
  password: '123456', password_confirmation: '123456', indirizzo: 'Via Roma', citta_id: 3, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Fra', cognome: 'Nebbia', cf: 'wdjiwj9', telefono: '5737378', data_nascita: Date.parse('01/08/2000'), email: 'cli7@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Fra', cognome: 'Nebbia', cf: 'wdjiwj9', telefono: '5737378', data_nascita: Date.parse('01/08/2000'), email: 'cli7@ente.it',
 password: '123456', password_confirmation: '123456', indirizzo: 'Via della Libertà', citta_id: 3, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Riccardo', cognome: 'Ilgrande', cf: 'w9udw9jf', telefono: '3838', data_nascita: Date.parse('02/09/1996'), email: 'cli8@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Riccardo', cognome: 'Ilgrande', cf: 'w9udw9jf', telefono: '3838', data_nascita: Date.parse('02/09/1996'), email: 'cli8@ente.it',
  password: '123456', password_confirmation: '123456', indirizzo: 'Via Cavour', citta_id: 3, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Linus', cognome: 'Torvalds', cf: 'wd9wjw', telefono: '463746', data_nascita: Date.parse('08/02/1991'), email: 'cli9@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Linus', cognome: 'Torvalds', cf: 'wd9wjw', telefono: '463746', data_nascita: Date.parse('08/02/1991'), email: 'cli9@ente.it',
  password: '123456', password_confirmation: '123456', indirizzo: 'Via da qui', citta_id: 4, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Al', cognome: 'Alino', cf: 'f3jfi2', telefono: '249209', data_nascita: Date.parse('01/05/1997'), email: 'cli10@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Al', cognome: 'Alino', cf: 'f3jfi2', telefono: '249209', data_nascita: Date.parse('01/05/1997'), email: 'cli10@ente.it',
 password: '123456', password_confirmation: '123456', indirizzo: 'Via assurda', citta_id: 5, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'John', cognome: 'Tortora', cf: '2iin2f', telefono: '22746', data_nascita: Date.parse('01/05/1969'), email: 'cli11@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'John', cognome: 'Tortora', cf: '2iin2f', telefono: '22746', data_nascita: Date.parse('01/05/1969'), email: 'cli11@ente.it',
  password: '123456', password_confirmation: '123456', indirizzo: 'via dello scandalo', citta_id: 6, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Jack', cognome: 'Baglio', cf: 'j9wj9j29', telefono: '0292836', data_nascita: Date.parse('31/12/1999'), email: 'cli12@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Jack', cognome: 'Baglio', cf: 'j9wj9j29', telefono: '0292836', data_nascita: Date.parse('31/12/1999'), email: 'cli12@ente.it',
  password: '123456', password_confirmation: '123456', indirizzo: 'Contrada massiccia', citta_id: 7, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Soreta', cognome: 'Mammeta', cf: '1uhue', telefono: '3467365', data_nascita: Date.parse('04/06/1977'), email: 'cli13@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Soreta', cognome: 'Mammeta', cf: '1uhue', telefono: '3467365', data_nascita: Date.parse('04/06/1977'), email: 'cli13@ente.it',
 password: '123456', password_confirmation: '123456', indirizzo: 'Largo Sorella', citta_id: 8, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Mario', cognome: 'Rossi', cf: '2uh2uh', telefono: '38573857', data_nascita: Date.parse('01/05/1990'), email: 'cli14@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Mario', cognome: 'Rossi', cf: '2uh2uh', telefono: '38573857', data_nascita: Date.parse('01/05/1990'), email: 'cli14@ente.it',
 password: '123456', password_confirmation: '123456', indirizzo: 'Rotonda di zio peppe', citta_id: 9, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Arturo', cognome: 'Di Napoli', cf: '29j02j0', telefono: '263748', data_nascita: Date.parse('02/05/1980'), email: 'cli15@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Arturo', cognome: 'Di Napoli', cf: '29j02j0', telefono: '263748', data_nascita: Date.parse('02/05/1980'), email: 'cli15@ente.it',
 password: '123456', password_confirmation: '123456', indirizzo: 'La strada del buon pastore', citta_id: 10, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Bello Figo', cognome: 'Gu', cf: 'uh21ueh', telefono: '746758', data_nascita: Date.parse('01/03/2004'), email: 'cli16@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Bello Figo', cognome: 'Gu', cf: 'uh21ueh', telefono: '746758', data_nascita: Date.parse('01/03/2004'), email: 'cli16@ente.it',
 password: '123456', password_confirmation: '123456', indirizzo: 'Via agnello', citta_id: 10, confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Sancho', cognome: 'Panza', cf: 'ncknskc', telefono: '9566656', data_nascita: Date.parse('01/03/1995'), email: 'cli17@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Sancho', cognome: 'Panza', cf: 'ncknskc', telefono: '9566656', data_nascita: Date.parse('01/03/1995'), email: 'cli17@ente.it',
  password: '123456', password_confirmation: '123456', indirizzo: 'Via agnellone', citta_id: 3).save(:validate => false)
-Cliente.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Miss', cognome: 'Mr', cf: 'dkowmsmc', telefono: '78446778', data_nascita: Date.parse('01/03/1991'), email: 'cli18@ente.it',
+Cliente.create(citta_nascita: 1, sesso: 'M',nome: 'Miss', cognome: 'Mr', cf: 'dkowmsmc', telefono: '78446778', data_nascita: Date.parse('01/03/1991'), email: 'cli18@ente.it',
 password: '123456', password_confirmation: '123456', indirizzo: 'Via vitello', citta_id: 6).save(:validate => false)
 
-Titolare.create(citta_nascita: "Messina",provincia_nascita: "ME", sesso: 'M',nome: 'Tito', cognome: 'Lare', email: 'tito1@lare.it', password: '123456', password_confirmation: '123456', telefono: '3423556',
+Titolare.create(citta_nascita: 1, sesso: 'M',nome: 'Tito', cognome: 'Lare', email: 'tito1@lare.it', password: '123456', password_confirmation: '123456', telefono: '3423556',
 piva: "abcde", data_nascita: Date.parse('01/05/1930'), cf: 'sdgsg', indirizzo: 'via della vita', citta_id: 8,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Titolare.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Giangiovanni', cognome: 'Itto', email: 'tito2@lare.it', password: '123456', password_confirmation: '123456', telefono: '73249',
+Titolare.create(citta_nascita: 2, sesso: 'M',nome: 'Giangiovanni', cognome: 'Itto', email: 'tito2@lare.it', password: '123456', password_confirmation: '123456', telefono: '73249',
 piva: "abcde", data_nascita: Date.parse('09/06/1955'), cf: 'kfmkimke', indirizzo: 'via in numeri', citta_id: 1,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Titolare.create(citta_nascita: "Roma", provincia_nascita: "RM", sesso: 'M',nome: 'Mimmo', cognome: 'Trippa', email: 'tito3@lare.it', password: '123456', password_confirmation: '123456', telefono: '000222',
+Titolare.create(citta_nascita: 3, sesso: 'M',nome: 'Mimmo', cognome: 'Trippa', email: 'tito3@lare.it', password: '123456', password_confirmation: '123456', telefono: '000222',
 piva: "abcde", data_nascita: Date.parse('03/05/1907'), cf: 'einjnf', indirizzo: 'via stanchezza', citta_id: 10,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Titolare.create(citta_nascita: "Catania", provincia_nascita: "CT", sesso: 'M',nome: 'Edoardo', cognome: 'Dei Boschi', email: 'tito4@lare.it', password: '123456', password_confirmation: '123456', telefono: '634622',
+Titolare.create(citta_nascita: 1, sesso: 'M',nome: 'Edoardo', cognome: 'Dei Boschi', email: 'tito4@lare.it', password: '123456', password_confirmation: '123456', telefono: '634622',
 piva: "abcde", data_nascita: Date.parse('04/11/1991'), cf: 'ijgin', indirizzo: 'via del sospiro', citta_id: 2,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
-Titolare.create(citta_nascita: "Palermo", provincia_nascita: "PA", sesso: 'M',nome: 'Sergio', cognome: 'Leone', email: 'tito5@lare.it', password: '123456', password_confirmation: '123456', telefono: '987765654',
+Titolare.create(citta_nascita: 4, sesso: 'M',nome: 'Sergio', cognome: 'Leone', email: 'tito5@lare.it', password: '123456', password_confirmation: '123456', telefono: '987765654',
 piva: "abcde", data_nascita: Date.parse('08/08/1964'), cf: 'wefjun', indirizzo: 'via alla menta', citta_id: 3,email_paypal: "fakeaccount@account.com", confirmed_at: Date.parse('01/01/2017')).save(:validate => false)
 
 Impresa.create(nome: 'Bazzecole al chilo', telefono: '2423', descrizione: 'Mah', titolare_id: 1, citta_id: 1, verificato: true, congelato: false,indirizzo: 'Via Catania 31', email: 'impre1@sa.it').save(:validate => false)

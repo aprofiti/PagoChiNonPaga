@@ -123,11 +123,9 @@ class Impresa < ActiveRecord::Base
 
   def getIndirizzo
     if(self.locality != "" || self.citta == nil)
-      puts("GET INDIRIZZO API")
       # E' stato ricavato da Google Place, quindi ha gia' la citta nell'indirizzo
       self.indirizzo
     else
-      puts("NO INDIRIZZO API")
       # Non e' stato ricavato tramite Google Place; aggiungo la citta alla fine dell'indirizzo
       "#{self.indirizzo}, #{self.citta.getNome}"
     end

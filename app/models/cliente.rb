@@ -33,7 +33,6 @@ class Cliente < ActiveRecord::Base
       if self.cf != cf
         errors.add(:cf,"Non corrisponde con i dati dell'Anagrafica inserita")
       end
-      puts(cf)
     end
   end
 
