@@ -25,7 +25,6 @@ class Titolare < ActiveRecord::Base
   validates_length_of :provincia_nascita, :is => 2, on: :create
   validate :check_CF, on: :create
   # Validations per indirizzo
-#  validates :locality, presence: true
   validate :check_indirizzo
 
   def check_CF
@@ -41,6 +40,7 @@ class Titolare < ActiveRecord::Base
   end
 
   def check_indirizzo
+    return false unless self.errors.empty?
     # Se ho il campo locality allora ho selezionato l'indirizzo tramite l'autocomplete di Google Place
     if(self.locality != "")
       # Controllo che la citta' dell'indirizzo selezionato, corrisponda alla Citta nel menu a tendina
@@ -88,7 +88,7 @@ class Titolare < ActiveRecord::Base
   end
 
   def getIndirizzo
-    if(self.locality != nil)
+    if(self.locality != "")
       # E' stato ricavato da Google Place, quindi ha gia' la citta nell'indirizzo
       self.indirizzo
     else

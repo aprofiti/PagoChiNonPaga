@@ -14,7 +14,7 @@ class Impresa < ActiveRecord::Base
   has_many :ordini
   has_and_belongs_to_many :sottocategorie
 
-  before_validation :check_indirizzo
+
   geocoded_by :getIndirizzo
   after_validation :geocode
 
@@ -29,10 +29,10 @@ class Impresa < ActiveRecord::Base
   validate :has_sottocategoria #custom validation per la presenza di almeno una sottocategoria
   validates :email, email: true
   # Validations per indirizzo
-  #validates :locality, presence: true
   validate :check_indirizzo
 
   def check_indirizzo
+    return false unless self.errors.empty?
     # Se ho il campo locality allora ho selezionato l'indirizzo tramite l'autocomplete di Google Place
     if(self.locality != "")
       # Controllo che la citta' dell'indirizzo selezionato, corrisponda alla Citta nel menu a tendina
@@ -122,10 +122,12 @@ class Impresa < ActiveRecord::Base
   end
 
   def getIndirizzo
-    if(self.locality != nil)
+    if(self.locality != "" || self.citta == nil)
+      puts("GET INDIRIZZO API")
       # E' stato ricavato da Google Place, quindi ha gia' la citta nell'indirizzo
       self.indirizzo
     else
+      puts("NO INDIRIZZO API")
       # Non e' stato ricavato tramite Google Place; aggiungo la citta alla fine dell'indirizzo
       "#{self.indirizzo}, #{self.citta.getNome}"
     end
