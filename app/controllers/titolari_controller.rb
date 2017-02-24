@@ -81,7 +81,7 @@ class TitolariController < ApplicationController
         citta = Citta.find_by_nome(locality)
         if citta != nil
           # Aggiorno l'attributo con l'id della citta trovata
-          @impresa.assign_attributes('citta_id' => citta.id)
+          @titolare.assign_attributes('citta_id' => citta.id)
         end
       end
     end
