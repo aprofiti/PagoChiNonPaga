@@ -10,7 +10,6 @@
           <tr>
             <th width = "20%"><%= model_class.human_attribute_name(:image) %></th>
             <th><%= model_class.human_attribute_name(:nome) %></th>
-            <th><%= model_class.human_attribute_name(:descrizione) %></th>
             <th><%= model_class.human_attribute_name(:impresa) %></th>
             <th><%= model_class.human_attribute_name(:prezzo) %></th>
             <th><%= model_class.human_attribute_name(:quantita) %></th>
@@ -24,17 +23,19 @@
               <tr>
                 <td><%= image_tag(prodotto.image, :class => "img-responsive") %></td>
                 <td><%= link_to prodotto.nome, impresa_prodotti_path(id: prodotto.id, impresa_nome: prodotto.impresa.getNome) %></td>
-                <td><%= prodotto.descrizione %></td>
                 <td><%= prodotto.impresa.getNome %></td>
                 <td><%= item.price %></td>
-                <td><%= item.quantity %></td>
-                <td><%= link_to "Rimuovi", remove_item_carrello_path(id: params[:id],item: item),
-                        :class => 'btn btn-danger btn-xs', method: :post %> </td>
                 <td>
-                  <%= link_to 'più uno', aggiungi_quantita_carrello_path(item: item.id,carrello_id: @carrello.id) ,method: :post %>
+                  <%= link_to sottrai_quantita_carrello_path(item: item.id,carrello_id: @carrello.id), :class => "btn btn-default btn-xs", method: :post do %>
+                    <span class="fa fa-minus"></span>
+                  <% end %>
+                  <%= item.quantity %>
+                  <%= link_to aggiungi_quantita_carrello_path(item: item.id,carrello_id: @carrello.id), :class => "btn btn-default btn-xs", method: :post do %>
+                    <span class="fa fa-plus"></span>
+                  <% end %>
                 </td>
-                <td>
-                  <%= link_to 'meno uno', sottrai_quantita_carrello_path(item: item.id,carrello_id: @carrello.id) ,method: :post %>
+                <td><%= link_to "Rimuovi", remove_item_carrello_path(id: params[:id],item: item),
+                        :class => 'btn btn-danger btn-xs', method: :post %>
                 </td>
               </tr>
             <% end %>
@@ -69,19 +70,4 @@
       <% end %>
     </div>
   </div>
-
-
-
-
-
-  <!-- Fare la lista dei prodotto per impresa
-
-    <% @carrello.impresaElemento.each do |lista| %>
-    <tr>
-      <td><%= %></td>
-    </tr>
-    <% end %>
-  -->
-
-
 </div>
