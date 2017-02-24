@@ -5,6 +5,10 @@ class CittaController < ApplicationController
   # GET /citta.json
   def index
     @citta = Citta.all
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @citta }
+     end
   end
 
   # GET /citta/:id

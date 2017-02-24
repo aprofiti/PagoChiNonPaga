@@ -50,7 +50,7 @@
                 <%= f.hidden_field_tag :administrative_area_level_3 %>
                 <%= f.hidden_field_tag :neighborhood %>
                 <%= f.hidden_field_tag :country %>
-                <%= f.input :citta_id, collection: Citta.all.order(:nome) %>
+                <%= f.input :citta_id, collection: Citta.all.order(:nome),:input_html => { :id => "citta_id" } %>
                 <%= error_span(@titolare[:citta_id]) %>
               </div>
             </div>

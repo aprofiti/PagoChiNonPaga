@@ -67,8 +67,23 @@ function fillInAddress() {
     if (componentForm[addressType]) {
       var val = place.address_components[i][componentForm[addressType]];
       document.getElementById(addressType).value = val;
+      }
     }
-  }
+    var citta = place.address_components[1];
+    $.ajax({
+         type: "GET",
+         url: "/citta.json",
+         data: '/citta.json',
+         datatype:"JSON", // check more option
+         success: function(data) {
+           for(i=0;i<Object.keys(data).length;i++){
+             if (data[i].nome.localeCompare(citta.long_name)==0){
+               document.getElementById("citta_id").value = data[i].id;
+               break;
+             }
+           }
+          }
+       });
 }
 
 // Bias the autocomplete object to the user's geographical location,

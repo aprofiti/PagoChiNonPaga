@@ -52,7 +52,6 @@ class ImpreseController < ApplicationController
     # Assegno al titolare che l'ha creata
     @impresa.titolare_id = current_utente.actable_id
     # Se per indirizzo, ho utilizzato l'autocompletiton, seleziono automaticamente la citta corrispondente
-    ricercaLocality()
     respond_to do |format|
       if @impresa.save
 =begin
@@ -73,7 +72,6 @@ class ImpreseController < ApplicationController
   # PATCH/PUT /imprese/:nome.json?id=:id
   def update
     # Se per indirizzo, ho utilizzato l'autocompletiton, seleziono automaticamente la citta corrispondente
-    ricercaLocality()
     respond_to do |format|
       if @impresa.update(impresa_params)
         format.html { redirect_to impresa_path(nome: @impresa.nome,id: @impresa.id), notice: 'Impresa was successfully updated.' }
@@ -96,19 +94,6 @@ class ImpreseController < ApplicationController
   end
 
   private
-    def ricercaLocality
-      # Se per indirizzo, ho utilizzato l'autocompletiton, seleziono automaticamente la citta corrispondente
-      locality = params[:impresa][:locality]
-      if (locality != "")
-        # Ricerco all'interno del db la citta
-        citta = Citta.find_by_nome(locality)
-        if citta != nil
-          # Aggiorno l'attributo con l'id della citta trovata
-          @impresa.assign_attributes('citta_id' => citta.id)
-        end
-      end
-    end
-
     def is_abilitata #impresa deve essere verificata e NON congelata
       if !(@impresa.verificato && !(@impresa.congelato))
         flash[:error] = "L'impresa e' stata congelata. {er maggiori informazioni, contattare il polo di appartenenza."
