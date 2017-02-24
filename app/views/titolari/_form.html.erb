@@ -23,8 +23,7 @@
                 <%= error_span(@titolare[:nome]) %>
                 <%= f.input :cognome%>
                 <%= error_span(@titolare[:cognome]) %>
-                <%= f.input :citta_nascita %>
-                <%= f.input :provincia_nascita %>
+                <%= f.input :citta_nascita, collection: Citta.all.order(:nome) %>
               </div>
               <div class="col-md-6">
                 <%= f.input :sesso ,collection: ['M','F']%>

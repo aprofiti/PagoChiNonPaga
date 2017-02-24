@@ -72,6 +72,10 @@ class Citta < ActiveRecord::Base
     self.imprese
   end
 
+  def getProvincia
+    self.provincia
+  end
+
   def getNome
     self.nome
   end

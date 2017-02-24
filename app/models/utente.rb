@@ -19,10 +19,9 @@ class Utente < ActiveRecord::Base
   # Metodi di Istanza
   #
 
-  def check_CF(nome,cognome,sesso,data_nascita,citta_nascita,provincia_nascita)
-    if (citta_nascita == '' || sesso == '' ||
-      nome == '' || cognome == '' ||
-      data_nascita == '' || provincia_nascita == '')
+  def check_CF(nome,cognome,sesso,data_nascita,citta_nascita)
+    if (nome == '' || cognome == '' || sesso == '' ||
+       data_nascita == '' || citta_nascita == '')
       # ERRORE: Parametri non corretti
       return
     end
@@ -30,10 +29,12 @@ class Utente < ActiveRecord::Base
     # Calcolo il CF
     # Atteznione: La gemma puo' lanciare eccezioni per parametri non corretti
     begin
+      # Cerco la Citta nel db per recuperare nome e provincia
+      citta = Citta.find(citta_nascita)
       # Controllo che la citta di nascita si corretta
       # Uso un metodo della gemma che restituisce il codice per la citta
       # In questo modo posso controllare che la citta esiste veramente
-      CodiceFiscale::Codes.city(citta_nascita,provincia_nascita)
+      CodiceFiscale::Codes.city(citta.getNome,citta.getProvincia)
 
       # Fornisco i dati nel formato accettato dalla gemma
       valoriSesso = {'M' => :male, 'F' => :female}
@@ -46,8 +47,8 @@ class Utente < ActiveRecord::Base
         :surname       => cognome_nuovo,
         :gender        => valoriSesso[sesso],
         :birthdate     => data_nascita,
-        :province_code => provincia_nascita,
-        :city_name     => citta_nascita
+        :province_code => citta.getProvincia,
+        :city_name     => citta.getNome
       )
       # Debug del CF
       puts(codice)

@@ -1,7 +1,7 @@
 class Cliente < ActiveRecord::Base
   require 'codice_fiscale'
   # Attributi per CF
-  attr_accessor :sesso, :citta_nascita, :provincia_nascita
+  attr_accessor :sesso, :citta_nascita
   # Attributi per indirizzo
   attr_accessor :route, :locality
 
@@ -19,8 +19,7 @@ class Cliente < ActiveRecord::Base
   validate :unique_entry #custom validation
   validates_numericality_of :telefono
   # Validazioni per il Form
-  validates :sesso, :citta_nascita, :provincia_nascita, presence: true, on: :create
-  validates_length_of :provincia_nascita, :is => 2, on: :create
+  validates :sesso, :citta_nascita, presence: true, on: :create
   validate :check_CF, on: :create
   # Validations per indirizzo
   validate :check_indirizzo
@@ -29,7 +28,7 @@ class Cliente < ActiveRecord::Base
     # Non Controllo il CF durante i Test con Rspec
     unless Rails.env.test?
       # Richiamo il metodo della Superclasse Utente per calcolare il CF
-      cf = self.acting_as.check_CF(self.nome,self.cognome,self.sesso,self.data_nascita,self.citta_nascita,self.provincia_nascita)
+      cf = self.acting_as.check_CF(self.nome,self.cognome,self.sesso,self.data_nascita,self.citta_nascita)
       # Controllo che il codice fiscale coincida con quello inserito dall'utente nel Form
       if self.cf != cf
         errors.add(:cf,"Non corrisponde con i dati dell'Anagrafica inserita")
