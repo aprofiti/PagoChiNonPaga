@@ -24,6 +24,8 @@ class ClientiController < ApplicationController
   # POST /clienti
   # POST /clienti.json
   def create
+    # Se per indirizzo, ho utilizzato l'autocompletiton, seleziono automaticamente la citta corrispondente
+    ricercaLocality()
     @cliente = Cliente.new(cliente_params)
     respond_to do |format|
       if @cliente.save
@@ -39,6 +41,8 @@ class ClientiController < ApplicationController
   # PATCH/PUT /clienti/:id
   # PATCH/PUT /clienti/:id.json
   def update
+    # Se per indirizzo, ho utilizzato l'autocompletiton, seleziono automaticamente la citta corrispondente
+    ricercaLocality()
     # Aggiorno il record nel DB
     respond_to do |format|
       if @cliente.update(cliente_params)
@@ -62,6 +66,18 @@ class ClientiController < ApplicationController
   end
 
   private
+    def ricercaLocality
+      # Se per indirizzo, ho utilizzato l'autocompletiton, seleziono automaticamente la citta corrispondente
+      locality = params[:cliente][:locality]
+      if (locality != "")
+        # Ricerco all'interno del db la citta
+        citta = Citta.find_by_nome(locality)
+        if citta != nil
+          # Aggiorno l'attributo con l'id della citta trovata
+          @impresa.assign_attributes('citta_id' => citta.id)
+        end
+      end
+    end
 
     #controlla che current_utente è di tipo Cliente e con l'id che cerca di visualizzare
     def controllo_id_cliente

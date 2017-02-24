@@ -25,6 +25,8 @@ class TitolariController < ApplicationController
   # POST /titolari
   # POST /titolari.json
   def create
+    # Se per indirizzo, ho utilizzato l'autocompletiton, seleziono automaticamente la citta corrispondente
+    ricercaLocality()
     # Salvo il record nel DB
     @titolare = Titolare.new(titolare_params)
     respond_to do |format|
@@ -42,6 +44,9 @@ class TitolariController < ApplicationController
   # PATCH/PUT /titolari/:id
   # PATCH/PUT /titolari/:id.json
   def update
+    # Se per indirizzo, ho utilizzato l'autocompletiton, seleziono automaticamente la citta corrispondente
+    ricercaLocality()
+    # Salvo il record nel DB
     respond_to do |format|
       params.delete [:sesso,:citta_nascita]
       puts(titolare_params)
@@ -68,6 +73,18 @@ class TitolariController < ApplicationController
   end
 
   private
+    def ricercaLocality
+      # Se per indirizzo, ho utilizzato l'autocompletiton, seleziono automaticamente la citta corrispondente
+      locality = params[:titolare][:locality]
+      if (locality != "")
+        # Ricerco all'interno del db la citta
+        citta = Citta.find_by_nome(locality)
+        if citta != nil
+          # Aggiorno l'attributo con l'id della citta trovata
+          @impresa.assign_attributes('citta_id' => citta.id)
+        end
+      end
+    end
 
     def controllo_id_titolare
       if !(current_utente.actable_id==params[:id].to_i && current_utente.isTitolare?)
