@@ -41,7 +41,7 @@ class Impresa < ActiveRecord::Base
       end
       # Controllo che la citta' dell'indirizzo selezionato, corrisponda alla Citta nel menu a tendina
       if (self.route == "")
-        errors.add(:indirizzo,"L'indizzo immesso non e' una via oppure un Punto di Interesse con indirizzo")
+        errors.add(:indirizzo,"L'indizzo immesso non e' una via; oppure un Punto di Interesse con indirizzo")
       end
     end
     # Controllo l'esistenza dell'indirizzo tramite Google Place API

@@ -26,31 +26,36 @@ class Utente < ActiveRecord::Base
       # ERRORE: Parametri non corretti
       return
     end
-    # Controllo che la citta di nascita si corretta
-    # Uso un metodo della gemma che restituisce il codice per la citta
-    # In questo modo posso controllare che la citta esiste veramente
-    if (CodiceFiscale::Codes.city(citta_nascita,provincia_nascita) == "")
-      # ERRORE: Non esiste la citta fornita
-      return
+
+    # Calcolo il CF
+    # Atteznione: La gemma puo' lanciare eccezioni per parametri non corretti
+    begin
+      # Controllo che la citta di nascita si corretta
+      # Uso un metodo della gemma che restituisce il codice per la citta
+      # In questo modo posso controllare che la citta esiste veramente
+      CodiceFiscale::Codes.city(citta_nascita,provincia_nascita)
+
+      # Fornisco i dati nel formato accettato dalla gemma
+      valoriSesso = {'M' => :male, 'F' => :female}
+      nome_nuovo = '' + nome
+      cognome_nuovo = '' + cognome
+
+      # Utilizzo la Gemma per calcolare il CF
+      codice = CodiceFiscale.calculate(
+        :name          => nome_nuovo,
+        :surname       => cognome_nuovo,
+        :gender        => valoriSesso[sesso],
+        :birthdate     => data_nascita,
+        :province_code => provincia_nascita,
+        :city_name     => citta_nascita
+      )
+      # Debug del CF
+      puts(codice)
+      return codice
+    rescue
+      # ERRORE: In calcolo del codice fiscale ha lanciato una eccezione a causa dei parametri errati
+      return false
     end
-
-    # Fornisco i dati nel formato accettato dalla gemma
-    valoriSesso = {'M' => :male, 'F' => :female}
-    nome_nuovo = '' + nome
-    cognome_nuovo = '' + cognome
-
-    # Utilizzo la Gemma per calcolare il CF
-    codice = CodiceFiscale.calculate(
-    :name          => nome_nuovo,
-    :surname       => cognome_nuovo,
-    :gender        => valoriSesso[sesso],
-    :birthdate     => data_nascita,
-    :province_code => provincia_nascita,
-    :city_name     => citta_nascita
-    )
-    # Debug del CF
-    puts(codice)
-    return codice
   end
 
   # Ritorna il nome dell'Utente

@@ -32,7 +32,7 @@ class Cliente < ActiveRecord::Base
       cf = self.acting_as.check_CF(self.nome,self.cognome,self.sesso,self.data_nascita,self.citta_nascita,self.provincia_nascita)
       # Controllo che il codice fiscale coincida con quello inserito dall'utente nel Form
       if self.cf != cf
-        errors.add(:cf,"Codice Fiscale non corretto")
+        errors.add(:cf,"Non corrisponde con i dati dell'Anagrafica inserita")
       end
       puts(cf)
     end
@@ -48,7 +48,7 @@ class Cliente < ActiveRecord::Base
       end
       # Controllo che la citta' dell'indirizzo selezionato, corrisponda alla Citta nel menu a tendina
       if (self.route == "")
-        errors.add(:indirizzo,"L'indizzo immesso non e' una via oppure un Punto di Interesse con indirizzo")
+        errors.add(:indirizzo,"L'indizzo immesso non e' una via; oppure un Punto di Interesse con indirizzo")
       end
     end
     # Controllo l'esistenza dell'indirizzo tramite Google Place API
