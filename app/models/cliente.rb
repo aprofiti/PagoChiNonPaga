@@ -95,7 +95,7 @@ class Cliente < ActiveRecord::Base
 
   # Ritorna il numero totale di Clienti (sostenitori) all'interno di tutto il DB VERIFICATI
   def self.get_num_clienti
-    Utente.where("actable_type = ?", "Cliente").where("created_at != ?", nil).count
+    Cliente.where.not('created_at' => nil).count
   end
 
   def getIndirizzo
