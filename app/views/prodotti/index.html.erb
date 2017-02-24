@@ -11,7 +11,6 @@
         <th><%= model_class.human_attribute_name(:prezzo) %></th>
         <th><%= model_class.human_attribute_name(:qta) %></th>
         <th><%= model_class.human_attribute_name(:descrizione) %></th>
-        <th><%= model_class.human_attribute_name(:impresa_id) %></th>
         <th><%= model_class.human_attribute_name(:created_at) %></th>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
@@ -26,7 +25,6 @@
           <td><%= prodotto.prezzo %></td>
           <td><%= prodotto.qta %></td>
           <td><%= prodotto.descrizione %></td>
-          <td><%= prodotto.impresa_id %></td>
           <td><%= prodotto.created_at %></td>
           <td>
             <% if utente_signed_in? && current_utente.isCliente? %>
@@ -37,7 +35,7 @@
             <%end%>
             <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
                <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                    edit_impresa_prodotto_path(nome: prodotto.nome,id_p: params[:id]), :class => 'btn btn-default btn-xs',method: :get %>
+                    edit_impresa_prodotto_path(nome: prodotto.nome,id_p: prodotto.id), :class => 'btn btn-default btn-xs',method: :get %>
                <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                     impresa_prodotto_elimina_prodotto_path(impresa_nome: prodotto.impresa.nome, prodotto_nome: prodotto.nome, id_p: prodotto.id),
                     :method => :post,:class => 'btn btn-xs btn-danger',
