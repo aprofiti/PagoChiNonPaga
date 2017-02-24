@@ -26,7 +26,10 @@ class AdminAbility
       can :manage, Impresa, :citta_id => user.polo.citta.ids
 
       can :manage, Ordine, :impresa_id => user.polo.get_imprese
-      can :super_manage, Ordine
+      can :show, Ordine
+      can :destroy, Ordine
+      can :history, Ordine
+      can :export, Ordine
 
       can :manage, Prodotto, :impresa_id => user.polo.get_imprese
       can :super_manage, Prodotto
