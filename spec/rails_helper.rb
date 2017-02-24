@@ -59,19 +59,19 @@ end
 
 
 def createTitolare(nome,cognome,citta)
-  titolare= Titolare.create(sesso: "M", citta_nascita: "Palermo", provincia_nascita: "PA",nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "via catania 2",citta_id: citta.id,piva: 'piva',email_paypal: "email@fake.com")
+  titolare= Titolare.create(sesso: "M", citta_nascita: "Palermo", provincia_nascita: "PA",nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "Via Appia Nuova", locality: "", citta_id: citta.id, piva: "IT123456", email_paypal: "email@fake.com")
   return titolare
 end
 
 
 def createCliente(nome,cognome,citta)
-  cliente= Cliente.create(sesso: "M", citta_nascita: "Palermo", provincia_nascita: "PA",nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "via catania 2",citta_id: citta.id)
+  cliente= Cliente.create(sesso: "M", citta_nascita: "Palermo", provincia_nascita: "PA",nome: nome, cognome: cognome,telefono: "3456",data_nascita: Date.today, cf: nome+cognome,email: nome+cognome+"@lo.lo",password: "lololo",password_confirmation: "lololo", indirizzo: "Via Appia Nuova", locality: "", citta_id: citta.id)
   return cliente
 end
 
 def createImpresa(nome,email,citta,titolare,congelata,verificata)
   impresa= Impresa.create(nome: nome,telefono: "1234",email: email,descrizione: "impresa",
-   verificato: verificata,congelato: congelata ,citta_id: citta.id,titolare_id: titolare.id, indirizzo: "via catania 2").save(validate: false)
+   verificato: verificata,congelato: congelata ,citta_id: citta.id,titolare_id: titolare.id, indirizzo: "Via Appia Nuova", locality: "").save(validate: false)
   Impresa.first.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 return Impresa.first
 end

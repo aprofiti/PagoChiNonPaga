@@ -5,7 +5,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Impresa', telefono: '45454', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: '', email: 'impre30@sa.it')
+    verificato: true, congelato: false, indirizzo: '', email: 'impre30@sa.it', locality: "")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
@@ -15,7 +15,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: '', telefono: '45454', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it')
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
@@ -25,7 +25,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa', telefono: '', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it')
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
@@ -35,7 +35,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa', telefono: '4545454', descrizione: '', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it')
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
@@ -45,7 +45,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa', telefono: '45454', descrizione: 'Boh', citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it')
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
@@ -55,7 +55,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa', telefono: '45454', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: '', email: 'impre30@sa.it')
+    verificato: true, congelato: false, indirizzo: '', email: 'impre30@sa.it', locality: "")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
@@ -65,7 +65,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa', telefono: 'boh', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it')
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
@@ -75,7 +75,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa', telefono: '123460', fax: "ciao" , descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it')
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
@@ -85,7 +85,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa?!', telefono: '123460', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it')
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
@@ -95,7 +95,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa', telefono: '123460', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it', sitoweb: "ciao")
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "", sitoweb: "ciao")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
@@ -105,29 +105,29 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa', telefono: '123460', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it', facebook: "ciao")
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "", facebook: "ciao")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
     expect(impresa).not_to be_valid
   end
   it "is invalid if is already in the db" do
-    citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
+    citta = Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
+    #titolare = createTitolare("Mario","Rossi",citta)
+    #Utente.where(actable_id: titolare.id).first.confirm
+    #impresa1 = createImpresa('Marmellate spa','impre30@sa.it',citta,titolare,false,true)
+    #impresa1.save()
 
-    impresa1= Impresa.new(nome: 'Marmellate spa', telefono: '123460', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it')
+    sottocategoria = Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
-    sottocategoria= Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
-
+    impresa1 = Impresa.new(nome: 'Marmellate spa', telefono: '123460', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "")
     impresa1.sottocategorie << sottocategoria
-
     impresa1.save()
 
-    impresa= Impresa.new(nome: 'Marmellate spa', telefono: '123460', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it')
-
+    impresa = Impresa.new(nome: 'Marmellate spa', telefono: '123460', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "")
     impresa.sottocategorie << sottocategoria
-
     impresa.valid?
 
     expect(impresa.errors[:base]).to include("Impresa già presente.")
@@ -136,7 +136,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa', telefono: '123460', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'impre30@sa.it')
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'impre30@sa.it', locality: "")
 
     expect(impresa).not_to be_valid
   end
@@ -144,7 +144,7 @@ RSpec.describe Impresa, type: :model do
     citta= Citta.create(nome: "Taormina", provincia: "Messina", regione: "Sicilia", polo_id: 1)
 
     impresa= Impresa.new(nome: 'Marmellate spa', telefono: '123460', descrizione: 'Boh', titolare_id: 1, citta_id: citta.id,
-    verificato: true, congelato: false, indirizzo: 'piazza Paladini 4', email: 'boh')
+    verificato: true, congelato: false, indirizzo: 'Piazzetta Paladini 4', email: 'boh', locality: "")
 
     impresa.sottocategorie << Sottocategoria.create(nome: 'Ristoranti', categoria_id: 1)
 
