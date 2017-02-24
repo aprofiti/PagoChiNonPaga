@@ -17,7 +17,7 @@
         <div class="col-md-6">
           <%= f.input :nome, disabled: true %>
           <%= error_span(@impresa[:nome]) %>
-          <%= f.input :indirizzo, disabled: true %>
+          <%= f.input :indirizzo, value: @impresa.getIndirizzo, disabled: true %>
           <%= error_span(@impresa[:indirizzo]) %>
           <%= f.input :locality, :input_html => { :id => "locality" }, :as => :hidden  %>
           <%= f.input :route, :input_html => { :id => "route" }, :as => :hidden  %>
@@ -26,7 +26,7 @@
           <%= f.hidden_field_tag :administrative_area_level_3 %>
           <%= f.hidden_field_tag :neighborhood %>
           <%= f.hidden_field_tag :country %>
-          <%= f.input :citta_id, collection: Citta.all.order(:nome) %>
+          <%= f.input :citta_id, collection: Citta.all.order(:nome), value: @impresa.citta, disabled: true %>
           <%= error_span(@impresa[:citta_id]) %>
         </div>
         <div class="col-md-6">

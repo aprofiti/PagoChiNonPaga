@@ -2,6 +2,23 @@
 <script src="//maps.google.com/maps/api/js?key=AIzaSyBzvisYtIWdt5PVvyiRkBdkVCvD2QIPJZY"></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 
+<script>
+ // Inizializza la Mappa
+ var coordinate = <%=raw @hash.to_json %>;
+
+ $(document).ready(function(){
+  // Controlla che siano impostate le coordinate
+  if(coordinate[0].lat == null && coordinate[0].lng== null) return;
+  // Mostro la mappa
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'mappa'}}, function(){
+    markers = handler.addMarkers(coordinate);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(18);
+  });
+ });
+ </script>
 
 <!-- Hero Image -->
 <section id="hero" class="">
