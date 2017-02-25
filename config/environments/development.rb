@@ -46,8 +46,8 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-   user_name:      'pricetrackerservicemail@gmail.com',
-   password:       'pricetracke',
+   user_name:      ENV["GMAIL_USERNAME"],
+   password:       ENV["GMAIL_PASSWORD"],
    domain:         'localhost:3000',
    address:       'smtp.gmail.com',
    port:          '587',

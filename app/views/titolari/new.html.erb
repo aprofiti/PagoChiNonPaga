@@ -6,5 +6,5 @@
   <%= render :partial => 'form' %>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzvisYtIWdt5PVvyiRkBdkVCvD2QIPJZY&libraries=places&callback=initAutocomplete"
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initAutocomplete"
   async defer></script>
