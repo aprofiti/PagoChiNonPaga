@@ -1,6 +1,4 @@
 {<img src="https://codeclimate.com/repos/5857d9aa8a16a3785e000242/badges/2189e03961ec6bb92fb1/gpa.svg" />}[https://codeclimate.com/repos/5857d9aa8a16a3785e000242/feed]
-{<img src="https://codeclimate.com/repos/5857d9aa8a16a3785e000242/badges/2189e03961ec6bb92fb1/coverage.svg" />}[https://codeclimate.com/repos/5857d9aa8a16a3785e000242/coverage]
-{<img src="https://codeclimate.com/repos/5857d9aa8a16a3785e000242/badges/2189e03961ec6bb92fb1/issue_count.svg" />}[https://codeclimate.com/repos/5857d9aa8a16a3785e000242/feed]
 
 Master:
 {<img src="https://travis-ci.com/aprofiti/PagoChiNonPaga.svg?token=sEH49kUaCvv6DPGvX5yj&branch=master" alt="Build Status" />}[https://travis-ci.com/aprofiti/PagoChiNonPaga]
@@ -9,30 +7,3 @@ Develop:
 {<img src="https://travis-ci.com/aprofiti/PagoChiNonPaga.svg?token=sEH49kUaCvv6DPGvX5yj&branch=develop" alt="Build Status" />}[https://travis-ci.com/aprofiti/PagoChiNonPaga]
 
 == README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
