@@ -119,15 +119,11 @@ class Utente < ActiveRecord::Base
   end
 
   def isMyImpresa?(impresa)
-    if isTitolare? && self.actable_id == impresa.titolare_id
-      true
-    else
-      false
-    end
+    isTitolare? && self.actable_id == impresa.titolare_id
   end
 
   def hasCarrello?
-      isCliente? && Carrello.exists?(:cliente_id => self.actable_id)
+    isCliente? && Carrello.exists?(:cliente_id => self.actable_id)
   end
 
   def getCarrello
