@@ -1,0 +1,17 @@
+#File che contiene variabili d'ambiente.
+#Questa è un esempio. Compilare le variabili d'ambiente con i propri valori per testare la piattaforma.
+
+#Variabili email
+GMAIL_USERNAME: 'inserire email'
+GMAIL_PASSWORD: 'inserire password email'
+
+#Variabili paypal
+PAYPAL_CLIENT_ID: inserire id cliente generato da api paypal
+PAYPAL_CLIENT_SECRET: inserire secret cliente generato da api paypal
+PAYPAL_APP_ID: inserire paypal app id generato da api paypal
+PAYPAL_USERNAME: inserire paypal username generato da api paypal
+PAYPAL_PASSWORD: inserire password paypal generato da api paypal
+PAYPAL_SIGNATURE: inserire signature paypal generato da api paypal
+
+#Variabili Google API
+GOOGLE_API_KEY: inserire api key google maps
