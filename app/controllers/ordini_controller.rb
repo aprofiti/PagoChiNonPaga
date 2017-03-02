@@ -15,9 +15,6 @@ GNU General Public License for more details.
 =end
 
 class OrdiniController < ApplicationController
-  require 'paypal-sdk-rest'
-  include PayPal::SDK::REST
-  include PayPal::SDK::Core::Logging
   before_action :set_ordine, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente!
   before_filter :is_mio_ordine?, only: [:show,:destroy]
@@ -176,59 +173,23 @@ class OrdiniController < ApplicationController
   #Esegue transazione paypal
   def paypal_url
     @ordine = Ordine.find(params[:id])
-    @payment = Payment.new({
-      :intent =>  "sale",
-
-      :payer =>  {
-        :payment_method =>  "paypal" },
-
-      :redirect_urls => {
-        :return_url => "#{root_url}mieiOrdini/#{@ordine.id}/checkout",
-        :cancel_url => root_url },
-
-      :transactions =>  [{
-        :payee => {
-          :email => @ordine.impresa.titolare.email_paypal
-        },
-        :item_list => {
-          #Items vuota, viene riempita in ciclo sottostante
-          :items => []},
-        :amount =>  {
-          :total =>  @ordine.getTotale,
-          :currency =>  "EUR" ,
-          :details => {
-            :shipping => @ordine.spedizione,
-            :subtotal => @ordine.totale
-          }
-        },
-        :description =>  "Transazione ordine #{@ordine.id}, impresa #{@ordine.impresa.getNome}" }]})
-
-        unique_ids= @ordine.prodotti.uniq
-        unique_ids.each do |prodotto|
-          @payment.transactions.at(0).item_list.items.merge!({
-            :name => prodotto.nome,
-            :price => prodotto.prezzo,
-            :currency => "EUR",
-            :quantity => @ordine.occorrenzeProdotto(prodotto.id),
-            })
-        end
-    if @payment.create
+    return_path= "#{root_url}mieiOrdini/#{@ordine.id}/checkout"
+    @pagamento = Paypal.crea_pagamento(return_path,root_url,@ordine)
+    if @pagamento.create
       # Redirect the user to given approval url
-      @redirect_url = @payment.links.find{|v| v.rel == "approval_url" }.href
-      logger.info "Payment[#{@payment.id}]"
+      @redirect_url = @pagamento.links.find{|v| v.rel == "approval_url" }.href
+      logger.info "Payment[#{@pagamento.id}]"
       logger.info "Redirect: #{@redirect_url}"
 
       redirect_to @redirect_url
     else
-      logger.error @payment.error.inspect
+      logger.error @pagamento.error.inspect
     end
   end
   #GET /mieiOrdini/:id/checkout
   #Dopo il pagamento effettuato viene eseguita una get a questa risorsa per completare il pagamento
   def checkout
-    payment = Payment.find(params[:paymentId])
-    if payment.execute( :payer_id => params[:PayerID] )
-
+    if Paypal.esegui_pagamento(params[:PayerID],params[:paymentId] )
       @pagato = StatoOrdine.find_by_stato(StatoOrdine.PAGATO)
       @ordine = Ordine.find(params[:id])
       @ordine.update_attribute('stato_ordine',@pagato)
