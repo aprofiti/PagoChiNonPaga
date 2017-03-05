@@ -58,9 +58,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
     if  model.class.name == "Prodotto"
-      "/assets/template/missing.png"
+      "/assets/images/template/missing.png"
     else
-      "/assets/template/Sfondo Negozio.png"
+      "/assets/images/template/Sfondo Negozio.png"
     end
   end
 
