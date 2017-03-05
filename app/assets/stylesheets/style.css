@@ -35,6 +35,9 @@ form.navbar-form.navbar-center{
   border-bottom-style: solid;
   color:whitesmoke;
 }
+.twitter-typeahead{
+  width: 100%;
+}
 
 /* Intestazione nelle pagini prima del contenuto */
 .page-header{
