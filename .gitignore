@@ -17,4 +17,4 @@
 /tmp
 
 # Ignore env variables file
-/config/local_env.yml
+#/config/local_env.yml
