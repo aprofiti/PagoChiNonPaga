@@ -57,6 +57,11 @@ form.navbar-form.navbar-center{
   float: left;
 }
 
+#logoJumbotron{
+  height:100px;
+  margin: 0 auto;
+}
+
 .jumbotronColor{
   background-image: radial-gradient(50% 177%, #428BCA 50%, rgba(73,143,225,0.70) 100%);
   border: 1px solid #979797;
