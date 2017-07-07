@@ -56,19 +56,12 @@
       <!-- Imprese -->
       <% Impresa.get_random_imprese.each do |impresa| %>
         <div id="DatiStatistiche" class="row">
-
-          <div class="col-xs-11 col-xs-offset-1">
-            <div id="imgImpresa" >
-
-              <section id="hero" class="">
-                <%= image_tag(impresa.image, :id => "heroImg", :class => "img-responsive") %>
-              </section>
-
-
-
+          <div class="col-xs-2 col-xs-offset-1 col-md-offset-0">
+            <div id="imgImpresa">
+                <%= image_tag(impresa.image, :id => "imgImpresaHome", :class => "img-responsive") %>
             </div>
-
-
+          </div>
+          <div class="col-xs-7 col-xs-offset-2 col-sm-offset-1 col-lg-offset-1">
             <div id="datiImpresa">
             <h4><%= link_to impresa.nome, impresa_path(nome: impresa.nome, id: impresa.id), method: :get %></h4>
             <h5>
