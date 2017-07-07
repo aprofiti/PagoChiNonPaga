@@ -18,6 +18,7 @@
     </div>
   </div>
 </div>
+<!-- Contenuto Principale Home Page -->
 <div class="container">
   <div class="row">
   <!-- Statistiche Sezione SX -->
@@ -27,35 +28,35 @@
       </div>
       <!-- Dati Piattaforma-->
       <div id="DatiStatistiche" class="row">
-        <div class="col-xs-7 col-xs-offset-1">
-          <h4>Attivita' Aderenti:</h4>
+        <div class="col-xs-2 col-xs-offset-1 text-right">
+          <h3 class="numeriStatistiche text-center"><%= Impresa.count %></h4>
         </div>
-        <div class="col-sm-2 text-right">
-          <h4><%= Impresa.count %></h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-7 col-xs-offset-1">
-          <h4>Marchio Certificato:</h4>
-        </div>
-        <div class="col-sm-2 text-right">
-          <h4><%= Impresa.get_num_imprese %></h4>
+        <div class="col-xs-7 col-xs-offset-2 col-sm-offset-1">
+          <h4 style="padding-top:15px;">Attivit&aacute Aderenti</h4>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-7 col-xs-offset-1">
-          <h4>Utenti Iscritti:</h4>
+        <div class="col-xs-2 col-xs-offset-1 text-right">
+          <h3 class="numeriStatistiche text-center"><%= Impresa.get_num_imprese %></h4>
         </div>
-        <div class="col-sm-2 text-right">
-          <h4><%= Utente.get_num_utenti %></h4>
+        <div class="col-xs-7 col-xs-offset-2 col-sm-offset-1">
+          <h4 style="padding-top:15px;">Marchio Certificato</h4>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-7 col-xs-offset-1">
-          <h4>Sostenitori:</h4>
+        <div class="col-xs-2 col-xs-offset-1 text-right">
+          <h3 class="numeriStatistiche text-center"><%= Utente.get_num_utenti %></h4>
         </div>
-        <div class="col-sm-2 text-right">
-          <h4><%= Cliente.get_num_clienti %></h4>
+        <div class="col-xs-7 col-xs-offset-2 col-sm-offset-1">
+          <h4 style="padding-top:15px;">Utenti Iscritti</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2 col-xs-offset-1 text-right">
+          <h3 class="numeriStatistiche text-center"><%= Cliente.get_num_clienti %></h4>
+        </div>
+        <div class="col-xs-7 col-xs-offset-2 col-sm-offset-1">
+          <h4 style="padding-top:15px;">Sostenitori</h4>
         </div>
       </div>
     </div>
@@ -89,7 +90,7 @@
               %>
             </h5>
           </div>
-          </div>
+        </div>
         </div>
       <% end %>
     </div>
