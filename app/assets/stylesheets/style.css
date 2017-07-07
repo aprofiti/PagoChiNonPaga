@@ -47,48 +47,6 @@ form.navbar-form.navbar-center{
   padding-bottom: 20px;
 }
 
-/*
-  Sezione del Home Page
-*/
-
-#logo{
-  height:50px;
-  /* Fix per l'allineameto del collapse con il logo della barra */
-  float: left;
-}
-
-#logoJumbotron{
-  height:100px;
-  margin: 0 auto;
-}
-
-.jumbotronColor{
-  background-image: radial-gradient(50% 177%, #428BCA 50%, rgba(73,143,225,0.70) 100%);
-  border: 1px solid #979797;
-}
-
-.txtJumbotron, .jumbotron h1{
-  color: white;
-}
-
-/* Sezione Statistiche Home Page */
-.statistiche{
-  color: #4A90E2;
-  border-bottom: 2px solid #4A90E2;
-  padding-bottom: 5px;
-}
-
-#DatiStatistiche{
-  margin-top:10px;
-}
-
-.numeriStatistiche{
-  color: #4A90E2;
-}
-
-.txtCatalogo{
-    color: #45A2FF;
-}
 
 /*
   Sezione del Footer
@@ -182,17 +140,4 @@ form.navbar-form.navbar-center{
 .alert{
   text-align: center;
   margin-bottom: 0;
-}
-
-/*
-  Stili per la pagina di scelta tipologia utente
-*/
-.paginaRegistrati{
-  margin-top: 10px;
-  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100%;
-  min-height: 50vh; /* These two lines are counted as one :-)       */
-
-  display: flex;
-  align-items: center;
 }

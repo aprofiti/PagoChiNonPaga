@@ -2,11 +2,54 @@
 // They will automatically be included in application.css.
 // You can use Less here: http://lesscss.org/
 
+/*
+  Sezione del Home Page
+*/
+
 #welcomepage{
     background: url('/assets/template/sfondi/welcome_ap_comp.jpg') no-repeat;
     background-size: 100%;
     background-position: center;
-  }
+}
+
+#logo{
+  height:50px;
+  /* Fix per l'allineameto del collapse con il logo della barra */
+  float: left;
+}
+
+#logoJumbotron{
+  height:100px;
+  margin: 0 auto;
+}
+
+.jumbotronColor{
+  background-image: radial-gradient(50% 177%, #428BCA 50%, rgba(73,143,225,0.70) 100%);
+  border: 1px solid #979797;
+}
+
+.txtJumbotron, .jumbotron h1{
+  color: white;
+}
+
+/* Sezione Statistiche Home Page */
+.statistiche{
+  color: #4A90E2;
+  border-bottom: 2px solid #4A90E2;
+  padding-bottom: 5px;
+}
+
+#DatiStatistiche{
+  margin-top:10px;
+}
+
+.numeriStatistiche{
+  color: #4A90E2;
+}
+
+.txtCatalogo{
+    color: #45A2FF;
+}
 
 #imgImpresa {
   width: 100px;
@@ -22,4 +65,18 @@
 #datiImpresa {
   overflow: hidden;
   //padding-left: 20px;
+}
+
+
+/*
+  Stili per la pagina di scelta tipologia utente
+*/
+.paginaRegistrati{
+  margin-top: 10px;
+  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100%;
+  min-height: 50vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
 }
