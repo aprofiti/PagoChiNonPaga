@@ -1,20 +1,33 @@
 <%- model_class = Sottocategoria -%>
-<!-- Breadcumb -->
-  <ol class="breadcrumb">
+<!-- Jumbotron -->
+<div id="sottocategoriepage" class="jumbotron jumbotronColor">
+  <h1 class="sfumato text-center"><span>LISTA IMPRESE<span></h1>
+  <!-- Barra di Ricerca nel Jumbotron -->
+  <div class="">
+    <%= render "layouts/home/barra_ricerca_home" %>
+  </div>
+  <!-- Testo nel Jumbotron -->
+  <div class="container-fluid" style="padding-top:30px;">
+    <div id="logo_ap" class="col-sm-4 col-sm-offset-4">
+      <%= image_tag "template/logo/Logo_footer.png", :id => "logoJumbotron", :class => "img-responsive" %>
+    </div>
+  </div>
+</div>
+
+<!-- Lista imprese -->
+<div class="container">
+  <div id="listaImprese" class="page-header">
     <%
       sottocategoria = @sottocategoria
       categoria = @sottocategoria.getCategoria
     %>
-    <li><%= link_to "Home", root_path %></li>
-    <li><%= link_to "Categorie", categorie_path %></li>
-    <li><%= link_to categoria.getNome, categoria_sottocategorie_path(categoria_nome: categoria.getNome) %></li>
-    <li class="active"><%= sottocategoria.getNome %></li>
-  </ol>
-<!-- Lista imprese -->
-<div class="container">
-  <div class="page-header">
-    <h1><%=t '.title', :default => t("helpers.links.lista_imprese") %></h1>
+    
+    <h2>
+      <span><%= link_to categoria.getNome, categoria_sottocategorie_path(categoria_nome: categoria.getNome) %>/</span>
+      <span id="attivo"><%= sottocategoria.getNome %></span>
+    </h2>
   </div>
+  <!-- Tabella -->
   <table class="table table-striped">
     <thead>
       <tr>
