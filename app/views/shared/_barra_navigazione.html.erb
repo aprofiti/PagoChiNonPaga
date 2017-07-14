@@ -51,7 +51,12 @@
             </ul>
       </ul>
       <!-- Barra di Ricerca -->
-      <%= render "shared/barra_ricerca" %>
+      <% #  L'if controlla che la pagina corrente non sia index imprese, index categorie o lo show di sottocategorie.
+         #  Controllo controller_nameperchè controllare lo show richiederebbe parametro e non sarebbe generico. Se non è una di quelle viene fatto render barra ricerca in alto
+      %>
+      <% if !current_page?(imprese_path) && !current_page?(categorie_path) && controller.controller_name!='sottocategorie'%>
+          <%= render "shared/barra_ricerca" %>
+      <% end %>
     </div>
   </div>
 </nav>
