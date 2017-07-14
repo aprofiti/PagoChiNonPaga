@@ -1,6 +1,6 @@
 <div class="container-fluid footerSeparator">
   <div id="footer" class="row">
-    <div class="col-xs-6 col-sm-4 col-md-3 col-sm-push-6 col-md-push-0">
+    <div class="col-xs-6 col-sm-6 col-md-3">
       <div class="pull-right">
         <%= image_tag "template/logo/Logo_AddioPizzo.png", :id => "logoFooter", :class => "img-responsive" %>
       </div>
@@ -14,43 +14,118 @@
       # 2 -> Messina
     %>
     <!-- Lista poli Principali -->
-    <div class="footerInfo col-xs-6 col-sm-6 col-md-3 col-sm-pull-3 col-md-pull-0" >
+    <div class="footerInfo col-xs-6 col-sm-6 col-md-3">
+      <!-- Palermo -->
       <h4>Palermo</h4>
       <dl class="dl-horizontal">
-        <dt>Indirizzo</dt>
-        <dd><%= poli[0].indirizzo %>, <%= poli[0].cap %> Palermo</dd>
-        <dt>Telefono</dt>
-        <dd><%= poli[0].telefono %></dd>
-        <dt>Email</dt>
-        <dd><%= poli[0].email %></dd>
-        <dt>Sito:</dt>
-        <dd><%= poli[0].sitoweb %></dd>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Indirizzo:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[0].indirizzo %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Telefono:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[0].telefono %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Email:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[0].email %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Sito:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[0].sitoweb %></dd>
+          </div>
+        </div>
       </dl>
     </div>
-    <div class="footerInfo col-xs-6 col-sm-3 col-md-3 col-sm-pull-3 col-md-pull-0">
-      <h4>Messina</h4>
-      <dl class="dl-horizontal">
-        <dt>Indirizzo</dt>
-        <dd><%= poli[0].indirizzo %>, <%= poli[1].cap %> Catania</dd>
-        <dt>Telefono</dt>
-        <dd><%= poli[1].telefono %></dd>
-        <dt>Email</dt>
-        <dd><%= poli[1].email %></dd>
-        <dt>Sito:</dt>
-        <dd><%= poli[1].sitoweb %></dd>
-      </dl>
-    </div>
-    <div class="footerInfo col-xs-6 col-sm-3 col-md-3">
+    <div class="footerInfo col-xs-6 col-sm-6 col-md-3">
+      <!-- Catania -->
       <h4>Catania</h4>
       <dl class="dl-horizontal">
-        <dt>Indirizzo</dt>
-        <dd><%= poli[0].indirizzo %>, <%= poli[2].cap %> Messina</dd>
-        <dt>Telefono</dt>
-        <dd><%= poli[2].telefono %></dd>
-        <dt>Email</dt>
-        <dd><%= poli[2].email %></dd>
-        <dt>Sito:</dt>
-        <dd><%= poli[2].sitoweb %></dd>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Indirizzo:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[1].indirizzo %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Telefono:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[1].telefono %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Email:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[1].email %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Sito:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[1].sitoweb %></dd>
+          </div>
+        </div>
+      </dl>
+    </div>
+    <div class="footerInfo col-xs-6 col-sm-6 col-md-3">
+      <!-- Messina -->
+      <h4>Messina</h4>
+      <dl class="dl-horizontal">
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Indirizzo:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[2].indirizzo %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Telefono:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[2].telefono %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Email:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[2].email %></dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            <dt>Sito:</dt>
+          </div>
+          <div class="col-xs-9">
+            <dd><%= poli[2].sitoweb %></dd>
+          </div>
+        </div>
       </dl>
     </div>
   </div>
