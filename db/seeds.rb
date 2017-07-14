@@ -15,12 +15,12 @@ GNU General Public License for more details.
 =end
 
 
-Polo.create(nome: 'AP Palermo',email: 'comitato@addiopizzo.org', sitoweb: 'www.addiopizzo.org', telefono: '09 15084262', cap: '90134',
-  indirizzo: 'via Lincoln, 131', citta_sede: 'Palermo')
-Polo.create(nome: 'AP Catania',email: 'comitato@addiopizzocatania.org', sitoweb: 'www.addiopizzocatania.org', telefono: '329 9203410', cap: '95126',
-  indirizzo: 'via Grasso Finocchiaro, 112', citta_sede: 'Catania')
-Polo.create(nome: 'AP Messina',email: 'addiopizzomessina@gmail.com', sitoweb: 'www.addiopizzomessina.it', telefono: '338 9191543', cap: '98124',
-  indirizzo: 'via Mons. Grano, 2', citta_sede: 'Messina')
+Polo.create(nome: 'Palermo',email: 'comitato@addiopizzo.org', sitoweb: 'www.addiopizzo.org', telefono: '09 15084262',
+  indirizzo: 'via Lincoln 131, 90134 Palermo', citta_sede: 'Palermo')
+Polo.create(nome: 'Catania',email: 'comitato@addiopizzocatania.org', sitoweb: 'www.addiopizzocatania.org', telefono: '329 9203410',
+  indirizzo: 'via Grasso Finocchiaro 112, 95126 Catania', citta_sede: 'Catania')
+Polo.create(nome: 'Messina',email: 'addiopizzomessina@gmail.com', sitoweb: 'www.addiopizzomessina.it', telefono: '338 9191543',
+  indirizzo: 'via Mons. Grano 2, 98124 Messina', citta_sede: 'Messina')
 
 
 Citta.create(nome: 'Messina', provincia: 'ME', regione: 'Sicilia', polo_id: 1)
