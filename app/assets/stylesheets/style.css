@@ -52,15 +52,21 @@ form.navbar-form.navbar-center{
   Sezione del Footer
 */
 #footer{
+  background-color: #C6C6C6;
+
   padding-top:10px;
   padding-bottom:10px;
 }
 
 #logoFooter{
   max-height: 150px;
-  margin-left: 10%;
+  max-width: 200px;
+  //margin-left: 10%;
+
+  padding-top:30px;
 }
 
+/* Separatore tra Contenuto Pagina e Footer */
 .footerSeparator{
   background-color: white;
   border-top: 1px;
@@ -80,13 +86,19 @@ form.navbar-form.navbar-center{
   border-left: 0;
 }
 
+/* Sezione informazioni Poli */
 .footerInfo{
   padding-top:20px;
   padding-bottom:10px;
+  padding-right: 5px;
 
-  border-left: 0;
+  /* Divisore tra le informazioni dei poli */
   border-style: solid;
-  border-color: lightgrey;
+  //border-color: lightgrey;
+  border-color: #1B1B19;
+
+  border-left: 1;
+  border-left-width: 1px;
   border-top: 0;
   border-bottom: 0;
   border-right: 0;

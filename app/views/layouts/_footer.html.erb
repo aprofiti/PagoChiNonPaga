@@ -1,39 +1,56 @@
 <div class="container-fluid footerSeparator">
   <div id="footer" class="row">
     <div class="col-xs-6 col-sm-4 col-md-3 col-sm-push-6 col-md-push-0">
-      <%= image_tag "template/logo/Logo_footer.png", :id => "logoFooter", :class => "img-responsive" %>
+      <div class="pull-right">
+        <%= image_tag "template/logo/Logo_AddioPizzo.png", :id => "logoFooter", :class => "img-responsive" %>
+      </div>
     </div>
+
+    <%
+      # Recupero la lista dei Poli Principali
+      poli = Polo.all
+      # 0 -> Palermo
+      # 1 -> Catania
+      # 2 -> Messina
+    %>
+    <!-- Lista poli Principali -->
     <div class="footerInfo col-xs-6 col-sm-6 col-md-3 col-sm-pull-3 col-md-pull-0" >
       <h4>Palermo</h4>
       <dl class="dl-horizontal">
         <dt>Indirizzo</dt>
-        <dd>Via Palermo</dd>
+        <dd><%= poli[0].indirizzo %>, <%= poli[0].cap %> Palermo</dd>
         <dt>Telefono</dt>
-        <dd>06808020</dd>
+        <dd><%= poli[0].telefono %></dd>
         <dt>Email</dt>
-        <dd>emailmia@email.it</dd>
+        <dd><%= poli[0].email %></dd>
+        <dt>Sito:</dt>
+        <dd><%= poli[0].sitoweb %></dd>
       </dl>
     </div>
     <div class="footerInfo col-xs-6 col-sm-3 col-md-3 col-sm-pull-3 col-md-pull-0">
       <h4>Messina</h4>
       <dl class="dl-horizontal">
         <dt>Indirizzo</dt>
-        <dd>Via Palermo</dd>
+        <dd><%= poli[0].indirizzo %>, <%= poli[1].cap %> Catania</dd>
         <dt>Telefono</dt>
-        <dd>06808020</dd>
+        <dd><%= poli[1].telefono %></dd>
         <dt>Email</dt>
-        <dd>emailmia@email.it</dd>
+        <dd><%= poli[1].email %></dd>
+        <dt>Sito:</dt>
+        <dd><%= poli[1].sitoweb %></dd>
       </dl>
     </div>
     <div class="footerInfo col-xs-6 col-sm-3 col-md-3">
       <h4>Catania</h4>
       <dl class="dl-horizontal">
         <dt>Indirizzo</dt>
-        <dd>Via Palermo</dd>
+        <dd><%= poli[0].indirizzo %>, <%= poli[2].cap %> Messina</dd>
         <dt>Telefono</dt>
-        <dd>06808020</dd>
+        <dd><%= poli[2].telefono %></dd>
         <dt>Email</dt>
-        <dd>emailmia@email.it</dd>
+        <dd><%= poli[2].email %></dd>
+        <dt>Sito:</dt>
+        <dd><%= poli[2].sitoweb %></dd>
       </dl>
     </div>
   </div>
