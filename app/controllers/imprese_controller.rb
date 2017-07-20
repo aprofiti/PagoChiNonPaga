@@ -31,6 +31,8 @@ class ImpreseController < ApplicationController
   # GET /imprese/:nome?id=:id
   # GET /imprese/:nome.json?id=:id
   def show
+    @prodotti = Impresa.find(params[:id].to_i).prodotti
+
     @hash = Gmaps4rails.build_markers(@impresa) do |impresa, marker|
       marker.lat impresa.latitude
       marker.lng impresa.longitude
