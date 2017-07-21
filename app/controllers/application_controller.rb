@@ -33,8 +33,18 @@ class ApplicationController < ActionController::Base
   # Reindirizza dopo il login al Pannello di Controllo corrispondente alla tipologia dell'Utente
   def after_sign_in_path_for(resource)
     if current_utente
-      # Reindirizzo al Profilo Utente
+      # Controllo il tipo di Utente
       if (current_utente.isCliente?)
+
+        # controllo se cliente ha ordini attivi e in caso lancio un flash
+        idCliente = current_utente.actable_id
+        cliente = Cliente.find(idCliente)
+        ordini_attivi= cliente.getOrdiniAttivi
+        if !ordini_attivi.empty?
+          flash[:alert] = "Controlla lo stato degli ordini attivi."
+        end
+
+        # reindirizzo al cp di Cliente
         cliente_path(current_utente.actable_id)
       elsif (current_utente.isTitolare?)
         idTitolare = current_utente.actable_id
@@ -43,6 +53,20 @@ class ApplicationController < ActionController::Base
         if titolare.getNumImprese == 0
           new_impresa_path
         else
+          # Controllo se il titolare ha ordini attivi e in caso lancio un flash
+
+          imprese = titolare.imprese
+          # Itero nelle varie imprese
+          imprese.each do |impresa|
+            ordini = impresa.getOrdiniAttivi
+            if !ordini.empty?
+              # Ho degli ordini attivi in almeno una impresa
+              flash[:alert] = "Controlla lo stato degli ordini attivi"
+              return titolare_path(idTitolare)
+            end
+          end
+
+          # reindirizzo il titolare nel suo cp
           titolare_path(idTitolare)
         end
       end
