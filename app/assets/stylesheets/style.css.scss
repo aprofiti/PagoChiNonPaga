@@ -1,5 +1,57 @@
+@font-face {
+  font-family: "Roboto";
+  src: url('/assets/roboto-regular');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url('/assets/roboto-bold');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Roboto Medium";
+  src: url('/assets/roboto-medium');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto Black";
+  src: url('/assets/roboto-black');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1{
+  font-family: "Roboto Black";
+}
+
+h2{
+  font-family: "Roboto Medium";
+}
+
+h3{
+  font-family: "Roboto";
+}
+
+h4{
+  font-family: "Roboto";
+}
+
+p{
+  font-family: "Roboto";
+}
+
+a{
+  font-family: "Roboto";
+}
+
 /* Necessario per evitare che la barra del menu copra il contenuto della pagina */
 body {
+  font-family: "Roboto";
   padding-top: 50px;
   background: #fff;
 }
