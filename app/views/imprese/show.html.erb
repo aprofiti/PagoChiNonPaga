@@ -56,11 +56,7 @@
       <% if @impresa.titolare.has_email_paypal %>
       <span class="glyphicon glyphicon-shopping-cart"></span>
       <h3>
-      <!-- Vecchio link
         <%= link_to "Consulta il catalogo", impresa_prodotti_path(impresa_nome: @impresa.nome,id: params[:id]) , class: "txtCatalogo", method: :get %>
-      -->
-      <%= link_to "Consulta il catalogo", "#listaProdotti", class: "txtCatalogo",
-            :data => { :toggle => 'collapse'}, method: :get, remote: true %>
       </h3>
       <% end %>
 
@@ -83,12 +79,6 @@
       <% end %>
     </div>
   </div>
-
-  <!-- Partial Lista Prodotto -->
-  <div class="row">
-    <%= render :partial => "catalogo" %>
-  </div>
-
 </section>
 
 <!-- Mappa -->
