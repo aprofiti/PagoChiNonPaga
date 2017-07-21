@@ -28,7 +28,7 @@ class ProdottiController < ApplicationController
     if !(impresa.verificato && !(impresa.congelato))
       redirect_back
     else
-      @prodotti = Prodotto.all
+      @prodotti = Prodotto.where(impresa_id: params[:id])
     end
   end
 
