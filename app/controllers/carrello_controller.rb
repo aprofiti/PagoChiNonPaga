@@ -44,9 +44,10 @@ class CarrelloController < ApplicationController
     qta_post = params[:prodotto][:qta].to_i
     if prodotto.checkDisponibilita(qta_post,carrello)
       carrello.add(prodotto,prodotto.prezzo,qta_post)
+      flash[:success] = "Prodotto aggiunto al carrello."
       redirect_back
     else
-      flash[:notice] = "Quantita selezionata non disponibile"
+      flash[:notice] = "Quantita selezionata non disponibile."
       redirect_to(:back)
     end
   end
