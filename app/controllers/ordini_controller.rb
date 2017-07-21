@@ -41,7 +41,7 @@ class OrdiniController < ApplicationController
           break
         end
       end
-      
+
       @ordiniCompletati = @ordini - @ordiniAttivi
     elsif current_utente.isTitolare?
       @ordini = []
@@ -50,6 +50,27 @@ class OrdiniController < ApplicationController
         @ordiniAttivi += impresa.getOrdiniAttivi
         @ordini += impresa.ordini
       end
+
+      @ordiniAttivi.each do |ordine|
+        flag_attesa= false # flag per arrestare il ciclo
+        flag_spedizione= false # ibidem
+
+        if ordine.stato_ordine.stato == StatoOrdine.ATTESA && !flag_attesa
+          flash[:alert]= "Alcuni ordini attendono l'inserimento delle spese di spedizione. Aggiorna l'importo o elimina l'operazione."
+          flag_attesa= true
+        end
+
+        if ordine.stato_ordine.stato == StatoOrdine.PAGATO && !flag_spedizione
+          flash[:alert]= "Alcuni ordini attendono di essere spediti. Aggiorna l'importo o rimborsa il cliente per eliminare l'operazione."
+          flag_spedizione= true
+        end
+
+        if flag_attesa && flag_spedizione # risparmiamoci cicli inutili
+          break
+        end
+
+      end
+
       @ordiniCompletati = @ordini - @ordiniAttivi
     end
   end
