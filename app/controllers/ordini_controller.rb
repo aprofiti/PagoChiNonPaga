@@ -33,6 +33,15 @@ class OrdiniController < ApplicationController
     if current_utente.isCliente?
       @ordini = Cliente.find(id).ordini
       @ordiniAttivi = Cliente.find(id).getOrdiniAttivi
+
+      # Ricordo al Cliente di pagare o rifiutare l'ordine
+      @ordiniAttivi.each do |ordine|
+        if ordine.stato_ordine.stato == StatoOrdine.CONFERMA
+          flash[:alert]= "Alcuni ordini attendono la tua conferma sul totale da pagare. Paga l'importo o elimina l'operazione."
+          break
+        end
+      end
+      
       @ordiniCompletati = @ordini - @ordiniAttivi
     elsif current_utente.isTitolare?
       @ordini = []
