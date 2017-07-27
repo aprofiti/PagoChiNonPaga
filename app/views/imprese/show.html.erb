@@ -53,7 +53,7 @@
   <!-- Catalogo -->
   <div id="catalogo" class="row">
     <div id="descrizioneCatalogo" class="col-md-6 col-xs-4">
-      <% if @impresa.titolare.has_email_paypal && !@impresa.prodotti.empty?%>
+      <% if @impresa.titolare.has_email_paypal %>
       <span class="glyphicon glyphicon-shopping-cart"></span>
       <h3>
         <%= link_to "Consulta il catalogo", impresa_prodotti_path(impresa_nome: @impresa.nome,id: params[:id]) , class: "txtCatalogo", method: :get %>

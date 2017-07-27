@@ -2,8 +2,13 @@
 <div class="container">
     <h1 class="text-center page-title">PRODOTTI</h1>
       <hr>
+      <% if @prodotti.count==0 || !@prodotti.first.impresa.hasProdotti? %>
+        Catalogo vuoto.
+      <% end %>
       <% @prodotti.each do |prodotto| %>
-        <%= render :partial => "show", :locals => { :prodotto => prodotto }  %>
+        <% if !prodotto.eliminato %>
+          <%= render :partial => "show", :locals => { :prodotto => prodotto }  %>
+        <% end %>
       <% end %>
   <%= hidden_field_tag(:id,params[:id]) %>
 
