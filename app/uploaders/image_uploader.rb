@@ -60,7 +60,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     if model.class.name == "Prodotto"
       ActionController::Base.helpers.asset_path("template/" + [version_name, "missing.png"].compact.join('_'))
     else
-      ActionController::Base.helpers.asset_path("template/" + [version_name, "Sfondo Negozio.png"].compact.join('_'))
+      ActionController::Base.helpers.asset_path("template/" + [version_name, "impresa_default.png"].compact.join('_'))
     end
   end
 
