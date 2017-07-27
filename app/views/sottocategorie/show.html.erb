@@ -9,7 +9,7 @@
   <!-- Testo nel Jumbotron -->
   <div class="container-fluid" style="padding-top:30px;">
     <div id="logo_ap" class="col-sm-4 col-sm-offset-4">
-      <%= image_tag "template/logo/Logo_footer.png", :id => "logoJumbotron", :class => "img-responsive" %>
+      <%= image_tag "template/logo/consumocritico.png", :id => "logoJumbotron", :class => "img-responsive" %>
     </div>
   </div>
 </div>
@@ -21,7 +21,7 @@
       sottocategoria = @sottocategoria
       categoria = @sottocategoria.getCategoria
     %>
-    
+
     <h2>
       <span><%= link_to categoria.getNome, categoria_sottocategorie_path(categoria_nome: categoria.getNome) %>/</span>
       <span id="attivo"><%= sottocategoria.getNome %></span>
