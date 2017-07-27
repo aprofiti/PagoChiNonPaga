@@ -54,7 +54,7 @@ body {
   font-family: "Roboto";
   padding-top: 50px;
   background: #fff;
-  overflow-x:hidden;
+  overflow-x:hidden; //rimuove la riga bianca verticale a destra
 }
 
 navbar-brand{
@@ -96,7 +96,7 @@ form.navbar-form.navbar-center{
 
 /* Sezione centrale della pagina */
 .contenuto{
-  min-height:500px;
+  min-height:665px;
   padding-bottom: 20px;
 }
 

@@ -59,4 +59,17 @@ class Polo < ActiveRecord::Base
     self.nome
   end
 
+  #Metodi richiamati nel footer per il formato dell'indirizzo
+
+  # Resituisce via e numero civico
+  def getIndirizzo
+    via = self.indirizzo.split(',')
+    via.first
+  end
+
+  # Resituisce CAP e Citta
+  def getCitta
+    via = self.indirizzo.split(',')
+    via.last
+  end
 end
