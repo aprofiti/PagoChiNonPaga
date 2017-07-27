@@ -42,6 +42,14 @@
                   <%= f.number_field :qta, :class => 'text_field',:value => 1 %>
                 <%end%>
               <%end%>
+              <% if current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
+                 <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_impresa_prodotto_path(nome: prodotto.nome,id_p: prodotto.id), :class => 'btn btn-default btn-xs',method: :get %>
+                 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      impresa_prodotto_elimina_prodotto_path(impresa_nome: prodotto.impresa.nome, prodotto_nome: prodotto.nome, id_p: prodotto.id),
+                      :method => :post,:class => 'btn btn-xs btn-danger',
+                      data: { :confirm => "\t\t\t\t\t\t\t\tATTENZIONE!!!! \nEliminando questo prodotto dovrai comunque evadere eventuali ordini in cui è presente. Continuare comunque?" }%>
+              <% end %>
             <% else %>
               <%= button_to "Aggiungi al carrello",  new_utente_session_path, :class => "btn btn-info" %>
             <% end %>
