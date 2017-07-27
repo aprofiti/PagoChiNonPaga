@@ -11,6 +11,8 @@ gem 'devise'
 gem 'cancancan'
 # User action history
 gem 'paper_trail'
+# Background worker
+gem 'whenever', :require => false
 # Implementazione IS-A
 gem 'activerecord', '>= 4.2.6'
 gem 'active_record-acts_as'
