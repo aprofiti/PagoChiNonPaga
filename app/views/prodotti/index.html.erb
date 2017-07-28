@@ -2,22 +2,26 @@
 <div class="container">
     <h1 class="text-center page-title">PRODOTTI</h1>
       <hr>
-      <% if @prodotti.count==0 || !@prodotti.first.impresa.hasProdotti? %>
-        Catalogo vuoto.
-      <% end %>
-      <% @prodotti.each do |prodotto| %>
-        <% if !prodotto.eliminato %>
-          <%= render :partial => "show", :locals => { :prodotto => prodotto }  %>
+      <% if !Impresa.find(params[:id]).hasProdotti? %>
+        <%= render "prodotti/catalogo_vuoto" %>
+      <% else %>
+        <% @prodotti.each do |prodotto| %>
+          <% if !prodotto.eliminato %>
+            <%= render :partial => "show", :locals => { :prodotto => prodotto }  %>
+          <% end %>
         <% end %>
       <% end %>
-  <%= hidden_field_tag(:id,params[:id]) %>
 
-  <%= link_to t('.profilo_impresa', :default => t("helpers.links.profilo_impresa")),
-        impresa_path(nome: params[:impresa_nome],id: params[:id]),
-        :class => 'btn btn-default',method: :get %>
-  <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
-    <%= link_to t('.new', :default => t("helpers.links.new")),
-          new_impresa_prodotto_path(id: params[:id]),
-          :class => 'btn btn-primary' ,method: :get%>
-  <% end %>
+      <%= hidden_field_tag(:id,params[:id]) %>
+      <div id="azioni-catalogo">
+        <hr>
+      <%= link_to t('.profilo_impresa', :default => t("helpers.links.profilo_impresa")),
+            impresa_path(nome: params[:impresa_nome],id: params[:id]),
+            :class => 'btn btn-default',method: :get, :style=> 'float:left' %>
+      <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
+        <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_impresa_prodotto_path(id: params[:id]),
+              :class => 'btn btn-primary' ,method: :get , :style=> 'float:right'%>
+      <% end %>
+    </div>
 </div>

@@ -179,18 +179,16 @@ class Impresa < ActiveRecord::Base
   end
 
   def hasProdotti?
-    if self.prodotti.count == 0
-      false
+    if self.prodotti.empty?
+      return false
     else
-      bool= true
       self.prodotti.each do |prodotto|
-        bool= bool & prodotto.eliminato
-        if !bool
+        if !prodotto.eliminato
           return true
         end
       end
-      false
+      return false
     end
   end
-
+  
 end
