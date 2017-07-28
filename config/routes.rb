@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   end
 
   root 'static_pages#home_page'
-
+  get '*unmatched_route', :to => 'static_pages#render_404'
 
 #*********************ROTTE CANCELLATE************************
   #resources :admins perchè si accede da rails_admin
