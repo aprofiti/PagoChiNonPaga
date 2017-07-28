@@ -8,6 +8,10 @@ Develop:
 
 PagoChiNonPaga is a platform developed for the homonym service offered by AddioPizzo for an Universitary project.
 
+## Requirements
+
+Ruby version `2.3.1` and Rails version `4.2.7.1` are needed to run the app. Newer versions may are incompatible.
+
 ## Getting Started 
 
 Download this repository from master branch.
