@@ -63,15 +63,17 @@
         <% end %>
         <%= link_to t('.back', :default => t("helpers.links.back")),
                       ordini_path, :class => 'btn btn-default' ,method: :get %>
-        <% if current_utente.isTitolare? %>
+        <% if current_utente.isTitolare? && (@ordine.getStato == StatoOrdine.ATTESA || @ordine.getStato == StatoOrdine.PAGATO) %>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_ordine_path(@ordine), :class => 'btn btn-default',method: :get %>
         <% end %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      ordine_path(@ordine),
-                      :method => 'delete',
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-danger' %>
+        <% if @ordine.getStato == StatoOrdine.ATTESA || @ordine.getStato == StatoOrdine.CONFERMA %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        ordine_path(@ordine),
+                        :method => 'delete',
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-danger' %>
+        <% end %>
        </div>
     </div>
 </div>
