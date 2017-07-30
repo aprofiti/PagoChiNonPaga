@@ -51,9 +51,9 @@ class OrdiniController < ApplicationController
         @ordini += impresa.ordini
       end
 
+      flag_attesa= false # flag per arrestare il ciclo
+      flag_spedizione= false # ibidem
       @ordiniAttivi.each do |ordine|
-        flag_attesa= false # flag per arrestare il ciclo
-        flag_spedizione= false # ibidem
 
         if ordine.stato_ordine.stato == StatoOrdine.ATTESA && !flag_attesa
           flash[:alert]= "Alcuni ordini attendono l'inserimento delle spese di spedizione. Aggiorna l'importo o elimina l'operazione."
@@ -81,18 +81,34 @@ class OrdiniController < ApplicationController
     case @ordine.stato_ordine.stato
     when StatoOrdine.ATTESA
       # Il titolare puo' modificare i dati per inserire costo di spedizione
-      flash[:alert] = "In attesa che il titolare inserisca le spese di Spedizione"
+      if current_utente.isCliente?
+        flash[:alert] = "In attesa che il titolare inserisca le spese di spedizione."
+      elsif current_utente.isTitolare?
+        flash[:alert] = "Clicca sul pulsante MODIFICA per inserire le spese di spedizione."
+      end
     when StatoOrdine.CONFERMA
       # In attesa che il clienti accetti i costi di spedizione e paghi l'ordine
-      flash[:notice] = "In attesa di conferma da parte dell'utente"
+      if current_utente.isCliente?
+        flash[:notice] = "Clicca sul pulsante PAYPAL per pagare e inserire l'indirizzo di spedizione, oppure CANCELLA l'ordine."
+      elsif current_utente.isTitolare?
+        flash[:alert] = "In attesa di conferma da parte del cliente."
+      end
     when StatoOrdine.PAGATO
       # In attesa che il Titolare contrassegni l'ordine come spedito
       # Non puo' essere modificato dal Titolare
-      flash[:notice] = "Ordine pagato. In attesa di spedizione da parte del titolare"
+      if current_utente.isCliente?
+        flash[:notice] = "Ordine pagato. In attesa di spedizione da parte del titolare."
+      elsif current_utente.isTitolare?
+        flash[:notice] = "Ordine pagato. Clicca sul pulsante MODIFICA per cambiare lo stato dell'ordine in SPEDITO quando opportuno."
+      end
     when StatoOrdine.SPEDITO
       # In attesa di conferma ricezione da parte del cliente
       # Non puo' essere modificato dal Titolare
-      flash[:notice] = "Ordine in attesa che il cliente confermi il ricevimento dell'ordine"
+      if current_utente.isCliente?
+        flash[:notice] = "Ordine spedito. Clicca sul pulsante MODIFICA per cambiare lo stato dell'ordine in RICEVUTO quando opportuno."
+      elsif current_utente.isTitolare?
+        flash[:notice] = "Ordine in attesa che il cliente confermi il ricevimento dell'ordine."
+      end
     when StatoOrdine.RICEVUTO
       # L'ordine e' completato e non puo' essere modificato
       flash[:success] = "Ordine completato"
