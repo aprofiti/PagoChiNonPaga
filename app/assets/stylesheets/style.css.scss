@@ -1,26 +1,26 @@
 @font-face {
   font-family: "Roboto";
-  src: url('/assets/roboto-regular');
+  src: font-url('/assets/roboto-regular');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Roboto";
-  src: url('/assets/roboto-bold');
+  src: font-url('/assets/roboto-bold');
   font-weight: bold;
 }
 
 @font-face {
   font-family: "Roboto Medium";
-  src: url('/assets/roboto-medium');
+  src: font-url('/assets/roboto-medium');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Roboto Black";
-  src: url('/assets/roboto-black');
+  src: font-url('/assets/roboto-black');
   font-weight: normal;
   font-style: normal;
 }
