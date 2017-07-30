@@ -124,4 +124,7 @@ class Cliente < ActiveRecord::Base
     end
   end
 
+  def getNomeCognome
+    "#{self.nome} #{self.cognome}"
+  end
 end

@@ -21,7 +21,6 @@ class OrdiniController < ApplicationController
   before_action :set_ordine, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente!
   before_filter :is_mio_ordine?, only: [:show,:destroy]
-  before_filter :is_titolare?, only: :edit
   before_filter :is_eliminabile?, only: :destroy
   before_action :restore_quantita, only: :destroy
   before_action :is_in_conferma?, only: :paypal_url
@@ -120,11 +119,17 @@ class OrdiniController < ApplicationController
   def edit
     # Si puo' modificare solamente se e' in ATTESA oppure in PAGATO
     stato = @ordine.stato_ordine.stato
-    if (stato == StatoOrdine.CONFERMA) ||
-       (stato == StatoOrdine.SPEDITO) ||
-       (stato == StatoOrdine.RICEVUTO)
-       # Reindirizzo poiche' e' un ordine non modificabile
-       redirect_to ordine_path(@ordine)
+    if current_utente.isTitolare?
+      if (stato == StatoOrdine.CONFERMA) ||
+         (stato == StatoOrdine.SPEDITO)  ||
+         (stato == StatoOrdine.RICEVUTO)
+         # Reindirizzo poiche' e' un ordine non modificabile
+         redirect_to ordine_path(@ordine)
+      end
+    elsif current_utente.isCliente?
+      if !(stato == StatoOrdine.SPEDITO)
+          redirect_to ordine_path(@ordine)
+      end
     end
   end
   # POST /mieiOrdini/:id/prepara_ordini

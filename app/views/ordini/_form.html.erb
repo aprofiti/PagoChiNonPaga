@@ -22,14 +22,24 @@
     </div>
     <div class="page-header"></div>
     <div class="row">
-      <div class="col-xs-6 col-sm-3 col-xs-offset-1 col-sm-offset-2">
-        <%= f.input :spedizione , :disabled => @ordine.spedizione?%>
-        <%= error_span(@ordine[:spedizione]) %>
-      </div>
-      <div class="col-xs-6 col-sm-3 col-xs-offset-1 col-sm-offset-2">
-        <%= f.association :stato_ordine ,prompt: @ordine.stato_ordine.stato,collection: @ordine.getStatiDisponibili,:disabled =>!@ordine.spedizione?%>
-        <%= error_span(@ordine[:stato]) %>
-      </div>
+
+      <% if current_utente.isTitolare? %>
+        <div class="col-xs-6 col-sm-3 col-xs-offset-1 col-sm-offset-2">
+          <%= f.input :spedizione , :disabled => @ordine.spedizione?%>
+          <%= error_span(@ordine[:spedizione]) %>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-xs-offset-1 col-sm-offset-2">
+          <%= f.association :stato_ordine ,prompt: @ordine.stato_ordine.stato,collection: @ordine.getStatiDisponibiliTitolare,:disabled =>!@ordine.spedizione?%>
+          <%= error_span(@ordine[:stato]) %>
+        </div>
+      <% end %>
+
+      <% if current_utente.isCliente? %>
+        <div class="col-xs-6 col-sm-3 col-xs-offset-1 col-sm-offset-2">
+          <%= f.association :stato_ordine ,prompt: @ordine.stato_ordine.stato,collection: @ordine.getStatiDisponibiliCliente%>
+          <%= error_span(@ordine[:stato]) %>
+        </div>
+      <% end %>
 </div>
 
   </div>
