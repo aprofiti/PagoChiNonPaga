@@ -1,26 +1,33 @@
+<div class="row">
+<h1 class="text-center page-title"> REGISTRATI </h1>
+</div>
 <div class="container paginaRegistrati">
+
+
   <div class="row">
+    <hr>
+
     <!-- Sezione Cliente -->
     <div class="col-md-6">
       <div class="panel panel-info">
-        <div class="panel-heading">
+        <div class="panel-heading text-center">
           <h4>Registrati come Cliente</h4>
         </div>
         <div class="panel-body text-center">
           <h4>Entra nella rete come cliente per poter acquistare dalle Imprese che hanno rinunciato al pizzo!</h4>
-          <%= button_to "Registrati", new_cliente_path, :class => "btn btn-primary", method: :get %>
+          <%= button_to "Registrati", new_cliente_path, :class => "btn btn-primary registration-button", method: :get %>
         </div>
       </div>
     </div>
     <!-- Sezione Titolare -->
     <div class="col-md-6">
       <div class="panel panel-info">
-        <div class="panel-heading">
+        <div class="panel-heading text-center">
           <h4>Registra la tua Impresa</h4>
         </div>
         <div class="panel-body text-center">
-          <h4>Compila la richiesta di adesione per la rete di PagoChiNonPaga</h4>
-          <%= button_to "Compila il Form", new_titolare_path, :class => "btn btn-primary", method: :get %>
+          <h4>Compila la richiesta di adesione della tua impresa alla rete PagoChiNonPaga</h4>
+          <%= button_to "Compila il Form", new_titolare_path, :class => "btn btn-primary registration-button", method: :get %>
         </div>
       </div>
     </div>

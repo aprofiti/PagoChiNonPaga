@@ -1,0 +1,61 @@
+<%- model_class = Prodotto -%>
+<div class="container">
+  <div class="page-header">
+    <h1><%= prodotto.nome %></h1>
+  </div>
+  <div class="row">
+    <div class="col-md-12"  >
+      <div class="panel panel-default" style="height:30%">
+        <div class="panel-body">
+            <div class="col-md-6">
+              <%= image_tag(prodotto.image, :class => "img-responsive") %>
+            </div>
+            <div class="col-md-6">
+              <dl class="dl-horizontal text-right">
+                <div class="row">
+                  <dt><strong><%= model_class.human_attribute_name(:impresa_id) %>:</strong></dt>
+                  <dd><%= Impresa.find(prodotto.impresa_id).getNome %></dd>
+                </div>
+                <div class="row">
+                  <dt><strong><%= model_class.human_attribute_name(:prezzo) %>:</strong></dt>
+                  <dd><%= prodotto.prezzo %></dd>
+                </div>
+                <div class="row">
+                  <dt><strong><%= model_class.human_attribute_name(:quantità_Disponibile) %>:</strong></dt>
+                  <dd><%= prodotto.qta %></dd>
+                </div>
+                <div class="row">
+                  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+                  <dd><%= prodotto.nome %></dd>
+                </div>
+                <div class="row">
+                  <dt><strong><%= model_class.human_attribute_name(:descrizione) %>:</strong></dt>
+                  <dd><%= sanitize prodotto.descrizione %></dd>
+                </div>
+              </dl>
+            </div>
+          <div class="pull-right">
+            <% if utente_signed_in? %>
+              <% if !current_utente.isTitolare? %>
+                <%= simple_form_for prodotto,url:  add_cart_carrello_path(current_utente.actable_id, prodotto_id: prodotto.id),method: :post , :html => { :class => 'form-horizontal' } do |f| %>
+                  <%= f.button :submit , "Aggiungi al carrello" %>
+                  <%= f.number_field :qta, :class => 'text_field',:value => 1 %>
+                <%end%>
+              <%end%>
+              <% if current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
+                 <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_impresa_prodotto_path(nome: prodotto.nome,id_p: prodotto.id), :class => 'btn btn-default btn-xs',method: :get %>
+                 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      impresa_prodotto_elimina_prodotto_path(impresa_nome: prodotto.impresa.nome, prodotto_nome: prodotto.nome, id_p: prodotto.id),
+                      :method => :post,:class => 'btn btn-xs btn-danger',
+                      data: { :confirm => "\t\t\t\t\t\t\t\tATTENZIONE!!!! \nEliminando questo prodotto dovrai comunque evadere eventuali ordini in cui è presente. Continuare comunque?" }%>
+              <% end %>
+            <% else %>
+              <%= button_to "Aggiungi al carrello",  new_utente_session_path, :class => "btn btn-info" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

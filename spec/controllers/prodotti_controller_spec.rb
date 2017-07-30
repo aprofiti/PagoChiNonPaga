@@ -38,15 +38,6 @@ RSpec.describe ProdottiController, type: :controller do
       expect(response).to render_template :new
     end
 
-    it "should get show prodotto" do
-      congelata=false
-      verificata=true
-      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata,verificata)
-      sign_in @titolare
-      prodotto = Prodotto.create(nome: "prodotto",qta: 10, prezzo: 10, impresa_id: impresa.id,descrizione: "descrizioneee")
-      get :show, impresa_nome: impresa.nome, nome: prodotto.nome, id_p: prodotto.id
-      expect(response).to render_template :show
-    end
 
     it "should get prodotto index" do
       congelata=false
@@ -73,13 +64,5 @@ RSpec.describe ProdottiController, type: :controller do
       expect(response).to_not render_template :index
     end
 
-    it "should not get prodotto impresa congelata" do
-      congelata=true
-      verificata=true
-      impresa =createImpresa("impresa","imp@resa.com",@citta,@titolare,congelata,verificata)
-      prodotto = Prodotto.create(nome: "prodotto",qta: 10, prezzo: 10, impresa_id: impresa.id,descrizione: "descrizioneee")
-      get :show , impresa_nome: impresa.nome, nome: prodotto.nome,id_p: prodotto.id
-      expect(response).to_not render_template :show
-    end
 
 end

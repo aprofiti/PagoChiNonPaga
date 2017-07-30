@@ -11,9 +11,18 @@
             <div class="col-md-12">
               <dt><strong><%= model_class.human_attribute_name(:data) %>:</strong></dt>
               <dd><%= @ordine.created_at %></dd>
+              <% if current_utente.isTitolare? %>
+                <% #sezione ordine vista solo dal titolare %>
+                <dt><strong><%= model_class.human_attribute_name(:cliente_id) %>:</strong></dt>
+                <dd><%= Cliente.find(@ordine.cliente_id).getNomeCognome %></dd>
+                <dt><strong><%= "Email cliente" %>:</strong></dt>
+                <dd><%= Cliente.find(@ordine.cliente_id).email %></dd>
+              <% elsif current_utente.isCliente? %>
+                <% #sezione ordine vista solo dal cliente %>
+                <dt><strong><%= "Email impresa" %>:</strong></dt>
+                <dd><%= Impresa.find(@ordine.impresa_id).email %></dd>
+              <% end %>
 
-              <dt><strong><%= model_class.human_attribute_name(:cliente_id) %>:</strong></dt>
-              <dd><%= Cliente.find(@ordine.cliente_id).getNome %></dd>
               <dt><strong><%= model_class.human_attribute_name(:impresa_id) %>:</strong></dt>
               <dd><%= Impresa.find(@ordine.impresa_id).getNome %></dd>
               <dt><strong><%= model_class.human_attribute_name(:stato_ordine) %>:</strong></dt>
@@ -58,20 +67,26 @@
         <% if current_utente.isCliente? %>
           <!-- Pagamento disponibile solo se si è in conferma richiesta -->
           <% if @ordine.getStato == StatoOrdine.CONFERMA %>
-            <%= link_to "Pocedi al pagamento con paypal", paypal_url_ordine_path(id: @ordine.id), method: :post %>
+          <%= link_to(image_tag("template/Paypal_button.png", class: 'image-responsive', height: '150'), paypal_url_ordine_path(id: @ordine.id), method: :post) %>
+          <% end %>
+          <% if @ordine.getStato == StatoOrdine.SPEDITO %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_ordine_path(@ordine), :class => 'btn btn-default',method: :get %>
           <% end %>
         <% end %>
         <%= link_to t('.back', :default => t("helpers.links.back")),
                       ordini_path, :class => 'btn btn-default' ,method: :get %>
-        <% if current_utente.isTitolare? %>
+        <% if current_utente.isTitolare? && (@ordine.getStato == StatoOrdine.ATTESA || @ordine.getStato == StatoOrdine.PAGATO) %>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_ordine_path(@ordine), :class => 'btn btn-default',method: :get %>
         <% end %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      ordine_path(@ordine),
-                      :method => 'delete',
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-danger' %>
+        <% if @ordine.getStato == StatoOrdine.ATTESA || @ordine.getStato == StatoOrdine.CONFERMA %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        ordine_path(@ordine),
+                        :method => 'delete',
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-danger' %>
+        <% end %>
        </div>
     </div>
 </div>

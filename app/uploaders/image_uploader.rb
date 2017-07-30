@@ -57,10 +57,10 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
-    if  model.class.name == "Prodotto"
+    if model.class.name == "Prodotto"
       ActionController::Base.helpers.asset_path("template/" + [version_name, "missing.png"].compact.join('_'))
     else
-      ActionController::Base.helpers.asset_path("template/" + [version_name, "Sfondo Negozio.png"].compact.join('_'))
+      ActionController::Base.helpers.asset_path("template/" + [version_name, "impresa_default.png"].compact.join('_'))
     end
   end
 

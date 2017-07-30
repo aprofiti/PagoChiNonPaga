@@ -22,10 +22,23 @@
         return html.join('');
     }
 </script>
-<div class="container">
-  <div class="page-header">
-    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+<!-- Jumbotron -->
+<div id="impresepage" class="jumbotron jumbotronColor">
+  <h1 class="sfumato text-center"><span>IMPRESE<span></h1>
+  <!-- Barra di Ricerca nel Jumbotron -->
+  <div class="">
+    <%= render "layouts/home/barra_ricerca_home" %>
   </div>
+  <!-- Testo nel Jumbotron -->
+  <div id="logo_pizzo" class="container-fluid" style="padding-top:30px;">
+    <div id="logo_ap" class="col-sm-4 col-sm-offset-4">
+      <%= image_tag "template/logo/consumocritico.png", :id => "logoJumbotron", :class => "img-responsive" %>
+    </div>
+  </div>
+</div>
+<!-- Tabella con lista imprese -->
+<div class="container">
+
   <div class="col-md-12">
   <table class="table table-hover"
     data-toggle="table"
@@ -43,29 +56,29 @@
     data-detail-formatter="detailFormatter">
     <thead>
       <tr>
-        <th data-field="nome" data-sortable="true"><%= model_class.human_attribute_name(:nome) %></th>
-        <th data-field="giorni_orari" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:giorni_orari) %></th>
-        <th data-field="citta_id" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:citta_id) %></th>
-        <th data-field="indirizzo" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:indirizzo) %></th>
-        <th data-field="telefono" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:telefono) %></th>
-        <th data-field="fax" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:fax) %></th>
-        <th data-field="email" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:email) %></th>
-        <th data-field="sitoweb" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:sitoweb) %></th>
-        <th data-field="facebook" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:facebook) %></th>
+        <th data-field="Nome" data-sortable="true"><%= model_class.human_attribute_name(:nome) %></th>
+        <th data-field="Giorni e orari" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:giorni_orari) %></th>
+        <th data-field="Città" data-sortable="true" data-visible="true"><%= model_class.human_attribute_name(:citta_id) %></th>
+        <th data-field="Indirizzo" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:indirizzo) %></th>
+        <th data-field="Telefono" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:telefono) %></th>
+        <th data-field="Fax" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:fax) %></th>
+        <th data-field="Email" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:email) %></th>
+        <th data-field="Sito Web" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:sitoweb) %></th>
+        <th data-field="Facebook" data-sortable="true" data-visible="false"><%= model_class.human_attribute_name(:facebook) %></th>
       </tr>
     </thead>
     <tbody>
       <% @imprese.each do |impresa| %>
         <tr>
           <td><%= link_to impresa.nome,impresa_path(nome: impresa.nome, id: impresa.id),method: :get %></td>
-          <td><%= impresa.giorni_orari %></td>
-          <td><%= impresa.citta_id %></td>
+          <td><%= impresa.giorni_orari.blank? ? 'n.d.': impresa.giorni_orari %></td>
+          <td><%= impresa.citta.nome %></td>
           <td><%= impresa.indirizzo %></td>
           <td><%= impresa.telefono %></td>
-          <td><%= impresa.fax %></td>
+          <td><%= impresa.fax.blank? ? 'n.d.': impresa.fax %></td>
           <td><%= impresa.email %></td>
-          <td><%= impresa.sitoweb %></td>
-          <td><%= impresa.facebook %></td>
+          <td><%= impresa.sitoweb.blank? ? 'n.d.' : impresa.sitoweb %></td>
+          <td><%= impresa.facebook.blank? ? 'n.d.' : impresa.facebook %></td>
         </tr>
       <% end %>
     </tbody>

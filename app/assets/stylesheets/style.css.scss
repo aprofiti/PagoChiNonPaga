@@ -1,0 +1,219 @@
+@font-face {
+  font-family: "Roboto";
+  src: url('/assets/roboto-regular');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url('/assets/roboto-bold');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Roboto Medium";
+  src: url('/assets/roboto-medium');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto Black";
+  src: url('/assets/roboto-black');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1{
+  font-family: "Roboto Black";
+}
+
+h2{
+  font-family: "Roboto Medium";
+}
+
+h3{
+  font-family: "Roboto";
+}
+
+h4{
+  font-family: "Roboto";
+}
+
+p{
+  font-family: "Roboto";
+}
+
+a{
+  font-family: "Roboto";
+}
+
+/* Necessario per evitare che la barra del menu copra il contenuto della pagina */
+body {
+  font-family: "Roboto";
+  padding-top: 50px;
+  background: #fff;
+  overflow-x:hidden; //rimuove la riga bianca verticale a destra
+}
+
+navbar-brand{
+  height: 100%;
+  padding: 0;
+}
+
+navbar-nav{
+  padding-top:10px;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+  color: whitesmoke;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover{
+  color: #F5A623;
+}
+
+/* Barra di ricerca */
+form.navbar-form.navbar-center{
+  /* Posizione la barra di ricerca al centro della barra di Navigazione */
+  text-align:center;
+}
+.typeahead{
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom-width: 1px;
+  border-bottom-color: white;
+  border-bottom-style: solid;
+  color:whitesmoke;
+}
+.twitter-typeahead{
+  width: 100%;
+}
+
+/* Intestazione nelle pagini prima del contenuto */
+.page-header{
+  color: #428BCA;
+}
+
+.page-title {
+  margin-top:100px;
+  font-size:50px;
+}
+
+.registration-button {
+  margin-top: 30px;
+}
+/* Sezione centrale della pagina */
+.contenuto{
+  min-height:665px;
+  padding-bottom: 40px;
+}
+
+
+/*
+  Sezione del Footer
+*/
+#footer{
+  background-color: #C6C6C6;
+
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+#logoFooter{
+  max-height: 150px;
+  max-width: 200px;
+  //margin-left: 10%;
+
+  padding-top:30px;
+}
+
+/* Separatore tra Contenuto Pagina e Footer */
+.footerSeparator{
+  background-color: white;
+  border-top: 1px;
+  border-style: solid;
+  border-color: lightgrey;
+  border-bottom: 0;
+  border-right: 0;
+  border-left: 0;
+}
+
+.footerLogo{
+  border-right:1px;
+  border-style: solid;
+  border-color: lightgrey;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+/* Sezione informazioni Poli */
+.footerInfo{
+  padding-top:20px;
+  padding-bottom:10px;
+  padding-right: 5px;
+
+  /* Divisore tra le informazioni dei poli */
+  border-style: solid;
+  //border-color: lightgrey;
+  border-color: #1B1B19;
+
+  border-left: 1;
+  border-left-width: 1px;
+  border-top: 0;
+  border-bottom: 0;
+  border-right: 0;
+}
+
+/* Stile per il Flash dei Messaggi */
+.alert{
+  text-align: center;
+  margin-bottom: 0;
+}
+
+#notice {
+  color: green;
+}
+
+/* Generati dallo Scaffolding
+*/
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+/* Visualizzazione in linea degli elementi dt nelle pagine dei profili */
+.datiProfilo dt, .datiProfilo dd{
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: auto;
+  width: auto;
+}
+
+.foorterInfo dl, .footerInfo dt{
+    text-align: left;
+    width: auto;
+    padding-right: 1em;
+}
+
+.foorterInfo dl, .footerInfo dd{
+    margin-left: 0;
+    text-align: left;
+}
+.alert{
+  text-align: center;
+  margin-bottom: 0;
+}

@@ -15,10 +15,12 @@ GNU General Public License for more details.
 =end
 
 class OrdiniController < ApplicationController
+  require 'paypal-sdk-rest'
+  include PayPal::SDK::REST
+  include PayPal::SDK::Core::Logging
   before_action :set_ordine, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_utente!
   before_filter :is_mio_ordine?, only: [:show,:destroy]
-  before_filter :is_titolare?, only: :edit
   before_filter :is_eliminabile?, only: :destroy
   before_action :restore_quantita, only: :destroy
   before_action :is_in_conferma?, only: :paypal_url
@@ -30,6 +32,15 @@ class OrdiniController < ApplicationController
     if current_utente.isCliente?
       @ordini = Cliente.find(id).ordini
       @ordiniAttivi = Cliente.find(id).getOrdiniAttivi
+
+      # Ricordo al Cliente di pagare o rifiutare l'ordine
+      @ordiniAttivi.each do |ordine|
+        if ordine.stato_ordine.stato == StatoOrdine.CONFERMA
+          flash[:alert]= "Alcuni ordini attendono la tua conferma sul totale da pagare. Paga l'importo o elimina l'operazione."
+          break
+        end
+      end
+
       @ordiniCompletati = @ordini - @ordiniAttivi
     elsif current_utente.isTitolare?
       @ordini = []
@@ -38,6 +49,27 @@ class OrdiniController < ApplicationController
         @ordiniAttivi += impresa.getOrdiniAttivi
         @ordini += impresa.ordini
       end
+
+      flag_attesa= false # flag per arrestare il ciclo
+      flag_spedizione= false # ibidem
+      @ordiniAttivi.each do |ordine|
+
+        if ordine.stato_ordine.stato == StatoOrdine.ATTESA && !flag_attesa
+          flash[:alert]= "Alcuni ordini attendono l'inserimento delle spese di spedizione. Aggiorna l'importo o elimina l'operazione."
+          flag_attesa= true
+        end
+
+        if ordine.stato_ordine.stato == StatoOrdine.PAGATO && !flag_spedizione
+          flash[:alert]= "Alcuni ordini attendono di essere spediti. Aggiorna l'importo o rimborsa il cliente per eliminare l'operazione."
+          flag_spedizione= true
+        end
+
+        if flag_attesa && flag_spedizione # risparmiamoci cicli inutili
+          break
+        end
+
+      end
+
       @ordiniCompletati = @ordini - @ordiniAttivi
     end
   end
@@ -48,18 +80,34 @@ class OrdiniController < ApplicationController
     case @ordine.stato_ordine.stato
     when StatoOrdine.ATTESA
       # Il titolare puo' modificare i dati per inserire costo di spedizione
-      flash[:alert] = "In attesa che il titolare inserisca le spese di Spedizione"
+      if current_utente.isCliente?
+        flash[:alert] = "In attesa che il titolare inserisca le spese di spedizione."
+      elsif current_utente.isTitolare?
+        flash[:alert] = "Clicca sul pulsante MODIFICA per inserire le spese di spedizione."
+      end
     when StatoOrdine.CONFERMA
       # In attesa che il clienti accetti i costi di spedizione e paghi l'ordine
-      flash[:notice] = "In attesa di conferma da parte dell'utente"
+      if current_utente.isCliente?
+        flash[:notice] = "Clicca sul pulsante PAYPAL per pagare e inserire l'indirizzo di spedizione, oppure CANCELLA l'ordine."
+      elsif current_utente.isTitolare?
+        flash[:alert] = "In attesa di conferma da parte del cliente."
+      end
     when StatoOrdine.PAGATO
       # In attesa che il Titolare contrassegni l'ordine come spedito
       # Non puo' essere modificato dal Titolare
-      flash[:notice] = "Ordine pagato. In attesa di spedizione da parte del titolare"
+      if current_utente.isCliente?
+        flash[:notice] = "Ordine pagato. In attesa di spedizione da parte del titolare."
+      elsif current_utente.isTitolare?
+        flash[:notice] = "Ordine pagato. Clicca sul pulsante MODIFICA per cambiare lo stato dell'ordine in SPEDITO quando opportuno."
+      end
     when StatoOrdine.SPEDITO
       # In attesa di conferma ricezione da parte del cliente
       # Non puo' essere modificato dal Titolare
-      flash[:notice] = "Ordine in attesa che il cliente confermi il ricevimento dell'ordine"
+      if current_utente.isCliente?
+        flash[:notice] = "Ordine spedito. Clicca sul pulsante MODIFICA per cambiare lo stato dell'ordine in RICEVUTO quando opportuno."
+      elsif current_utente.isTitolare?
+        flash[:notice] = "Ordine in attesa che il cliente confermi il ricevimento dell'ordine."
+      end
     when StatoOrdine.RICEVUTO
       # L'ordine e' completato e non puo' essere modificato
       flash[:success] = "Ordine completato"
@@ -71,11 +119,17 @@ class OrdiniController < ApplicationController
   def edit
     # Si puo' modificare solamente se e' in ATTESA oppure in PAGATO
     stato = @ordine.stato_ordine.stato
-    if (stato == StatoOrdine.CONFERMA) ||
-       (stato == StatoOrdine.SPEDITO) ||
-       (stato == StatoOrdine.RICEVUTO)
-       # Reindirizzo poiche' e' un ordine non modificabile
-       redirect_to ordine_path(@ordine)
+    if current_utente.isTitolare?
+      if (stato == StatoOrdine.CONFERMA) ||
+         (stato == StatoOrdine.SPEDITO)  ||
+         (stato == StatoOrdine.RICEVUTO)
+         # Reindirizzo poiche' e' un ordine non modificabile
+         redirect_to ordine_path(@ordine)
+      end
+    elsif current_utente.isCliente?
+      if !(stato == StatoOrdine.SPEDITO)
+          redirect_to ordine_path(@ordine)
+      end
     end
   end
   # POST /mieiOrdini/:id/prepara_ordini
@@ -173,23 +227,59 @@ class OrdiniController < ApplicationController
   #Esegue transazione paypal
   def paypal_url
     @ordine = Ordine.find(params[:id])
-    return_path= "#{root_url}mieiOrdini/#{@ordine.id}/checkout"
-    @pagamento = Paypal.crea_pagamento(return_path,root_url,@ordine)
-    if @pagamento.create
+    @payment = Payment.new({
+      :intent =>  "sale",
+
+      :payer =>  {
+        :payment_method =>  "paypal" },
+
+      :redirect_urls => {
+        :return_url => "#{root_url}mieiOrdini/#{@ordine.id}/checkout",
+        :cancel_url => root_url },
+
+      :transactions =>  [{
+        :payee => {
+          :email => @ordine.impresa.titolare.email_paypal
+        },
+        :item_list => {
+          #Items vuota, viene riempita in ciclo sottostante
+          :items => []},
+        :amount =>  {
+          :total =>  @ordine.getTotale,
+          :currency =>  "EUR" ,
+          :details => {
+            :shipping => @ordine.spedizione,
+            :subtotal => @ordine.totale
+          }
+        },
+        :description =>  "Transazione ordine #{@ordine.id}, impresa #{@ordine.impresa.getNome}" }]})
+
+        unique_ids= @ordine.prodotti.uniq
+        unique_ids.each do |prodotto|
+          @payment.transactions.at(0).item_list.items.merge!({
+            :name => prodotto.nome,
+            :price => prodotto.prezzo,
+            :currency => "EUR",
+            :quantity => @ordine.occorrenzeProdotto(prodotto.id),
+            })
+        end
+    if @payment.create
       # Redirect the user to given approval url
-      @redirect_url = @pagamento.links.find{|v| v.rel == "approval_url" }.href
-      logger.info "Payment[#{@pagamento.id}]"
+      @redirect_url = @payment.links.find{|v| v.rel == "approval_url" }.href
+      logger.info "Payment[#{@payment.id}]"
       logger.info "Redirect: #{@redirect_url}"
 
       redirect_to @redirect_url
     else
-      logger.error @pagamento.error.inspect
+      logger.error @payment.error.inspect
     end
   end
   #GET /mieiOrdini/:id/checkout
   #Dopo il pagamento effettuato viene eseguita una get a questa risorsa per completare il pagamento
   def checkout
-    if Paypal.esegui_pagamento(params[:PayerID],params[:paymentId] )
+    payment = Payment.find(params[:paymentId])
+    if payment.execute( :payer_id => params[:PayerID] )
+
       @pagato = StatoOrdine.find_by_stato(StatoOrdine.PAGATO)
       @ordine = Ordine.find(params[:id])
       @ordine.update_attribute('stato_ordine',@pagato)

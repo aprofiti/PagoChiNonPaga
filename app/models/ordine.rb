@@ -80,11 +80,17 @@ class Ordine < ActiveRecord::Base
     "#Ordine: #{self.id} del Cliente: #{self.cliente_id}"
   end
 
-  def getStatiDisponibili
+  def getStatiDisponibiliTitolare
     stati =[ self.stato_ordine]
     if self.stato_ordine.stato == StatoOrdine.PAGATO
       stati << StatoOrdine.find(4)
     end
+    stati
+  end
+
+  def getStatiDisponibiliCliente
+    stati =[ self.stato_ordine]
+    stati << StatoOrdine.find(5)
     stati
   end
 

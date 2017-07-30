@@ -1,3 +1,93 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Less here: http://lesscss.org/
+
+/*
+  Sezione del Home Page
+*/
+
+//header con immagine
+#welcomepage{
+    //immagine in background con sfumatura a gradiente
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%),
+      url('/assets/template/sfondi/welcome_ap_comp.jpg') no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+
+#logo{
+  height:50px;
+  /* Fix per l'allineameto del collapse con il logo della barra */
+  float: left;
+}
+
+#logoJumbotron{
+  height:100px;
+  margin: 0 auto;
+}
+
+.jumbotronColor{
+  background-image: radial-gradient(50% 177%, #428BCA 50%, rgba(73,143,225,0.70) 100%);
+  border: 1px solid #979797;
+}
+
+.txtJumbotron, .jumbotron h1{
+  color: white;
+}
+
+//sfondo nero sfumato sotto scritta header
+.sfumato span{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Sezione Statistiche Home Page */
+.statistiche{
+  color: #4A90E2;
+  border-bottom: 2px solid #4A90E2;
+  padding-bottom: 5px;
+}
+
+#DatiStatistiche{
+  margin-top:10px;
+}
+
+.numeriStatistiche{
+  color: #4A90E2;
+}
+
+.txtCatalogo{
+    color: #45A2FF;
+}
+
+#imgImpresa {
+  width: 100px;
+  float:left;
+}
+
+#imgImpresaHome{
+  object-fit: cover;
+  width: 100px;
+  min-height: 64px;
+}
+
+#datiImpresa {
+  overflow: hidden;
+  //padding-left: 20px;
+}
+
+
+/*
+  Stili per la pagina di scelta tipologia utente
+*/
+.paginaRegistrati{
+  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+#page-404 {
+  background:url('/assets/template/sfondi/apsfoc.png') no-repeat;
+  background-size: 100%;
+}

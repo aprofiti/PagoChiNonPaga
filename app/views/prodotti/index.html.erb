@@ -1,61 +1,27 @@
 <%- model_class = Prodotto -%>
 <div class="container">
-  <div class="page-header">
-    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-  </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th><%= model_class.human_attribute_name(:id) %></th>
-        <th><%= model_class.human_attribute_name(:nome) %></th>
-        <th><%= model_class.human_attribute_name(:prezzo) %></th>
-        <th><%= model_class.human_attribute_name(:qta) %></th>
-        <th><%= model_class.human_attribute_name(:descrizione) %></th>
-        <th><%= model_class.human_attribute_name(:created_at) %></th>
-        <th><%=t '.actions', :default => t("helpers.actions") %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @prodotti.each do |prodotto| %>
-        <% if prodotto.impresa_id.to_i == params[:id].to_i %>
+    <h1 class="text-center page-title">PRODOTTI</h1>
+      <hr>
+      <% if !Impresa.find(params[:id]).hasProdotti? %>
+        <%= render "prodotti/catalogo_vuoto" %>
+      <% else %>
+        <% @prodotti.each do |prodotto| %>
           <% if !prodotto.eliminato %>
-        <tr>
-          <td><%= prodotto.id %></td>
-          <td><%= link_to prodotto.nome, impresa_prodotto_path(impresa_nome: params[:impresa_nome],nome: prodotto.nome, id_p: prodotto.id,method: :get) %></td>
-          <td><%= prodotto.prezzo %></td>
-          <td><%= prodotto.qta %></td>
-          <td><%= prodotto.descrizione %></td>
-          <td><%= prodotto.created_at %></td>
-          <td>
-            <% if utente_signed_in? && current_utente.isCliente? %>
-              <%= simple_form_for prodotto, url:  add_cart_carrello_path(current_utente.actable_id, prodotto_id: prodotto.id),method: :post , :html => { :class => 'form-horizontal' } do |f| %>
-                <%= f.button :submit , "Aggiungi al carrello"%>
-                <%= f.number_field :qta, :class => 'text_field',:value => 1 %>
-              <% end %>
-            <%end%>
-            <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
-               <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                    edit_impresa_prodotto_path(nome: prodotto.nome,id_p: prodotto.id), :class => 'btn btn-default btn-xs',method: :get %>
-               <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                    impresa_prodotto_elimina_prodotto_path(impresa_nome: prodotto.impresa.nome, prodotto_nome: prodotto.nome, id_p: prodotto.id),
-                    :method => :post,:class => 'btn btn-xs btn-danger',
-                    data: { :confirm => "\t\t\t\t\t\t\t\tATTENZIONE!!!! \nEliminando questo prodotto dovrai comunque evadere eventuali ordini in cui è presente. Continuare comunque?" }%>
-            <% end %>
-            </td>
-          </tr>
-            <% end %>
+            <%= render :partial => "show", :locals => { :prodotto => prodotto }  %>
           <% end %>
+        <% end %>
       <% end %>
-    </tbody>
-  </table>
-  <%= hidden_field_tag(:id,params[:id]) %>
 
-  <%= link_to t('.profilo_impresa', :default => t("helpers.links.profilo_impresa")),
-        impresa_path(nome: params[:impresa_nome],id: params[:id]),
-        :class => 'btn btn-default',method: :get %>
-  <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
-    <%= link_to t('.new', :default => t("helpers.links.new")),
-          new_impresa_prodotto_path(id: params[:id]),
-          :class => 'btn btn-primary' ,method: :get%>
-  <% end %>
+      <%= hidden_field_tag(:id,params[:id]) %>
+      <div id="azioni-catalogo">
+        <hr>
+      <%= link_to t('.profilo_impresa', :default => t("helpers.links.profilo_impresa")),
+            impresa_path(nome: params[:impresa_nome],id: params[:id]),
+            :class => 'btn btn-default',method: :get, :style=> 'float:left' %>
+      <% if utente_signed_in? && current_utente.isMyImpresa?(Impresa.find(params[:id])) %>
+        <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_impresa_prodotto_path(id: params[:id]),
+              :class => 'btn btn-primary' ,method: :get , :style=> 'float:right'%>
+      <% end %>
+    </div>
 </div>

@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   #PATH del tipo /imprese/:nome/prodotti/:nome
   resources :imprese, param: :nome , :nome => /[^\/]+/ do
-    resources :prodotti, param: :nome, :nome => /[^\/]+/ do
+    resources :prodotti,except: [:show], param: :nome, :nome => /[^\/]+/ do
       post :elimina_prodotto
     end
   end
@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   end
 
   root 'static_pages#home_page'
-
+  get '*unmatched_route', :to => 'static_pages#render_404'
 
 #*********************ROTTE CANCELLATE************************
   #resources :admins perchè si accede da rails_admin

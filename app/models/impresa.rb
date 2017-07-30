@@ -178,4 +178,17 @@ class Impresa < ActiveRecord::Base
     ordini
   end
 
+  def hasProdotti?
+    if self.prodotti.empty?
+      return false
+    else
+      self.prodotti.each do |prodotto|
+        if !prodotto.eliminato
+          return true
+        end
+      end
+      return false
+    end
+  end
+  
 end
