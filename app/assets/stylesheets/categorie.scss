@@ -1,7 +1,7 @@
 //header con immagine
 #categoriepage{
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%),
-     url('/assets/template/sfondi/shopping_on.jpg') no-repeat;
+    asset-data-url('template/sfondi/shopping_on.jpg') no-repeat;
     background-size: 100%;
     background-position: center;
 }
